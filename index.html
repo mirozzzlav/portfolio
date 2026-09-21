@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="sk">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Portfolio | Tvoje meno</title>
+    <meta
+      name="description"
+      content="Jednoduche osobne portfolio programatora alebo digitalneho tvorcu."
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="Domov">
+        <img src="assets/logo.svg" alt="Tvoje meno" width="168" height="44" />
+      </a>
+
+      <nav class="site-nav" aria-label="Hlavna navigacia">
+        <a href="#about">O mne</a>
+        <a href="#projects">Projekty</a>
+        <a href="#contact">Kontakt</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <p class="eyebrow">Programator / digitalny tvorca</p>
+        <h1 id="hero-title">Tvorim prehladne weby a digitalne produkty.</h1>
+        <p class="hero-text">
+          Kratky uvod o tom, kto si, comu sa venujes a aku hodnotu vies priniest
+          klientom, timu alebo projektu.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#projects">Pozriet projekty</a>
+          <a class="button secondary" href="#contact">Kontaktovat ma</a>
+        </div>
+      </section>
+
+      <section id="about" class="section" aria-labelledby="about-title">
+        <div class="section-heading">
+          <p class="eyebrow">O mne</p>
+          <h2 id="about-title">Strucne, jasne, k veci.</h2>
+        </div>
+        <p>
+          Sem patri kratke bio: tvoje zameranie, skusenosti, technologie, styl prace a
+          typ projektov, ktore ta zaujimaju. Text drz jednoduchy a konkretnejsi nez
+          bezne osobne predstavenie.
+        </p>
+      </section>
+
+      <section id="projects" class="section" aria-labelledby="projects-title">
+        <div class="section-heading">
+          <p class="eyebrow">Vybrane prace</p>
+          <h2 id="projects-title">Projekty</h2>
+        </div>
+
+        <div class="project-grid">
+          <article class="project-card">
+            <p class="project-type">Web aplikacia</p>
+            <h3>Projekt jedna</h3>
+            <p>Kratky popis projektu, problemu, riesenia a tvojej ulohy v nom.</p>
+            <a href="#" aria-label="Otvorit detail projektu jedna">Detail</a>
+          </article>
+
+          <article class="project-card">
+            <p class="project-type">Frontend</p>
+            <h3>Projekt dva</h3>
+            <p>Strucne zhrnutie pouzitych technologii, vysledku a dopadu.</p>
+            <a href="#" aria-label="Otvorit detail projektu dva">Detail</a>
+          </article>
+
+          <article class="project-card">
+            <p class="project-type">Content</p>
+            <h3>Projekt tri</h3>
+            <p>
+              Miesto pre projekt z oblasti digitalneho obsahu, dizajnu alebo tvorby.
+            </p>
+            <a href="#" aria-label="Otvorit detail projektu tri">Detail</a>
+          </article>
+        </div>
+      </section>
+
+      <section id="contact" class="section contact" aria-labelledby="contact-title">
+        <div class="section-heading">
+          <p class="eyebrow">Kontakt</p>
+          <h2 id="contact-title">Ozvi sa.</h2>
+        </div>
+
+        <form class="contact-form" action="#" method="post">
+          <label>
+            Meno
+            <input type="text" name="name" autocomplete="name" required />
+          </label>
+          <label>
+            Email
+            <input type="email" name="email" autocomplete="email" required />
+          </label>
+          <label>
+            Sprava
+            <textarea name="message" rows="5" required></textarea>
+          </label>
+          <button class="button primary" type="submit">Odoslat</button>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>&copy; 2026 Tvoje meno. Vsetky prava vyhradene.</p>
+    </footer>
+  </body>
+</html>
