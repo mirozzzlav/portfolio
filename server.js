@@ -19,7 +19,9 @@ const mimeTypes = {
   ".json": "application/json; charset=utf-8",
   ".png": "image/png",
   ".svg": "image/svg+xml",
-  ".webp": "image/webp"
+  ".webp": "image/webp",
+  ".woff": "font/woff",
+  ".woff2": "font/woff2"
 };
 
 function sendFile(response, filePath) {
