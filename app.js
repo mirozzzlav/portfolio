@@ -1,3 +1,6 @@
+const sectionExitDurationMs = 240;
+const sectionHideTimers = new WeakMap();
+
 function setupMenu() {
   const menu = document.querySelector(".menu");
   const menuToggle = document.querySelector(".menu-toggle");
@@ -45,14 +48,70 @@ function setupMenu() {
 
       event.preventDefault();
       closeMenu();
-      setActiveSection(targetId);
-      history.pushState(null, "", `#${targetId}`);
+      navigateToSection(targetId);
     });
   });
 
   window.addEventListener("popstate", () => {
     setActiveSection(getSectionIdFromHash());
   });
+}
+
+function setupSectionScrollNavigation() {
+  let accumulatedDelta = 0;
+  let lastNavigationTime = 0;
+  const cooldownMs = 620;
+  const deltaThreshold = 70;
+
+  window.addEventListener(
+    "wheel",
+    (event) => {
+      if (
+        event.ctrlKey ||
+        event.metaKey ||
+        shouldLetScrollableContentHandleWheel(event)
+      ) {
+        return;
+      }
+
+      accumulatedDelta += event.deltaY;
+
+      if (Math.abs(accumulatedDelta) < deltaThreshold) {
+        return;
+      }
+
+      const now = Date.now();
+
+      if (now - lastNavigationTime < cooldownMs) {
+        return;
+      }
+
+      const direction = accumulatedDelta > 0 ? 1 : -1;
+      const changedSection = navigateToAdjacentSection(direction);
+
+      if (changedSection) {
+        event.preventDefault();
+        lastNavigationTime = now;
+      }
+
+      accumulatedDelta = 0;
+    },
+    { passive: false }
+  );
+}
+
+function shouldLetScrollableContentHandleWheel(event) {
+  if (!(event.target instanceof Element)) {
+    return false;
+  }
+
+  const activeSection = document.querySelector("main .section.is-active");
+  const scrollableContent = event.target.closest(".section-content");
+
+  return (
+    activeSection?.contains(scrollableContent) &&
+    scrollableContent.scrollHeight > scrollableContent.clientHeight
+  );
 }
 
 function renderAbout(about) {
@@ -187,21 +246,98 @@ function getSectionIdFromHash() {
   return "about";
 }
 
+function getMenuSectionIds() {
+  return Array.from(document.querySelectorAll(".site-nav a[href^='#']"))
+    .map((link) => {
+      const href = link.getAttribute("href");
+      return href === "#top" ? "about" : href.slice(1);
+    })
+    .filter((sectionId) => document.querySelector(`main .section#${sectionId}`));
+}
+
+function getActiveSectionId() {
+  return (
+    document.querySelector("main .section.is-active")?.id || getSectionIdFromHash()
+  );
+}
+
+function navigateToAdjacentSection(direction) {
+  const sectionIds = getMenuSectionIds();
+  const activeIndex = sectionIds.indexOf(getActiveSectionId());
+  const nextIndex = activeIndex + direction;
+  const nextSectionId = sectionIds[nextIndex];
+
+  if (!nextSectionId) {
+    return false;
+  }
+
+  navigateToSection(nextSectionId);
+  return true;
+}
+
+function navigateToSection(sectionId) {
+  if (getActiveSectionId() === sectionId) {
+    return;
+  }
+
+  setActiveSection(sectionId);
+  history.pushState(null, "", `#${sectionId}`);
+}
+
 function setActiveSection(sectionId) {
+  const previousSection = document.querySelector("main .section.is-active");
+
   document.querySelectorAll("main .section").forEach((section) => {
     const isActive = section.id === sectionId;
-    section.classList.toggle("is-active", isActive);
-    section.toggleAttribute("hidden", !isActive);
+    const hideTimer = sectionHideTimers.get(section);
+
+    if (hideTimer) {
+      window.clearTimeout(hideTimer);
+      sectionHideTimers.delete(section);
+    }
+
+    if (isActive) {
+      section.hidden = false;
+      section.classList.remove("is-leaving");
+      section.classList.add("is-active");
+      return;
+    }
+
+    section.classList.remove("is-active");
+
+    if (section === previousSection) {
+      section.hidden = false;
+      section.classList.add("is-leaving");
+
+      const nextHideTimer = window.setTimeout(() => {
+        if (section.classList.contains("is-leaving")) {
+          section.classList.remove("is-leaving");
+          section.hidden = true;
+        }
+
+        sectionHideTimers.delete(section);
+      }, sectionExitDurationMs);
+
+      sectionHideTimers.set(section, nextHideTimer);
+      return;
+    }
+
+    section.classList.remove("is-leaving");
+    section.hidden = true;
   });
 
   document.querySelectorAll('a[href^="#"]').forEach((link) => {
     const href = link.getAttribute("href");
     const linkSectionId = href === "#top" ? "about" : href.slice(1);
-    link.toggleAttribute("aria-current", linkSectionId === sectionId);
+    const isCurrentSection = linkSectionId === sectionId;
+
+    link.toggleAttribute("aria-current", isCurrentSection);
+    link.classList.toggle("is-current", isCurrentSection);
   });
 }
 
 setupMenu();
+setupSectionScrollNavigation();
 loadPortfolioData().catch((error) => {
   console.error(error);
 });
