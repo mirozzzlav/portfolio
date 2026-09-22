@@ -2,6 +2,7 @@ function setupMenu() {
   const menu = document.querySelector(".menu");
   const menuToggle = document.querySelector(".menu-toggle");
   const siteNav = document.querySelector(".site-nav");
+  const sectionLinks = document.querySelectorAll('a[href^="#"]');
 
   function closeMenu() {
     siteNav.classList.remove("is-open");
@@ -32,31 +33,68 @@ function setupMenu() {
       closeMenu();
     }
   });
+
+  sectionLinks.forEach((link) => {
+    link.addEventListener("click", (event) => {
+      const href = link.getAttribute("href");
+      const targetId = href === "#top" ? "about" : href.slice(1);
+
+      if (!document.querySelector(`main .section#${targetId}`)) {
+        return;
+      }
+
+      event.preventDefault();
+      closeMenu();
+      setActiveSection(targetId);
+      history.pushState(null, "", `#${targetId}`);
+    });
+  });
+
+  window.addEventListener("popstate", () => {
+    setActiveSection(getSectionIdFromHash());
+  });
 }
 
 function renderAbout(about) {
   const aboutContainer = document.querySelector("[data-about]");
   aboutContainer.replaceChildren();
 
-  if (about.portrait) {
-    const figure = document.createElement("figure");
-    const image = document.createElement("img");
+  const [intro, ...details] = about.paragraphs;
+  const introElement = document.createElement("p");
+  introElement.className = "about-intro";
+  introElement.textContent = intro;
+  aboutContainer.append(introElement);
 
-    figure.className = "about-portrait";
-    image.src = about.portrait.src;
-    image.alt = about.portrait.alt;
-    image.width = about.portrait.width;
-    image.height = about.portrait.height;
-
-    figure.append(image);
-    aboutContainer.append(figure);
+  if (details.length === 0) {
+    return;
   }
 
-  about.paragraphs.forEach((paragraph) => {
+  const detailsContainer = document.createElement("div");
+  const toggle = document.createElement("button");
+
+  detailsContainer.className = "about-more";
+  detailsContainer.hidden = true;
+
+  details.forEach((paragraph) => {
     const element = document.createElement("p");
     element.textContent = paragraph;
-    aboutContainer.append(element);
+    detailsContainer.append(element);
   });
+
+  toggle.className = "show-more";
+  toggle.type = "button";
+  toggle.setAttribute("aria-expanded", "false");
+  toggle.textContent = "Show more";
+
+  toggle.addEventListener("click", () => {
+    const isExpanded = toggle.getAttribute("aria-expanded") === "true";
+    introElement.classList.toggle("is-expanded", !isExpanded);
+    detailsContainer.hidden = isExpanded;
+    toggle.setAttribute("aria-expanded", String(!isExpanded));
+    toggle.textContent = isExpanded ? "Show more" : "Show less";
+  });
+
+  aboutContainer.append(detailsContainer, toggle);
 }
 
 function renderProjects(projects) {
@@ -135,6 +173,32 @@ async function loadPortfolioData() {
   const data = await response.json();
   renderAbout(data.about);
   renderProjects(data.projects);
+  setActiveSection(getSectionIdFromHash());
+}
+
+function getSectionIdFromHash() {
+  const hashId = window.location.hash.slice(1);
+  const sectionId = hashId === "top" ? "about" : hashId;
+
+  if (document.querySelector(`main .section#${sectionId}`)) {
+    return sectionId;
+  }
+
+  return "about";
+}
+
+function setActiveSection(sectionId) {
+  document.querySelectorAll("main .section").forEach((section) => {
+    const isActive = section.id === sectionId;
+    section.classList.toggle("is-active", isActive);
+    section.toggleAttribute("hidden", !isActive);
+  });
+
+  document.querySelectorAll('a[href^="#"]').forEach((link) => {
+    const href = link.getAttribute("href");
+    const linkSectionId = href === "#top" ? "about" : href.slice(1);
+    link.toggleAttribute("aria-current", linkSectionId === sectionId);
+  });
 }
 
 setupMenu();
