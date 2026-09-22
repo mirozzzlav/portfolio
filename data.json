@@ -1,0 +1,83 @@
+{
+  "about": {
+    "portrait": {
+      "src": "assets/me.jpeg",
+      "alt": "Portret tvorcu v hmlistom lese",
+      "width": 1150,
+      "height": 1408
+    },
+    "paragraphs": [
+      "Som tvorca digitalnych rieseni so zameranim na prehladne weby, prakticke aplikacie a vizualne detaily, ktore maju zmysel. Pri praci ma bavi hladat jednoduchu formu pre zlozite veci: aby bol vysledok rychly, citatelny a prijemny na pouzivanie.",
+      "Najradsej pracujem na projektoch, kde sa stretava dizajn, technologia a jasny ciel. Viem sa ponorit do detailu, no stale myslim na celok: co ma stranka povedat, ako sa v nej clovek orientuje a co ma urobit ako dalsi krok.",
+      "Mimo kodu si vsimam atmosferu, kompoziciu a male rozhodnutia, ktore menia dojem z celeho produktu. Aj preto mam rad weby, ktore nie su len funkcne, ale maju vlastny charakter."
+    ]
+  },
+  "projects": [
+    {
+      "title": "Klientsky dashboard",
+      "type": "Web aplikacia",
+      "description": "Prehladny interny dashboard pre sledovanie zakaziek, stavu poziadaviek a rychlych rozhodnuti. Navrh bol zamerany na citatelne tabulky, jasne stavy a rychlu orientaciu bez zbytocnych efektov.",
+      "url": "https://example.com",
+      "galleryLabel": "Ukazky projektu jedna",
+      "images": [
+        {
+          "className": "web-dashboard",
+          "alt": "Dashboard s bocnou navigaciou"
+        },
+        {
+          "className": "web-mobile",
+          "alt": "Mobilny nahlad dashboardu"
+        },
+        {
+          "className": "web-detail",
+          "alt": "Detail stavu v dashboarde"
+        }
+      ],
+      "technologies": ["HTML", "CSS", "JavaScript"]
+    },
+    {
+      "title": "Produktova prezentacia",
+      "type": "Frontend",
+      "description": "Landing page pre digitalny produkt s dorazom na rychle pochopenie ponuky, dobre citatelne sekcie a responzivny layout. V projekte som riesil vizualny system, komponenty a finalne doladenie detailov.",
+      "url": "https://example.com",
+      "galleryLabel": "Ukazky projektu dva",
+      "images": [
+        {
+          "className": "shop-hero",
+          "alt": "Hero sekcia produktovej prezentacie"
+        },
+        {
+          "className": "shop-card",
+          "alt": "Produktova karta"
+        },
+        {
+          "className": "shop-checkout",
+          "alt": "Objednavkovy krok"
+        }
+      ],
+      "technologies": ["Responsive UI", "Design system", "Performance"]
+    },
+    {
+      "title": "Obsahovy hub",
+      "type": "Content",
+      "description": "Jednoduchy system pre publikovanie a triedenie obsahu. Cielom bolo vytvorit pokojne prostredie na pracu s textom, obrazkami a stavmi clankov bez toho, aby rozhranie prebijalo samotny obsah.",
+      "url": "https://example.com",
+      "galleryLabel": "Ukazky projektu tri",
+      "images": [
+        {
+          "className": "content-editor",
+          "alt": "Editor obsahu"
+        },
+        {
+          "className": "content-library",
+          "alt": "Kniznica obsahu"
+        },
+        {
+          "className": "content-preview",
+          "alt": "Nahlad publikovaneho obsahu"
+        }
+      ],
+      "technologies": ["Content model", "Editor UI", "Accessibility"]
+    }
+  ]
+}

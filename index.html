@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Portfolio | Tvoje meno</title>
+    <title>Portfolio</title>
     <meta
       name="description"
       content="Jednoduche osobne portfolio programatora alebo digitalneho tvorcu."
@@ -16,7 +16,7 @@
     <header class="site-header">
       <div class="site-header-inner">
         <a class="brand" href="#top" aria-label="Domov">
-          <img src="assets/logo.svg" alt="Tvoje meno" width="124" height="66" />
+          <img src="assets/logo.svg" alt="logo" width="124" height="66" />
         </a>
 
         <div class="menu">
@@ -46,33 +46,7 @@
         <div class="section-heading">
           <h2 class="eyebrow">O mne</h2>
         </div>
-        <div class="about-copy">
-          <figure class="about-portrait">
-            <img
-              src="assets/me.jpeg"
-              alt="Portret tvorcu v hmlistom lese"
-              width="1150"
-              height="1408"
-            />
-          </figure>
-          <p>
-            Som tvorca digitalnych rieseni so zameranim na prehladne weby, prakticke
-            aplikacie a vizualne detaily, ktore maju zmysel. Pri praci ma bavi hladat
-            jednoduchu formu pre zlozite veci: aby bol vysledok rychly, citatelny a
-            prijemny na pouzivanie.
-          </p>
-          <p>
-            Najradsej pracujem na projektoch, kde sa stretava dizajn, technologia a
-            jasny ciel. Viem sa ponorit do detailu, no stale myslim na celok: co ma
-            stranka povedat, ako sa v nej clovek orientuje a co ma urobit ako dalsi
-            krok.
-          </p>
-          <p>
-            Mimo kodu si vsimam atmosferu, kompoziciu a male rozhodnutia, ktore menia
-            dojem z celeho produktu. Aj preto mam rad weby, ktore nie su len funkcne,
-            ale maju vlastny charakter.
-          </p>
-        </div>
+        <div class="about-copy" data-about></div>
       </section>
 
       <section id="projects" class="section" aria-label="Projekty">
@@ -80,94 +54,7 @@
           <h2 class="eyebrow">Projekty</h2>
         </div>
 
-        <div class="project-grid">
-          <article class="project-card">
-            <div class="project-gallery" aria-label="Ukazky projektu jedna">
-              <span class="project-photo web-dashboard"></span>
-              <span class="project-photo web-mobile"></span>
-              <span class="project-photo web-detail"></span>
-            </div>
-            <p class="project-type">Web aplikacia</p>
-            <h3>Klientsky dashboard</h3>
-            <p>
-              Prehladny interny dashboard pre sledovanie zakaziek, stavu poziadaviek a
-              rychlych rozhodnuti. Navrh bol zamerany na citatelne tabulky, jasne stavy
-              a rychlu orientaciu bez zbytocnych efektov.
-            </p>
-            <ul class="project-meta" aria-label="Pouzite technologie">
-              <li>HTML</li>
-              <li>CSS</li>
-              <li>JavaScript</li>
-            </ul>
-            <a
-              class="project-link"
-              href="https://example.com"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Otvorit projekt Klientsky dashboard"
-            >
-              Otvorit projekt
-            </a>
-          </article>
-
-          <article class="project-card">
-            <div class="project-gallery" aria-label="Ukazky projektu dva">
-              <span class="project-photo shop-hero"></span>
-              <span class="project-photo shop-card"></span>
-              <span class="project-photo shop-checkout"></span>
-            </div>
-            <p class="project-type">Frontend</p>
-            <h3>Produktova prezentacia</h3>
-            <p>
-              Landing page pre digitalny produkt s dorazom na rychle pochopenie ponuky,
-              dobre citatelne sekcie a responzivny layout. V projekte som riesil
-              vizualny system, komponenty a finalne doladenie detailov.
-            </p>
-            <ul class="project-meta" aria-label="Pouzite technologie">
-              <li>Responsive UI</li>
-              <li>Design system</li>
-              <li>Performance</li>
-            </ul>
-            <a
-              class="project-link"
-              href="https://example.com"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Otvorit projekt Produktova prezentacia"
-            >
-              Otvorit projekt
-            </a>
-          </article>
-
-          <article class="project-card">
-            <div class="project-gallery" aria-label="Ukazky projektu tri">
-              <span class="project-photo content-editor"></span>
-              <span class="project-photo content-library"></span>
-              <span class="project-photo content-preview"></span>
-            </div>
-            <p class="project-type">Content</p>
-            <h3>Obsahovy hub</h3>
-            <p>
-              Jednoduchy system pre publikovanie a triedenie obsahu. Cielom bolo
-              vytvorit pokojne prostredie na pracu s textom, obrazkami a stavmi clankov
-              bez toho, aby rozhranie prebijalo samotny obsah.
-            </p>
-            <ul class="project-meta" aria-label="Pouzite technologie">
-              <li>Content model</li>
-              <li>Editor UI</li>
-              <li>Accessibility</li>
-            </ul>
-            <a
-              class="project-link"
-              href="https://example.com"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Otvorit projekt Obsahovy hub"
-            >
-              Otvorit projekt
-            </a>
-          </article>
-        </div>
+        <div class="project-grid" data-projects></div>
       </section>
 
       <section id="contact" class="section contact" aria-label="Kontakt">
@@ -217,149 +104,6 @@
       </nav>
       <p>&copy; 2026</p>
     </footer>
-    <script>
-      const fireflyLayer = document.querySelector(".firefly-layer");
-      const fireflyContext = fireflyLayer.getContext("2d");
-      const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-      const fireflyState = {
-        animationFrame: null,
-        dots: [],
-        height: 0,
-        width: 0
-      };
-
-      function createFirefly(width, height) {
-        const size = Math.floor(Math.random() * 5 + 3);
-
-        return {
-          alpha: Math.random() * 0.26 + 0.36,
-          drift: Math.random() * 0.006 + 0.002,
-          phase: Math.random() * Math.PI * 2,
-          size,
-          speedX: (Math.random() - 0.5) * 0.28,
-          speedY: (Math.random() - 0.5) * 0.22,
-          x: Math.random() * width,
-          y: Math.random() * height
-        };
-      }
-
-      function resizeFireflies() {
-        const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
-        const width = window.innerWidth;
-        const height = window.innerHeight;
-
-        fireflyState.width = width;
-        fireflyState.height = height;
-        fireflyLayer.width = Math.floor(width * pixelRatio);
-        fireflyLayer.height = Math.floor(height * pixelRatio);
-        fireflyLayer.style.width = `${width}px`;
-        fireflyLayer.style.height = `${height}px`;
-        fireflyContext.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
-
-        const count = Math.max(18, Math.min(42, Math.floor((width * height) / 26000)));
-        fireflyState.dots = Array.from({ length: count }, () =>
-          createFirefly(width, height)
-        );
-      }
-
-      function drawFireflies(time = 0) {
-        fireflyContext.clearRect(0, 0, fireflyState.width, fireflyState.height);
-
-        fireflyState.dots.forEach((dot) => {
-          const twinkle = (Math.sin(time * dot.drift + dot.phase) + 1) / 2;
-          const opacity = dot.alpha * (0.86 + twinkle * 0.14);
-          const x = Math.round(dot.x);
-          const y = Math.round(dot.y);
-          const glowSize = dot.size * 5.5;
-          const midGlowSize = dot.size * 3.2;
-
-          dot.x += dot.speedX + Math.sin(time * 0.0008 + dot.phase) * 0.07;
-          dot.y += dot.speedY + Math.cos(time * 0.0007 + dot.phase) * 0.05;
-
-          if (dot.x < -20) dot.x = fireflyState.width + 20;
-          if (dot.x > fireflyState.width + 20) dot.x = -20;
-          if (dot.y < -20) dot.y = fireflyState.height + 20;
-          if (dot.y > fireflyState.height + 20) dot.y = -20;
-
-          fireflyContext.fillStyle = `rgb(255 198 54 / ${opacity * 0.16})`;
-          fireflyContext.fillRect(
-            x - glowSize / 2,
-            y - glowSize / 2,
-            glowSize,
-            glowSize
-          );
-
-          fireflyContext.fillStyle = `rgb(255 210 79 / ${opacity * 0.38})`;
-          fireflyContext.fillRect(
-            x - midGlowSize / 2,
-            y - midGlowSize / 2,
-            midGlowSize,
-            midGlowSize
-          );
-
-          fireflyContext.fillStyle = `rgb(255 249 203 / ${Math.min(opacity + 0.18, 1)})`;
-          fireflyContext.fillRect(
-            x - dot.size / 2,
-            y - dot.size / 2,
-            dot.size,
-            dot.size
-          );
-        });
-
-        if (!reducedMotionQuery.matches) {
-          fireflyState.animationFrame = window.requestAnimationFrame(drawFireflies);
-        }
-      }
-
-      function startFireflies() {
-        if (fireflyState.animationFrame) {
-          window.cancelAnimationFrame(fireflyState.animationFrame);
-        }
-
-        resizeFireflies();
-        drawFireflies();
-      }
-
-      window.addEventListener("resize", resizeFireflies);
-      reducedMotionQuery.addEventListener("change", startFireflies);
-      startFireflies();
-
-      const menu = document.querySelector(".menu");
-      const menuToggle = document.querySelector(".menu-toggle");
-      const siteNav = document.querySelector(".site-nav");
-
-      function closeMenu() {
-        siteNav.classList.remove("is-open");
-        menuToggle.setAttribute("aria-expanded", "false");
-        menuToggle.setAttribute("aria-label", "Otvorit menu");
-      }
-
-      menuToggle.addEventListener("click", () => {
-        const isOpen = siteNav.classList.toggle("is-open");
-        menuToggle.setAttribute("aria-expanded", String(isOpen));
-        menuToggle.setAttribute(
-          "aria-label",
-          isOpen ? "Zatvorit menu" : "Otvorit menu"
-        );
-      });
-
-      siteNav.addEventListener("click", (event) => {
-        if (event.target.matches("a")) {
-          closeMenu();
-        }
-      });
-
-      document.addEventListener("click", (event) => {
-        if (!menu.contains(event.target)) {
-          closeMenu();
-        }
-      });
-
-      document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape") {
-          closeMenu();
-        }
-      });
-    </script>
+    <script src="app.js" defer></script>
   </body>
 </html>
