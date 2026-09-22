@@ -81,7 +81,7 @@ function renderAbout(about) {
     detailsContainer.append(element);
   });
 
-  toggle.className = "show-more";
+  toggle.className = "button button-outline show-more";
   toggle.type = "button";
   toggle.setAttribute("aria-expanded", "false");
   toggle.textContent = "Show more";
