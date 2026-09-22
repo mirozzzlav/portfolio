@@ -50,7 +50,9 @@
         <div class="section-heading">
           <h2 class="eyebrow">O mne</h2>
         </div>
-        <div class="about-copy" data-about></div>
+        <div class="section-content">
+          <div class="about-copy" data-about></div>
+        </div>
       </section>
 
       <section id="projects" class="section" aria-label="Projekty">
@@ -58,7 +60,9 @@
           <h2 class="eyebrow">Projekty</h2>
         </div>
 
-        <div class="project-grid" data-projects></div>
+        <div class="section-content">
+          <div class="project-grid" data-projects></div>
+        </div>
       </section>
 
       <section id="contact" class="section contact" aria-label="Kontakt">
@@ -66,24 +70,26 @@
           <h2 class="eyebrow">Kontakt</h2>
         </div>
 
-        <form class="contact-form" action="#" method="post">
-          <label>
-            Meno
-            <input type="text" name="name" autocomplete="name" required />
-          </label>
-          <label>
-            Email
-            <input type="email" name="email" autocomplete="email" required />
-          </label>
-          <label>
-            Sprava
-            <textarea name="message" rows="5" required></textarea>
-          </label>
-          <button class="button button-primary" type="submit">
-            Odoslat
-            <span class="button-arrow" aria-hidden="true"></span>
-          </button>
-        </form>
+        <div class="section-content">
+          <form class="contact-form" action="#" method="post">
+            <label>
+              Meno
+              <input type="text" name="name" autocomplete="name" required />
+            </label>
+            <label>
+              Email
+              <input type="email" name="email" autocomplete="email" required />
+            </label>
+            <label>
+              Sprava
+              <textarea name="message" rows="5" required></textarea>
+            </label>
+            <button class="button button-primary" type="submit">
+              Odoslat
+              <span class="button-arrow" aria-hidden="true"></span>
+            </button>
+          </form>
+        </div>
       </section>
     </main>
 
