@@ -238,7 +238,7 @@ function closePreviewDialog() {
 
 function renderProjects(projects) {
   const projectStage = document.querySelector("[data-projects]");
-  const projectsContent = projectStage.parentElement;
+  // const projectsContent = projectStage.parentElement;
   const projectTrack = document.createElement("div");
   let activeProjectIndex = 0;
 
@@ -246,7 +246,9 @@ function renderProjects(projects) {
     projectTrack.style.transform = `translateX(-${activeProjectIndex * 100}%)`;
 
     projectTrack.querySelectorAll(".project-card").forEach((card, index) => {
-      card.toggleAttribute("aria-hidden", index !== activeProjectIndex);
+      const isHidden = index !== activeProjectIndex;
+      card.toggleAttribute("aria-hidden", isHidden);
+      card.toggleAttribute("inert", isHidden);
     });
   }
 
@@ -258,7 +260,7 @@ function renderProjects(projects) {
   projectStage.replaceChildren(projectTrack);
   updateProjectView();
 
-  projectsContent.querySelector(".project-controls")?.remove();
+  projectStage.querySelector(".project-controls")?.remove();
 
   if (projects.length < 2) {
     return;
@@ -303,7 +305,7 @@ function renderProjects(projects) {
   });
 
   updateProjectControls();
-  projectsContent.append(controls);
+  projectStage.append(controls);
 }
 
 async function loadPortfolioData() {

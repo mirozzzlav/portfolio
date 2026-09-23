@@ -328,7 +328,7 @@ main {
   align-items: start;
   width: 100%;
   height: 100%;
-  padding: var(--space-6) var(--main-inline-pad);
+  padding: 0 var(--main-inline-pad);
   overflow: hidden;
 }
 
@@ -359,8 +359,8 @@ main > .section {
 
 #projects .section-content {
   display: grid;
-  grid-template-rows: minmax(0, 1fr) auto;
-  gap: var(--space-3);
+  grid-template-rows: auto auto;
+  gap: var(--space-1);
 }
 
 #contact .section-content {
@@ -573,7 +573,6 @@ h3 {
 .project-stage {
   position: relative;
   width: 100%;
-  height: 100%;
   min-height: 0;
   overflow: hidden;
 }
@@ -581,7 +580,7 @@ h3 {
 .project-track {
   display: flex;
   width: 100%;
-  height: 100%;
+  align-items: flex-start;
   transition: transform 280ms ease;
   will-change: transform;
 }
@@ -592,7 +591,6 @@ h3 {
   align-content: start;
   gap: 0;
   width: 100%;
-  height: 100%;
   min-height: 0;
   overflow: visible;
   padding: 0;
@@ -605,6 +603,7 @@ h3 {
   justify-content: flex-start;
   gap: 0.65rem;
   width: 100%;
+  min-height: 1.2rem;
   margin-bottom: var(--space-2);
   line-height: 1.1;
 }
@@ -615,7 +614,7 @@ h3 {
   gap: 0.75rem;
   width: 100%;
   margin-top: 0;
-  padding: 9px;
+  padding: var(--space-4) 4px 0 4px;
 }
 
 .project-dot {
@@ -676,7 +675,7 @@ h3 {
   align-items: center;
   gap: var(--space-2);
   width: 80%;
-  margin: var(--space-3) 0 var(--space-2);
+  margin: var(--space-2) 0 var(--space-1);
 }
 
 .project-preview {
@@ -1117,6 +1116,7 @@ h3 {
 .project-card h3 {
   margin-bottom: var(--space-2);
   max-width: 24ch;
+  min-height: calc(1.45rem * 1.18);
   color: var(--color-text);
   font-size: clamp(1.15rem, 1.55vw, 1.45rem);
   font-weight: var(--font-weight-medium);
@@ -1139,6 +1139,14 @@ h3 {
   width: 100%;
   max-width: 720px;
   padding: 0;
+}
+
+.contact-intro {
+  margin-bottom: var(--space-1);
+  color: var(--color-text);
+  font-size: var(--font-size-md);
+  line-height: 1.72;
+  text-wrap: pretty;
 }
 
 label {
@@ -1182,7 +1190,10 @@ textarea:focus {
 }
 
 .site-footer {
-  position: relative;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
   z-index: 20;
   display: grid;
   grid-template-columns: 1fr auto;
@@ -1190,7 +1201,7 @@ textarea:focus {
   gap: var(--space-3);
   width: 100%;
   margin: 0 auto;
-  padding: var(--space-3) var(--space-5);
+  padding: 0.65rem var(--space-5);
   background: rgb(255 255 255 / 0.86);
   backdrop-filter: blur(12px);
   color: var(--color-ink);
@@ -1269,13 +1280,15 @@ textarea:focus {
   }
 
   main {
-    padding: var(--space-5) var(--space-3);
+    padding: 0 var(--space-3);
   }
 
   .site-footer {
     grid-template-columns: 1fr auto;
     justify-items: stretch;
-    padding: var(--space-3) var(--space-4);
+    gap: var(--space-2);
+    padding: 0.55rem var(--space-3);
+    font-size: 0.8rem;
   }
 
   .site-footer p {
@@ -1284,6 +1297,7 @@ textarea:focus {
 
   .footer-nav {
     justify-content: flex-start;
+    gap: var(--space-1);
   }
 
   .section {
@@ -1310,7 +1324,13 @@ textarea:focus {
 
   .project-gallery {
     grid-template-columns: repeat(2, 1fr);
-    width: min(100%, 320px);
+    width: min(100%, 260px);
+  }
+
+  .project-card p:not(.project-category) {
+    min-height: calc(0.92rem * 2 * 5);
+    font-size: 0.92rem;
+    line-height: 1.48;
   }
 
   .preview-dialog {
