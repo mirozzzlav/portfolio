@@ -1,8 +1,11 @@
 const sectionExitDurationMs = 240;
 const sectionHideTimers = new WeakMap();
+let previewDialog;
+let activePreviewProjectImages = [];
+let activePreviewImageIndex = 0;
 
 function setupMenu() {
-  const menu = document.querySelector(".menu");
+  const menu = document.querySelector(".site-menu");
   const menuToggle = document.querySelector(".menu-toggle");
   const siteNav = document.querySelector(".site-nav");
   const sectionLinks = document.querySelectorAll('a[href^="#"]');
@@ -10,13 +13,13 @@ function setupMenu() {
   function closeMenu() {
     siteNav.classList.remove("is-open");
     menuToggle.setAttribute("aria-expanded", "false");
-    menuToggle.setAttribute("aria-label", "Otvorit menu");
+    menuToggle.setAttribute("aria-label", "Otvoriť menu");
   }
 
   menuToggle.addEventListener("click", () => {
     const isOpen = siteNav.classList.toggle("is-open");
     menuToggle.setAttribute("aria-expanded", String(isOpen));
-    menuToggle.setAttribute("aria-label", isOpen ? "Zatvorit menu" : "Otvorit menu");
+    menuToggle.setAttribute("aria-label", isOpen ? "Zatvoriť menu" : "Otvoriť menu");
   });
 
   siteNav.addEventListener("click", (event) => {
@@ -57,176 +60,257 @@ function setupMenu() {
   });
 }
 
-function setupSectionScrollNavigation() {
-  let accumulatedDelta = 0;
-  let lastNavigationTime = 0;
-  const cooldownMs = 620;
-  const deltaThreshold = 70;
-
-  window.addEventListener(
-    "wheel",
-    (event) => {
-      if (
-        event.ctrlKey ||
-        event.metaKey ||
-        shouldLetScrollableContentHandleWheel(event)
-      ) {
-        return;
-      }
-
-      accumulatedDelta += event.deltaY;
-
-      if (Math.abs(accumulatedDelta) < deltaThreshold) {
-        return;
-      }
-
-      const now = Date.now();
-
-      if (now - lastNavigationTime < cooldownMs) {
-        return;
-      }
-
-      const direction = accumulatedDelta > 0 ? 1 : -1;
-      const changedSection = navigateToAdjacentSection(direction);
-
-      if (changedSection) {
-        event.preventDefault();
-        lastNavigationTime = now;
-      }
-
-      accumulatedDelta = 0;
-    },
-    { passive: false }
-  );
-}
-
-function shouldLetScrollableContentHandleWheel(event) {
-  if (!(event.target instanceof Element)) {
-    return false;
-  }
-
-  const activeSection = document.querySelector("main .section.is-active");
-  const scrollableContent = event.target.closest(".section-content");
-
-  return (
-    activeSection?.contains(scrollableContent) &&
-    scrollableContent.scrollHeight > scrollableContent.clientHeight
-  );
-}
-
 function renderAbout(about) {
   const aboutContainer = document.querySelector("[data-about]");
   aboutContainer.replaceChildren();
 
-  const [intro, ...details] = about.paragraphs;
-  const introElement = document.createElement("p");
-  introElement.className = "about-intro";
-  introElement.textContent = intro;
-  aboutContainer.append(introElement);
-
-  if (details.length === 0) {
-    return;
-  }
-
-  const detailsContainer = document.createElement("div");
-  const toggle = document.createElement("button");
-
-  detailsContainer.className = "about-more";
-  detailsContainer.hidden = true;
-
-  details.forEach((paragraph) => {
+  about.paragraphs.forEach((paragraph) => {
     const element = document.createElement("p");
     element.textContent = paragraph;
-    detailsContainer.append(element);
+    aboutContainer.append(element);
+  });
+}
+
+function createProjectCard(project, projectIndex) {
+  const article = document.createElement("article");
+  const header = document.createElement("div");
+  const gallery = document.createElement("div");
+  const type = document.createElement("p");
+  const title = document.createElement("h3");
+  const description = document.createElement("p");
+  const technologies = document.createElement("ul");
+  const link = document.createElement("a");
+
+  article.className = "project-card";
+  article.dataset.projectIndex = String(projectIndex);
+  header.className = "project-card-header";
+  gallery.className = "project-gallery";
+  gallery.setAttribute("aria-label", project.galleryLabel);
+
+  project.images.forEach((projectImage) => {
+    const photo = document.createElement("span");
+    photo.classList.add("project-preview");
+    photo.setAttribute("role", "img");
+    photo.setAttribute("aria-label", projectImage.alt);
+
+    if (projectImage.className) {
+      photo.classList.add(projectImage.className);
+    }
+
+    if (projectImage.src) {
+      const image = document.createElement("img");
+      image.src = projectImage.src;
+      image.alt = projectImage.alt;
+      image.loading = "lazy";
+      photo.removeAttribute("role");
+      photo.removeAttribute("aria-label");
+      photo.append(image);
+    }
+
+    photo.tabIndex = 0;
+    photo.addEventListener("click", () => {
+      openPreviewDialog(project.images, project.images.indexOf(projectImage));
+    });
+    photo.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        openPreviewDialog(project.images, project.images.indexOf(projectImage));
+      }
+    });
+
+    gallery.append(photo);
   });
 
-  toggle.className = "button button-outline show-more";
-  toggle.type = "button";
-  toggle.setAttribute("aria-expanded", "false");
-  toggle.textContent = "Show more";
+  type.className = "project-category";
+  type.textContent = project.type;
+  title.textContent = project.title;
+  description.textContent = project.description;
 
-  toggle.addEventListener("click", () => {
-    const isExpanded = toggle.getAttribute("aria-expanded") === "true";
-    introElement.classList.toggle("is-expanded", !isExpanded);
-    detailsContainer.hidden = isExpanded;
-    toggle.setAttribute("aria-expanded", String(!isExpanded));
-    toggle.textContent = isExpanded ? "Show more" : "Show less";
+  technologies.className = "project-tech-list";
+  technologies.setAttribute("aria-label", "Použité technológie");
+
+  project.technologies.forEach((technology) => {
+    const item = document.createElement("li");
+    item.textContent = technology;
+    technologies.append(item);
   });
 
-  aboutContainer.append(detailsContainer, toggle);
+  link.className = "project-link";
+  link.href = project.url;
+  link.target = "_blank";
+  link.rel = "noreferrer";
+  link.setAttribute("aria-label", `Otvoriť projekt ${project.title}`);
+  link.textContent = "Otvoriť projekt";
+
+  header.append(type, link);
+  article.append(header, description, gallery, technologies);
+  article.prepend(title);
+
+  return article;
+}
+
+function setupPreviewDialog() {
+  previewDialog = document.createElement("div");
+  previewDialog.className = "preview-dialog";
+  previewDialog.hidden = true;
+  previewDialog.innerHTML = `
+    <div class="preview-dialog-backdrop" data-preview-close></div>
+    <div class="preview-dialog-panel" role="dialog" aria-modal="true" aria-labelledby="preview-dialog-title">
+      <button class="preview-dialog-close" type="button" aria-label="Zatvoriť náhľad">×</button>
+      <button class="preview-dialog-nav preview-dialog-nav-prev" type="button" aria-label="Predchádzajúci obrázok"></button>
+      <div class="preview-dialog-image" role="img"></div>
+      <button class="preview-dialog-nav preview-dialog-nav-next" type="button" aria-label="Ďalší obrázok"></button>
+      <p id="preview-dialog-title" class="preview-dialog-title"></p>
+    </div>
+  `;
+
+  previewDialog.addEventListener("click", (event) => {
+    if (
+      event.target.matches("[data-preview-close]") ||
+      event.target.closest(".preview-dialog-close")
+    ) {
+      closePreviewDialog();
+    }
+  });
+
+  previewDialog
+    .querySelector(".preview-dialog-nav-prev")
+    .addEventListener("click", () => showAdjacentPreviewImage(-1));
+  previewDialog
+    .querySelector(".preview-dialog-nav-next")
+    .addEventListener("click", () => showAdjacentPreviewImage(1));
+
+  document.addEventListener("keydown", (event) => {
+    if (previewDialog.hidden) {
+      return;
+    }
+
+    if (event.key === "Escape") {
+      closePreviewDialog();
+      return;
+    }
+
+    if (event.key === "ArrowLeft") {
+      showAdjacentPreviewImage(-1);
+    }
+
+    if (event.key === "ArrowRight") {
+      showAdjacentPreviewImage(1);
+    }
+  });
+
+  document.body.append(previewDialog);
+}
+
+function openPreviewDialog(projectImages, imageIndex) {
+  activePreviewProjectImages = projectImages;
+  activePreviewImageIndex = imageIndex;
+  updatePreviewDialogImage();
+  previewDialog.hidden = false;
+  previewDialog.querySelector(".preview-dialog-close").focus();
+}
+
+function updatePreviewDialogImage() {
+  const projectImage = activePreviewProjectImages[activePreviewImageIndex];
+  const image = previewDialog.querySelector(".preview-dialog-image");
+  const title = previewDialog.querySelector(".preview-dialog-title");
+
+  image.className = "preview-dialog-image";
+  image.setAttribute("aria-label", projectImage.alt);
+
+  if (projectImage.className) {
+    image.classList.add(projectImage.className);
+  }
+
+  title.textContent = projectImage.alt;
+}
+
+function showAdjacentPreviewImage(direction) {
+  activePreviewImageIndex =
+    (activePreviewImageIndex + direction + activePreviewProjectImages.length) %
+    activePreviewProjectImages.length;
+  updatePreviewDialogImage();
+}
+
+function closePreviewDialog() {
+  previewDialog.hidden = true;
 }
 
 function renderProjects(projects) {
-  const projectGrid = document.querySelector("[data-projects]");
-  projectGrid.replaceChildren();
+  const projectStage = document.querySelector("[data-projects]");
+  const projectsContent = projectStage.parentElement;
+  const projectTrack = document.createElement("div");
+  let activeProjectIndex = 0;
 
-  projects.forEach((project) => {
-    const article = document.createElement("article");
-    const gallery = document.createElement("div");
-    const type = document.createElement("p");
-    const title = document.createElement("h3");
-    const description = document.createElement("p");
-    const technologies = document.createElement("ul");
-    const link = document.createElement("a");
+  function updateProjectView() {
+    projectTrack.style.transform = `translateX(-${activeProjectIndex * 100}%)`;
 
-    article.className = "project-card";
-    gallery.className = "project-gallery";
-    gallery.setAttribute("aria-label", project.galleryLabel);
-
-    project.images.forEach((projectImage) => {
-      const photo = document.createElement("span");
-      photo.classList.add("project-photo");
-      photo.setAttribute("role", "img");
-      photo.setAttribute("aria-label", projectImage.alt);
-
-      if (projectImage.className) {
-        photo.classList.add(projectImage.className);
-      }
-
-      if (projectImage.src) {
-        const image = document.createElement("img");
-        image.src = projectImage.src;
-        image.alt = projectImage.alt;
-        image.loading = "lazy";
-        photo.removeAttribute("role");
-        photo.removeAttribute("aria-label");
-        photo.append(image);
-      }
-
-      gallery.append(photo);
+    projectTrack.querySelectorAll(".project-card").forEach((card, index) => {
+      card.toggleAttribute("aria-hidden", index !== activeProjectIndex);
     });
+  }
 
-    type.className = "project-type";
-    type.textContent = project.type;
-    title.textContent = project.title;
-    description.textContent = project.description;
-
-    technologies.className = "project-meta";
-    technologies.setAttribute("aria-label", "Pouzite technologie");
-
-    project.technologies.forEach((technology) => {
-      const item = document.createElement("li");
-      item.textContent = technology;
-      technologies.append(item);
-    });
-
-    link.className = "project-link";
-    link.href = project.url;
-    link.target = "_blank";
-    link.rel = "noreferrer";
-    link.setAttribute("aria-label", `Otvorit projekt ${project.title}`);
-    link.textContent = "Otvorit projekt";
-
-    article.append(gallery, type, title, description, technologies, link);
-    projectGrid.append(article);
+  projectTrack.className = "project-track";
+  projects.forEach((project, projectIndex) => {
+    projectTrack.append(createProjectCard(project, projectIndex));
   });
+
+  projectStage.replaceChildren(projectTrack);
+  updateProjectView();
+
+  projectsContent.querySelector(".project-controls")?.remove();
+
+  if (projects.length < 2) {
+    return;
+  }
+
+  const controls = document.createElement("div");
+
+  function selectProject(nextProjectIndex) {
+    if (nextProjectIndex === activeProjectIndex) {
+      return;
+    }
+
+    activeProjectIndex = nextProjectIndex;
+    updateProjectView();
+    updateProjectControls();
+  }
+
+  function updateProjectControls() {
+    controls.querySelectorAll(".project-dot").forEach((control, index) => {
+      const isActive = index === activeProjectIndex;
+      control.classList.toggle("is-active", isActive);
+      control.setAttribute("aria-current", isActive ? "true" : "false");
+    });
+  }
+
+  controls.className = "project-controls";
+  controls.setAttribute("aria-label", "Výber projektov");
+
+  projects.forEach((project, projectIndex) => {
+    const control = document.createElement("button");
+    control.className = "project-dot";
+    control.type = "button";
+    control.setAttribute("aria-label", `Zobraziť projekt ${project.title}`);
+    control.addEventListener("pointerdown", (event) => {
+      event.preventDefault();
+    });
+    control.addEventListener("click", () => {
+      control.blur();
+      selectProject(projectIndex);
+    });
+    controls.append(control);
+  });
+
+  updateProjectControls();
+  projectsContent.append(controls);
 }
 
 async function loadPortfolioData() {
   const response = await fetch("data.json");
 
   if (!response.ok) {
-    throw new Error(`Nepodarilo sa nacitat data.json: ${response.status}`);
+    throw new Error(`Nepodarilo sa načítať data.json: ${response.status}`);
   }
 
   const data = await response.json();
@@ -246,33 +330,10 @@ function getSectionIdFromHash() {
   return "about";
 }
 
-function getMenuSectionIds() {
-  return Array.from(document.querySelectorAll(".site-nav a[href^='#']"))
-    .map((link) => {
-      const href = link.getAttribute("href");
-      return href === "#top" ? "about" : href.slice(1);
-    })
-    .filter((sectionId) => document.querySelector(`main .section#${sectionId}`));
-}
-
 function getActiveSectionId() {
   return (
     document.querySelector("main .section.is-active")?.id || getSectionIdFromHash()
   );
-}
-
-function navigateToAdjacentSection(direction) {
-  const sectionIds = getMenuSectionIds();
-  const activeIndex = sectionIds.indexOf(getActiveSectionId());
-  const nextIndex = activeIndex + direction;
-  const nextSectionId = sectionIds[nextIndex];
-
-  if (!nextSectionId) {
-    return false;
-  }
-
-  navigateToSection(nextSectionId);
-  return true;
 }
 
 function navigateToSection(sectionId) {
@@ -337,7 +398,7 @@ function setActiveSection(sectionId) {
 }
 
 setupMenu();
-setupSectionScrollNavigation();
+setupPreviewDialog();
 loadPortfolioData().catch((error) => {
   console.error(error);
 });

@@ -6,37 +6,42 @@
     <title>Portfolio</title>
     <meta
       name="description"
-      content="Jednoduche osobne portfolio programatora alebo digitalneho tvorcu."
+      content="Jednoduché osobné portfolio programátora alebo digitálneho tvorcu."
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <header class="site-header">
       <div class="site-header-inner">
-        <a class="brand" href="#top" aria-label="Domov">
-          <img src="assets/logo1.svg" alt="logo" />
+        <a class="site-brand" href="#top" aria-label="Domov">
+          <img src="assets/logo1.svg" alt="Logo" />
         </a>
 
-        <div class="menu">
+        <div class="site-menu">
           <button
             class="button button-outline menu-toggle"
             type="button"
             aria-controls="site-menu"
             aria-expanded="false"
-            aria-label="Otvorit menu"
+            aria-label="Otvoriť menu"
           >
             <span class="menu-toggle-label">Menu</span>
-            <img
-              class="menu-toggle-nut"
-              src="assets/nut.svg"
-              alt=""
+            <svg
+              class="menu-toggle-icon"
+              viewBox="0 0 144 124.7"
               width="28"
               height="28"
               aria-hidden="true"
-            />
+            >
+              <path
+                fill="currentColor"
+                fill-rule="evenodd"
+                d="M144 62.35 108 124.7H36L0 62.35 36 0h72ZM72 34.35a28 28 0 1 0 0 56 28 28 0 1 0 0-56Z"
+              />
+            </svg>
           </button>
 
-          <nav id="site-menu" class="site-nav" aria-label="Hlavna navigacia">
+          <nav id="site-menu" class="site-nav" aria-label="Hlavná navigácia">
             <a href="#about">O mne</a>
             <a href="#projects">Projekty</a>
             <a href="#contact">Kontakt</a>
@@ -45,56 +50,60 @@
       </div>
     </header>
 
-    <main id="top">
-      <section id="about" class="section" aria-label="O mne">
-        <div class="section-heading">
-          <h2 class="eyebrow">O mne</h2>
-        </div>
-        <div class="section-content">
-          <div class="about-copy" data-about></div>
-        </div>
-      </section>
+    <div class="page-layout">
+      <main id="top">
+        <section id="about" class="section" aria-label="O mne">
+          <div class="section-heading">
+            <h2 class="section-title">O mne</h2>
+          </div>
+          <div class="section-content">
+            <div class="about-copy" data-about></div>
+          </div>
+        </section>
 
-      <section id="projects" class="section" aria-label="Projekty">
-        <div class="section-heading">
-          <h2 class="eyebrow">Projekty</h2>
-        </div>
+        <section id="projects" class="section" aria-label="Projekty">
+          <div class="section-heading">
+            <h2 class="section-title">Projekty</h2>
+          </div>
 
-        <div class="section-content">
-          <div class="project-grid" data-projects></div>
-        </div>
-      </section>
+          <div class="section-content">
+            <div class="project-stage" data-projects></div>
+          </div>
+        </section>
 
-      <section id="contact" class="section contact" aria-label="Kontakt">
-        <div class="section-heading">
-          <h2 class="eyebrow">Kontakt</h2>
-        </div>
+        <section id="contact" class="section" aria-label="Kontakt">
+          <div class="section-heading">
+            <h2 class="section-title">Kontakt</h2>
+          </div>
 
-        <div class="section-content">
-          <form class="contact-form" action="#" method="post">
-            <label>
-              Meno
-              <input type="text" name="name" autocomplete="name" required />
-            </label>
-            <label>
-              Email
-              <input type="email" name="email" autocomplete="email" required />
-            </label>
-            <label>
-              Sprava
-              <textarea name="message" rows="5" required></textarea>
-            </label>
-            <button class="button button-primary" type="submit">
-              Odoslat
-              <span class="button-arrow" aria-hidden="true"></span>
-            </button>
-          </form>
-        </div>
-      </section>
-    </main>
+          <div class="section-content">
+            <form class="contact-form" action="#" method="post">
+              <label>
+                Meno
+                <input type="text" name="name" autocomplete="name" required />
+              </label>
+              <label>
+                E-mail
+                <input type="email" name="email" autocomplete="email" required />
+              </label>
+              <label>
+                Správa
+                <textarea name="message" rows="5" required></textarea>
+              </label>
+              <button class="button button-primary" type="submit">
+                Odoslať
+                <span class="button-arrow" aria-hidden="true"></span>
+              </button>
+            </form>
+          </div>
+        </section>
+      </main>
+
+      <aside class="visual-panel" aria-hidden="true"></aside>
+    </div>
 
     <footer class="site-footer">
-      <nav class="footer-nav" aria-label="Navigacia v pate">
+      <nav class="footer-nav" aria-label="Navigácia v päte">
         <a href="#about">O mne</a>
         <a href="#projects">Projekty</a>
         <a href="#contact">Kontakt</a>

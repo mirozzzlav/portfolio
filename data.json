@@ -1,62 +1,70 @@
 {
   "about": {
     "paragraphs": [
-      "Som tvorca digitalnych rieseni so zameranim na prehladne weby, prakticke aplikacie a vizualne detaily, ktore maju zmysel. Pri praci ma bavi hladat jednoduchu formu pre zlozite veci: aby bol vysledok rychly, citatelny a prijemny na pouzivanie.",
-      "Najradsej pracujem na projektoch, kde sa stretava dizajn, technologia a jasny ciel. Viem sa ponorit do detailu, no stale myslim na celok: co ma stranka povedat, ako sa v nej clovek orientuje a co ma urobit ako dalsi krok.",
-      "Mimo kodu si vsimam atmosferu, kompoziciu a male rozhodnutia, ktore menia dojem z celeho produktu. Aj preto mam rad weby, ktore nie su len funkcne, ale maju vlastny charakter."
+      "Som tvorca digitálnych riešení so zameraním na prehľadné weby, praktické aplikácie a vizuálne detaily, ktoré majú zmysel. Pri práci ma baví hľadať jednoduchú formu pre zložité veci: aby bol výsledok rýchly, čitateľný a príjemný na používanie.",
+      "Najradšej pracujem na projektoch, kde sa stretáva dizajn, technológia a jasný cieľ. Viem sa ponoriť do detailu, no stále myslím na celok: čo má stránka povedať, ako sa v nej človek orientuje a čo má urobiť ako ďalší krok.",
+      "Mimo kódu si všímam atmosféru, kompozíciu a malé rozhodnutia, ktoré menia dojem z celého produktu. Aj preto mám rád weby, ktoré nie sú len funkčné, ale majú vlastný charakter."
     ]
   },
   "projects": [
     {
       "title": "Klientsky dashboard",
-      "type": "Web aplikacia",
-      "description": "Prehladny interny dashboard pre sledovanie zakaziek, stavu poziadaviek a rychlych rozhodnuti. Navrh bol zamerany na citatelne tabulky, jasne stavy a rychlu orientaciu bez zbytocnych efektov.",
+      "type": "Webová aplikácia",
+      "description": "Interný dashboard pre zákazky, požiadavky a rýchle rozhodnutia. Zjednocuje stav klientov, priority tímu a dôležité termíny na jednom mieste. Návrh kladie dôraz na rýchle filtrovanie, čitateľné karty a prehľad bez zbytočného hľadania.",
       "url": "https://example.com",
-      "galleryLabel": "Ukazky projektu jedna",
+      "galleryLabel": "Ukážky prvého projektu",
       "images": [
         {
           "className": "web-dashboard",
-          "alt": "Dashboard s bocnou navigaciou"
+          "alt": "Dashboard s bočnou navigáciou"
         },
         {
           "className": "web-mobile",
-          "alt": "Mobilny nahlad dashboardu"
+          "alt": "Mobilný náhľad dashboardu"
         },
         {
           "className": "web-detail",
           "alt": "Detail stavu v dashboarde"
+        },
+        {
+          "className": "web-overview",
+          "alt": "Prehľad aktívnych zákaziek"
         }
       ],
       "technologies": ["HTML", "CSS", "JavaScript"]
     },
     {
-      "title": "Produktova prezentacia",
-      "type": "Frontend",
-      "description": "Landing page pre digitalny produkt s dorazom na rychle pochopenie ponuky, dobre citatelne sekcie a responzivny layout. V projekte som riesil vizualny system, komponenty a finalne doladenie detailov.",
+      "title": "Produktová prezentácia",
+      "type": "Web",
+      "description": "Produktová stránka s jasnou ponukou a responzívnym layoutom. Vedie návštevníka od prvého dojmu cez benefity až k objednávke alebo kontaktu. Rozhranie je postavené na výraznej typografii, rýchlom načítaní a jednoduchej správe obsahu.",
       "url": "https://example.com",
-      "galleryLabel": "Ukazky projektu dva",
+      "galleryLabel": "Ukážky druhého projektu",
       "images": [
         {
           "className": "shop-hero",
-          "alt": "Hero sekcia produktovej prezentacie"
+          "alt": "Úvodná sekcia produktovej prezentácie"
         },
         {
           "className": "shop-card",
-          "alt": "Produktova karta"
+          "alt": "Produktová karta"
         },
         {
           "className": "shop-checkout",
-          "alt": "Objednavkovy krok"
+          "alt": "Objednávkový krok"
+        },
+        {
+          "className": "shop-pricing",
+          "alt": "Cenový blok produktovej prezentácie"
         }
       ],
-      "technologies": ["Responsive UI", "Design system", "Performance"]
+      "technologies": ["Responzívne UI", "Dizajnový systém", "Výkon"]
     },
     {
-      "title": "Obsahovy hub",
-      "type": "Content",
-      "description": "Jednoduchy system pre publikovanie a triedenie obsahu. Cielom bolo vytvorit pokojne prostredie na pracu s textom, obrazkami a stavmi clankov bez toho, aby rozhranie prebijalo samotny obsah.",
+      "title": "Obsahový hub",
+      "type": "Webová aplikácia",
+      "description": "Systém na publikovanie, triedenie a správu obsahu. Redaktorom dáva rýchly spôsob prípravy článkov, kategórií a náhľadov pred zverejnením. Štruktúra podporuje konzistentný výstup, dobrú orientáciu a prístupnosť pre čitateľov.",
       "url": "https://example.com",
-      "galleryLabel": "Ukazky projektu tri",
+      "galleryLabel": "Ukážky tretieho projektu",
       "images": [
         {
           "className": "content-editor",
@@ -64,14 +72,96 @@
         },
         {
           "className": "content-library",
-          "alt": "Kniznica obsahu"
+          "alt": "Knižnica obsahu"
         },
         {
           "className": "content-preview",
-          "alt": "Nahlad publikovaneho obsahu"
+          "alt": "Náhľad publikovaného obsahu"
+        },
+        {
+          "className": "content-taxonomy",
+          "alt": "Triedenie obsahu podľa kategórií"
         }
       ],
-      "technologies": ["Content model", "Editor UI", "Accessibility"]
+      "technologies": ["Model obsahu", "Editor rozhrania", "Prístupnosť"]
+    },
+    {
+      "title": "Rezervačný systém",
+      "type": "Webová aplikácia",
+      "description": "Prehľad rezervácií, dostupnosti a potvrdení v jednom toku. Používateľ si vie vybrať termín, skontrolovať údaje a dokončiť rezerváciu bez zbytočných krokov. Administrácia zobrazuje kapacity, zmeny a potvrdenia tak, aby bola denná prevádzka ľahšia.",
+      "url": "https://example.com",
+      "galleryLabel": "Ukážky štvrtého projektu",
+      "images": [
+        {
+          "className": "booking-calendar",
+          "alt": "Kalendárny prehľad rezervácií"
+        },
+        {
+          "className": "booking-slots",
+          "alt": "Voľné časové sloty"
+        },
+        {
+          "className": "booking-confirmation",
+          "alt": "Potvrdenie rezervácie"
+        },
+        {
+          "className": "booking-admin",
+          "alt": "Administrácia rezervácií"
+        }
+      ],
+      "technologies": ["Rezervačný tok", "UX", "Formuláre"]
+    },
+    {
+      "title": "Analytický panel",
+      "type": "Webová aplikácia",
+      "description": "Rýchly prehľad metrík, filtrov a trendov pre tímové rozhodovanie. Panel prepája grafy, tabuľky a porovnania tak, aby sa dali nájsť súvislosti bez exportov. Stavali sme na čitateľných dátových vzoroch, jasných stavoch a praktických reportoch.",
+      "url": "https://example.com",
+      "galleryLabel": "Ukážky piateho projektu",
+      "images": [
+        {
+          "className": "analytics-chart",
+          "alt": "Graf s vývojom metrík"
+        },
+        {
+          "className": "analytics-filter",
+          "alt": "Filter analytického panelu"
+        },
+        {
+          "className": "analytics-table",
+          "alt": "Tabuľka výsledkov"
+        },
+        {
+          "className": "analytics-summary",
+          "alt": "Súhrn kľúčových metrík"
+        }
+      ],
+      "technologies": ["Grafy", "Filtre", "Reporty"]
+    },
+    {
+      "title": "Mikrostránka podujatia",
+      "type": "Web",
+      "description": "Kompaktná stránka pre program, rečníkov a registráciu. Návštevník rýchlo nájde časový harmonogram, profily hostí a miesto konania. Dizajn drží pozornosť na podstatných informáciách a vedie k jednoduchému prihláseniu na podujatie.",
+      "url": "https://example.com",
+      "galleryLabel": "Ukážky šiesteho projektu",
+      "images": [
+        {
+          "className": "event-stage",
+          "alt": "Program podujatia"
+        },
+        {
+          "className": "event-speakers",
+          "alt": "Zoznam rečníkov"
+        },
+        {
+          "className": "event-ticket",
+          "alt": "Registračný prvok"
+        },
+        {
+          "className": "event-location",
+          "alt": "Informácie o mieste konania"
+        }
+      ],
+      "technologies": ["Landing page", "CMS", "SEO"]
     }
   ]
 }
