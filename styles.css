@@ -73,8 +73,7 @@
 :root {
   --palette-ink: #000000;
   --palette-accent-soft: #dcecff;
-  --palette-accent-purple: #a98bff;
-  --palette-accent-purple-dark: #6f48d8;
+  --palette-accent-fine: #49a1f7;
   --palette-surface-muted: #f2f5f7;
 
   --color-surface: #ffffff;
@@ -155,7 +154,7 @@ body::before {
   position: fixed;
   inset: 0;
   z-index: -1;
-  background: var(--color-background) url("/assets/bg1.svg") center / cover no-repeat;
+  background: var(--color-background) url("/assets/bg.svg") center / cover no-repeat;
 }
 
 a {
@@ -227,8 +226,8 @@ a:hover {
 }
 
 .button.menu-toggle[aria-expanded="true"] {
-  border-color: var(--palette-ink);
-  background: var(--palette-ink);
+  border-color: var(--palette-accent-fine);
+  background: var(--palette-accent-fine);
   color: var(--color-on-accent);
 }
 
@@ -302,7 +301,7 @@ a:hover {
   left: 10px;
   width: 7px;
   height: 7px;
-  background: var(--palette-accent-purple-dark);
+  background: var(--palette-accent-fine);
   content: "";
   transform: translateY(-50%) scale(0);
   transform-origin: center;
@@ -347,7 +346,7 @@ main > .section {
 .section-content {
   min-height: 0;
   overflow-y: auto;
-  padding-right: var(--space-3);
+  padding: 7px var(--space-3) 7px 7px;
   scrollbar-color: var(--color-scrollbar-strong) var(--color-scrollbar-track);
   scrollbar-width: thin;
 }
@@ -454,21 +453,33 @@ h3 {
 
 .button-outline:hover {
   border-color: var(--palette-ink);
-  background: var(--palette-accent-soft);
+  background: var(--color-surface);
+  outline: 3px solid var(--color-focus-ring);
+  outline-offset: 4px;
+}
+
+.button-outline:active,
+.button-outline[aria-expanded="true"],
+.button-outline.is-active {
+  border-color: var(--palette-accent-fine);
+  background: var(--palette-accent-fine);
+  color: var(--color-on-accent);
 }
 
 .button-primary,
 .button.primary {
-  border-color: var(--color-accent);
-  background: var(--color-accent);
-  color: var(--color-on-accent);
+  border-color: var(--palette-accent-fine);
+  background: var(--palette-accent-soft);
+  color: var(--palette-ink);
 }
 
 .button-primary:hover,
 .button.primary:hover {
-  border-color: var(--palette-accent-purple);
-  background: var(--palette-accent-purple);
+  border-color: var(--palette-accent-fine);
+  background: var(--palette-accent-fine);
   color: var(--color-on-accent);
+  outline: 3px solid var(--palette-accent-soft);
+  outline-offset: 4px;
 }
 
 .section {
@@ -748,8 +759,8 @@ h3 {
 }
 
 .project-meta li:nth-child(3n) {
-  border-color: var(--palette-accent-purple);
-  background: var(--palette-accent-purple);
+  border-color: var(--palette-accent-fine);
+  background: var(--palette-accent-fine);
   color: var(--color-on-accent);
 }
 
@@ -878,7 +889,7 @@ textarea:focus {
 
 .footer-nav a[aria-current="true"],
 .footer-nav a.is-current {
-  color: var(--palette-accent-purple-dark);
+  color: var(--palette-accent-fine);
 }
 
 .footer-nav a[aria-current="true"]::before,
