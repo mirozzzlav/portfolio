@@ -31,6 +31,17 @@ const styles = {
     }
   },
 
+  compact: {
+    gap: "0.4rem",
+    minHeight: "38px",
+    padding: "0 var(--space-2)",
+
+    svg: {
+      width: "16px",
+      height: "16px"
+    }
+  },
+
   outline: {
     background: "var(--color-surface)",
     color: "var(--color-ink)",
@@ -65,13 +76,25 @@ const buttonVariants = {
   primary: styles.primary
 };
 
-export function Button({ children, className, variant = "outline", ...props }) {
+export function Button({
+  as: Component = "button",
+  children,
+  className,
+  compact = false,
+  variant = "outline",
+  ...props
+}) {
   return (
-    <button
-      className={mergeClassNames(styles.button, buttonVariants[variant], className)}
+    <Component
+      className={mergeClassNames(
+        styles.button,
+        buttonVariants[variant],
+        compact && styles.compact,
+        className
+      )}
       {...props}
     >
       {children}
-    </button>
+    </Component>
   );
 }

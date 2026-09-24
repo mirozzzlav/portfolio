@@ -6,6 +6,9 @@
       "Mimo kódu si všímam atmosféru, kompozíciu a malé rozhodnutia, ktoré menia dojem z celého produktu. Aj preto mám rád weby, ktoré nie sú len funkčné, ale majú vlastný charakter."
     ]
   },
+  "social": {
+    "githubUrl": "https://github.com/mirozzzlav"
+  },
   "projects": [
     {
       "title": "Klientsky dashboard",

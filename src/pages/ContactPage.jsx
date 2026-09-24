@@ -42,13 +42,13 @@ export function ContactPage() {
     >
       <p className={className(styles.intro)}>
         Budem rád, keď sa mi ozvete s otázkou, nápadom alebo konkrétnym dopytom. Ak
-        hľadáte niekoho na web, aplikáciu alebo úpravu existujúceho riešenia, pokojne
-        mi napíšte. Spoločne môžeme prejsť, čo potrebujete a aký ďalší krok dáva zmysel.
+        hľadáte niekoho na web, aplikáciu alebo úpravu existujúceho riešenia, pokojne mi
+        napíšte. Spoločne môžeme prejsť, čo potrebujete a aký ďalší krok dáva zmysel.
       </p>
       <Field label="Meno" type="text" name="name" autoComplete="name" required />
       <Field label="E-mail" type="email" name="email" autoComplete="email" required />
       <Field as="textarea" label="Správa" name="message" rows="5" required />
-      <Button variant="primary" type="submit">
+      <Button compact variant="primary" type="submit">
         Odoslať
         <span className={className(styles.buttonArrow)} aria-hidden="true" />
       </Button>
