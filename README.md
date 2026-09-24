@@ -2,20 +2,31 @@
 
 Jednoduché osobné portfolio pre programátora alebo tvorcu digitálneho contentu.
 
-Projekt má byť postavený primárne na čistom HTML, CSS a JavaScripte. Ak sa rozsah časom zväčší, React je prijateľná ďalšia voľba.
+Projekt je postavený na Reacte, Vite, React Routeri a Emotion. Obsah zostáva oddelený v `data.json`.
 
 ## Spustenie lokálne
-
-Projekt používa jednoduchý Node server bez externých závislostí.
 
 ```bash
 npm run dev
 ```
 
-Web potom otvor na:
+Vite vypíše lokálnu adresu, štandardne:
 
 ```text
-http://127.0.0.1:8080
+http://localhost:5173
+```
+
+## Kontrola kódu
+
+```bash
+npm run lint
+npm run format:check
+```
+
+Produkčný build:
+
+```bash
+npm run build
 ```
 
 ## Lokálny projektový kontext
