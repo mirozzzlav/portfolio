@@ -125,7 +125,7 @@ export function Header() {
     <header className={className(styles.header)}>
       <div className={className(styles.inner)}>
         <Link className={className(styles.brand)} to="/" aria-label="Domov">
-          <img src="/assets/logo1.svg" alt="Logo" />
+          <img src="/assets/logo.svg" alt="Logo" />
         </Link>
 
         <div className={className(styles.menu)} ref={menuRef}>
