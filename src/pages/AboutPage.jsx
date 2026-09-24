@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import portfolioData from "../../data.json";
+import { BinaryClockPill } from "../components/BinaryClockPill.jsx";
 import { Button } from "../components/Button.jsx";
 import { className } from "../styles/classNames.js";
 
@@ -21,7 +22,7 @@ const styles = {
     display: "flex",
     flexWrap: "wrap",
     alignItems: "center",
-    gap: "var(--space-2)",
+    gap: "var(--space-2)"
   }
 };
 
@@ -81,6 +82,7 @@ export function AboutPage() {
           <GitHubIcon />
           GitHub
         </Button>
+        <BinaryClockPill />
       </div>
     </div>
   );
