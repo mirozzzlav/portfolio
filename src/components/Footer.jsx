@@ -35,7 +35,7 @@ const styles = {
       gridTemplateColumns: "1fr auto",
       justifyItems: "stretch",
       gap: "var(--space-2)",
-      padding: "var(--space-1) var(--space-3)",
+      padding: "var(--space-2) var(--main-inline-pad)",
 
       p: {
         textAlign: "right"
@@ -61,6 +61,16 @@ const styles = {
     color: "var(--color-border)",
     fontWeight: "var(--font-weight-regular)",
     lineHeight: "var(--line-height-solid)"
+  },
+
+  year: {
+    display: "inline-block",
+    color: "var(--color-ink)",
+    fontFamily: "var(--font-family-digital-numeric)",
+    fontSize: "0.78em",
+    fontWeight: "var(--font-weight-bold)",
+    letterSpacing: "0.04em",
+    lineHeight: "var(--line-height-solid)"
   }
 };
 
@@ -80,7 +90,10 @@ export function Footer() {
         ))}
       </nav>
       <p>
-        &copy; <CurrentYear />
+        &copy;{" "}
+        <span className={className(styles.year)}>
+          <CurrentYear />
+        </span>
       </p>
     </footer>
   );

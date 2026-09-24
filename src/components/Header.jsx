@@ -25,7 +25,7 @@ const styles = {
     padding: "0 var(--space-5)",
 
     "@media (max-width: 780px)": {
-      padding: "0 var(--space-4)"
+      padding: "0 var(--main-inline-pad)"
     }
   },
 

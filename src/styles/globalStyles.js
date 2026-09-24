@@ -1,4 +1,12 @@
 export const globalStyles = {
+  "@font-face": {
+    fontFamily: '"DSEG7 Modern"',
+    src: 'url("/assets/fonts/dseg/dseg7-modern-bold.woff2") format("woff2")',
+    fontDisplay: "swap",
+    fontStyle: "normal",
+    fontWeight: 700
+  },
+
   ":root": {
     "--palette-ink": "#000000",
     "--palette-accent-soft": "#dcecff",
@@ -39,6 +47,7 @@ export const globalStyles = {
 
     "--font-size-sm": "0.92rem",
     "--font-size-md": "1.08rem",
+    "--font-family-digital-numeric": '"DSEG7 Modern", monospace',
     "--font-weight-regular": 400,
     "--font-weight-medium": 500,
     "--font-weight-semibold": 600,
@@ -142,7 +151,6 @@ export const globalStyles = {
 
   "@media (max-width: 780px)": {
     ":root": {
-      "--main-inline-pad": "var(--space-3)",
       "--section-inline-gap": "var(--space-4)"
     },
 

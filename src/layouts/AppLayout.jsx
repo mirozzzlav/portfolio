@@ -66,7 +66,7 @@ const styles = {
       "var(--space-6) var(--main-inline-pad) var(--space-7) var(--main-inline-pad)",
 
     "@media (max-width: 780px)": {
-      padding: "var(--space-5) var(--space-3) var(--space-7)"
+      padding: "var(--space-5) var(--main-inline-pad) var(--space-7)"
     }
   },
 
