@@ -1,51 +1,31 @@
-/** @jsxImportSource @emotion/react */
-import { useEffect } from "react";
+import { className } from "../styles/classNames.js";
 import { IconButton } from "./IconButton.jsx";
+import { Lightbox } from "./Lightbox.jsx";
 import { PreviewSurface } from "./PreviewSurface.jsx";
 
 const styles = {
-  dialog: {
-    position: "fixed",
-    inset: 0,
-    zIndex: 50,
+  content: {
     display: "grid",
-    placeItems: "center",
-    padding: "var(--space-5)",
+    alignItems: "center",
+    justifyItems: "center",
+    width: "100%",
+    height: "100%",
+    minHeight: 0,
+    padding: "var(--space-6)",
 
     "@media (max-width: 780px)": {
-      padding: "var(--space-3)"
+      padding: "var(--space-5) var(--space-3)"
     }
   },
 
-  backdrop: {
-    position: "absolute",
-    inset: 0,
-    background: "var(--surface-overlay-soft)",
-    backdropFilter: "blur(14px)"
-  },
-
-  panel: {
-    position: "relative",
-    zIndex: 1,
-    display: "grid",
-    gap: "var(--space-3)",
-    width: "min(860px, 100%)"
-  },
-
-  close: {
-    position: "fixed",
-    top: "var(--space-4)",
-    right: "var(--space-4)",
-    zIndex: 3,
-    fontSize: "1.4rem",
-    lineHeight: 1
-  },
-
   nav: {
-    position: "absolute",
-    top: "50%",
+    position: "relative",
     zIndex: 2,
-    transform: "translateY(-50%)",
+    width: "48px",
+    height: "48px",
+    background: "var(--surface-solid)",
+    boxShadow:
+      "0 10px 30px color-mix(in srgb, var(--palette-ink) 12%, var(--color-transparent))",
 
     "&::before": {
       position: "absolute",
@@ -60,115 +40,113 @@ const styles = {
   },
 
   navPrev: {
-    left: "calc(-1 * var(--space-7))",
-
     "&::before": {
       transform: "translate(-35%, -50%) rotate(225deg)"
-    },
-
-    "@media (max-width: 780px)": {
-      left: "var(--space-1)"
     }
   },
 
   navNext: {
-    right: "calc(-1 * var(--space-7))",
-
     "&::before": {
       transform: "translate(-65%, -50%) rotate(45deg)"
-    },
-
-    "@media (max-width: 780px)": {
-      right: "var(--space-1)"
     }
   },
 
+  viewer: {
+    display: "grid",
+    gridTemplateColumns: "auto minmax(0, 1fr) auto",
+    gridTemplateRows: "minmax(0, auto) auto",
+    alignItems: "center",
+    gap: "var(--space-3)",
+    width: "min(100%, calc(1000px + 112px))",
+
+    "@media (max-width: 780px)": {
+      gap: "var(--space-2)"
+    }
+  },
+
+  stage: {
+    display: "grid",
+    minWidth: 0,
+    width: "min(100%, 1000px, calc((100dvh - 10rem) * 1.6))",
+    justifySelf: "center",
+
+    "@supports not (height: 100dvh)": {
+      width: "min(100%, 1000px, calc((100vh - 10rem) * 1.6))"
+    }
+  },
+
+  previewSurface: {
+    width: "100%",
+    border: 0,
+    backgroundColor: "var(--palette-accent-soft)",
+    backgroundSize: "cover",
+    boxShadow:
+      "0 20px 60px color-mix(in srgb, var(--palette-ink) 18%, var(--color-transparent))"
+  },
+
   title: {
+    gridColumn: "2",
     marginBottom: 0,
     color: "var(--color-text)",
     fontSize: "var(--font-size-sm)",
-    fontWeight: "var(--font-weight-medium)"
+    fontWeight: "var(--font-weight-medium)",
+    textAlign: "center"
   }
 };
 
 export function PreviewDialog({ preview, onClose, onNavigate }) {
-  useEffect(() => {
-    if (!preview) {
-      return undefined;
-    }
-
-    function handleKeyDown(event) {
-      if (event.key === "Escape") {
-        onClose();
-      }
-
-      if (event.key === "ArrowLeft") {
-        onNavigate(-1);
-      }
-
-      if (event.key === "ArrowRight") {
-        onNavigate(1);
-      }
-    }
-
-    document.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [onClose, onNavigate, preview]);
-
   if (!preview) {
     return null;
   }
 
   const image = preview.images[preview.imageIndex];
 
+  function handleLightboxKeyDown(event) {
+    if (event.key === "ArrowLeft") {
+      onNavigate(-1);
+    }
+
+    if (event.key === "ArrowRight") {
+      onNavigate(1);
+    }
+  }
+
   return (
-    <div css={styles.dialog}>
-      <div
-        css={styles.backdrop}
-        data-preview-close
-        onClick={onClose}
-        aria-hidden="true"
-      />
-      <div
-        css={styles.panel}
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="preview-dialog-title"
-      >
+    <Lightbox
+      closeLabel="Zatvoriť náhľad"
+      contentClassName={className(styles.content)}
+      isOpen={Boolean(preview)}
+      labelledBy="preview-dialog-title"
+      onClose={onClose}
+      onKeyDown={handleLightboxKeyDown}
+    >
+      <div className={className(styles.viewer)}>
         <IconButton
-          css={styles.close}
-          aria-label="Zatvoriť náhľad"
-          onClick={onClose}
-          size="md"
-        >
-          ×
-        </IconButton>
-        <IconButton
-          css={[styles.nav, styles.navPrev]}
+          className={className([styles.nav, styles.navPrev])}
           aria-label="Predchádzajúci obrázok"
           onClick={() => onNavigate(-1)}
           size="lg"
         />
-        <PreviewSurface
-          aspectRatio="16 / 10"
-          image={image}
-          radius="var(--radius-md)"
-          role="img"
-          aria-label={image.alt}
-        />
+        <div className={className(styles.stage)}>
+          <PreviewSurface
+            aspectRatio="16 / 10"
+            className={className(styles.previewSurface)}
+            image={image}
+            radius="var(--radius-md)"
+            role="img"
+            aria-label={image.alt}
+          />
+        </div>
         <IconButton
-          css={[styles.nav, styles.navNext]}
+          className={className([styles.nav, styles.navNext])}
           aria-label="Ďalší obrázok"
           onClick={() => onNavigate(1)}
           size="lg"
         />
-        <p id="preview-dialog-title" css={styles.title}>
+        <p id="preview-dialog-title" className={className(styles.title)}>
           {image.alt}
         </p>
       </div>
-    </div>
+    </Lightbox>
   );
 }
