@@ -22,7 +22,6 @@ const styles = {
     flexWrap: "wrap",
     alignItems: "center",
     gap: "var(--space-2)",
-    marginTop: "var(--space-2)"
   }
 };
 
