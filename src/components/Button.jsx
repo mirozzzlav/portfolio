@@ -1,4 +1,4 @@
-/** @jsxImportSource @emotion/react */
+import { mergeClassNames } from "../styles/classNames.js";
 
 const activeButton = {
   borderColor: "var(--palette-accent-fine)",
@@ -22,7 +22,7 @@ const styles = {
     fontSize: "0.84rem",
     fontWeight: "var(--font-weight-semibold)",
     letterSpacing: 0,
-    lineHeight: 1,
+    lineHeight: "var(--line-height-solid)",
     textTransform: "uppercase",
     transition: "background 160ms ease, border-color 160ms ease, color 160ms ease",
 
@@ -65,9 +65,12 @@ const buttonVariants = {
   primary: styles.primary
 };
 
-export function Button({ children, css: cssProp, variant = "outline", ...props }) {
+export function Button({ children, className, variant = "outline", ...props }) {
   return (
-    <button css={[styles.button, buttonVariants[variant], cssProp]} {...props}>
+    <button
+      className={mergeClassNames(styles.button, buttonVariants[variant], className)}
+      {...props}
+    >
       {children}
     </button>
   );

@@ -1,26 +1,20 @@
-/** @jsxImportSource @emotion/react */
 import { Button } from "../components/Button.jsx";
 import { Field } from "../components/Field.jsx";
-import { SectionPage } from "../components/SectionPage.jsx";
+import { className } from "../styles/classNames.js";
 
 const styles = {
   form: {
     display: "grid",
     gap: "var(--space-3)",
     width: "100%",
-    maxWidth: "720px",
-    padding: 0,
-
-    "@media (max-width: 1000px)": {
-      maxWidth: "none"
-    }
+    padding: 0
   },
 
   intro: {
     marginBottom: "var(--space-1)",
     color: "var(--color-text)",
     fontSize: "var(--font-size-md)",
-    lineHeight: 1.72,
+    lineHeight: "var(--line-height-prose)",
     textWrap: "pretty"
   },
 
@@ -40,22 +34,24 @@ export function ContactPage() {
   }
 
   return (
-    <SectionPage sectionId="contact" title="Kontakt">
-      <form css={styles.form} action="#" method="post" onSubmit={handleSubmit}>
-        <p css={styles.intro}>
-          Budem rád, keď sa mi ozvete s otázkou, nápadom alebo konkrétnym dopytom. Ak
-          hľadáte niekoho na web, aplikáciu alebo úpravu existujúceho riešenia, pokojne
-          mi napíšte. Spoločne môžeme prejsť, čo potrebujete a aký ďalší krok dáva
-          zmysel.
-        </p>
-        <Field label="Meno" type="text" name="name" autoComplete="name" required />
-        <Field label="E-mail" type="email" name="email" autoComplete="email" required />
-        <Field as="textarea" label="Správa" name="message" rows="5" required />
-        <Button variant="primary" type="submit">
-          Odoslať
-          <span css={styles.buttonArrow} aria-hidden="true" />
-        </Button>
-      </form>
-    </SectionPage>
+    <form
+      className={className(styles.form)}
+      action="#"
+      method="post"
+      onSubmit={handleSubmit}
+    >
+      <p className={className(styles.intro)}>
+        Budem rád, keď sa mi ozvete s otázkou, nápadom alebo konkrétnym dopytom. Ak
+        hľadáte niekoho na web, aplikáciu alebo úpravu existujúceho riešenia, pokojne
+        mi napíšte. Spoločne môžeme prejsť, čo potrebujete a aký ďalší krok dáva zmysel.
+      </p>
+      <Field label="Meno" type="text" name="name" autoComplete="name" required />
+      <Field label="E-mail" type="email" name="email" autoComplete="email" required />
+      <Field as="textarea" label="Správa" name="message" rows="5" required />
+      <Button variant="primary" type="submit">
+        Odoslať
+        <span className={className(styles.buttonArrow)} aria-hidden="true" />
+      </Button>
+    </form>
   );
 }

@@ -1,4 +1,12 @@
-/** @jsxImportSource @emotion/react */
+import { mergeClassNames } from "../styles/classNames.js";
+import { SelectionIndicator } from "./SelectionIndicator.jsx";
+
+const activeButton = {
+  borderColor: "var(--palette-accent-fine)",
+  background: "var(--palette-accent-fine)",
+  color: "var(--color-on-accent)",
+  boxShadow: "0 0 0 var(--space-0) var(--color-focus-ring)"
+};
 
 const styles = {
   button: {
@@ -14,7 +22,7 @@ const styles = {
     color: "var(--color-ink)",
     cursor: "pointer",
     font: "inherit",
-    lineHeight: 1,
+    lineHeight: "var(--line-height-solid)",
     outline: "none",
     boxShadow: "none",
     transition:
@@ -41,10 +49,39 @@ const styles = {
     }
   },
 
-  sm: {
+  selectorButton: {
+    appearance: "none",
+    WebkitTapHighlightColor: "var(--color-transparent)",
+    display: "inline-grid",
+    placeItems: "center",
+    flex: "none",
     width: "0.66rem",
     height: "0.66rem",
-    borderRadius: "2px"
+    padding: 0,
+    border: 0,
+    borderRadius: "2px",
+    background: "var(--color-transparent)",
+    cursor: "pointer",
+    font: "inherit",
+    lineHeight: "var(--line-height-solid)",
+    outline: "none",
+
+    "&:hover [data-selection-indicator], &:active [data-selection-indicator]": {
+      borderColor: "var(--palette-accent-fine)",
+      background: "var(--palette-accent-fine)"
+    },
+
+    "&:focus": {
+      outline: 0
+    },
+
+    "&:focus-visible [data-selection-indicator]": {
+      boxShadow: "0 0 0 var(--space-0) var(--color-focus-ring)"
+    },
+
+    "&::-moz-focus-inner": {
+      border: 0
+    }
   },
 
   md: {
@@ -57,16 +94,10 @@ const styles = {
     height: "44px"
   },
 
-  active: {
-    borderColor: "var(--palette-accent-fine)",
-    background: "var(--palette-accent-fine)",
-    color: "var(--color-on-accent)",
-    boxShadow: "0 0 0 var(--space-0) var(--color-focus-ring)"
-  }
+  active: activeButton
 };
 
 const sizes = {
-  sm: styles.sm,
   md: styles.md,
   lg: styles.lg
 };
@@ -74,20 +105,27 @@ const sizes = {
 export function IconButton({
   "aria-label": ariaLabel,
   children,
-  css: cssProp,
+  className,
   isActive = false,
   size = "md",
   type = "button",
   ...props
 }) {
+  const isSelector = size === "sm" && !children;
+
   return (
     <button
       aria-label={ariaLabel}
-      css={[styles.button, sizes[size], isActive && styles.active, cssProp]}
+      className={mergeClassNames(
+        isSelector ? styles.selectorButton : styles.button,
+        !isSelector && sizes[size],
+        !isSelector && isActive && styles.active,
+        className
+      )}
       type={type}
       {...props}
     >
-      {children}
+      {isSelector ? <SelectionIndicator isActive={isActive} /> : children}
     </button>
   );
 }

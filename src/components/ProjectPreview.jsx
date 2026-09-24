@@ -1,4 +1,4 @@
-/** @jsxImportSource @emotion/react */
+import { className } from "../styles/classNames.js";
 import { PreviewSurface } from "./PreviewSurface.jsx";
 
 const styles = {
@@ -21,7 +21,7 @@ export function ProjectPreview({ image, isInteractive, onOpen }) {
 
   return (
     <PreviewSurface
-      css={styles.preview}
+      className={className(styles.preview)}
       image={image}
       imageLoading="lazy"
       role={image.src ? undefined : "button"}

@@ -1,4 +1,4 @@
-/** @jsxImportSource @emotion/react */
+import { className } from "../styles/classNames.js";
 
 const styles = {
   label: {
@@ -42,9 +42,9 @@ export function Field({ as = "input", label, ...props }) {
   const Control = as;
 
   return (
-    <label css={styles.label}>
+    <label className={className(styles.label)}>
       {label}
-      <Control css={[styles.control, styles[as]]} {...props} />
+      <Control className={className([styles.control, styles[as]])} {...props} />
     </label>
   );
 }

@@ -1,4 +1,4 @@
-/** @jsxImportSource @emotion/react */
+import { className } from "../styles/classNames.js";
 
 const styles = {
   list: {
@@ -21,7 +21,7 @@ const styles = {
       color: "var(--palette-ink)",
       fontSize: "0.78rem",
       fontWeight: "var(--font-weight-medium)",
-      lineHeight: 1
+      lineHeight: "var(--line-height-solid)"
     },
 
     "li:nth-of-type(2n)": {
@@ -38,7 +38,7 @@ const styles = {
 
 export function TagList({ ariaLabel, items }) {
   return (
-    <ul css={styles.list} aria-label={ariaLabel}>
+    <ul className={className(styles.list)} aria-label={ariaLabel}>
       {items.map((item) => (
         <li key={item}>{item}</li>
       ))}

@@ -32,11 +32,6 @@ export const globalStyles = {
     "--color-transparent": "transparent",
     "--color-nav-hover":
       "color-mix(in srgb, var(--palette-accent-soft) var(--opacity-strong), var(--color-transparent))",
-    "--color-scrollbar":
-      "color-mix(in srgb, var(--palette-ink) var(--opacity-medium), var(--color-transparent))",
-    "--color-scrollbar-strong":
-      "color-mix(in srgb, var(--palette-ink) var(--opacity-strong), var(--color-transparent))",
-    "--color-scrollbar-track": "var(--color-transparent)",
     "--shadow-menu":
       "0 12px 28px color-mix(in srgb, var(--palette-ink) var(--opacity-subtle), var(--color-transparent))",
     "--main-inline-pad": "var(--space-5)",
@@ -48,8 +43,13 @@ export const globalStyles = {
     "--font-weight-medium": 500,
     "--font-weight-semibold": 600,
     "--font-weight-bold": 700,
-
-    "--content-width": "1000px",
+    "--line-height-none": 0,
+    "--line-height-solid": 1,
+    "--line-height-compact": 1.1,
+    "--line-height-heading": 1.2,
+    "--line-height-body": 1.6,
+    "--line-height-prose": 1.72,
+    "--line-height-display": 0.98,
 
     "--space-0": "0.25rem",
     "--space-1": "0.5rem",
@@ -75,24 +75,32 @@ export const globalStyles = {
   },
 
   "html, #root": {
-    height: "100%"
+    minHeight: "100%"
   },
 
   body: {
-    height: "100%",
+    minHeight: "100%",
     margin: 0,
     color: "var(--color-text)",
     fontFamily:
       'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
     fontWeight: "var(--font-weight-regular)",
-    lineHeight: 1.6,
-    overflow: "hidden",
+    lineHeight: "var(--line-height-body)",
+    overflowX: "hidden",
+    overflowY: "auto",
     textRendering: "optimizeLegibility"
   },
 
   "#root": {
     display: "grid",
-    gridTemplateRows: "auto minmax(0, 1fr) auto"
+    minHeight: "100vh",
+    gridTemplateRows: "auto 1fr auto"
+  },
+
+  "@supports (height: 100svh)": {
+    "#root": {
+      minHeight: "100svh"
+    }
   },
 
   a: {
@@ -112,7 +120,7 @@ export const globalStyles = {
     marginBottom: "var(--space-2)",
     fontSize: "var(--font-size-md)",
     fontWeight: "var(--font-weight-bold)",
-    lineHeight: 1.2
+    lineHeight: "var(--line-height-heading)"
   },
 
   ":where(a, button, input, textarea):focus-visible": {
@@ -132,18 +140,6 @@ export const globalStyles = {
     }
   },
 
-  "@keyframes section-exit": {
-    from: {
-      opacity: 1,
-      transform: "translateY(0)"
-    },
-
-    to: {
-      opacity: 0,
-      transform: "translateY(calc(-1 * var(--space-2)))"
-    }
-  },
-
   "@media (max-width: 780px)": {
     ":root": {
       "--main-inline-pad": "var(--space-3)",
@@ -155,7 +151,8 @@ export const globalStyles = {
     },
 
     body: {
-      overflow: "hidden"
+      overflowX: "hidden",
+      overflowY: "auto"
     }
   }
 };

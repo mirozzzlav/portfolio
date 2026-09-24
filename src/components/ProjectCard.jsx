@@ -1,4 +1,4 @@
-/** @jsxImportSource @emotion/react */
+import { className } from "../styles/classNames.js";
 import { ProjectPreview } from "./ProjectPreview.jsx";
 import { TagList } from "./TagList.jsx";
 
@@ -17,20 +17,20 @@ const styles = {
     h3: {
       marginBottom: "var(--space-2)",
       maxWidth: "24ch",
-      minHeight: "calc(1.45rem * 1.18)",
+      minHeight: "calc(1.45rem * var(--line-height-heading))",
       color: "var(--color-text)",
       fontSize: "clamp(1.15rem, 1.55vw, 1.45rem)",
       fontWeight: "var(--font-weight-medium)",
-      lineHeight: 1.18,
+      lineHeight: "var(--line-height-heading)",
       textWrap: "balance"
     },
 
     "p:not([data-project-category])": {
       marginBottom: 0,
-      minHeight: "calc(1.58em * 3)",
+      minHeight: "calc(var(--line-height-body) * 1em * 3)",
       color: "var(--color-text)",
       fontSize: "1rem",
-      lineHeight: 1.58,
+      lineHeight: "var(--line-height-body)",
       textWrap: "pretty"
     },
 
@@ -38,9 +38,9 @@ const styles = {
       minHeight: "auto",
 
       "p:not([data-project-category])": {
-        minHeight: "calc(0.92rem * 2 * 5)",
+        minHeight: "calc(0.92rem * var(--line-height-body) * 5)",
         fontSize: "0.92rem",
-        lineHeight: 1.48
+        lineHeight: "var(--line-height-body)"
       }
     }
   },
@@ -53,7 +53,7 @@ const styles = {
     width: "100%",
     minHeight: "1.2rem",
     marginBottom: "var(--space-2)",
-    lineHeight: 1.1,
+    lineHeight: "var(--line-height-compact)",
 
     "@media (max-width: 780px)": {
       gap: "var(--space-1)",
@@ -68,7 +68,7 @@ const styles = {
     color: "var(--palette-accent-fine)",
     fontSize: "1rem",
     fontWeight: "var(--font-weight-medium)",
-    lineHeight: 1.1,
+    lineHeight: "var(--line-height-compact)",
     letterSpacing: 0,
     opacity: 1,
 
@@ -86,7 +86,7 @@ const styles = {
     color: "var(--color-accent)",
     fontSize: "1rem",
     fontWeight: "var(--font-weight-medium)",
-    lineHeight: 1.1,
+    lineHeight: "var(--line-height-compact)",
     textDecoration: "none",
 
     "&::before": {
@@ -97,19 +97,22 @@ const styles = {
       textDecoration: "none"
     },
 
-    "&::after": {
-      marginLeft: "var(--space-1)",
-      content: '"->"',
-      transition: "transform 160ms ease"
-    },
-
-    "&:hover::after": {
+    "&:hover svg": {
       transform: "translateX(var(--space-0))"
     },
 
     "@media (max-width: 780px)": {
       fontSize: "0.92rem"
     }
+  },
+
+  linkIcon: {
+    display: "block",
+    flex: "none",
+    width: "1rem",
+    height: "1rem",
+    marginLeft: "var(--space-1)",
+    transition: "transform 160ms ease"
   },
 
   gallery: {
@@ -129,14 +132,14 @@ const styles = {
 
 export function ProjectCard({ isActive, onPreviewOpen, project }) {
   return (
-    <article css={styles.card} aria-hidden={!isActive}>
+    <article className={className(styles.card)} aria-hidden={!isActive}>
       <h3>{project.title}</h3>
-      <div css={styles.header}>
-        <p css={styles.category} data-project-category>
+      <div className={className(styles.header)}>
+        <p className={className(styles.category)} data-project-category>
           {project.type}
         </p>
         <a
-          css={styles.link}
+          className={className(styles.link)}
           href={project.url}
           target="_blank"
           rel="noreferrer"
@@ -144,10 +147,24 @@ export function ProjectCard({ isActive, onPreviewOpen, project }) {
           tabIndex={isActive ? 0 : -1}
         >
           Otvoriť projekt
+          <svg
+            className={className(styles.linkIcon)}
+            viewBox="0 0 16 16"
+            aria-hidden="true"
+          >
+            <path
+              d="M4 8h8m-3-3 3 3-3 3"
+              fill="none"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="1.75"
+            />
+          </svg>
         </a>
       </div>
       <p>{project.description}</p>
-      <div css={styles.gallery} aria-label={project.galleryLabel}>
+      <div className={className(styles.gallery)} aria-label={project.galleryLabel}>
         {project.images.map((image, imageIndex) => (
           <ProjectPreview
             image={image}

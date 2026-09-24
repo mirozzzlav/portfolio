@@ -1,7 +1,7 @@
-/** @jsxImportSource @emotion/react */
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { navigationItems } from "../data/navigationItems.js";
+import { pageRoutes } from "../pages/index.jsx";
+import { className } from "../styles/classNames.js";
 import { Button } from "./Button.jsx";
 import { NavigationLink } from "./NavigationLink.jsx";
 
@@ -32,7 +32,7 @@ const styles = {
   brand: {
     display: "inline-flex",
     alignItems: "center",
-    lineHeight: 0,
+    lineHeight: "var(--line-height-none)",
 
     img: {
       display: "block",
@@ -58,7 +58,7 @@ const styles = {
   menuToggleLabel: {
     fontSize: "0.84rem",
     fontWeight: "var(--font-weight-semibold)",
-    lineHeight: 1
+    lineHeight: "var(--line-height-solid)"
   },
 
   menuToggleIcon: {
@@ -122,24 +122,24 @@ export function Header() {
   }, []);
 
   return (
-    <header css={styles.header}>
-      <div css={styles.inner}>
-        <Link css={styles.brand} to="/" aria-label="Domov">
+    <header className={className(styles.header)}>
+      <div className={className(styles.inner)}>
+        <Link className={className(styles.brand)} to="/" aria-label="Domov">
           <img src="/assets/logo1.svg" alt="Logo" />
         </Link>
 
-        <div css={styles.menu} ref={menuRef}>
+        <div className={className(styles.menu)} ref={menuRef}>
           <Button
-            css={styles.menuToggle}
+            className={className(styles.menuToggle)}
             type="button"
             aria-controls="site-menu"
             aria-expanded={isMenuOpen}
             aria-label={isMenuOpen ? "Zatvoriť menu" : "Otvoriť menu"}
             onClick={() => setIsMenuOpen((currentValue) => !currentValue)}
           >
-            <span css={styles.menuToggleLabel}>Menu</span>
+            <span className={className(styles.menuToggleLabel)}>Menu</span>
             <svg
-              css={styles.menuToggleIcon}
+              className={className(styles.menuToggleIcon)}
               viewBox="0 0 144 124.7"
               width="28"
               height="28"
@@ -155,10 +155,10 @@ export function Header() {
 
           <nav
             id="site-menu"
-            css={[styles.nav, isMenuOpen && styles.navOpen]}
+            className={className([styles.nav, isMenuOpen && styles.navOpen])}
             aria-label="Hlavná navigácia"
           >
-            {navigationItems.map((item) => (
+            {pageRoutes.map((item) => (
               <NavigationLink
                 item={item}
                 key={item.path}

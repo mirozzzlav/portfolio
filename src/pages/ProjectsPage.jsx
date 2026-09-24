@@ -1,10 +1,9 @@
-/** @jsxImportSource @emotion/react */
 import { useMemo, useState } from "react";
 import portfolioData from "../../data.json";
 import { IconButton } from "../components/IconButton.jsx";
 import { PreviewDialog } from "../components/PreviewDialog.jsx";
 import { ProjectCard } from "../components/ProjectCard.jsx";
-import { SectionPage } from "../components/SectionPage.jsx";
+import { className } from "../styles/classNames.js";
 
 const styles = {
   stage: {
@@ -66,9 +65,9 @@ export function ProjectsPage() {
   }
 
   return (
-    <SectionPage sectionId="projects" title="Projekty">
-      <div css={styles.stage}>
-        <div css={styles.track} style={trackStyle}>
+    <>
+      <div className={className(styles.stage)}>
+        <div className={className(styles.track)} style={trackStyle}>
           {projects.map((project, projectIndex) => (
             <ProjectCard
               isActive={projectIndex === activeProjectIndex}
@@ -80,7 +79,7 @@ export function ProjectsPage() {
         </div>
 
         {projects.length > 1 ? (
-          <div css={styles.controls} aria-label="Výber projektov">
+          <div className={className(styles.controls)} aria-label="Výber projektov">
             {projects.map((project, projectIndex) => {
               const isActive = projectIndex === activeProjectIndex;
 
@@ -107,6 +106,6 @@ export function ProjectsPage() {
         onClose={() => setPreview(null)}
         onNavigate={navigatePreview}
       />
-    </SectionPage>
+    </>
   );
 }

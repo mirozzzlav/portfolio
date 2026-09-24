@@ -1,4 +1,4 @@
-/** @jsxImportSource @emotion/react */
+import { mergeClassNames } from "../styles/classNames.js";
 import { projectPreviewVariants } from "./projectPreviewVariants.js";
 
 const styles = {
@@ -26,6 +26,7 @@ const styles = {
 export function PreviewSurface({
   as: Component = "span",
   aspectRatio = "1",
+  className,
   image,
   imageLoading,
   radius = "var(--radius-sm)",
@@ -33,11 +34,12 @@ export function PreviewSurface({
 }) {
   return (
     <Component
-      css={[
+      className={mergeClassNames(
         styles.surface,
         { aspectRatio, borderRadius: radius },
-        projectPreviewVariants[image.className]
-      ]}
+        projectPreviewVariants[image.className],
+        className
+      )}
       {...props}
     >
       {image.src ? (
