@@ -35,7 +35,7 @@ export const globalStyles = {
     "--shadow-menu":
       "0 12px 28px color-mix(in srgb, var(--palette-ink) var(--opacity-subtle), var(--color-transparent))",
     "--main-inline-pad": "var(--space-5)",
-    "--section-inline-gap": "var(--space-6)",
+    "--section-inline-gap": "var(--space-5)",
 
     "--font-size-sm": "0.92rem",
     "--font-size-md": "1.08rem",
@@ -143,7 +143,7 @@ export const globalStyles = {
   "@media (max-width: 780px)": {
     ":root": {
       "--main-inline-pad": "var(--space-3)",
-      "--section-inline-gap": "var(--space-5)"
+      "--section-inline-gap": "var(--space-4)"
     },
 
     "html, body": {

@@ -31,7 +31,7 @@ const styles = {
     gap: "var(--space-2)",
     width: "100%",
     marginTop: 0,
-    padding: "var(--space-4) var(--space-0) 0"
+    padding: "var(--space-4) var(--space-0) var(--space-0) var(--space-0)"
   }
 };
 

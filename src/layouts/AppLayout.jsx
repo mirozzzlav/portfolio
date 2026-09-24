@@ -66,12 +66,7 @@ const styles = {
       "var(--space-6) var(--main-inline-pad) var(--space-7) var(--main-inline-pad)",
 
     "@media (max-width: 780px)": {
-      padding: "0 var(--space-3) var(--space-7)",
-      paddingTop: `clamp(
-        calc(var(--space-7) + var(--space-5)),
-        12vh,
-        calc(var(--space-7) * 2)
-      )`
+      padding: "var(--space-5) var(--space-3) var(--space-7)"
     }
   },
 
@@ -94,7 +89,7 @@ const styles = {
     display: "block",
     objectFit: "contain",
     position: "relative",
-    top: "var(--space-7)"
+    top: "var(--space-6)"
   },
   pageSection: {
     "--section-space": "var(--section-inline-gap)",
@@ -103,6 +98,7 @@ const styles = {
     width: "100%",
     display: "grid",
     gridTemplateRows: "auto auto",
+    gap: "var(--section-space)",
     minHeight: 0,
     padding: 0,
     animation: "section-enter 280ms ease-out both",
@@ -120,11 +116,7 @@ const styles = {
 
   pageHeading: {
     display: "grid",
-    gap: "var(--space-1)",
-
-    "@media (max-width: 780px)": {
-      marginBottom: "var(--space-3)"
-    }
+    gap: "var(--space-1)"
   },
 
   pageTitle: {
@@ -157,9 +149,9 @@ const styles = {
   },
 
   pageContent: {
-    maxWidth: "60ch",
+    maxWidth: "75ch",
     overflow: "visible",
-    padding: "var(--space-5) 0 0 0",
+    padding: 0,
 
     "@media (max-width: 780px)": {
       overflow: "visible"
