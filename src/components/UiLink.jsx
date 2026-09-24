@@ -64,32 +64,24 @@ const styles = {
 
   footer: {
     position: "relative",
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "var(--space-1)",
     borderRadius: "var(--radius-pill)",
+    padding: "var(--space-0) 0",
     transition: "color 160ms ease",
 
-    "&::after": {
-      position: "absolute",
-      right: 0,
-      bottom: "calc(-1 * var(--space-0))",
-      left: 0,
-      height: "2px",
-      background: "var(--palette-accent-fine)",
-      content: '""',
-      transform: "scaleX(0)",
-      transformOrigin: "left",
-      transition: "transform 160ms ease"
-    },
-
     "&:not([aria-current='true']):hover": {
-      color: "var(--color-ink)"
+      color: "var(--color-ink)",
+
+      "[data-selection-indicator]": {
+        borderColor: "var(--palette-accent-fine)",
+        background: "var(--palette-accent-fine)"
+      }
     },
 
     "&[aria-current='true']:hover": {
       color: "var(--palette-accent-fine)"
-    },
-
-    "&:hover::after": {
-      transform: "scaleX(1)"
     }
   },
 
@@ -110,6 +102,15 @@ const activeLinkVariants = {
 };
 
 function renderLinkContent(children, isCurrent, variant) {
+  if (variant === "footer") {
+    return (
+      <>
+        <SelectionIndicator isActive={isCurrent} />
+        <span className={mergeClassNames(styles.menuLabel)}>{children}</span>
+      </>
+    );
+  }
+
   if (variant !== "menu") {
     return children;
   }
