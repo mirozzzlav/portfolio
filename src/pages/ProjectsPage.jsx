@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import portfolioData from "../../data.json";
 import { IconButton } from "../components/IconButton.jsx";
 import { PreviewDialog } from "../components/PreviewDialog.jsx";
@@ -35,6 +35,14 @@ const styles = {
   }
 };
 
+function isKeyboardNavigationTarget(target) {
+  return Boolean(
+    target?.closest?.(
+      'input, textarea, select, button, a, [role="button"], [role="dialog"]'
+    )
+  );
+}
+
 export function ProjectsPage() {
   const [activeProjectIndex, setActiveProjectIndex] = useState(0);
   const [preview, setPreview] = useState(null);
@@ -48,6 +56,15 @@ export function ProjectsPage() {
   function openPreview(images, imageIndex) {
     setPreview({ images, imageIndex });
   }
+
+  const navigateProject = useCallback(
+    (direction) => {
+      setActiveProjectIndex(
+        (currentIndex) => (currentIndex + direction + projects.length) % projects.length
+      );
+    },
+    [projects.length]
+  );
 
   function navigatePreview(direction) {
     setPreview((currentPreview) => {
@@ -63,6 +80,41 @@ export function ProjectsPage() {
       };
     });
   }
+
+  useEffect(() => {
+    if (projects.length <= 1 || preview) {
+      return undefined;
+    }
+
+    function handleKeyDown(event) {
+      if (
+        event.defaultPrevented ||
+        event.altKey ||
+        event.ctrlKey ||
+        event.metaKey ||
+        event.shiftKey ||
+        isKeyboardNavigationTarget(event.target)
+      ) {
+        return;
+      }
+
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        navigateProject(-1);
+      }
+
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        navigateProject(1);
+      }
+    }
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [navigateProject, preview, projects.length]);
 
   return (
     <>
