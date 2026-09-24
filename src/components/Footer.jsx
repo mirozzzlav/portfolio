@@ -20,10 +20,13 @@ const styles = {
     padding: "var(--space-2) var(--space-5)",
     background: "var(--surface-overlay-strong)",
     backdropFilter: "blur(12px)",
+    boxShadow:
+      "0 -6px 16px color-mix(in srgb, var(--palette-ink) 4%, var(--color-transparent))",
     color: "var(--color-ink)",
     fontSize: "var(--font-size-sm)",
 
     p: {
+      fontWeight: "var(--font-weight-semibold)",
       marginBottom: 0,
       textAlign: "right"
     },
@@ -47,7 +50,7 @@ const styles = {
     justifyContent: "flex-start",
     gap: "var(--space-2)",
     color: "var(--color-ink)",
-    fontWeight: "var(--font-weight-regular)",
+    fontWeight: "var(--font-weight-medium)",
 
     "@media (max-width: 780px)": {
       gap: "var(--space-1)"
@@ -56,6 +59,7 @@ const styles = {
 
   separator: {
     color: "var(--color-border)",
+    fontWeight: "var(--font-weight-regular)",
     lineHeight: "var(--line-height-solid)"
   }
 };

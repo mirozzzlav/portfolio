@@ -86,8 +86,7 @@ const styles = {
   },
 
   footerActive: {
-    color: "var(--palette-accent-fine)",
-    fontWeight: "var(--font-weight-medium)"
+    color: "var(--palette-accent-fine)"
   }
 };
 
