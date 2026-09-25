@@ -19,7 +19,7 @@ def build_contact_message(
     message["From"] = settings.contact_from_email
     message["To"] = settings.contact_to_email
     message["Reply-To"] = str(payload.email)
-    message["Subject"] = f"Nová správa z portfólia od {payload.name}"
+    message["Subject"] = "Nová správa z portfólia od Mira"
 
     body = "\n".join(
         [
