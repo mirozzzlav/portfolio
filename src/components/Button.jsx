@@ -68,6 +68,15 @@ const styles = {
       outline: "3px solid var(--palette-accent-soft)",
       outlineOffset: "var(--space-0)"
     }
+  },
+
+  disabled: {
+    cursor: "not-allowed",
+    opacity: 0.58,
+
+    "&:hover": {
+      outline: "none"
+    }
   }
 };
 
@@ -90,6 +99,7 @@ export function Button({
         styles.button,
         buttonVariants[variant],
         compact && styles.compact,
+        props.disabled && styles.disabled,
         className
       )}
       {...props}

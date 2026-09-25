@@ -14,6 +14,8 @@ export const globalStyles = {
     "--palette-surface-muted": "#f2f5f7",
     "--palette-surface": "#ffffff",
     "--palette-border": "#c9d1dc",
+    "--palette-error": "#b42318",
+    "--palette-success": "#177245",
 
     "--opacity-subtle": "8%",
     "--opacity-muted": "18%",
@@ -24,6 +26,8 @@ export const globalStyles = {
     "--color-border": "var(--palette-border)",
     "--color-ink": "var(--palette-ink)",
     "--color-accent": "var(--palette-ink)",
+    "--color-error": "var(--palette-error)",
+    "--color-success": "var(--palette-success)",
     "--surface-frosted":
       "color-mix(in srgb, var(--color-surface), var(--color-transparent) var(--opacity-strong))",
     "--surface-overlay-soft":
@@ -72,6 +76,7 @@ export const globalStyles = {
     "--radius-sm": "8px",
     "--radius-md": "8px",
     "--radius-lg": "10px",
+    "--radius-xl": "16px",
     "--radius-pill": "999px"
   },
 
