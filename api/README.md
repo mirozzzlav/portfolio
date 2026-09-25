@@ -1,6 +1,6 @@
 # Portfolio API
 
-Small FastAPI service for the portfolio contact form. It sends email through a generic SMTP client (`aiosmtplib`) and can be configured for Cloudflare Email Service SMTP.
+Small FastAPI service for the portfolio contact form. It sends email through a generic SMTP client (`aiosmtplib`) and can be configured for Resend SMTP.
 
 ## Local setup
 
@@ -42,17 +42,17 @@ curl -X POST http://127.0.0.1:8001/api/contact \
   -d '{"name":"Test","email":"test@example.com","message":"Ahoj"}'
 ```
 
-## Cloudflare SMTP
+## Resend SMTP
 
 Use these SMTP values:
 
-- `SMTP_HOST=smtp.mx.cloudflare.net`
+- `SMTP_HOST=smtp.resend.com`
 - `SMTP_PORT=465`
-- `SMTP_USERNAME=api_token`
-- `SMTP_PASSWORD=<Cloudflare API token with Email Sending: Edit permission>`
+- `SMTP_USERNAME=resend`
+- `SMTP_PASSWORD=<Resend API key>`
 - `SMTP_USE_TLS=true`
 
-Cloudflare SMTP uses implicit TLS on port `465`. The sender domain from `CONTACT_FROM_EMAIL` must be onboarded under Cloudflare Email Service > Email Sending.
+Resend SMTP uses implicit TLS on port `465`. The sender domain from `CONTACT_FROM_EMAIL` must be verified in Resend.
 
 For production email delivery, set:
 

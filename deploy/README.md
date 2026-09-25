@@ -132,4 +132,4 @@ This creates a certificate for `mirofurinda.com` only. It should not replace the
    sudo systemctl reload nginx
    ```
 
-Keep `MAIL_DRY_RUN=true` until the domain and Cloudflare Email Sending SMTP are ready.
+Keep `MAIL_DRY_RUN=true` until the domain and Resend SMTP are ready. For Resend, set `SMTP_HOST=smtp.resend.com`, `SMTP_USERNAME=resend`, and `SMTP_PASSWORD` to a Resend API key. The sender domain in `CONTACT_FROM_EMAIL` must be verified in Resend.
