@@ -1,0 +1,23 @@
+[Unit]
+Description=Portfolio contact API
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/var/www/portfolio/api
+EnvironmentFile=/etc/portfolio-api.env
+ExecStart=/var/www/portfolio/api/.venv/bin/uvicorn app.main:app --host 127.0.0.1 --port 8001
+Restart=on-failure
+RestartSec=5
+User=www-data
+Group=www-data
+
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true
+ReadWritePaths=/var/www/portfolio
+
+[Install]
+WantedBy=multi-user.target
