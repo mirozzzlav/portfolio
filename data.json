@@ -11,160 +11,94 @@
   },
   "projects": [
     {
-      "title": "Klientsky dashboard",
+      "title": "Priatelia",
       "type": "Webová aplikácia",
-      "description": "Interný dashboard pre zákazky, požiadavky a rýchle rozhodnutia. Zjednocuje stav klientov, priority tímu a dôležité termíny na jednom mieste. Návrh kladie dôraz na rýchle filtrovanie, čitateľné karty a prehľad bez zbytočného hľadania.",
-      "url": "https://example.com",
-      "galleryLabel": "Ukážky prvého projektu",
+      "description": "Priatelia je aplikácia na spoznávanie nových ľudí a parťákov na základe spoločných záľub, sympatií a blízkosti. Používateľovi sa postupne zobrazujú ľudia z jeho okolia a keď ho niekto zaujme, môže mu dať like. Ak sympatie vzniknú na oboch stranách, aplikácia ich prepojí a otvorí im priestor na spoločnú konverzáciu.",
+      "url": "https://priatelia.wondercules.com",
+      "galleryLabel": "Ukážky projektu Priatelia",
       "images": [
         {
-          "className": "web-dashboard",
-          "alt": "Dashboard s bočnou navigáciou"
+          "src": "/assets/projects/priatelia/1.png",
+          "alt": "Prehliadanie ľudí z okolia podľa kritérií"
         },
         {
-          "className": "web-mobile",
-          "alt": "Mobilný náhľad dashboardu"
+          "src": "/assets/projects/priatelia/2.png",
+          "alt": "Profil človeka s opisom záľub a sympatií"
         },
         {
-          "className": "web-detail",
-          "alt": "Detail stavu v dashboarde"
+          "src": "/assets/projects/priatelia/3.png",
+          "alt": "Úprava profilu, záujmov a fotiek"
         },
         {
-          "className": "web-overview",
-          "alt": "Prehľad aktívnych zákaziek"
+          "src": "/assets/projects/priatelia/4.png",
+          "alt": "Chat po vzájomnom prepojení používateľov"
         }
       ],
-      "technologies": ["HTML", "CSS", "JavaScript"]
+      "technologies": [
+        "Matching",
+        "Chat",
+        "Profily"
+      ]
     },
     {
-      "title": "Produktová prezentácia",
-      "type": "Web",
-      "description": "Produktová stránka s jasnou ponukou a responzívnym layoutom. Vedie návštevníka od prvého dojmu cez benefity až k objednávke alebo kontaktu. Rozhranie je postavené na výraznej typografii, rýchlom načítaní a jednoduchej správe obsahu.",
-      "url": "https://example.com",
-      "galleryLabel": "Ukážky druhého projektu",
-      "images": [
-        {
-          "className": "shop-hero",
-          "alt": "Úvodná sekcia produktovej prezentácie"
-        },
-        {
-          "className": "shop-card",
-          "alt": "Produktová karta"
-        },
-        {
-          "className": "shop-checkout",
-          "alt": "Objednávkový krok"
-        },
-        {
-          "className": "shop-pricing",
-          "alt": "Cenový blok produktovej prezentácie"
-        }
-      ],
-      "technologies": ["Responzívne UI", "Dizajnový systém", "Výkon"]
-    },
-    {
-      "title": "Obsahový hub",
+      "title": "Digitálny archív",
       "type": "Webová aplikácia",
-      "description": "Systém na publikovanie, triedenie a správu obsahu. Redaktorom dáva rýchly spôsob prípravy článkov, kategórií a náhľadov pred zverejnením. Štruktúra podporuje konzistentný výstup, dobrú orientáciu a prístupnosť pre čitateľov.",
-      "url": "https://example.com",
-      "galleryLabel": "Ukážky tretieho projektu",
+      "description": "Digitálny archív dokumentov s prehľadným triedením do kategórií, autormi a schvaľovateľmi. Používateľ vie dokumenty pohodlne prechádzať, vyhľadávať a filtrovať podľa dôležitých údajov. Súčasťou riešenia je viacúrovňový schvaľovací proces, ktorý zapája viacerých ľudí a drží celý tok dokumentov pod kontrolou. Demo je pripravené ako ukážka, pracuje s mock/simulovanými dátami a dá sa doň prihlásiť cez ľubovoľné prihlasovacie údaje.",
+      "url": "https://archive.wondercules.com",
+      "galleryLabel": "Ukážky projektu Digitálny archív",
       "images": [
         {
-          "className": "content-editor",
-          "alt": "Editor obsahu"
+          "src": "/assets/projects/archive/1.png",
+          "alt": "Prehľad dokumentov v digitálnom archíve"
         },
         {
-          "className": "content-library",
-          "alt": "Knižnica obsahu"
+          "src": "/assets/projects/archive/2.png",
+          "alt": "Pridávanie nového dokumentu do digitálneho archívu"
         },
         {
-          "className": "content-preview",
-          "alt": "Náhľad publikovaného obsahu"
+          "src": "/assets/projects/archive/3.png",
+          "alt": "Filtrovanie dokumentov podľa kategórií"
         },
         {
-          "className": "content-taxonomy",
-          "alt": "Triedenie obsahu podľa kategórií"
+          "src": "/assets/projects/archive/4.png",
+          "alt": "Správa kategórií v digitálnom archíve"
         }
       ],
-      "technologies": ["Model obsahu", "Editor rozhrania", "Prístupnosť"]
+      "technologies": [
+        "Správa dokumentov",
+        "Filtrovanie",
+        "Approval workflow"
+      ]
     },
     {
-      "title": "Rezervačný systém",
+      "title": "Yokaid",
       "type": "Webová aplikácia",
-      "description": "Prehľad rezervácií, dostupnosti a potvrdení v jednom toku. Používateľ si vie vybrať termín, skontrolovať údaje a dokončiť rezerváciu bez zbytočných krokov. Administrácia zobrazuje kapacity, zmeny a potvrdenia tak, aby bola denná prevádzka ľahšia.",
-      "url": "https://example.com",
-      "galleryLabel": "Ukážky štvrtého projektu",
+      "description": "Yokaid je priestor, kde ľudia zdieľajú hodnotenia a skúsenosti s prácou rôznych profesionálov, ako sú murári, stolári, obkladači alebo ďalší remeselníci. Na hlavnej obrazovke sa majstri zobrazujú priamo na mape, takže si návštevník vie rýchlo pozrieť, kto pôsobí v jeho okolí, aké má hodnotenia a čo o ňom napísali ostatní. Cieľom projektu je pomôcť ľuďom nájsť spoľahlivých odborníkov na základe reálnych skúseností.",
+      "url": "https://yokaid.wondercules.com",
+      "galleryLabel": "Ukážky projektu Yokaid",
       "images": [
         {
-          "className": "booking-calendar",
-          "alt": "Kalendárny prehľad rezervácií"
+          "src": "/assets/projects/yokaid/1.png",
+          "alt": "Mapa s profesionálmi v aplikácii Yokaid"
         },
         {
-          "className": "booking-slots",
-          "alt": "Voľné časové sloty"
+          "src": "/assets/projects/yokaid/2.png",
+          "alt": "Profil profesionála s hodnoteniami a recenziami"
         },
         {
-          "className": "booking-confirmation",
-          "alt": "Potvrdenie rezervácie"
+          "src": "/assets/projects/yokaid/3.png",
+          "alt": "Formulár na napísanie recenzie profesionála"
         },
         {
-          "className": "booking-admin",
-          "alt": "Administrácia rezervácií"
+          "src": "/assets/projects/yokaid/4.png",
+          "alt": "Vyhľadávanie profesionálov podľa mena"
         }
       ],
-      "technologies": ["Rezervačný tok", "UX", "Formuláre"]
-    },
-    {
-      "title": "Analytický panel",
-      "type": "Webová aplikácia",
-      "description": "Rýchly prehľad metrík, filtrov a trendov pre tímové rozhodovanie. Panel prepája grafy, tabuľky a porovnania tak, aby sa dali nájsť súvislosti bez exportov. Stavali sme na čitateľných dátových vzoroch, jasných stavoch a praktických reportoch.",
-      "url": "https://example.com",
-      "galleryLabel": "Ukážky piateho projektu",
-      "images": [
-        {
-          "className": "analytics-chart",
-          "alt": "Graf s vývojom metrík"
-        },
-        {
-          "className": "analytics-filter",
-          "alt": "Filter analytického panelu"
-        },
-        {
-          "className": "analytics-table",
-          "alt": "Tabuľka výsledkov"
-        },
-        {
-          "className": "analytics-summary",
-          "alt": "Súhrn kľúčových metrík"
-        }
-      ],
-      "technologies": ["Grafy", "Filtre", "Reporty"]
-    },
-    {
-      "title": "Mikrostránka podujatia",
-      "type": "Web",
-      "description": "Kompaktná stránka pre program, rečníkov a registráciu. Návštevník rýchlo nájde časový harmonogram, profily hostí a miesto konania. Dizajn drží pozornosť na podstatných informáciách a vedie k jednoduchému prihláseniu na podujatie.",
-      "url": "https://example.com",
-      "galleryLabel": "Ukážky šiesteho projektu",
-      "images": [
-        {
-          "className": "event-stage",
-          "alt": "Program podujatia"
-        },
-        {
-          "className": "event-speakers",
-          "alt": "Zoznam rečníkov"
-        },
-        {
-          "className": "event-ticket",
-          "alt": "Registračný prvok"
-        },
-        {
-          "className": "event-location",
-          "alt": "Informácie o mieste konania"
-        }
-      ],
-      "technologies": ["Landing page", "CMS", "SEO"]
+      "technologies": [
+        "Mapa",
+        "Recenzie",
+        "Vyhľadávanie"
+      ]
     }
   ]
 }
