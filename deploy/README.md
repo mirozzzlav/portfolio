@@ -21,7 +21,7 @@ Do not stop or restart unrelated services.
 Example deployment path:
 
 ```text
-/var/www/portfolio/
+/var/www/html/portfolio/
   api/
   dist/
 ```
@@ -29,7 +29,7 @@ Example deployment path:
 Example production env file:
 
 ```text
-/etc/portfolio-api.env
+/var/www/html/portfolio/api/.env
 ```
 
 The API should listen only on localhost:
@@ -89,14 +89,22 @@ This creates a certificate for `mirofurinda.com` only. It should not replace the
 ## Deployment flow
 
 1. Pull or copy the repository to the VPS.
-2. Build the frontend:
+2. For regular deploys, run:
+
+   ```bash
+   ./deploy/deploy-vps.sh
+   ```
+
+   The script pulls the current branch, installs Node dependencies when package files changed, builds the frontend, prepares the API virtualenv, and restarts `portfolio-api` when permitted.
+
+3. Or build the frontend manually:
 
    ```bash
    npm ci
    npm run build
    ```
 
-3. Create the API virtualenv:
+4. Create the API virtualenv:
 
    ```bash
    cd api
@@ -104,15 +112,21 @@ This creates a certificate for `mirofurinda.com` only. It should not replace the
    .venv/bin/pip install -e .
    ```
 
-4. Create `/etc/portfolio-api.env` from `portfolio-api.env.example`.
-5. Install the systemd service from `portfolio-api.service.example`.
-6. Test nginx config before reload:
+5. Create `api/.env` from `deploy/portfolio-api.env.example` and edit the SMTP values:
+
+   ```bash
+   cp deploy/portfolio-api.env.example api/.env
+   nano api/.env
+   ```
+
+6. Install the systemd service from `portfolio-api.service.example`.
+7. Test nginx config before reload:
 
    ```bash
    sudo nginx -t
    ```
 
-7. Reload nginx, do not restart it:
+8. Reload nginx, do not restart it:
 
    ```bash
    sudo systemctl reload nginx

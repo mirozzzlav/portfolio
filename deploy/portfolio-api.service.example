@@ -5,19 +5,19 @@ Wants=network-online.target
 
 [Service]
 Type=simple
-WorkingDirectory=/var/www/portfolio/api
-EnvironmentFile=/etc/portfolio-api.env
-ExecStart=/var/www/portfolio/api/.venv/bin/uvicorn app.main:app --host 127.0.0.1 --port 8001
+WorkingDirectory=/var/www/html/portfolio/api
+EnvironmentFile=/var/www/html/portfolio/api/.env
+ExecStart=/var/www/html/portfolio/api/.venv/bin/uvicorn app.main:app --host 127.0.0.1 --port 8001
 Restart=on-failure
 RestartSec=5
-User=www-data
-Group=www-data
+User=miro
+Group=miro
 
 NoNewPrivileges=true
 PrivateTmp=true
 ProtectSystem=full
 ProtectHome=true
-ReadWritePaths=/var/www/portfolio
+ReadWritePaths=/var/www/html/portfolio
 
 [Install]
 WantedBy=multi-user.target

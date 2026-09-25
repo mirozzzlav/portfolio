@@ -4,7 +4,7 @@ server {
 
     server_name mirofurinda.com;
 
-    root /var/www/portfolio/dist;
+    root /var/www/html/portfolio/dist;
     index index.html;
 
     location /api/ {
