@@ -79,9 +79,14 @@ const styles = {
     width: "100%",
     border: 0,
     backgroundColor: "var(--palette-accent-soft)",
-    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "contain",
     boxShadow:
-      "0 20px 60px color-mix(in srgb, var(--palette-ink) 18%, var(--color-transparent))"
+      "0 20px 60px color-mix(in srgb, var(--palette-ink) 18%, var(--color-transparent))",
+
+    img: {
+      objectFit: "contain"
+    }
   },
 
   title: {

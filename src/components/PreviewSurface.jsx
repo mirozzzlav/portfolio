@@ -1,5 +1,4 @@
 import { mergeClassNames } from "../styles/classNames.js";
-import { projectPreviewVariants } from "./projectPreviewVariants.js";
 
 const styles = {
   surface: {
@@ -37,7 +36,6 @@ export function PreviewSurface({
       className={mergeClassNames(
         styles.surface,
         { aspectRatio, borderRadius: radius },
-        projectPreviewVariants[image.className],
         className
       )}
       {...props}
