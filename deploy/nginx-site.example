@@ -16,6 +16,8 @@ server {
         proxy_set_header X-Forwarded-Proto $scheme;
     }
 
+    # React/Vite SPA routing: serve index.html for client-side routes
+    # such as /contact or /projects on browser refresh.
     location / {
         try_files $uri $uri/ /index.html;
     }

@@ -40,6 +40,14 @@ The API should listen only on localhost:
 
 Nginx can then proxy `/api/` to the API while serving the React build from `dist/`.
 
+The nginx example is configured for React/Vite client-side routing:
+
+```nginx
+try_files $uri $uri/ /index.html;
+```
+
+This keeps direct visits and browser refreshes working for routes such as `/contact` and `/projects`.
+
 ## Nginx site files
 
 This VPS uses the Debian/Ubuntu nginx layout:
