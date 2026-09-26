@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import portfolioData from "../../data.json";
 import { IconButton } from "../components/IconButton.jsx";
 import { PreviewDialog } from "../components/PreviewDialog.jsx";
@@ -10,7 +10,8 @@ const styles = {
     position: "relative",
     width: "100%",
     minHeight: 0,
-    overflow: "hidden"
+    overflow: "hidden",
+    touchAction: "pan-y"
   },
 
   track: {
@@ -35,6 +36,9 @@ const styles = {
   }
 };
 
+const swipeThreshold = 48;
+const swipeDirectionRatio = 1.25;
+
 function isKeyboardNavigationTarget(target) {
   return Boolean(
     target?.closest?.(
@@ -46,6 +50,7 @@ function isKeyboardNavigationTarget(target) {
 export function ProjectsPage() {
   const [activeProjectIndex, setActiveProjectIndex] = useState(0);
   const [preview, setPreview] = useState(null);
+  const touchStart = useRef(null);
   const projects = portfolioData.projects;
 
   const trackStyle = useMemo(
@@ -60,7 +65,7 @@ export function ProjectsPage() {
   const navigateProject = useCallback(
     (direction) => {
       setActiveProjectIndex(
-        (currentIndex) => (currentIndex + direction + projects.length) % projects.length
+        (currentIndex) => Math.min(Math.max(currentIndex + direction, 0), projects.length - 1)
       );
     },
     [projects.length]
@@ -79,6 +84,39 @@ export function ProjectsPage() {
           currentPreview.images.length
       };
     });
+  }
+
+  function handleTouchStart(event) {
+    if (projects.length <= 1 || preview || event.touches.length !== 1) {
+      touchStart.current = null;
+      return;
+    }
+
+    const touch = event.touches[0];
+    touchStart.current = {
+      x: touch.clientX,
+      y: touch.clientY
+    };
+  }
+
+  function handleTouchEnd(event) {
+    if (!touchStart.current || projects.length <= 1 || preview) {
+      return;
+    }
+
+    const touch = event.changedTouches[0];
+    const deltaX = touch.clientX - touchStart.current.x;
+    const deltaY = touch.clientY - touchStart.current.y;
+    const absX = Math.abs(deltaX);
+    const absY = Math.abs(deltaY);
+    touchStart.current = null;
+
+    if (absX < swipeThreshold || absX < absY * swipeDirectionRatio) {
+      return;
+    }
+
+    event.preventDefault();
+    navigateProject(deltaX < 0 ? 1 : -1);
   }
 
   useEffect(() => {
@@ -118,7 +156,11 @@ export function ProjectsPage() {
 
   return (
     <>
-      <div className={className(styles.stage)}>
+      <div
+        className={className(styles.stage)}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+      >
         <div className={className(styles.track)} style={trackStyle}>
           {projects.map((project, projectIndex) => (
             <ProjectCard
