@@ -46,8 +46,7 @@ const styles = {
   descriptionFrame: {
     position: "relative",
     width: "min(100%, 68ch)",
-    height: "calc(1rem * var(--line-height-body) * 4.5)",
-    marginBottom: "var(--space-3)",
+    height: "calc(1rem * var(--line-height-body) * 5)",
 
     "&::after": {
       position: "absolute",
@@ -68,7 +67,8 @@ const styles = {
     },
 
     "@media (max-width: 780px)": {
-      height: "calc(0.92rem * var(--line-height-body) * 4.5)"
+      height: "calc(0.92rem * var(--line-height-body) * 4.5)",
+      marginBottom: "var(--space-3)"
     }
   },
 

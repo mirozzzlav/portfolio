@@ -47,6 +47,7 @@ export const globalStyles = {
     "--shadow-menu":
       "0 12px 28px color-mix(in srgb, var(--palette-ink) var(--opacity-subtle), var(--color-transparent))",
     "--main-inline-pad": "var(--space-5)",
+    "--header-height": "76px",
     "--section-inline-gap": "var(--space-5)",
 
     "--font-size-sm": "0.92rem",
@@ -156,6 +157,7 @@ export const globalStyles = {
 
   "@media (max-width: 780px)": {
     ":root": {
+      "--header-height": "72px",
       "--section-inline-gap": "var(--space-4)"
     },
 

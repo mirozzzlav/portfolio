@@ -7,7 +7,10 @@ import { NavigationLink } from "./NavigationLink.jsx";
 
 const styles = {
   header: {
-    position: "relative",
+    position: "fixed",
+    top: 0,
+    right: 0,
+    left: 0,
     zIndex: 20,
     width: "100%",
     padding: "var(--space-2) 0",

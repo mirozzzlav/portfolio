@@ -17,7 +17,7 @@ const styles = {
     gap: "var(--space-3)",
     width: "100%",
     margin: "0 auto",
-    padding: "var(--space-2) var(--space-5)",
+    padding: "var(--space-2) var(--space-4)",
     background: "var(--surface-overlay-strong)",
     backdropFilter: "blur(12px)",
     boxShadow:
@@ -35,7 +35,7 @@ const styles = {
       gridTemplateColumns: "1fr auto",
       justifyItems: "stretch",
       gap: "var(--space-2)",
-      padding: "var(--space-2) var(--main-inline-pad)",
+      padding: "var(--space-2) var(--space-3)",
 
       p: {
         textAlign: "right"

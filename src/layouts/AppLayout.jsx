@@ -20,6 +20,7 @@ const styles = {
     display: "grid",
     gridTemplateColumns: "55fr 45fr",
     gap: "var(--space-6)",
+    paddingTop: "var(--header-height)",
 
     "@media (max-width: 1000px)": {
       gridTemplateColumns: "minmax(0, 1fr)"
@@ -60,10 +61,8 @@ const styles = {
     }
   },
   visualImage: {
-    position: "relative",
-    top: "var(--space-6)",
     display: "block",
-    width: "min(100%, 560px)",
+    width: "min(100%, 460px)",
     aspectRatio: "1",
     minWidth: 0,
     overflow: "hidden",
