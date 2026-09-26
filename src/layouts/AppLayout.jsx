@@ -34,7 +34,7 @@ const styles = {
     alignItems: "start",
     width: "100%",
     padding:
-      "var(--space-3) var(--main-inline-pad) var(--space-4) var(--main-inline-pad)",
+      "var(--space-3) var(--main-inline-pad) var(--space-7) var(--main-inline-pad)",
 
     "@media (max-width: 780px)": {
       padding: "var(--space-3) var(--main-inline-pad) var(--space-7) var(--main-inline-pad)",
