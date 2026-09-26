@@ -67,7 +67,11 @@ const styles = {
     display: "inline-flex",
     alignItems: "center",
     justifyContent: "center",
+    width: "48px",
+    height: "48px",
+    borderRadius: "50%",
     background: "var(--surface-solid)",
+    color: "var(--palette-accent-fine)",
     boxShadow:
       "0 10px 30px color-mix(in srgb, var(--palette-ink) 12%, var(--color-transparent))",
     fontSize: "1.25rem",
@@ -76,13 +80,23 @@ const styles = {
 
     svg: {
       display: "block",
-      width: "18px",
-      height: "18px"
+      width: "22px",
+      height: "22px",
+
+      path: {
+        stroke: "var(--palette-accent-fine)"
+      }
+    },
+
+    "&:hover svg path, &:active svg path": {
+      stroke: "var(--color-on-accent)"
     },
 
     "@media (max-width: 780px)": {
       top: "16px",
-      right: "16px"
+      right: "16px",
+      width: "44px",
+      height: "44px"
     }
   }
 };
@@ -142,7 +156,7 @@ export function Lightbox({
           className={mergeClassNames(styles.close)}
           aria-label={closeLabel}
           onClick={onClose}
-          size="md"
+          size="lg"
         >
           <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
             <path
