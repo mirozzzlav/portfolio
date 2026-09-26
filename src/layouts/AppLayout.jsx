@@ -37,6 +37,12 @@ const styles = {
 
     "@media (max-width: 780px)": {
       padding: "var(--space-5) var(--main-inline-pad) var(--space-7)"
+    },
+
+    '&[data-section="projects"]': {
+      "@media (max-width: 780px)": {
+        paddingBottom: "var(--space-7)"
+      }
     }
   },
 
@@ -154,6 +160,7 @@ function renderPage(Component, sectionId, title) {
 
 export function AppLayout() {
   const location = useLocation();
+  const currentRoute = pageRoutes.find((route) => route.path === location.pathname);
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
@@ -163,7 +170,11 @@ export function AppLayout() {
     <>
       <Header />
       <div className={className(styles.appBody)}>
-        <main id="top" className={className(styles.main)}>
+        <main
+          id="top"
+          className={className(styles.main)}
+          data-section={currentRoute?.sectionId}
+        >
           <Routes>
             {pageRoutes.map(({ Component, path, sectionId, title }) => (
               <Route

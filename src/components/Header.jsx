@@ -22,10 +22,10 @@ const styles = {
     gap: "var(--space-4)",
     width: "100%",
     margin: "0 auto",
-    padding: "0 var(--space-5)",
+    padding: "0 var(--space-4)",
 
     "@media (max-width: 780px)": {
-      padding: "0 var(--main-inline-pad)"
+      padding: "0 var(--space-3)"
     }
   },
 

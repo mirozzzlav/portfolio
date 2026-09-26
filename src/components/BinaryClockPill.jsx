@@ -1,26 +1,13 @@
 import { useEffect, useState } from "react";
 import { className } from "../styles/classNames.js";
+import { Pill } from "./Pill.jsx";
 
 const styles = {
-  pill: {
-    display: "inline-flex",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: "0.4rem",
-    minHeight: "38px",
-    padding: "0 var(--space-2)",
-    border: "1px solid var(--color-border)",
-    borderRadius: "var(--radius-pill)",
-    background: "var(--surface-overlay-soft)",
-    color: "var(--color-ink)",
-    lineHeight: "var(--line-height-solid)"
-  },
-
-  label: {
-    fontSize: "0.78rem",
-    fontWeight: "var(--font-weight-semibold)",
-    letterSpacing: 0,
-    textTransform: "uppercase"
+  icon: {
+    flex: "none",
+    width: "16px",
+    height: "16px",
+    color: "var(--palette-accent-fine)"
   },
 
   time: {
@@ -43,6 +30,29 @@ const styles = {
     margin: "0 0.22rem"
   }
 };
+
+function ClockIcon() {
+  return (
+    <svg className={className(styles.icon)} viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        d="M12 6.75v5.25l3.25 2"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="1.8"
+      />
+      <path
+        d="M4.75 12a7.25 7.25 0 1 0 14.5 0 7.25 7.25 0 1 0-14.5 0Z"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="1.8"
+      />
+    </svg>
+  );
+}
 
 function toBinary(value, length) {
   return value.toString(2).padStart(length, "0");
@@ -74,12 +84,8 @@ export function BinaryClockPill() {
   }, []);
 
   return (
-    <span
-      className={className(styles.pill)}
-      aria-label={`Binárne hodinky ${timeLabel}`}
-      title={timeLabel}
-    >
-      <span className={className(styles.label)}>BIN</span>
+    <Pill aria-label={`Binárne hodinky ${timeLabel}`} title={timeLabel}>
+      <ClockIcon />
       <span className={className(styles.time)}>
         {binaryTimeParts.map((timePart, timePartIndex) => (
           <span key={timePartIndex}>
@@ -90,6 +96,6 @@ export function BinaryClockPill() {
           </span>
         ))}
       </span>
-    </span>
+    </Pill>
   );
 }

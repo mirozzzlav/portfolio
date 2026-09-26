@@ -3,7 +3,11 @@ import { mergeClassNames } from "../styles/classNames.js";
 const activeButton = {
   borderColor: "var(--palette-accent-fine)",
   background: "var(--palette-accent-fine)",
-  color: "var(--color-on-accent)"
+  color: "var(--color-on-accent)",
+
+  svg: {
+    color: "var(--color-on-accent)"
+  }
 };
 
 const styles = {
@@ -27,7 +31,8 @@ const styles = {
     transition: "background 160ms ease, border-color 160ms ease, color 160ms ease",
 
     svg: {
-      flex: "none"
+      flex: "none",
+      color: "var(--palette-accent-fine)"
     }
   },
 

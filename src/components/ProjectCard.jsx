@@ -192,7 +192,7 @@ const styles = {
 
     "@media (max-width: 780px)": {
       gridTemplateColumns: "repeat(2, 1fr)",
-      width: "min(100%, 260px)"
+      width: "min(100%, 238px)"
     }
   }
 };
