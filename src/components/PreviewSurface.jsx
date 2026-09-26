@@ -1,7 +1,9 @@
+import { BlurLoadedImage } from "./BlurLoadedImage.jsx";
 import { mergeClassNames } from "../styles/classNames.js";
 
 const styles = {
   surface: {
+    position: "relative",
     display: "block",
     width: "100%",
     minWidth: 0,
@@ -40,13 +42,12 @@ export function PreviewSurface({
       )}
       {...props}
     >
-      {image.src ? (
-        <img
-          src={image.src}
-          alt={props.role === "img" ? "" : image.alt}
-          loading={imageLoading}
-        />
-      ) : null}
+      <BlurLoadedImage
+        src={image.src}
+        placeholderSrc={image.placeholderSrc}
+        alt={props.role === "img" ? "" : image.alt}
+        loading={imageLoading}
+      />
     </Component>
   );
 }

@@ -19,18 +19,22 @@
       "images": [
         {
           "src": "/assets/projects/priatelia/1.webp",
+          "placeholderSrc": "/assets/projects/priatelia/1-placeholder.webp",
           "alt": "Prehliadanie ľudí z okolia podľa kritérií"
         },
         {
           "src": "/assets/projects/priatelia/2.webp",
+          "placeholderSrc": "/assets/projects/priatelia/2-placeholder.webp",
           "alt": "Profil človeka s opisom záľub a sympatií"
         },
         {
           "src": "/assets/projects/priatelia/3.webp",
+          "placeholderSrc": "/assets/projects/priatelia/3-placeholder.webp",
           "alt": "Úprava profilu, záujmov a fotiek"
         },
         {
           "src": "/assets/projects/priatelia/4.webp",
+          "placeholderSrc": "/assets/projects/priatelia/4-placeholder.webp",
           "alt": "Chat po vzájomnom prepojení používateľov"
         }
       ],
@@ -49,18 +53,22 @@
       "images": [
         {
           "src": "/assets/projects/archive/1.webp",
+          "placeholderSrc": "/assets/projects/archive/1-placeholder.webp",
           "alt": "Prehľad dokumentov v digitálnom archíve"
         },
         {
           "src": "/assets/projects/archive/2.webp",
+          "placeholderSrc": "/assets/projects/archive/2-placeholder.webp",
           "alt": "Pridávanie nového dokumentu do digitálneho archívu"
         },
         {
           "src": "/assets/projects/archive/3.webp",
+          "placeholderSrc": "/assets/projects/archive/3-placeholder.webp",
           "alt": "Filtrovanie dokumentov podľa kategórií"
         },
         {
           "src": "/assets/projects/archive/4.webp",
+          "placeholderSrc": "/assets/projects/archive/4-placeholder.webp",
           "alt": "Správa kategórií v digitálnom archíve"
         }
       ],
@@ -79,18 +87,22 @@
       "images": [
         {
           "src": "/assets/projects/yokaid/1.webp",
+          "placeholderSrc": "/assets/projects/yokaid/1-placeholder.webp",
           "alt": "Mapa s profesionálmi v aplikácii Yokaid"
         },
         {
           "src": "/assets/projects/yokaid/2.webp",
+          "placeholderSrc": "/assets/projects/yokaid/2-placeholder.webp",
           "alt": "Profil profesionála s hodnoteniami a recenziami"
         },
         {
           "src": "/assets/projects/yokaid/3.webp",
+          "placeholderSrc": "/assets/projects/yokaid/3-placeholder.webp",
           "alt": "Formulár na napísanie recenzie profesionála"
         },
         {
           "src": "/assets/projects/yokaid/4.webp",
+          "placeholderSrc": "/assets/projects/yokaid/4-placeholder.webp",
           "alt": "Vyhľadávanie profesionálov podľa mena"
         }
       ],

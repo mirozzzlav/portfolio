@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { BlurLoadedImage } from "../components/BlurLoadedImage.jsx";
 import { Footer } from "../components/Footer.jsx";
 import { Header } from "../components/Header.jsx";
 import { pageRoutes, redirectRoutes } from "../pages/index.jsx";
@@ -84,12 +85,18 @@ const styles = {
     }
   },
   visualImage: {
-    width: "min(100%, 560px)",
-    height: "auto",
-    display: "block",
-    objectFit: "contain",
     position: "relative",
-    top: "var(--space-6)"
+    top: "var(--space-6)",
+    display: "block",
+    width: "min(100%, 560px)",
+    aspectRatio: "1",
+    minWidth: 0,
+    overflow: "hidden",
+    borderRadius: "var(--radius-sm)"
+  },
+  visualImageMedia: {
+    display: "block",
+    objectFit: "contain"
   },
   pageSection: {
     "--section-space": "var(--section-inline-gap)",
@@ -255,7 +262,13 @@ export function AppLayout() {
           </Routes>
         </main>
         <aside className={className(styles.visualPanel)} aria-hidden="true">
-          <img className={className(styles.visualImage)} src="/assets/bg.webp" alt="" />
+          <BlurLoadedImage
+            className={className(styles.visualImage)}
+            imageClassName={className(styles.visualImageMedia)}
+            src="/assets/bg.webp"
+            placeholderSrc="/assets/bg-placeholder.webp"
+            alt=""
+          />
         </aside>
       </div>
       <Footer />
