@@ -1,14 +1,10 @@
-import { useEffect, useRef } from "react";
-import { Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { BlurLoadedImage } from "../components/BlurLoadedImage.jsx";
 import { Footer } from "../components/Footer.jsx";
 import { Header } from "../components/Header.jsx";
 import { pageRoutes, redirectRoutes } from "../pages/index.jsx";
 import { className } from "../styles/classNames.js";
-
-const wheelNavigationLockMs = 720;
-const wheelNavigationThreshold = 44;
-const scrollEdgeTolerance = 4;
 
 const pageContentVariants = {
   projects: {
@@ -18,33 +14,6 @@ const pageContentVariants = {
     maxWidth: "none"
   }
 };
-
-function getRouteIndex(pathname) {
-  return pageRoutes.findIndex((route) => route.path === pathname);
-}
-
-function isScrollableControl(target) {
-  return Boolean(
-    target?.closest?.(
-      'input, textarea, select, [role="dialog"], [data-disable-page-wheel-navigation]'
-    )
-  );
-}
-
-function canNavigateFromScrollEdge(direction) {
-  const documentElement = document.documentElement;
-  const maxScrollY = Math.max(0, documentElement.scrollHeight - window.innerHeight);
-
-  if (maxScrollY <= scrollEdgeTolerance) {
-    return true;
-  }
-
-  if (direction > 0) {
-    return window.scrollY >= maxScrollY - scrollEdgeTolerance;
-  }
-
-  return window.scrollY <= scrollEdgeTolerance;
-}
 
 const styles = {
   appBody: {
@@ -185,62 +154,10 @@ function renderPage(Component, sectionId, title) {
 
 export function AppLayout() {
   const location = useLocation();
-  const navigate = useNavigate();
-  const wheelNavigationUnlockTime = useRef(0);
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }, [location.pathname]);
-
-  useEffect(() => {
-    function handleWheel(event) {
-      if (
-        event.defaultPrevented ||
-        event.ctrlKey ||
-        event.metaKey ||
-        isScrollableControl(event.target)
-      ) {
-        return;
-      }
-
-      const dominantDelta = Math.abs(event.deltaY) >= Math.abs(event.deltaX);
-
-      if (!dominantDelta || Math.abs(event.deltaY) < wheelNavigationThreshold) {
-        return;
-      }
-
-      const direction = event.deltaY > 0 ? 1 : -1;
-
-      if (!canNavigateFromScrollEdge(direction)) {
-        return;
-      }
-
-      const currentRouteIndex = getRouteIndex(location.pathname);
-      const nextRouteIndex = currentRouteIndex + direction;
-      const nextRoute = pageRoutes[nextRouteIndex];
-
-      if (currentRouteIndex < 0 || !nextRoute) {
-        return;
-      }
-
-      const now = Date.now();
-
-      if (now < wheelNavigationUnlockTime.current) {
-        event.preventDefault();
-        return;
-      }
-
-      wheelNavigationUnlockTime.current = now + wheelNavigationLockMs;
-      event.preventDefault();
-      navigate(nextRoute.path);
-    }
-
-    window.addEventListener("wheel", handleWheel, { passive: false });
-
-    return () => {
-      window.removeEventListener("wheel", handleWheel);
-    };
-  }, [location.pathname, navigate]);
 
   return (
     <>

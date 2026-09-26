@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { className } from "../styles/classNames.js";
 import { ProjectPreview } from "./ProjectPreview.jsx";
 import { TagList } from "./TagList.jsx";
@@ -15,33 +16,99 @@ const styles = {
     background: "var(--color-transparent)",
 
     h3: {
+      display: "block",
+      overflow: "hidden",
       marginBottom: "var(--space-2)",
       maxWidth: "24ch",
-      minHeight: "calc(1.45rem * var(--line-height-heading))",
+      minHeight: "calc(1em * var(--line-height-heading))",
+      width: "fit-content",
+      border: "1px solid var(--color-border)",
+      borderLeft: 0,
+      borderRadius:
+        "var(--radius-lg) var(--radius-pill) var(--radius-pill) var(--radius-lg)",
+      padding: "var(--space-0) var(--space-5) var(--space-0) var(--space-0)",
+      background:
+        "color-mix(in srgb, var(--palette-surface-muted), var(--color-transparent) 34%)",
       color: "var(--color-text)",
       fontSize: "clamp(1.15rem, 1.55vw, 1.45rem)",
-      fontWeight: "var(--font-weight-medium)",
+      fontWeight: "var(--font-weight-semibold)",
       lineHeight: "var(--line-height-heading)",
-      textWrap: "balance"
-    },
-
-    "p:not([data-project-category])": {
-      marginBottom: 0,
-      minHeight: "calc(var(--line-height-body) * 1em * 3)",
-      color: "var(--color-text)",
-      fontSize: "1rem",
-      lineHeight: "var(--line-height-body)",
-      textWrap: "pretty"
+      textOverflow: "ellipsis",
+      textWrap: "nowrap",
+      whiteSpace: "nowrap"
     },
 
     "@media (max-width: 780px)": {
-      minHeight: "auto",
+      minHeight: "auto"
+    }
+  },
 
-      "p:not([data-project-category])": {
-        minHeight: "calc(0.92rem * var(--line-height-body) * 5)",
-        fontSize: "0.92rem",
-        lineHeight: "var(--line-height-body)"
-      }
+  descriptionFrame: {
+    position: "relative",
+    width: "min(100%, 68ch)",
+    height: "calc(1rem * var(--line-height-body) * 4.5)",
+    marginBottom: "var(--space-3)",
+
+    "&::after": {
+      position: "absolute",
+      right: 0,
+      bottom: 0,
+      left: 0,
+      display: "block",
+      height: "2.6rem",
+      background:
+        "linear-gradient(to bottom, color-mix(in srgb, var(--color-surface), var(--color-transparent) 100%) 0%, color-mix(in srgb, var(--color-surface), var(--color-transparent) 18%) 48%, var(--color-surface) 100%)",
+      content: '""',
+      opacity: 1,
+      pointerEvents: "none"
+    },
+
+    '&[data-has-more="false"]::after': {
+      opacity: 0
+    },
+
+    "@media (max-width: 780px)": {
+      height: "calc(0.92rem * var(--line-height-body) * 4.5)"
+    }
+  },
+
+  descriptionViewport: {
+    height: "100%",
+    overflowY: "auto",
+    overscrollBehavior: "contain",
+    paddingRight: "var(--space-2)",
+    paddingTop: "var(--space-1)",
+    paddingBottom: "var(--space-1)",
+    scrollbarWidth: "thin",
+    scrollbarColor: "var(--color-ink) var(--color-transparent)",
+
+    "&::-webkit-scrollbar": {
+      width: "0.4rem"
+    },
+
+    "&::-webkit-scrollbar-thumb": {
+      borderRadius: "var(--radius-pill)",
+      background: "var(--color-ink)"
+    },
+
+    "&::-webkit-scrollbar-track": {
+      background: "var(--color-transparent)"
+    },
+
+    "@media (max-width: 780px)": {
+      paddingRight: "var(--space-1)"
+    }
+  },
+
+  description: {
+    marginBottom: 0,
+    color: "var(--color-text)",
+    fontSize: "1rem",
+    lineHeight: "var(--line-height-body)",
+    textWrap: "pretty",
+
+    "@media (max-width: 780px)": {
+      fontSize: "0.92rem"
     }
   },
 
@@ -121,7 +188,7 @@ const styles = {
     alignItems: "center",
     gap: "var(--space-2)",
     width: "80%",
-    margin: "var(--space-2) 0 var(--space-1)",
+    margin: "0 0 var(--space-1)",
 
     "@media (max-width: 780px)": {
       gridTemplateColumns: "repeat(2, 1fr)",
@@ -131,6 +198,37 @@ const styles = {
 };
 
 export function ProjectCard({ isActive, onPreviewOpen, project }) {
+  const descriptionRef = useRef(null);
+  const [hasMoreDescription, setHasMoreDescription] = useState(false);
+
+  useEffect(() => {
+    const descriptionElement = descriptionRef.current;
+
+    if (!descriptionElement) {
+      return undefined;
+    }
+
+    function updateDescriptionFade() {
+      const remainingScroll =
+        descriptionElement.scrollHeight -
+        descriptionElement.scrollTop -
+        descriptionElement.clientHeight;
+
+      setHasMoreDescription(remainingScroll > 1);
+    }
+
+    updateDescriptionFade();
+    descriptionElement.addEventListener("scroll", updateDescriptionFade, {
+      passive: true
+    });
+    window.addEventListener("resize", updateDescriptionFade);
+
+    return () => {
+      descriptionElement.removeEventListener("scroll", updateDescriptionFade);
+      window.removeEventListener("resize", updateDescriptionFade);
+    };
+  }, [isActive, project.description]);
+
   return (
     <article className={className(styles.card)} aria-hidden={!isActive}>
       <h3>{project.title}</h3>
@@ -163,7 +261,14 @@ export function ProjectCard({ isActive, onPreviewOpen, project }) {
           </svg>
         </a>
       </div>
-      <p>{project.description}</p>
+      <div
+        className={className(styles.descriptionFrame)}
+        data-has-more={hasMoreDescription ? "true" : "false"}
+      >
+        <div className={className(styles.descriptionViewport)} ref={descriptionRef}>
+          <p className={className(styles.description)}>{project.description}</p>
+        </div>
+      </div>
       <div className={className(styles.gallery)} aria-label={project.galleryLabel}>
         {project.images.map((image, imageIndex) => (
           <ProjectPreview

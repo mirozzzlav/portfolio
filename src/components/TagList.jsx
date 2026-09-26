@@ -3,35 +3,33 @@ import { className } from "../styles/classNames.js";
 const styles = {
   list: {
     display: "flex",
+    alignContent: "flex-start",
+    alignItems: "flex-start",
     flexWrap: "wrap",
-    gap: "var(--space-1)",
+    columnGap: "var(--space-1)",
+    rowGap: "0.3rem",
+    height: "4.25rem",
     margin: 0,
-    minHeight: "1.85rem",
+    minHeight: "4.25rem",
+    overflowX: "hidden",
+    overflowY: "hidden",
     padding: 0,
     listStyle: "none",
 
     li: {
       display: "inline-flex",
       alignItems: "center",
-      minHeight: "24px",
+      flex: "none",
+      height: "27px",
+      minHeight: "27px",
       border: "1px solid var(--color-border)",
       borderRadius: "var(--radius-pill)",
-      padding: "0 var(--space-1)",
-      background: "var(--palette-accent-soft)",
+      padding: "0 var(--space-2)",
+      background: "var(--color-surface)",
       color: "var(--palette-ink)",
-      fontSize: "0.78rem",
-      fontWeight: "var(--font-weight-medium)",
+      fontSize: "0.84rem",
+      fontWeight: "var(--font-weight-semibold)",
       lineHeight: "var(--line-height-solid)"
-    },
-
-    "li:nth-of-type(2n)": {
-      background: "var(--palette-surface-muted)"
-    },
-
-    "li:nth-of-type(3n)": {
-      borderColor: "var(--palette-accent-fine)",
-      background: "var(--palette-accent-fine)",
-      color: "var(--color-on-accent)"
     }
   }
 };
