@@ -194,6 +194,13 @@ const styles = {
       gridTemplateColumns: "repeat(2, 1fr)",
       width: "min(100%, 238px)"
     }
+  },
+
+  tags: {
+    boxSizing: "border-box",
+    height: "calc(4.05rem + var(--space-1) + var(--space-1))",
+    paddingTop: "var(--space-1)",
+    paddingBottom: "var(--space-1)"
   }
 };
 
@@ -279,7 +286,9 @@ export function ProjectCard({ isActive, onPreviewOpen, project }) {
           />
         ))}
       </div>
-      <TagList items={project.technologies} ariaLabel="Použité technológie" />
+      <div className={className(styles.tags)}>
+        <TagList items={project.technologies} ariaLabel="Použité technológie" />
+      </div>
     </article>
   );
 }
