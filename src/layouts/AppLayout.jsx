@@ -57,6 +57,7 @@ const styles = {
   visualImage: {
     display: "block",
     width: "min(100%, 520px)",
+    height: "auto",
     aspectRatio: "1",
     minWidth: 0,
     overflow: "hidden",
