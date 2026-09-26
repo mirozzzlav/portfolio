@@ -255,7 +255,7 @@ export function AppLayout() {
           </Routes>
         </main>
         <aside className={className(styles.visualPanel)} aria-hidden="true">
-          <img className={className(styles.visualImage)} src="/assets/bg.png" alt="" />
+          <img className={className(styles.visualImage)} src="/assets/bg.webp" alt="" />
         </aside>
       </div>
       <Footer />

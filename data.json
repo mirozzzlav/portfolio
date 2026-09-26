@@ -18,19 +18,19 @@
       "galleryLabel": "Ukážky projektu Priatelia",
       "images": [
         {
-          "src": "/assets/projects/priatelia/1.png",
+          "src": "/assets/projects/priatelia/1.webp",
           "alt": "Prehliadanie ľudí z okolia podľa kritérií"
         },
         {
-          "src": "/assets/projects/priatelia/2.png",
+          "src": "/assets/projects/priatelia/2.webp",
           "alt": "Profil človeka s opisom záľub a sympatií"
         },
         {
-          "src": "/assets/projects/priatelia/3.png",
+          "src": "/assets/projects/priatelia/3.webp",
           "alt": "Úprava profilu, záujmov a fotiek"
         },
         {
-          "src": "/assets/projects/priatelia/4.png",
+          "src": "/assets/projects/priatelia/4.webp",
           "alt": "Chat po vzájomnom prepojení používateľov"
         }
       ],
@@ -48,19 +48,19 @@
       "galleryLabel": "Ukážky projektu Digitálny archív",
       "images": [
         {
-          "src": "/assets/projects/archive/1.png",
+          "src": "/assets/projects/archive/1.webp",
           "alt": "Prehľad dokumentov v digitálnom archíve"
         },
         {
-          "src": "/assets/projects/archive/2.png",
+          "src": "/assets/projects/archive/2.webp",
           "alt": "Pridávanie nového dokumentu do digitálneho archívu"
         },
         {
-          "src": "/assets/projects/archive/3.png",
+          "src": "/assets/projects/archive/3.webp",
           "alt": "Filtrovanie dokumentov podľa kategórií"
         },
         {
-          "src": "/assets/projects/archive/4.png",
+          "src": "/assets/projects/archive/4.webp",
           "alt": "Správa kategórií v digitálnom archíve"
         }
       ],
@@ -78,19 +78,19 @@
       "galleryLabel": "Ukážky projektu Yokaid",
       "images": [
         {
-          "src": "/assets/projects/yokaid/1.png",
+          "src": "/assets/projects/yokaid/1.webp",
           "alt": "Mapa s profesionálmi v aplikácii Yokaid"
         },
         {
-          "src": "/assets/projects/yokaid/2.png",
+          "src": "/assets/projects/yokaid/2.webp",
           "alt": "Profil profesionála s hodnoteniami a recenziami"
         },
         {
-          "src": "/assets/projects/yokaid/3.png",
+          "src": "/assets/projects/yokaid/3.webp",
           "alt": "Formulár na napísanie recenzie profesionála"
         },
         {
-          "src": "/assets/projects/yokaid/4.png",
+          "src": "/assets/projects/yokaid/4.webp",
           "alt": "Vyhľadávanie profesionálov podľa mena"
         }
       ],
