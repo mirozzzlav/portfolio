@@ -190,7 +190,6 @@ const styles = {
     color: "var(--color-text)",
     fontSize: "1rem",
     fontWeight: "var(--font-weight-semibold)",
-    textAlign: "center",
 
     "@media (max-width: 780px)": {
       minHeight: "3.5rem",
@@ -491,7 +490,7 @@ export function PreviewDialog({ preview, onClose, onNavigate }) {
               style={previewSurfaceStyle}
             />
           </div>
-          <p id="preview-dialog-title" className={className(styles.title)}>
+          <div id="preview-dialog-title" className={className(styles.title)}>
             <svg
               className={className(styles.titleIcon)}
               viewBox="0 0 24 24"
@@ -522,7 +521,7 @@ export function PreviewDialog({ preview, onClose, onNavigate }) {
               />
             </svg>
             {image.alt}
-          </p>
+          </div>
         </div>
         <IconButton
           className={className([styles.nav, styles.navNext])}
