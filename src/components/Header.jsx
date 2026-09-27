@@ -55,7 +55,10 @@ const styles = {
     minWidth: "70px",
     height: "40px",
     minHeight: "40px",
-    padding: "var(--space-1) var(--space-2)"
+    padding: "var(--space-1) var(--space-2)",
+    svg: {
+      color: "var(--colors-ink)"
+    }
   },
 
   menuToggleLabel: {
