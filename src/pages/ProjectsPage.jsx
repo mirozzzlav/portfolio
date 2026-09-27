@@ -1,9 +1,22 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+  Suspense,
+  lazy,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState
+} from "react";
 import portfolioData from "../../data.json";
 import { IconButton } from "../components/IconButton.jsx";
-import { PreviewDialog } from "../components/PreviewDialog.jsx";
 import { ProjectCard } from "../components/ProjectCard.jsx";
 import { className } from "../styles/classNames.js";
+
+const PreviewDialog = lazy(() =>
+  import("../components/PreviewDialog.jsx").then((module) => ({
+    default: module.PreviewDialog
+  }))
+);
 
 const styles = {
   stage: {
@@ -64,8 +77,8 @@ export function ProjectsPage() {
 
   const navigateProject = useCallback(
     (direction) => {
-      setActiveProjectIndex(
-        (currentIndex) => Math.min(Math.max(currentIndex + direction, 0), projects.length - 1)
+      setActiveProjectIndex((currentIndex) =>
+        Math.min(Math.max(currentIndex + direction, 0), projects.length - 1)
       );
     },
     [projects.length]
@@ -195,11 +208,15 @@ export function ProjectsPage() {
         ) : null}
       </div>
 
-      <PreviewDialog
-        preview={preview}
-        onClose={() => setPreview(null)}
-        onNavigate={navigatePreview}
-      />
+      {preview ? (
+        <Suspense fallback={null}>
+          <PreviewDialog
+            preview={preview}
+            onClose={() => setPreview(null)}
+            onNavigate={navigatePreview}
+          />
+        </Suspense>
+      ) : null}
     </>
   );
 }

@@ -7,6 +7,42 @@ function normalizeRoute(pathname) {
 }
 
 export default defineConfig({
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (!id.includes("node_modules")) {
+            return undefined;
+          }
+
+          if (id.includes("/react-router") || id.includes("/@remix-run/router")) {
+            return "vendor-router";
+          }
+
+          if (
+            id.includes("/react-dom/client") ||
+            id.includes("/react-dom-client.")
+          ) {
+            return "vendor-react-dom-client";
+          }
+
+          if (id.includes("/react-dom")) {
+            return "vendor-react-dom-core";
+          }
+
+          if (id.includes("/react")) {
+            return "vendor-react";
+          }
+
+          if (id.includes("/@emotion")) {
+            return "vendor-emotion";
+          }
+
+          return "vendor";
+        }
+      }
+    }
+  },
   plugins: [
     react(),
     {
