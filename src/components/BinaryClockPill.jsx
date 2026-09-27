@@ -3,10 +3,15 @@ import { className } from "../styles/classNames.js";
 import { Pill } from "./Pill.jsx";
 
 const styles = {
+  pill: {
+    "&& svg": {
+      width: "22px",
+      height: "22px"
+    }
+  },
+
   icon: {
     flex: "none",
-    width: "16px",
-    height: "16px",
     color: "var(--palette-accent-fine)"
   },
 
@@ -88,7 +93,11 @@ export function BinaryClockPill() {
   }, []);
 
   return (
-    <Pill aria-label={`Binárne hodinky ${timeLabel}`} title={timeLabel}>
+    <Pill
+      aria-label={`Binárne hodinky ${timeLabel}`}
+      className={styles.pill}
+      title={timeLabel}
+    >
       <ClockIcon />
       <span className={className(styles.time)}>
         {binaryTimeParts.map((timePart, timePartIndex) => (
