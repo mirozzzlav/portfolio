@@ -40,8 +40,8 @@ const styles = {
 
     svg: {
       display: "block",
-      width: "70px",
-      height: "auto"
+      width: "auto",
+      height: "40px",
     }
   },
 
