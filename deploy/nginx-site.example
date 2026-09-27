@@ -29,9 +29,18 @@ server {
         proxy_set_header X-Forwarded-Proto $scheme;
     }
 
+    location = /index.html {
+        add_header Cache-Control "no-cache";
+    }
+
+    location ~* ^/assets/.*\.(?:avif|css|gif|ico|jpe?g|js|png|svg|webp|woff2?)$ {
+        add_header Cache-Control "public, max-age=31536000, immutable";
+    }
+
     # React/Vite SPA routing: serve index.html for client-side routes
     # such as /contact or /projects on browser refresh.
     location / {
+        add_header Cache-Control "no-cache";
         try_files $uri $uri/ /index.html;
     }
 }
