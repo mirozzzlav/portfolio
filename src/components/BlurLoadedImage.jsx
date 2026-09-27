@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { mergeClassNames } from "../styles/classNames.js";
 
 const styles = {
@@ -61,7 +61,43 @@ export function BlurLoadedImage({
   ...props
 }) {
   const [loadedSrc, setLoadedSrc] = useState(null);
+  const imageRef = useRef(null);
   const isLoaded = loadedSrc === src;
+
+  useEffect(() => {
+    const image = imageRef.current;
+
+    if (!src || !image) {
+      setLoadedSrc(null);
+      return undefined;
+    }
+
+    let isCurrent = true;
+
+    function markLoaded() {
+      if (isCurrent) {
+        setLoadedSrc(src);
+      }
+    }
+
+    if (image.complete && image.naturalWidth > 0) {
+      markLoaded();
+      return undefined;
+    }
+
+    image
+      .decode?.()
+      .then(markLoaded)
+      .catch(() => {
+        if (image.complete && image.naturalWidth > 0) {
+          markLoaded();
+        }
+      });
+
+    return () => {
+      isCurrent = false;
+    };
+  }, [src]);
 
   return (
     <div
@@ -81,6 +117,7 @@ export function BlurLoadedImage({
       ) : null}
       {src ? (
         <img
+          ref={imageRef}
           className={mergeClassNames(styles.image, styles.fullImage, imageClassName)}
           src={src}
           alt={alt}
