@@ -1,4 +1,5 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { cache, flush } from "@emotion/css";
 import path from "node:path";
 import process from "node:process";
 import { fileURLToPath } from "node:url";
@@ -23,11 +24,24 @@ function routeToFilePath(route) {
   return path.join(distDir, route.slice(1), "index.html");
 }
 
-function renderDocument(template, appHtml, route) {
-  return replaceSeoTags(template, route, siteUrl).replace(
-    '<div id="root"></div>',
-    `<div id="root">${appHtml}</div>`
-  );
+function collectEmotionCss() {
+  return Object.values(cache.inserted)
+    .filter((styles) => typeof styles === "string")
+    .join("");
+}
+
+function renderEmotionStyleTag(cssText) {
+  if (!cssText) {
+    return "";
+  }
+
+  return `<style data-emotion="css">${cssText}</style>`;
+}
+
+function renderDocument(template, appHtml, emotionCss, route) {
+  return replaceSeoTags(template, route, siteUrl)
+    .replace("</head>", `${renderEmotionStyleTag(emotionCss)}\n  </head>`)
+    .replace('<div id="root"></div>', `<div id="root">${appHtml}</div>`);
 }
 
 function renderRedirectDocument(target) {
@@ -80,10 +94,12 @@ const { render } = await import(serverEntryPath);
 
 for (const route of routes) {
   const filePath = routeToFilePath(route);
+  flush();
   const appHtml = render(route);
+  const emotionCss = collectEmotionCss();
 
   await mkdir(path.dirname(filePath), { recursive: true });
-  await writeFile(filePath, renderDocument(template, appHtml, route));
+  await writeFile(filePath, renderDocument(template, appHtml, emotionCss, route));
 }
 
 for (const redirect of redirectRoutes) {
