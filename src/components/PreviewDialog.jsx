@@ -166,17 +166,18 @@ const styles = {
       userSelect: "none",
       objectFit: "contain"
     },
-    transformLayer: {
-      display: "grid",
-      width: "100%",
-      height: "100%",
-      minWidth: 0,
-      minHeight: 0,
-      transformOrigin: "center center",
-      willChange: "transform",
-      backfaceVisibility: "hidden",
-      WebkitBackfaceVisibility: "hidden"
-    },
+  },
+
+  transformLayer: {
+    display: "grid",
+    width: "100%",
+    height: "100%",
+    minWidth: 0,
+    minHeight: 0,
+    transformOrigin: "center center",
+    willChange: "transform",
+    backfaceVisibility: "hidden",
+    WebkitBackfaceVisibility: "hidden"
   },
 
   title: {
@@ -230,6 +231,10 @@ function getTouchDistance(touches) {
   return Math.hypot(deltaX, deltaY);
 }
 
+function getTransformStyle({ zoom, offsetX, offsetY }) {
+  return `translate3d(${offsetX}px, ${offsetY}px, 0) scale(${zoom})`;
+}
+
 export function PreviewDialog({ preview, onClose, onNavigate }) {
   const stageRef = useRef(null);
   const transformRef = useRef(null);
@@ -266,9 +271,6 @@ export function PreviewDialog({ preview, onClose, onNavigate }) {
 
   const isZoomed = imageState.zoom > minZoom;
 
-  /*
-   * Reset transformácie po zmene obrázka.
-   */
   useEffect(() => {
     gestureStart.current = null;
     pinchStart.current = null;
@@ -287,14 +289,10 @@ export function PreviewDialog({ preview, onClose, onNavigate }) {
     const element = transformRef.current;
 
     if (element) {
-      element.style.transform =
-        "translate3d(0px, 0px, 0) scale(1)";
+      element.style.transform = getTransformStyle(liveTransform.current);
     }
   }, [image?.src]);
 
-  /*
-   * Cleanup requestAnimationFrame.
-   */
   useEffect(() => {
     return () => {
       if (animationFrameRef.current !== null) {
@@ -306,7 +304,7 @@ export function PreviewDialog({ preview, onClose, onNavigate }) {
   if (!preview) {
     return null;
   }
-  
+
   function applyTransform() {
     const element = transformRef.current;
 
@@ -314,14 +312,13 @@ export function PreviewDialog({ preview, onClose, onNavigate }) {
       return;
     }
 
-    const {
+    const { zoom, offsetX, offsetY } = liveTransform.current;
+
+    element.style.transform = getTransformStyle({
       zoom,
       offsetX,
       offsetY
-    } = liveTransform.current;
-
-    element.style.transform =
-      `translate3d(${offsetX}px, ${offsetY}px, 0) scale(${zoom})`;
+    });
   }
 
   /*
@@ -347,6 +344,30 @@ export function PreviewDialog({ preview, onClose, onNavigate }) {
       src: image?.src ?? null,
       ...liveTransform.current
     });
+  }
+
+  function createGestureStart(touch, stageRect) {
+    return {
+      x: touch.clientX,
+      y: touch.clientY,
+      offsetX: liveTransform.current.offsetX,
+      offsetY: liveTransform.current.offsetY,
+      zoom: liveTransform.current.zoom,
+      isZoomed: liveTransform.current.zoom > minZoom,
+      stageWidth: stageRect.width,
+      stageHeight: stageRect.height
+    };
+  }
+
+  function createPinchStart(touches, stageRect) {
+    return {
+      distance: getTouchDistance(touches),
+      zoom: liveTransform.current.zoom,
+      offsetX: liveTransform.current.offsetX,
+      offsetY: liveTransform.current.offsetY,
+      stageWidth: stageRect.width,
+      stageHeight: stageRect.height
+    };
   }
 
   function handleLightboxKeyDown(event) {
@@ -380,13 +401,11 @@ export function PreviewDialog({ preview, onClose, onNavigate }) {
   }
 
   function getRenderedImageRect() {
-    const stageRect =
-      stageRef.current?.getBoundingClientRect();
+    const stageRect = stageRef.current?.getBoundingClientRect();
 
-    const renderedImage =
-      stageRef.current?.querySelector(
-        'img:not([aria-hidden="true"])'
-      );
+    const renderedImage = stageRef.current?.querySelector(
+      'img:not([aria-hidden="true"])'
+    );
 
     if (
       !stageRect ||
@@ -396,12 +415,10 @@ export function PreviewDialog({ preview, onClose, onNavigate }) {
       return null;
     }
 
-    const stageAspectRatio =
-      stageRect.width / stageRect.height;
+    const stageAspectRatio = stageRect.width / stageRect.height;
 
     const imageAspectRatio =
-      renderedImage.naturalWidth /
-      renderedImage.naturalHeight;
+      renderedImage.naturalWidth / renderedImage.naturalHeight;
 
     const containedWidth =
       imageAspectRatio > stageAspectRatio
@@ -413,24 +430,14 @@ export function PreviewDialog({ preview, onClose, onNavigate }) {
         ? stageRect.width / imageAspectRatio
         : stageRect.height;
 
-    const {
-      zoom,
-      offsetX,
-      offsetY
-    } = liveTransform.current;
+    const { zoom, offsetX, offsetY } = liveTransform.current;
 
     const width = containedWidth * zoom;
     const height = containedHeight * zoom;
 
-    const centerX =
-      stageRect.left +
-      stageRect.width / 2 +
-      offsetX;
+    const centerX = stageRect.left + stageRect.width / 2 + offsetX;
 
-    const centerY =
-      stageRect.top +
-      stageRect.height / 2 +
-      offsetY;
+    const centerY = stageRect.top + stageRect.height / 2 + offsetY;
 
     return {
       bottom: centerY + height / 2,
@@ -460,54 +467,25 @@ export function PreviewDialog({ preview, onClose, onNavigate }) {
       };
     }
 
-    const maxOffsetX =
-      (stageWidth * (zoom - 1)) / 2;
+    const maxOffsetX = (stageWidth * (zoom - 1)) / 2;
 
-    const maxOffsetY =
-      (stageHeight * (zoom - 1)) / 2;
+    const maxOffsetY = (stageHeight * (zoom - 1)) / 2;
 
     return {
-      offsetX: clamp(
-        offsetX,
-        -maxOffsetX,
-        maxOffsetX
-      ),
-
-      offsetY: clamp(
-        offsetY,
-        -maxOffsetY,
-        maxOffsetY
-      )
+      offsetX: clamp(offsetX, -maxOffsetX, maxOffsetX),
+      offsetY: clamp(offsetY, -maxOffsetY, maxOffsetY)
     };
   }
 
   function handleTouchStart(event) {
-    const stageRect =
-      stageRef.current?.getBoundingClientRect();
+    const stageRect = stageRef.current?.getBoundingClientRect();
 
     if (!stageRect) {
       return;
     }
 
-    /*
-     * Začiatok pinch.
-     */
     if (event.touches.length >= 2) {
-      pinchStart.current = {
-        distance: getTouchDistance(event.touches),
-
-        zoom: liveTransform.current.zoom,
-
-        offsetX:
-          liveTransform.current.offsetX,
-
-        offsetY:
-          liveTransform.current.offsetY,
-
-        stageWidth: stageRect.width,
-        stageHeight: stageRect.height
-      };
-
+      pinchStart.current = createPinchStart(event.touches, stageRect);
       gestureStart.current = null;
 
       return;
@@ -520,45 +498,17 @@ export function PreviewDialog({ preview, onClose, onNavigate }) {
 
     const touch = event.touches[0];
 
-    gestureStart.current = {
-      x: touch.clientX,
-      y: touch.clientY,
-
-      offsetX:
-        liveTransform.current.offsetX,
-
-      offsetY:
-        liveTransform.current.offsetY,
-
-      zoom:
-        liveTransform.current.zoom,
-
-      isZoomed:
-        liveTransform.current.zoom > minZoom,
-
-      stageWidth: stageRect.width,
-      stageHeight: stageRect.height
-    };
+    gestureStart.current = createGestureStart(touch, stageRect);
   }
 
   function handleTouchMove(event) {
-    /*
-     * PINCH
-     */
-    if (
-      pinchStart.current &&
-      event.touches.length >= 2
-    ) {
+    if (pinchStart.current && event.touches.length >= 2) {
       event.preventDefault();
 
       const start = pinchStart.current;
 
       const nextZoom = clamp(
-        start.zoom *
-          (
-            getTouchDistance(event.touches) /
-            start.distance
-          ),
+        start.zoom * (getTouchDistance(event.touches) / start.distance),
         minZoom,
         maxZoom
       );
@@ -581,31 +531,18 @@ export function PreviewDialog({ preview, onClose, onNavigate }) {
       return;
     }
 
-    /*
-     * PAN
-     */
     const gesture = gestureStart.current;
     const touch = event.touches[0];
 
-    if (
-      !gesture ||
-      !gesture.isZoomed ||
-      !touch
-    ) {
+    if (!gesture || !gesture.isZoomed || !touch) {
       return;
     }
 
     event.preventDefault();
 
-    const nextOffsetX =
-      gesture.offsetX +
-      touch.clientX -
-      gesture.x;
+    const nextOffsetX = gesture.offsetX + touch.clientX - gesture.x;
 
-    const nextOffsetY =
-      gesture.offsetY +
-      touch.clientY -
-      gesture.y;
+    const nextOffsetY = gesture.offsetY + touch.clientY - gesture.y;
 
     const bounded = getBoundedOffset(
       nextOffsetX,
@@ -624,13 +561,7 @@ export function PreviewDialog({ preview, onClose, onNavigate }) {
   }
 
   function handleTouchEnd(event) {
-    /*
-     * Koniec pinch.
-     */
-    if (
-      pinchStart.current &&
-      event.touches.length < 2
-    ) {
+    if (pinchStart.current && event.touches.length < 2) {
       pinchStart.current = null;
 
       /*
@@ -641,29 +572,10 @@ export function PreviewDialog({ preview, onClose, onNavigate }) {
       if (event.touches.length === 1) {
         const touch = event.touches[0];
 
-        const stageRect =
-          stageRef.current?.getBoundingClientRect();
+        const stageRect = stageRef.current?.getBoundingClientRect();
 
         if (stageRect) {
-          gestureStart.current = {
-            x: touch.clientX,
-            y: touch.clientY,
-
-            offsetX:
-              liveTransform.current.offsetX,
-
-            offsetY:
-              liveTransform.current.offsetY,
-
-            zoom:
-              liveTransform.current.zoom,
-
-            isZoomed:
-              liveTransform.current.zoom > minZoom,
-
-            stageWidth: stageRect.width,
-            stageHeight: stageRect.height
-          };
+          gestureStart.current = createGestureStart(touch, stageRect);
         }
       } else {
         gestureStart.current = null;
@@ -687,19 +599,14 @@ export function PreviewDialog({ preview, onClose, onNavigate }) {
       return;
     }
 
-    /*
-     * Swipe medzi obrázkami.
-     */
     if (!gesture || !touch) {
       gestureStart.current = null;
       return;
     }
 
-    const deltaX =
-      touch.clientX - gesture.x;
+    const deltaX = touch.clientX - gesture.x;
 
-    const deltaY =
-      touch.clientY - gesture.y;
+    const deltaY = touch.clientY - gesture.y;
 
     const absX = Math.abs(deltaX);
     const absY = Math.abs(deltaY);
@@ -713,11 +620,7 @@ export function PreviewDialog({ preview, onClose, onNavigate }) {
       return;
     }
 
-    onNavigate(
-      deltaX < 0
-        ? 1
-        : -1
-    );
+    onNavigate(deltaX < 0 ? 1 : -1);
   }
 
   function handleTouchCancel() {
@@ -771,12 +674,7 @@ export function PreviewDialog({ preview, onClose, onNavigate }) {
                     ? "grab"
                     : "zoom-in",
 
-                transform:
-                  `translate3d(
-                    ${imageState.offsetX}px,
-                    ${imageState.offsetY}px,
-                    0
-                  ) scale(${imageState.zoom})`
+                transform: getTransformStyle(imageState)
               }}
             >
               <PreviewSurface
