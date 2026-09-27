@@ -13,7 +13,7 @@
     {
       "title": "Priatelia",
       "type": "Webová aplikácia",
-      "description": "Priatelia je aplikácia na spoznávanie nových ľudí a parťákov na základe spoločných záľub, sympatií a blízkosti. Používateľovi sa postupne zobrazujú ľudia z jeho okolia a keď ho niekto zaujme, môže mu dať like. Ak sympatie vzniknú na oboch stranách, aplikácia ich prepojí a otvorí im priestor na spoločnú konverzáciu.",
+      "description": "Priatelia je aplikácia na spoznávanie nových ľudí a parťákov podľa záľub, sympatií a blízkosti. Keď si dvaja používatelia navzájom dajú like, aplikácia ich prepojí a otvorí im priestor na konverzáciu.",
       "url": "https://priatelia.wondercules.com",
       "galleryLabel": "Ukážky projektu Priatelia",
       "images": [
@@ -47,7 +47,7 @@
     {
       "title": "Digitálny archív",
       "type": "Webová aplikácia",
-      "description": "Digitálny archív dokumentov s prehľadným triedením do kategórií, autormi a schvaľovateľmi. Používateľ vie dokumenty pohodlne prechádzať, vyhľadávať a filtrovať podľa dôležitých údajov. Súčasťou riešenia je viacúrovňový schvaľovací proces, ktorý zapája viacerých ľudí a drží celý tok dokumentov pod kontrolou. Demo je pripravené ako ukážka, pracuje s mock/simulovanými dátami a dá sa doň prihlásiť cez ľubovoľné prihlasovacie údaje.",
+      "description": "Digitálny archív slúži na prehľadné triedenie, vyhľadávanie a filtrovanie dokumentov podľa kategórií, autorov a schvaľovateľov. Súčasťou je viacúrovňový approval workflow; demo používa simulované dáta.",
       "url": "https://archive.wondercules.com",
       "galleryLabel": "Ukážky projektu Digitálny archív",
       "images": [
@@ -81,7 +81,7 @@
     {
       "title": "Yokaid",
       "type": "Webová aplikácia",
-      "description": "Yokaid je priestor, kde ľudia zdieľajú hodnotenia a skúsenosti s prácou rôznych profesionálov, ako sú murári, stolári, obkladači alebo ďalší remeselníci. Na hlavnej obrazovke sa majstri zobrazujú priamo na mape, takže si návštevník vie rýchlo pozrieť, kto pôsobí v jeho okolí, aké má hodnotenia a čo o ňom napísali ostatní. Cieľom projektu je pomôcť ľuďom nájsť spoľahlivých odborníkov na základe reálnych skúseností.",
+      "description": "Yokaid pomáha nájsť spoľahlivých remeselníkov a profesionálov podľa mapy, hodnotení a reálnych skúseností ľudí. Návštevník rýchlo vidí, kto pôsobí v okolí a čo o ňom napísali ostatní.",
       "url": "https://yokaid.wondercules.com",
       "galleryLabel": "Ukážky projektu Yokaid",
       "images": [

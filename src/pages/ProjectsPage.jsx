@@ -8,7 +8,6 @@ import {
   useState
 } from "react";
 import portfolioData from "../../data.json";
-import { IconButton } from "../components/IconButton.jsx";
 import { ProjectCard } from "../components/ProjectCard.jsx";
 import { className } from "../styles/classNames.js";
 
@@ -37,15 +36,6 @@ const styles = {
     "@media (prefers-reduced-motion: reduce)": {
       transition: "none"
     }
-  },
-
-  controls: {
-    display: "flex",
-    alignItems: "center",
-    gap: "var(--space-2)",
-    width: "100%",
-    marginTop: 0,
-    padding: "var(--space-2) var(--space-0) var(--space-0)"
   }
 };
 
@@ -177,35 +167,17 @@ export function ProjectsPage() {
         <div className={className(styles.track)} style={trackStyle}>
           {projects.map((project, projectIndex) => (
             <ProjectCard
+              hasNextProject={projectIndex < projects.length - 1}
+              hasPreviousProject={projectIndex > 0}
               isActive={projectIndex === activeProjectIndex}
               key={project.title}
+              onNextProject={() => navigateProject(1)}
               onPreviewOpen={openPreview}
+              onPreviousProject={() => navigateProject(-1)}
               project={project}
             />
           ))}
         </div>
-
-        {projects.length > 1 ? (
-          <div className={className(styles.controls)} aria-label="Výber projektov">
-            {projects.map((project, projectIndex) => {
-              const isActive = projectIndex === activeProjectIndex;
-
-              return (
-                <IconButton
-                  isActive={isActive}
-                  aria-current={isActive ? "true" : "false"}
-                  aria-label={`Zobraziť projekt ${project.title}`}
-                  key={project.title}
-                  onClick={(event) => {
-                    event.currentTarget.blur();
-                    setActiveProjectIndex(projectIndex);
-                  }}
-                  size="sm"
-                />
-              );
-            })}
-          </div>
-        ) : null}
       </div>
 
       {preview ? (

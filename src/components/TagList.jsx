@@ -9,11 +9,7 @@ const styles = {
     flexWrap: "wrap",
     columnGap: "var(--space-1)",
     rowGap: "0.3rem",
-    height: "4.05rem",
     margin: 0,
-    minHeight: "4.05rem",
-    overflowX: "hidden",
-    overflowY: "hidden",
     padding: 0,
     listStyle: "none",
 
