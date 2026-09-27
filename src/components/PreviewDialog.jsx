@@ -235,6 +235,22 @@ function getTransformStyle({ zoom, offsetX, offsetY }) {
   return `translate3d(${offsetX}px, ${offsetY}px, 0) scale(${zoom})`;
 }
 
+function getContainedImageSize(stageRect, imageElement) {
+  const stageAspectRatio = stageRect.width / stageRect.height;
+  const imageAspectRatio = imageElement.naturalWidth / imageElement.naturalHeight;
+
+  return {
+    containedWidth:
+      imageAspectRatio > stageAspectRatio
+        ? stageRect.width
+        : stageRect.height * imageAspectRatio,
+    containedHeight:
+      imageAspectRatio > stageAspectRatio
+        ? stageRect.width / imageAspectRatio
+        : stageRect.height
+  };
+}
+
 export function PreviewDialog({ preview, onClose, onNavigate }) {
   const stageRef = useRef(null);
   const transformRef = useRef(null);
@@ -346,7 +362,29 @@ export function PreviewDialog({ preview, onClose, onNavigate }) {
     });
   }
 
-  function createGestureStart(touch, stageRect) {
+  function getStageImageMetrics() {
+    const stageRect = stageRef.current?.getBoundingClientRect();
+    const renderedImage = stageRef.current?.querySelector(
+      'img:not([aria-hidden="true"])'
+    );
+
+    if (
+      !stageRect ||
+      !renderedImage?.naturalWidth ||
+      !renderedImage?.naturalHeight
+    ) {
+      return null;
+    }
+
+    return {
+      stageRect,
+      stageWidth: stageRect.width,
+      stageHeight: stageRect.height,
+      ...getContainedImageSize(stageRect, renderedImage)
+    };
+  }
+
+  function createGestureStart(touch, metrics) {
     return {
       x: touch.clientX,
       y: touch.clientY,
@@ -354,19 +392,23 @@ export function PreviewDialog({ preview, onClose, onNavigate }) {
       offsetY: liveTransform.current.offsetY,
       zoom: liveTransform.current.zoom,
       isZoomed: liveTransform.current.zoom > minZoom,
-      stageWidth: stageRect.width,
-      stageHeight: stageRect.height
+      stageWidth: metrics.stageWidth,
+      stageHeight: metrics.stageHeight,
+      containedWidth: metrics.containedWidth,
+      containedHeight: metrics.containedHeight
     };
   }
 
-  function createPinchStart(touches, stageRect) {
+  function createPinchStart(touches, metrics) {
     return {
       distance: getTouchDistance(touches),
       zoom: liveTransform.current.zoom,
       offsetX: liveTransform.current.offsetX,
       offsetY: liveTransform.current.offsetY,
-      stageWidth: stageRect.width,
-      stageHeight: stageRect.height
+      stageWidth: metrics.stageWidth,
+      stageHeight: metrics.stageHeight,
+      containedWidth: metrics.containedWidth,
+      containedHeight: metrics.containedHeight
     };
   }
 
@@ -401,43 +443,20 @@ export function PreviewDialog({ preview, onClose, onNavigate }) {
   }
 
   function getRenderedImageRect() {
-    const stageRect = stageRef.current?.getBoundingClientRect();
+    const metrics = getStageImageMetrics();
 
-    const renderedImage = stageRef.current?.querySelector(
-      'img:not([aria-hidden="true"])'
-    );
-
-    if (
-      !stageRect ||
-      !renderedImage?.naturalWidth ||
-      !renderedImage?.naturalHeight
-    ) {
+    if (!metrics) {
       return null;
     }
 
-    const stageAspectRatio = stageRect.width / stageRect.height;
-
-    const imageAspectRatio =
-      renderedImage.naturalWidth / renderedImage.naturalHeight;
-
-    const containedWidth =
-      imageAspectRatio > stageAspectRatio
-        ? stageRect.width
-        : stageRect.height * imageAspectRatio;
-
-    const containedHeight =
-      imageAspectRatio > stageAspectRatio
-        ? stageRect.width / imageAspectRatio
-        : stageRect.height;
-
     const { zoom, offsetX, offsetY } = liveTransform.current;
 
-    const width = containedWidth * zoom;
-    const height = containedHeight * zoom;
+    const width = metrics.containedWidth * zoom;
+    const height = metrics.containedHeight * zoom;
 
-    const centerX = stageRect.left + stageRect.width / 2 + offsetX;
+    const centerX = metrics.stageRect.left + metrics.stageWidth / 2 + offsetX;
 
-    const centerY = stageRect.top + stageRect.height / 2 + offsetY;
+    const centerY = metrics.stageRect.top + metrics.stageHeight / 2 + offsetY;
 
     return {
       bottom: centerY + height / 2,
@@ -458,7 +477,9 @@ export function PreviewDialog({ preview, onClose, onNavigate }) {
     offsetY,
     zoom,
     stageWidth,
-    stageHeight
+    stageHeight,
+    containedWidth,
+    containedHeight
   ) {
     if (zoom <= minZoom) {
       return {
@@ -467,9 +488,9 @@ export function PreviewDialog({ preview, onClose, onNavigate }) {
       };
     }
 
-    const maxOffsetX = (stageWidth * (zoom - 1)) / 2;
+    const maxOffsetX = Math.max(0, (containedWidth * zoom - stageWidth) / 2);
 
-    const maxOffsetY = (stageHeight * (zoom - 1)) / 2;
+    const maxOffsetY = Math.max(0, (containedHeight * zoom - stageHeight) / 2);
 
     return {
       offsetX: clamp(offsetX, -maxOffsetX, maxOffsetX),
@@ -478,14 +499,14 @@ export function PreviewDialog({ preview, onClose, onNavigate }) {
   }
 
   function handleTouchStart(event) {
-    const stageRect = stageRef.current?.getBoundingClientRect();
+    const metrics = getStageImageMetrics();
 
-    if (!stageRect) {
+    if (!metrics) {
       return;
     }
 
     if (event.touches.length >= 2) {
-      pinchStart.current = createPinchStart(event.touches, stageRect);
+      pinchStart.current = createPinchStart(event.touches, metrics);
       gestureStart.current = null;
 
       return;
@@ -498,7 +519,7 @@ export function PreviewDialog({ preview, onClose, onNavigate }) {
 
     const touch = event.touches[0];
 
-    gestureStart.current = createGestureStart(touch, stageRect);
+    gestureStart.current = createGestureStart(touch, metrics);
   }
 
   function handleTouchMove(event) {
@@ -518,7 +539,9 @@ export function PreviewDialog({ preview, onClose, onNavigate }) {
         start.offsetY,
         nextZoom,
         start.stageWidth,
-        start.stageHeight
+        start.stageHeight,
+        start.containedWidth,
+        start.containedHeight
       );
 
       liveTransform.current = {
@@ -549,7 +572,9 @@ export function PreviewDialog({ preview, onClose, onNavigate }) {
       nextOffsetY,
       liveTransform.current.zoom,
       gesture.stageWidth,
-      gesture.stageHeight
+      gesture.stageHeight,
+      gesture.containedWidth,
+      gesture.containedHeight
     );
 
     liveTransform.current = {
@@ -572,10 +597,10 @@ export function PreviewDialog({ preview, onClose, onNavigate }) {
       if (event.touches.length === 1) {
         const touch = event.touches[0];
 
-        const stageRect = stageRef.current?.getBoundingClientRect();
+        const metrics = getStageImageMetrics();
 
-        if (stageRect) {
-          gestureStart.current = createGestureStart(touch, stageRect);
+        if (metrics) {
+          gestureStart.current = createGestureStart(touch, metrics);
         }
       } else {
         gestureStart.current = null;
