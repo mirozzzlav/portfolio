@@ -64,7 +64,7 @@ export function BlurLoadedImage({
   const isLoaded = loadedSrc === src;
 
   return (
-    <span
+    <div
       className={mergeClassNames(styles.frame, className)}
       data-loaded={isLoaded ? "true" : "false"}
       {...props}
@@ -89,6 +89,6 @@ export function BlurLoadedImage({
           onLoad={() => setLoadedSrc(src)}
         />
       ) : null}
-    </span>
+    </div>
   );
 }
