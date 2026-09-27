@@ -22,8 +22,7 @@ const styles = {
 
   separator: {
     color: "var(--palette-accent-fine)",
-    fontFamily:
-      'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+    fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
     fontSize: "0.92rem",
     fontWeight: "var(--font-weight-bold)",
     lineHeight: "var(--line-height-solid)",
@@ -70,15 +69,20 @@ function getBinaryClockParts(date) {
 }
 
 export function BinaryClockPill() {
-  const [clockDate, setClockDate] = useState(() => new Date());
+  const [clockDate, setClockDate] = useState(() => new Date(2000, 0, 1, 0, 0, 0));
   const { binaryTimeParts, timeLabel } = getBinaryClockParts(clockDate);
 
   useEffect(() => {
-    const intervalId = window.setInterval(() => {
+    function updateClockDate() {
       setClockDate(new Date());
-    }, 1000);
+    }
+
+    const timeoutId = window.setTimeout(updateClockDate, 0);
+
+    const intervalId = window.setInterval(updateClockDate, 1000);
 
     return () => {
+      window.clearTimeout(timeoutId);
       window.clearInterval(intervalId);
     };
   }, []);
