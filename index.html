@@ -7,6 +7,25 @@
     <!-- seo:start -->
     <!-- SEO tags are generated from src/seo.js. -->
     <!-- seo:end -->
+    <style>
+      a[aria-label="Domov"] img {
+        display: block;
+        width: 60px;
+        height: auto;
+      }
+
+      #site-menu[data-open="false"] {
+        pointer-events: none;
+        visibility: hidden;
+        transform: translateY(calc(-1 * var(--space-1, 0.5rem)));
+      }
+
+      #site-menu[data-open="true"] {
+        pointer-events: auto;
+        visibility: visible;
+        transform: translateY(0);
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>

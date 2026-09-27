@@ -159,6 +159,7 @@ export function Header() {
           <nav
             id="site-menu"
             className={className([styles.nav, isMenuOpen && styles.navOpen])}
+            data-open={isMenuOpen ? "true" : "false"}
             aria-label="Hlavná navigácia"
           >
             {pageRoutes.map((item) => (
