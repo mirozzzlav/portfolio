@@ -52,7 +52,6 @@ const styles = {
   titleNav: {
     display: "inline-flex",
     alignItems: "center",
-    gap: "var(--space-0)",
     minHeight: "44px",
     overflow: "hidden",
     border: "1px solid var(--color-border)",
