@@ -24,23 +24,28 @@ function routeToFilePath(route) {
   return path.join(distDir, route.slice(1), "index.html");
 }
 
-function collectEmotionCss() {
-  return Object.values(cache.inserted)
-    .filter((styles) => typeof styles === "string")
-    .join("");
+function collectEmotionStyles() {
+  const entries = Object.entries(cache.inserted).filter(
+    ([, styles]) => typeof styles === "string"
+  );
+
+  return {
+    cssText: entries.map(([, styles]) => styles).join(""),
+    ids: entries.map(([id]) => id)
+  };
 }
 
-function renderEmotionStyleTag(cssText) {
-  if (!cssText) {
+function renderEmotionStyleTag({ cssText, ids }) {
+  if (!cssText || ids.length === 0) {
     return "";
   }
 
-  return `<style data-emotion="css">${cssText}</style>`;
+  return `<style data-emotion="css ${ids.join(" ")}">${cssText}</style>`;
 }
 
-function renderDocument(template, appHtml, emotionCss, route) {
+function renderDocument(template, appHtml, emotionStyles, route) {
   return replaceSeoTags(template, route, siteUrl)
-    .replace("</head>", `${renderEmotionStyleTag(emotionCss)}\n  </head>`)
+    .replace("</head>", `${renderEmotionStyleTag(emotionStyles)}\n  </head>`)
     .replace('<div id="root"></div>', `<div id="root">${appHtml}</div>`);
 }
 
@@ -96,10 +101,10 @@ for (const route of routes) {
   const filePath = routeToFilePath(route);
   flush();
   const appHtml = render(route);
-  const emotionCss = collectEmotionCss();
+  const emotionStyles = collectEmotionStyles();
 
   await mkdir(path.dirname(filePath), { recursive: true });
-  await writeFile(filePath, renderDocument(template, appHtml, emotionCss, route));
+  await writeFile(filePath, renderDocument(template, appHtml, emotionStyles, route));
 }
 
 for (const redirect of redirectRoutes) {
