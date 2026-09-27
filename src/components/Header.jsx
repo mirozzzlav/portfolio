@@ -4,6 +4,7 @@ import { pageRoutes } from "../pages/index.jsx";
 import { className } from "../styles/classNames.js";
 import { Button } from "./Button.jsx";
 import { NavigationLink } from "./NavigationLink.jsx";
+import EyeLogo from "./EyeLogo.jsx";
 
 const styles = {
   header: {
@@ -37,9 +38,9 @@ const styles = {
     alignItems: "center",
     lineHeight: "var(--line-height-none)",
 
-    img: {
+    svg: {
       display: "block",
-      width: "60px",
+      width: "70px",
       height: "auto"
     }
   },
@@ -131,7 +132,7 @@ export function Header() {
     <header className={className(styles.header)}>
       <div className={className(styles.inner)}>
         <Link className={className(styles.brand)} to="/" aria-label="Domov">
-          <img src="/assets/logo.svg" alt="Logo" />
+          <EyeLogo />
         </Link>
 
         <div className={className(styles.menu)} ref={menuRef}>
