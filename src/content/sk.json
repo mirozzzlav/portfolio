@@ -49,6 +49,10 @@
     "continue": "Pokračovať",
     "redirectTitle": "Presmerovanie"
   },
+  "notFound": {
+    "title": "Stránka sa nenašla",
+    "action": "Späť domov"
+  },
   "about": {
     "paragraphs": [
       "Ahoj, moje meno je Miro a som web developer. Tvorím weby a webové aplikácie, ktoré vnímam ako malé digitálne priestory, do ktorých človek občas z rôznych dôvodov vstupuje.",

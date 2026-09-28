@@ -49,6 +49,10 @@
     "continue": "Continue",
     "redirectTitle": "Redirect"
   },
+  "notFound": {
+    "title": "Page not found",
+    "action": "Back home"
+  },
   "about": {
     "paragraphs": [
       "Hi, my name is Miro and I am a web developer. I create websites and web applications that I see as small digital spaces people enter for different reasons.",
