@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
 import { Button } from "../components/Button.jsx";
 import { Field } from "../components/Field.jsx";
 import { FormStatus } from "../components/FormStatus.jsx";
@@ -38,7 +38,7 @@ const styles = {
   },
 
   turnstile: {
-    minHeight: "65px"
+    minHeight: 0
   }
 };
 
@@ -52,8 +52,7 @@ function getPayload(form) {
     name: String(formData.get("name") || ""),
     email: String(formData.get("email") || ""),
     message: String(formData.get("message") || ""),
-    company: String(formData.get("company") || ""),
-    turnstileToken: String(formData.get("cf-turnstile-response") || "")
+    company: String(formData.get("company") || "")
   };
 }
 
@@ -121,14 +120,36 @@ async function readJsonResponse(response) {
   }
 }
 
-function resetTurnstile() {
-  if (typeof window !== "undefined" && window.turnstile) {
-    window.turnstile.reset();
+function resetTurnstile(widgetId) {
+  if (typeof window !== "undefined" && window.turnstile && widgetId !== null) {
+    window.turnstile.reset(widgetId);
   }
 }
 
-function TurnstileWidget() {
+const TurnstileWidget = forwardRef(function TurnstileWidget(_props, ref) {
   const containerRef = useRef(null);
+  const widgetIdRef = useRef(null);
+  const pendingVerificationRef = useRef(null);
+
+  useImperativeHandle(ref, () => ({
+    execute() {
+      if (!turnstileSiteKey) {
+        return Promise.resolve("");
+      }
+
+      if (!window.turnstile || widgetIdRef.current === null) {
+        return Promise.reject(new Error("Turnstile is not ready."));
+      }
+
+      return new Promise((resolve, reject) => {
+        pendingVerificationRef.current = { resolve, reject };
+        window.turnstile.execute(widgetIdRef.current);
+      });
+    },
+    reset() {
+      resetTurnstile(widgetIdRef.current);
+    }
+  }));
 
   useEffect(() => {
     if (!turnstileSiteKey) {
@@ -147,7 +168,31 @@ function TurnstileWidget() {
         return;
       }
 
-      window.turnstile.render(containerRef.current, {
+      widgetIdRef.current = window.turnstile.render(containerRef.current, {
+        "error-callback": () => {
+          pendingVerificationRef.current?.reject(
+            new Error("Turnstile verification failed.")
+          );
+          pendingVerificationRef.current = null;
+        },
+        "expired-callback": () => {
+          pendingVerificationRef.current?.reject(
+            new Error("Turnstile verification expired.")
+          );
+          pendingVerificationRef.current = null;
+        },
+        "timeout-callback": () => {
+          pendingVerificationRef.current?.reject(
+            new Error("Turnstile verification timed out.")
+          );
+          pendingVerificationRef.current = null;
+        },
+        appearance: "interaction-only",
+        callback: (token) => {
+          pendingVerificationRef.current?.resolve(token);
+          pendingVerificationRef.current = null;
+        },
+        execution: "execute",
         sitekey: turnstileSiteKey,
         theme: "auto"
       });
@@ -165,6 +210,11 @@ function TurnstileWidget() {
       return () => {
         isMounted = false;
         existingScript.removeEventListener("load", renderWidget);
+
+        if (window.turnstile && widgetIdRef.current !== null) {
+          window.turnstile.remove(widgetIdRef.current);
+          widgetIdRef.current = null;
+        }
       };
     }
 
@@ -180,6 +230,11 @@ function TurnstileWidget() {
     return () => {
       isMounted = false;
       script.removeEventListener("load", renderWidget);
+
+      if (window.turnstile && widgetIdRef.current !== null) {
+        window.turnstile.remove(widgetIdRef.current);
+        widgetIdRef.current = null;
+      }
     };
   }, []);
 
@@ -188,7 +243,7 @@ function TurnstileWidget() {
   }
 
   return <div ref={containerRef} className={className(styles.turnstile)} />;
-}
+});
 
 export function ContactPage() {
   const { content } = useI18n();
@@ -199,6 +254,7 @@ export function ContactPage() {
     type: "idle"
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const turnstileRef = useRef(null);
 
   function clearFieldError(fieldName) {
     setFieldErrors((currentErrors) => {
@@ -231,6 +287,26 @@ export function ContactPage() {
       });
       setIsSubmitting(false);
       return;
+    }
+
+    if (turnstileSiteKey) {
+      try {
+        const turnstileToken = await turnstileRef.current?.execute();
+
+        if (!turnstileToken) {
+          throw new Error("Turnstile token is missing.");
+        }
+
+        payload.turnstileToken = turnstileToken;
+      } catch {
+        setSubmitState({
+          messageKey: "turnstileError",
+          type: "error"
+        });
+        turnstileRef.current?.reset();
+        setIsSubmitting(false);
+        return;
+      }
     }
 
     try {
@@ -270,7 +346,7 @@ export function ContactPage() {
         type: "error"
       });
     } finally {
-      resetTurnstile();
+      turnstileRef.current?.reset();
       setIsSubmitting(false);
     }
   }
@@ -312,7 +388,7 @@ export function ContactPage() {
         onChange={() => clearFieldError("message")}
       />
       <HoneypotField />
-      <TurnstileWidget />
+      <TurnstileWidget ref={turnstileRef} />
       <div className={className(styles.actions)}>
         <FormStatus type={submitState.type}>
           {submitState.messageKey ? contact[submitState.messageKey] : ""}
