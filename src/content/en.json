@@ -1,0 +1,172 @@
+{
+  "language": {
+    "code": "en",
+    "htmlLang": "en",
+    "locale": "en_US",
+    "name": "English",
+    "label": "EN",
+    "flag": "🇬🇧"
+  },
+  "seo": {
+    "title": "Miro's portfolio - Websites and web apps",
+    "description": "Websites and web applications built with care for design, detail, functionality, and natural use."
+  },
+  "routes": {
+    "about": {
+      "label": "About",
+      "title": "About"
+    },
+    "projects": {
+      "label": "Projects",
+      "title": "Projects"
+    },
+    "contact": {
+      "label": "Contact",
+      "title": "Contact"
+    }
+  },
+  "ui": {
+    "home": "Home",
+    "menu": "Menu",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "mainNavigation": "Main navigation",
+    "footerNavigation": "Footer navigation",
+    "languageNavigation": "Language selection",
+    "contactLinks": "Contact links",
+    "contact": "Contact",
+    "github": "GitHub",
+    "binaryClock": "Binary clock",
+    "technologies": "Technologies used",
+    "viewPreviews": "View previews",
+    "openProject": "Open project",
+    "projectNavigation": "Project navigation",
+    "previousProject": "Previous",
+    "nextProject": "Next",
+    "closePreview": "Close preview",
+    "previousImage": "Previous image",
+    "nextImage": "Next image",
+    "continue": "Continue",
+    "redirectTitle": "Redirect"
+  },
+  "about": {
+    "paragraphs": [
+      "Hi, my name is Miro and I am a web developer. I create websites and web applications that I see as small digital spaces people enter for different reasons.",
+      "I combine colors, shapes, code, and empty space into a whole that should feel pleasant to look at and natural to use.",
+      "I am drawn to atmosphere, rhythm, and detail. I enjoy finding calm in complexity and bringing the essential parts forward."
+    ]
+  },
+  "contact": {
+    "intro": "I will be glad to hear from you with a question, an idea, or a specific request. If you are looking for someone to build a website, an app, or improve an existing solution, feel free to write. Together we can go through what you need and what the next step should be.",
+    "fields": {
+      "name": "Name",
+      "email": "E-mail",
+      "message": "Message"
+    },
+    "fieldErrors": {
+      "name": "Enter your name.",
+      "email": "Enter a valid e-mail address.",
+      "message": "Write a message with at least one word."
+    },
+    "submit": "Send",
+    "submitting": "Sending",
+    "validationError": "The message could not be sent. Please check the completed fields.",
+    "success": "Your message has been sent. I will get back to you as soon as possible.",
+    "networkError": "The message could not be sent. Please try again later."
+  },
+  "social": {
+    "githubUrl": "https://github.com/mirozzzlav"
+  },
+  "projects": [
+    {
+      "title": "Priatelia",
+      "type": "Web application",
+      "description": "Priatelia is an app for meeting new people and activity partners based on interests, sympathy, and proximity. When two users like each other, the app connects them and opens a space for conversation.",
+      "url": "https://priatelia.wondercules.com",
+      "galleryLabel": "Project previews for Priatelia",
+      "images": [
+        {
+          "src": "/assets/projects/priatelia/1.webp",
+          "placeholderSrc": "/assets/projects/priatelia/1-placeholder.webp",
+          "alt": "Browsing nearby people by criteria"
+        },
+        {
+          "src": "/assets/projects/priatelia/2.webp",
+          "placeholderSrc": "/assets/projects/priatelia/2-placeholder.webp",
+          "alt": "Person profile with interests and preferences"
+        },
+        {
+          "src": "/assets/projects/priatelia/3.webp",
+          "placeholderSrc": "/assets/projects/priatelia/3-placeholder.webp",
+          "alt": "Editing profile details, interests, and photos"
+        },
+        {
+          "src": "/assets/projects/priatelia/4.webp",
+          "placeholderSrc": "/assets/projects/priatelia/4-placeholder.webp",
+          "alt": "Chat after users connect with each other"
+        }
+      ],
+      "technologies": ["Matching", "Chat", "Profiles"]
+    },
+    {
+      "title": "Digital archive",
+      "type": "Web application",
+      "description": "Digital archive helps organize, search, and filter documents by categories, authors, and approvers. It includes a multi-level approval workflow; the demo uses simulated data.",
+      "url": "https://archive.wondercules.com",
+      "galleryLabel": "Project previews for Digital archive",
+      "images": [
+        {
+          "src": "/assets/projects/archive/1.webp",
+          "placeholderSrc": "/assets/projects/archive/1-placeholder.webp",
+          "alt": "Document overview in the digital archive"
+        },
+        {
+          "src": "/assets/projects/archive/2.webp",
+          "placeholderSrc": "/assets/projects/archive/2-placeholder.webp",
+          "alt": "Adding a new document to the digital archive"
+        },
+        {
+          "src": "/assets/projects/archive/3.webp",
+          "placeholderSrc": "/assets/projects/archive/3-placeholder.webp",
+          "alt": "Filtering documents by category"
+        },
+        {
+          "src": "/assets/projects/archive/4.webp",
+          "placeholderSrc": "/assets/projects/archive/4-placeholder.webp",
+          "alt": "Managing categories in the digital archive"
+        }
+      ],
+      "technologies": ["Document management", "Filtering", "Approval workflow"]
+    },
+    {
+      "title": "Yokaid",
+      "type": "Web application",
+      "description": "Yokaid helps people find reliable tradespeople and professionals using a map, ratings, and real experiences from other users. Visitors quickly see who works nearby and what others have written about them.",
+      "url": "https://yokaid.wondercules.com",
+      "galleryLabel": "Project previews for Yokaid",
+      "images": [
+        {
+          "src": "/assets/projects/yokaid/1.webp",
+          "placeholderSrc": "/assets/projects/yokaid/1-placeholder.webp",
+          "alt": "Map with professionals in the Yokaid app"
+        },
+        {
+          "src": "/assets/projects/yokaid/2.webp",
+          "placeholderSrc": "/assets/projects/yokaid/2-placeholder.webp",
+          "alt": "Professional profile with ratings and reviews"
+        },
+        {
+          "src": "/assets/projects/yokaid/3.webp",
+          "placeholderSrc": "/assets/projects/yokaid/3-placeholder.webp",
+          "alt": "Form for writing a review of a professional"
+        },
+        {
+          "src": "/assets/projects/yokaid/4.webp",
+          "placeholderSrc": "/assets/projects/yokaid/4-placeholder.webp",
+          "alt": "Searching professionals by name"
+        }
+      ],
+      "technologies": ["Map", "Reviews", "Search"]
+    }
+  ]
+}

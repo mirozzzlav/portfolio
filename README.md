@@ -2,7 +2,7 @@
 
 Jednoduché osobné portfolio pre programátora alebo tvorcu digitálneho contentu.
 
-Projekt je postavený na Reacte, Vite, React Routeri a Emotion. Obsah zostáva oddelený v `data.json`.
+Projekt je postavený na Reacte, Vite, React Routeri a Emotion. Lokalizovaný obsah je oddelený v `src/content/sk.json` a `src/content/en.json`.
 
 ## Spustenie lokálne
 

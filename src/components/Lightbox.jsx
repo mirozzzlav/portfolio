@@ -104,7 +104,7 @@ const styles = {
 export function Lightbox({
   children,
   className,
-  closeLabel = "Zatvoriť",
+  closeLabel = "Close",
   contentClassName,
   isOpen,
   labelledBy,
@@ -145,7 +145,11 @@ export function Lightbox({
       className={mergeClassNames(styles.root, className)}
       data-disable-page-wheel-navigation
     >
-      <div className={mergeClassNames(styles.backdrop)} onClick={onClose} aria-hidden="true" />
+      <div
+        className={mergeClassNames(styles.backdrop)}
+        onClick={onClose}
+        aria-hidden="true"
+      />
       <div
         className={mergeClassNames(styles.panel)}
         role="dialog"
@@ -169,7 +173,9 @@ export function Lightbox({
             />
           </svg>
         </IconButton>
-        <div className={mergeClassNames(contentClassName, styles.content)}>{children}</div>
+        <div className={mergeClassNames(contentClassName, styles.content)}>
+          {children}
+        </div>
       </div>
     </div>,
     document.body

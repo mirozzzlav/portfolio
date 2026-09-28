@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { className } from "../styles/classNames.js";
+import { useI18n } from "../useI18n.js";
 import { IconButton } from "./IconButton.jsx";
 import { Lightbox } from "./Lightbox.jsx";
 import { PreviewSurface } from "./PreviewSurface.jsx";
@@ -165,7 +166,7 @@ const styles = {
       pointerEvents: "none",
       userSelect: "none",
       objectFit: "contain"
-    },
+    }
   },
 
   transformLayer: {
@@ -252,6 +253,7 @@ function getContainedImageSize(stageRect, imageElement) {
 }
 
 export function PreviewDialog({ preview, onClose, onNavigate }) {
+  const { content } = useI18n();
   const stageRef = useRef(null);
   const transformRef = useRef(null);
 
@@ -368,11 +370,7 @@ export function PreviewDialog({ preview, onClose, onNavigate }) {
       'img:not([aria-hidden="true"])'
     );
 
-    if (
-      !stageRect ||
-      !renderedImage?.naturalWidth ||
-      !renderedImage?.naturalHeight
-    ) {
+    if (!stageRect || !renderedImage?.naturalWidth || !renderedImage?.naturalHeight) {
       return null;
     }
 
@@ -638,10 +636,7 @@ export function PreviewDialog({ preview, onClose, onNavigate }) {
 
     gestureStart.current = null;
 
-    if (
-      absX < swipeThreshold ||
-      absX < absY * swipeDirectionRatio
-    ) {
+    if (absX < swipeThreshold || absX < absY * swipeDirectionRatio) {
       return;
     }
 
@@ -656,30 +651,22 @@ export function PreviewDialog({ preview, onClose, onNavigate }) {
 
   return (
     <Lightbox
-      closeLabel="Zatvoriť náhľad"
+      closeLabel={content.ui.closePreview}
       contentClassName={className(styles.content)}
       isOpen={Boolean(preview)}
       labelledBy="preview-dialog-title"
       onClose={onClose}
       onKeyDown={handleLightboxKeyDown}
     >
-      <div
-        className={className(styles.viewer)}
-        onClick={handleViewerClick}
-      >
+      <div className={className(styles.viewer)} onClick={handleViewerClick}>
         <IconButton
-          className={className([
-            styles.nav,
-            styles.navPrev
-          ])}
-          aria-label="Predchádzajúci obrázok"
+          className={className([styles.nav, styles.navPrev])}
+          aria-label={content.ui.previousImage}
           onClick={() => onNavigate(-1)}
           size="lg"
         />
 
-        <div
-          className={className(styles.stageGroup)}
-        >
+        <div className={className(styles.stageGroup)}>
           <div
             ref={stageRef}
             className={className(styles.stage)}
@@ -690,23 +677,16 @@ export function PreviewDialog({ preview, onClose, onNavigate }) {
           >
             <div
               ref={transformRef}
-              className={className(
-                styles.transformLayer
-              )}
+              className={className(styles.transformLayer)}
               style={{
-                cursor:
-                  isZoomed
-                    ? "grab"
-                    : "zoom-in",
+                cursor: isZoomed ? "grab" : "zoom-in",
 
                 transform: getTransformStyle(imageState)
               }}
             >
               <PreviewSurface
                 aspectRatio="auto"
-                className={className(
-                  styles.previewSurface
-                )}
+                className={className(styles.previewSurface)}
                 image={image}
                 radius="var(--radius-md)"
                 role="img"
@@ -715,14 +695,9 @@ export function PreviewDialog({ preview, onClose, onNavigate }) {
             </div>
           </div>
 
-          <div
-            id="preview-dialog-title"
-            className={className(styles.title)}
-          >
+          <div id="preview-dialog-title" className={className(styles.title)}>
             <svg
-              className={className(
-                styles.titleIcon
-              )}
+              className={className(styles.titleIcon)}
               viewBox="0 0 24 24"
               aria-hidden="true"
               focusable="false"
@@ -758,11 +733,8 @@ export function PreviewDialog({ preview, onClose, onNavigate }) {
         </div>
 
         <IconButton
-          className={className([
-            styles.nav,
-            styles.navNext
-          ])}
-          aria-label="Ďalší obrázok"
+          className={className([styles.nav, styles.navNext])}
+          aria-label={content.ui.nextImage}
           onClick={() => onNavigate(1)}
           size="lg"
         />

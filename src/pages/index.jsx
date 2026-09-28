@@ -1,7 +1,6 @@
 import { AboutPage } from "./AboutPage.jsx";
 import { ContactPage } from "./ContactPage.jsx";
 import { ProjectsPage } from "./ProjectsPage.jsx";
-import { pageRouteDefinitions, redirectRoutes } from "../routes.js";
 
 const pageComponentsBySection = {
   about: AboutPage,
@@ -9,9 +8,9 @@ const pageComponentsBySection = {
   projects: ProjectsPage
 };
 
-export const pageRoutes = pageRouteDefinitions.map((route) => ({
-  ...route,
-  Component: pageComponentsBySection[route.sectionId]
-}));
-
-export { redirectRoutes };
+export function attachPageComponents(routes) {
+  return routes.map((route) => ({
+    ...route,
+    Component: pageComponentsBySection[route.sectionId]
+  }));
+}

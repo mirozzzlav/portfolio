@@ -3,9 +3,10 @@ import { cache, flush } from "@emotion/css";
 import path from "node:path";
 import process from "node:process";
 import { fileURLToPath } from "node:url";
-import { pageRouteDefinitions, redirectRoutes } from "../src/routes.js";
+import { getContent, supportedLanguages } from "../src/content/index.js";
+import { getPageRouteDefinitions, getRedirectRoutes } from "../src/routes.js";
 import { getRouteSeo, normalizeSiteUrl, siteSeo } from "../src/seo.js";
-import { escapeHtml, replaceSeoTags } from "../src/seoTags.js";
+import { escapeHtml, replaceDocumentMetadata } from "../src/seoTags.js";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(dirname, "..");
@@ -14,7 +15,10 @@ const templatePath = path.join(distDir, "index.html");
 const serverEntryPath = path.join(distDir, "server", "entry-server.js");
 const siteUrl = normalizeSiteUrl(process.env.SITE_URL || siteSeo.siteUrl);
 
-const routes = pageRouteDefinitions.map((route) => route.path);
+const routes = supportedLanguages.flatMap((language) =>
+  getPageRouteDefinitions(language).map((route) => route.path)
+);
+const redirects = supportedLanguages.flatMap((language) => getRedirectRoutes(language));
 
 function routeToFilePath(route) {
   if (route === "/") {
@@ -44,25 +48,28 @@ function renderEmotionStyleTag({ cssText, ids }) {
 }
 
 function renderDocument(template, appHtml, emotionStyles, route) {
-  return replaceSeoTags(template, route, siteUrl)
+  return replaceDocumentMetadata(template, route, siteUrl)
     .replace("</head>", `${renderEmotionStyleTag(emotionStyles)}\n  </head>`)
     .replace('<div id="root"></div>', `<div id="root">${appHtml}</div>`);
 }
 
 function renderRedirectDocument(target) {
-  const canonicalUrl = getRouteSeo(target, siteUrl).canonicalUrl;
+  const routeSeo = getRouteSeo(target, siteUrl);
+  const canonicalUrl = routeSeo.canonicalUrl;
+  const htmlLang = routeSeo.htmlLang;
+  const content = getContent(routeSeo.language);
 
   return `<!doctype html>
-<html lang="sk">
+<html lang="${escapeHtml(htmlLang)}">
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="refresh" content="0; url=${escapeHtml(target)}" />
     <link rel="canonical" href="${escapeHtml(canonicalUrl)}" />
     <script>window.location.replace(${JSON.stringify(target)});</script>
-    <title>Presmerovanie</title>
+    <title>${escapeHtml(content.ui.redirectTitle)}</title>
   </head>
   <body>
-    <a href="${escapeHtml(target)}">Pokračovať</a>
+    <a href="${escapeHtml(target)}">${escapeHtml(content.ui.continue)}</a>
   </body>
 </html>
 `;
@@ -72,15 +79,22 @@ function renderSitemap() {
   const urls = routes
     .map((route) => {
       const routeSeo = getRouteSeo(route, siteUrl);
+      const alternateLinks = routeSeo.alternates
+        .map(
+          (alternate) =>
+            `    <xhtml:link rel="alternate" hreflang="${escapeHtml(alternate.hrefLang)}" href="${escapeHtml(alternate.href)}" />`
+        )
+        .join("\n");
 
       return `  <url>
     <loc>${escapeHtml(routeSeo.canonicalUrl)}</loc>
+${alternateLinks}
   </url>`;
     })
     .join("\n");
 
   return `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${urls}
 </urlset>
 `;
@@ -107,7 +121,7 @@ for (const route of routes) {
   await writeFile(filePath, renderDocument(template, appHtml, emotionStyles, route));
 }
 
-for (const redirect of redirectRoutes) {
+for (const redirect of redirects) {
   const filePath = routeToFilePath(redirect.from);
 
   await mkdir(path.dirname(filePath), { recursive: true });

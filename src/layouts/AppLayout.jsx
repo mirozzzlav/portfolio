@@ -3,8 +3,9 @@ import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { BlurLoadedImage } from "../components/BlurLoadedImage.jsx";
 import { Footer } from "../components/Footer.jsx";
 import { Header } from "../components/Header.jsx";
-import { pageRoutes, redirectRoutes } from "../pages/index.jsx";
+import { attachPageComponents } from "../pages/index.jsx";
 import { className } from "../styles/classNames.js";
+import { useI18n } from "../useI18n.js";
 
 const pageContentVariants = {
   projects: {
@@ -37,8 +38,9 @@ const styles = {
       "var(--space-3) var(--main-inline-pad) var(--space-7) var(--main-inline-pad)",
 
     "@media (max-width: 780px)": {
-      padding: "var(--space-3) var(--main-inline-pad) var(--space-7) var(--main-inline-pad)",
-    },
+      padding:
+        "var(--space-3) var(--main-inline-pad) var(--space-7) var(--main-inline-pad)"
+    }
   },
 
   visualPanel: {
@@ -154,6 +156,8 @@ function renderPage(Component, sectionId, title) {
 
 export function AppLayout() {
   const location = useLocation();
+  const { redirects, routes } = useI18n();
+  const pageRoutes = attachPageComponents(routes);
   const currentRoute = pageRoutes.find((route) => route.path === location.pathname);
 
   useEffect(() => {
@@ -177,10 +181,10 @@ export function AppLayout() {
                 key={path}
               />
             ))}
-            {redirectRoutes.map(({ from, to }) => (
+            {redirects.map(({ from, to }) => (
               <Route path={from} element={<Navigate to={to} replace />} key={from} />
             ))}
-            <Route path="*" element={<Navigate to="/" replace />} />
+            <Route path="*" element={<Navigate to={routes[0].path} replace />} />
           </Routes>
         </main>
         <aside className={className(styles.visualPanel)} aria-hidden="true">

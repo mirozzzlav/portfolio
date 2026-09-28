@@ -1,10 +1,78 @@
 {
+  "language": {
+    "code": "sk",
+    "htmlLang": "sk",
+    "locale": "sk_SK",
+    "name": "Slovenčina",
+    "label": "SK",
+    "flag": "🇸🇰"
+  },
+  "seo": {
+    "title": "Mirovo portfólio - Webové stránky a aplikácie",
+    "description": "Tvorba webových stránok a aplikácií so zmyslom pre dizajn, detail, funkčnosť a prirodzené používanie."
+  },
+  "routes": {
+    "about": {
+      "label": "O mne",
+      "title": "O mne"
+    },
+    "projects": {
+      "label": "Projekty",
+      "title": "Projekty"
+    },
+    "contact": {
+      "label": "Kontakt",
+      "title": "Kontakt"
+    }
+  },
+  "ui": {
+    "home": "Domov",
+    "menu": "Menu",
+    "openMenu": "Otvoriť menu",
+    "closeMenu": "Zatvoriť menu",
+    "mainNavigation": "Hlavná navigácia",
+    "footerNavigation": "Navigácia v päte",
+    "languageNavigation": "Výber jazyka",
+    "contactLinks": "Kontaktné odkazy",
+    "contact": "Kontakt",
+    "github": "GitHub",
+    "binaryClock": "Binárne hodinky",
+    "technologies": "Použité technológie",
+    "viewPreviews": "Pozrieť náhľady",
+    "openProject": "Otvoriť projekt",
+    "projectNavigation": "Prepínanie projektov",
+    "previousProject": "Predošlý",
+    "nextProject": "Ďalší",
+    "closePreview": "Zatvoriť náhľad",
+    "previousImage": "Predchádzajúci obrázok",
+    "nextImage": "Ďalší obrázok",
+    "continue": "Pokračovať",
+    "redirectTitle": "Presmerovanie"
+  },
   "about": {
     "paragraphs": [
       "Ahoj, moje meno je Miro a som web developer. Tvorím weby a webové aplikácie, ktoré vnímam ako malé digitálne priestory, do ktorých človek občas z rôznych dôvodov vstupuje.",
       "Z farieb, tvarov, kódu a prázdneho miesta skladám celok, ktorý má byť príjemný na pohľad aj prirodzený na používanie.",
       "Priťahuje ma atmosféra, rytmus a detail. Baví ma hľadať pokoj v zložitosti a zvýrazniť to podstatné."
     ]
+  },
+  "contact": {
+    "intro": "Budem rád, keď sa mi ozvete s otázkou, nápadom alebo konkrétnym dopytom. Ak hľadáte niekoho na web, aplikáciu alebo úpravu existujúceho riešenia, pokojne mi napíšte. Spoločne môžeme prejsť, čo potrebujete a aký ďalší krok dáva zmysel.",
+    "fields": {
+      "name": "Meno",
+      "email": "E-mail",
+      "message": "Správa"
+    },
+    "fieldErrors": {
+      "name": "Zadajte meno.",
+      "email": "Zadajte platný e-mail.",
+      "message": "Napíšte správu aspoň s jedným slovom."
+    },
+    "submit": "Odoslať",
+    "submitting": "Odosielam",
+    "validationError": "Nepodarilo sa odoslať správu. Skontrolujte vyplnené polia.",
+    "success": "Správa bola odoslaná. Ozvem sa vám čo najskôr.",
+    "networkError": "Správu sa nepodarilo odoslať. Skúste to, prosím, neskôr."
   },
   "social": {
     "githubUrl": "https://github.com/mirozzzlav"
@@ -38,11 +106,7 @@
           "alt": "Chat po vzájomnom prepojení používateľov"
         }
       ],
-      "technologies": [
-        "Matching",
-        "Chat",
-        "Profily"
-      ]
+      "technologies": ["Matching", "Chat", "Profily"]
     },
     {
       "title": "Digitálny archív",
@@ -72,11 +136,7 @@
           "alt": "Správa kategórií v digitálnom archíve"
         }
       ],
-      "technologies": [
-        "Správa dokumentov",
-        "Filtrovanie",
-        "Approval workflow"
-      ]
+      "technologies": ["Správa dokumentov", "Filtrovanie", "Approval workflow"]
     },
     {
       "title": "Yokaid",
@@ -106,11 +166,7 @@
           "alt": "Vyhľadávanie profesionálov podľa mena"
         }
       ],
-      "technologies": [
-        "Mapa",
-        "Recenzie",
-        "Vyhľadávanie"
-      ]
+      "technologies": ["Mapa", "Recenzie", "Vyhľadávanie"]
     }
   ]
 }

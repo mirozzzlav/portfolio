@@ -1,17 +1,28 @@
-export const pageRouteDefinitions = [
-  { label: "O mne", path: "/", sectionId: "about", title: "O mne" },
-  {
-    label: "Projekty",
-    path: "/projects",
-    sectionId: "projects",
-    title: "Projekty"
-  },
-  {
-    label: "Kontakt",
-    path: "/contact",
-    sectionId: "contact",
-    title: "Kontakt"
-  }
+import { getContent, localizePath } from "./content/index.js";
+
+export const basePageRouteDefinitions = [
+  { path: "/", sectionId: "about" },
+  { path: "/projects", sectionId: "projects" },
+  { path: "/contact", sectionId: "contact" }
 ];
 
-export const redirectRoutes = [{ from: "/about", to: "/" }];
+export function getPageRouteDefinitions(language) {
+  const content = getContent(language);
+
+  return basePageRouteDefinitions.map((route) => ({
+    ...route,
+    label: content.routes[route.sectionId].label,
+    path: localizePath(route.path, language),
+    title: content.routes[route.sectionId].title,
+    unlocalizedPath: route.path
+  }));
+}
+
+export function getRedirectRoutes(language) {
+  return [
+    {
+      from: localizePath("/about", language),
+      to: localizePath("/", language)
+    }
+  ];
+}

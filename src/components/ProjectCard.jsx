@@ -1,4 +1,5 @@
 import { className } from "../styles/classNames.js";
+import { useI18n } from "../useI18n.js";
 import { ProjectPreview } from "./ProjectPreview.jsx";
 import { TagList } from "./TagList.jsx";
 import { UiLink } from "./UiLink.jsx";
@@ -174,6 +175,7 @@ const styles = {
 };
 
 export function ProjectCard({ isActive, onPreviewOpen, project }) {
+  const { content } = useI18n();
   const { description, galleryLabel, images, technologies, title, type, url } = project;
   const previewImages = images.slice(0, 4);
 
@@ -190,7 +192,7 @@ export function ProjectCard({ isActive, onPreviewOpen, project }) {
         </div>
       </div>
       <div className={className(styles.tags)}>
-        <TagList items={technologies} ariaLabel="Použité technológie" />
+        <TagList items={technologies} ariaLabel={content.ui.technologies} />
       </div>
       {previewImages.length > 0 ? (
         <div className={className(styles.previewWrapper)}>
@@ -232,7 +234,9 @@ export function ProjectCard({ isActive, onPreviewOpen, project }) {
                 strokeWidth="1.45"
               />
             </svg>
-            <span className={className(styles.previewButtonText)}>Pozrieť náhľady</span>
+            <span className={className(styles.previewButtonText)}>
+              {content.ui.viewPreviews}
+            </span>
           </button>
         </div>
       ) : null}
@@ -243,10 +247,10 @@ export function ProjectCard({ isActive, onPreviewOpen, project }) {
         showIndicator={false}
         target="_blank"
         rel="noreferrer"
-        aria-label={`Otvoriť projekt ${title}`}
+        aria-label={`${content.ui.openProject} ${title}`}
         tabIndex={isActive ? 0 : -1}
       >
-        Otvoriť projekt
+        {content.ui.openProject}
       </UiLink>
     </article>
   );

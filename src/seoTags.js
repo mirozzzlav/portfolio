@@ -18,6 +18,12 @@ export function renderSeoTags(route, siteUrl) {
     <meta name="description" content="${escapeHtml(routeSeo.description)}" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="${escapeHtml(routeSeo.canonicalUrl)}" />
+    ${routeSeo.alternates
+      .map(
+        (alternate) =>
+          `<link rel="alternate" hreflang="${escapeHtml(alternate.hrefLang)}" href="${escapeHtml(alternate.href)}" />`
+      )
+      .join("\n    ")}
     <meta property="og:type" content="website" />
     <meta property="og:title" content="${escapeHtml(routeSeo.title)}" />
     <meta property="og:description" content="${escapeHtml(routeSeo.description)}" />
@@ -33,4 +39,17 @@ export function renderSeoTags(route, siteUrl) {
 
 export function replaceSeoTags(html, route, siteUrl) {
   return html.replace(seoBlockPattern, renderSeoTags(route, siteUrl));
+}
+
+export function replaceHtmlLang(html, route, siteUrl) {
+  const routeSeo = getRouteSeo(route, siteUrl);
+
+  return html.replace(
+    /<html lang="[^"]*">/,
+    `<html lang="${escapeHtml(routeSeo.htmlLang)}">`
+  );
+}
+
+export function replaceDocumentMetadata(html, route, siteUrl) {
+  return replaceHtmlLang(replaceSeoTags(html, route, siteUrl), route, siteUrl);
 }

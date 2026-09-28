@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import portfolioData from "../../data.json";
 import { BinaryClockPill } from "../components/BinaryClockPill.jsx";
 import { Button } from "../components/Button.jsx";
 import { className } from "../styles/classNames.js";
+import { useI18n } from "../useI18n.js";
 
 const styles = {
   copy: {
@@ -61,26 +61,29 @@ function GitHubIcon() {
 }
 
 export function AboutPage() {
+  const { content, routes } = useI18n();
+  const contactRoute = routes.find((route) => route.sectionId === "contact");
+
   return (
     <div className={className(styles.copy)}>
-      {portfolioData.about.paragraphs.map((paragraph) => (
+      {content.about.paragraphs.map((paragraph) => (
         <p key={paragraph}>{paragraph}</p>
       ))}
 
-      <div className={className(styles.actions)} aria-label="Kontaktné odkazy">
-        <Button as={Link} compact to="/contact">
+      <div className={className(styles.actions)} aria-label={content.ui.contactLinks}>
+        <Button as={Link} compact to={contactRoute.path}>
           <EnvelopeIcon />
-          Kontakt
+          {content.ui.contact}
         </Button>
         <Button
           as="a"
           compact
-          href={portfolioData.social.githubUrl}
+          href={content.social.githubUrl}
           target="_blank"
           rel="noreferrer"
         >
           <GitHubIcon />
-          GitHub
+          {content.ui.github}
         </Button>
         <BinaryClockPill />
       </div>

@@ -1,6 +1,6 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import { replaceSeoTags } from "./src/seoTags.js";
+import { replaceDocumentMetadata } from "./src/seoTags.js";
 
 function normalizeRoute(pathname) {
   return pathname === "/index.html" ? "/" : pathname;
@@ -19,10 +19,7 @@ export default defineConfig({
             return "vendor-router";
           }
 
-          if (
-            id.includes("/react-dom/client") ||
-            id.includes("/react-dom-client.")
-          ) {
+          if (id.includes("/react-dom/client") || id.includes("/react-dom-client.")) {
             return "vendor-react-dom-client";
           }
 
@@ -48,7 +45,7 @@ export default defineConfig({
     {
       name: "portfolio-seo",
       transformIndexHtml(html, context) {
-        return replaceSeoTags(html, normalizeRoute(context.path || "/"));
+        return replaceDocumentMetadata(html, normalizeRoute(context.path || "/"));
       }
     }
   ],

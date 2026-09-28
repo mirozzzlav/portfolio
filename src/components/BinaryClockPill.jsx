@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { className } from "../styles/classNames.js";
+import { useI18n } from "../useI18n.js";
 import { Pill } from "./Pill.jsx";
 
 const styles = {
@@ -74,6 +75,7 @@ function getBinaryClockParts(date) {
 }
 
 export function BinaryClockPill() {
+  const { content } = useI18n();
   const [clockDate, setClockDate] = useState(() => new Date(2000, 0, 1, 0, 0, 0));
   const { binaryTimeParts, timeLabel } = getBinaryClockParts(clockDate);
 
@@ -94,7 +96,7 @@ export function BinaryClockPill() {
 
   return (
     <Pill
-      aria-label={`Binárne hodinky ${timeLabel}`}
+      aria-label={`${content.ui.binaryClock} ${timeLabel}`}
       className={styles.pill}
       title={timeLabel}
     >

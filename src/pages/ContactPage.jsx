@@ -4,6 +4,7 @@ import { Field } from "../components/Field.jsx";
 import { FormStatus } from "../components/FormStatus.jsx";
 import { HoneypotField } from "../components/HoneypotField.jsx";
 import { className } from "../styles/classNames.js";
+import { useI18n } from "../useI18n.js";
 
 const styles = {
   form: {
@@ -48,6 +49,62 @@ function getPayload(form) {
   };
 }
 
+function isValidEmail(value) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
+}
+
+function validatePayload(payload) {
+  const errors = {};
+
+  if (!payload.name.trim()) {
+    errors.name = true;
+  }
+
+  if (!isValidEmail(payload.email)) {
+    errors.email = true;
+  }
+
+  if (
+    ![...payload.message.trim()].some((character) => /[\p{L}\p{N}]/u.test(character))
+  ) {
+    errors.message = true;
+  }
+
+  return errors;
+}
+
+function normalizeFieldErrors(data) {
+  if (data?.errors && !Array.isArray(data.errors)) {
+    return Object.keys(data.errors).reduce(
+      (errors, field) => ({
+        ...errors,
+        [field]: true
+      }),
+      {}
+    );
+  }
+
+  if (!Array.isArray(data?.detail)) {
+    return {};
+  }
+
+  return data.detail.reduce((errors, error) => {
+    const field = [...(error.loc || [])]
+      .reverse()
+      .find((part) => ["name", "email", "message"].includes(part));
+
+    if (field && !errors[field]) {
+      errors[field] = true;
+    }
+
+    return errors;
+  }, {});
+}
+
+function hasFieldErrors(errors) {
+  return Object.keys(errors).length > 0;
+}
+
 async function readJsonResponse(response) {
   try {
     return await response.json();
@@ -57,9 +114,11 @@ async function readJsonResponse(response) {
 }
 
 export function ContactPage() {
+  const { content } = useI18n();
+  const contact = content.contact;
   const [fieldErrors, setFieldErrors] = useState({});
   const [submitState, setSubmitState] = useState({
-    message: "",
+    messageKey: null,
     type: "idle"
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -81,9 +140,21 @@ export function ContactPage() {
     event.preventDefault();
     setIsSubmitting(true);
     setFieldErrors({});
-    setSubmitState({ message: "", type: "idle" });
+    setSubmitState({ messageKey: null, type: "idle" });
 
     const form = event.currentTarget;
+    const payload = getPayload(form);
+    const clientErrors = validatePayload(payload);
+
+    if (Object.keys(clientErrors).length > 0) {
+      setFieldErrors(clientErrors);
+      setSubmitState({
+        messageKey: "validationError",
+        type: "error"
+      });
+      setIsSubmitting(false);
+      return;
+    }
 
     try {
       const response = await fetch("/api/contact", {
@@ -91,16 +162,18 @@ export function ContactPage() {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify(getPayload(form))
+        body: JSON.stringify(payload)
       });
       const data = await readJsonResponse(response);
 
       if (!response.ok) {
-        setFieldErrors(data?.errors || {});
+        const responseFieldErrors = normalizeFieldErrors(data);
+
+        setFieldErrors(responseFieldErrors);
         setSubmitState({
-          message:
-            data?.message ||
-            "Nepodarilo sa odoslať správu. Skontrolujte vyplnené polia.",
+          messageKey: hasFieldErrors(responseFieldErrors)
+            ? "validationError"
+            : "networkError",
           type: "error"
         });
         return;
@@ -108,12 +181,12 @@ export function ContactPage() {
 
       form.reset();
       setSubmitState({
-        message: "Správa bola odoslaná. Ozvem sa vám čo najskôr.",
+        messageKey: "success",
         type: "success"
       });
     } catch {
       setSubmitState({
-        message: "Správu sa nepodarilo odoslať. Skúste to, prosím, neskôr.",
+        messageKey: "networkError",
         type: "error"
       });
     } finally {
@@ -129,24 +202,20 @@ export function ContactPage() {
       noValidate
       onSubmit={handleSubmit}
     >
-      <p className={className(styles.intro)}>
-        Budem rád, keď sa mi ozvete s otázkou, nápadom alebo konkrétnym dopytom. Ak
-        hľadáte niekoho na web, aplikáciu alebo úpravu existujúceho riešenia, pokojne mi
-        napíšte. Spoločne môžeme prejsť, čo potrebujete a aký ďalší krok dáva zmysel.
-      </p>
+      <p className={className(styles.intro)}>{contact.intro}</p>
       <Field
-        error={fieldErrors.name}
+        error={fieldErrors.name ? contact.fieldErrors.name : undefined}
         id="contact-name"
-        label="Meno"
+        label={contact.fields.name}
         type="text"
         name="name"
         autoComplete="name"
         onChange={() => clearFieldError("name")}
       />
       <Field
-        error={fieldErrors.email}
+        error={fieldErrors.email ? contact.fieldErrors.email : undefined}
         id="contact-email"
-        label="E-mail"
+        label={contact.fields.email}
         type="email"
         name="email"
         autoComplete="email"
@@ -154,18 +223,20 @@ export function ContactPage() {
       />
       <Field
         as="textarea"
-        error={fieldErrors.message}
+        error={fieldErrors.message ? contact.fieldErrors.message : undefined}
         id="contact-message"
-        label="Správa"
+        label={contact.fields.message}
         name="message"
         rows="5"
         onChange={() => clearFieldError("message")}
       />
       <HoneypotField />
       <div className={className(styles.actions)}>
-        <FormStatus type={submitState.type}>{submitState.message}</FormStatus>
+        <FormStatus type={submitState.type}>
+          {submitState.messageKey ? contact[submitState.messageKey] : ""}
+        </FormStatus>
         <Button compact disabled={isSubmitting} variant="primary" type="submit">
-          {isSubmitting ? "Odosielam" : "Odoslať"}
+          {isSubmitting ? contact.submitting : contact.submit}
           <span className={className(styles.buttonArrow)} aria-hidden="true" />
         </Button>
       </div>

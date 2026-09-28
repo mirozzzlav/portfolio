@@ -7,10 +7,10 @@ import {
   useRef,
   useState
 } from "react";
-import portfolioData from "../../data.json";
 import { ProjectCard } from "../components/ProjectCard.jsx";
 import { ProjectTitleNavigation } from "../components/ProjectTitleNavigation.jsx";
 import { className } from "../styles/classNames.js";
+import { useI18n } from "../useI18n.js";
 
 const PreviewDialog = lazy(() =>
   import("../components/PreviewDialog.jsx").then((module) => ({
@@ -52,10 +52,11 @@ function isKeyboardNavigationTarget(target) {
 }
 
 export function ProjectsPage() {
+  const { content } = useI18n();
   const [activeProjectIndex, setActiveProjectIndex] = useState(0);
   const [preview, setPreview] = useState(null);
   const touchStart = useRef(null);
-  const projects = portfolioData.projects;
+  const projects = content.projects;
   const activeProject = projects[activeProjectIndex];
 
   const trackStyle = useMemo(

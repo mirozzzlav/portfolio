@@ -1,6 +1,6 @@
 import { Fragment } from "react";
-import { pageRoutes } from "../pages/index.jsx";
 import { className } from "../styles/classNames.js";
+import { useI18n } from "../useI18n.js";
 import { CurrentYear } from "./CurrentYear.jsx";
 import { NavigationLink } from "./NavigationLink.jsx";
 
@@ -75,10 +75,12 @@ const styles = {
 };
 
 export function Footer() {
+  const { content, routes } = useI18n();
+
   return (
     <footer className={className(styles.footer)}>
-      <nav className={className(styles.nav)} aria-label="Navigácia v päte">
-        {pageRoutes.map((item, itemIndex) => (
+      <nav className={className(styles.nav)} aria-label={content.ui.footerNavigation}>
+        {routes.map((item, itemIndex) => (
           <Fragment key={item.path}>
             {itemIndex > 0 ? (
               <span className={className(styles.separator)} aria-hidden="true">

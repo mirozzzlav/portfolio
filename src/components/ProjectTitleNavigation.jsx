@@ -1,4 +1,5 @@
 import { className } from "../styles/classNames.js";
+import { useI18n } from "../useI18n.js";
 
 const pillBase = {
   border: "1px solid var(--color-border)",
@@ -163,8 +164,13 @@ export function ProjectNavigationControls({
   onNext,
   onPrevious
 }) {
+  const { content } = useI18n();
+
   return (
-    <div className={className(styles.navigationPill)} aria-label="Prepínanie projektov">
+    <div
+      className={className(styles.navigationPill)}
+      aria-label={content.ui.projectNavigation}
+    >
       <button
         className={className(styles.navigationButton)}
         type="button"
@@ -176,7 +182,9 @@ export function ProjectNavigationControls({
         }}
       >
         <ProjectNavigationArrow direction="previous" />
-        <span className={className(styles.navigationLabel)}>Predošlý</span>
+        <span className={className(styles.navigationLabel)}>
+          {content.ui.previousProject}
+        </span>
       </button>
       <button
         className={className(styles.navigationButton)}
@@ -188,7 +196,9 @@ export function ProjectNavigationControls({
           onNext();
         }}
       >
-        <span className={className(styles.navigationLabel)}>Ďalší</span>
+        <span className={className(styles.navigationLabel)}>
+          {content.ui.nextProject}
+        </span>
         <ProjectNavigationArrow direction="next" />
       </button>
     </div>

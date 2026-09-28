@@ -1,10 +1,12 @@
+import {
+  getContent,
+  getLanguageFromPathname,
+  getSeoAlternates
+} from "./content/index.js";
+
 export const siteSeo = {
   siteUrl: "https://mirofurinda.com",
-  title: "Mirovo portfólio - Webové stránky a aplikácie",
-  description:
-    "Tvorba webových stránok a aplikácií so zmyslom pre dizajn, detail, funkčnosť a prirodzené používanie.",
   imagePath: "/assets/social.jpg",
-  locale: "sk_SK",
   twitterCard: "summary_large_image"
 };
 
@@ -19,9 +21,21 @@ export function createAbsoluteUrl(pathname, siteUrl = siteSeo.siteUrl) {
 }
 
 export function getRouteSeo(pathname, siteUrl = siteSeo.siteUrl) {
+  const language = getLanguageFromPathname(pathname);
+  const content = getContent(language);
+
   return {
     ...siteSeo,
+    title: content.seo.title,
+    description: content.seo.description,
+    htmlLang: content.language.htmlLang,
+    language,
+    locale: content.language.locale,
     canonicalUrl: createAbsoluteUrl(pathname, siteUrl),
-    imageUrl: createAbsoluteUrl(siteSeo.imagePath, siteUrl)
+    imageUrl: createAbsoluteUrl(siteSeo.imagePath, siteUrl),
+    alternates: getSeoAlternates(pathname).map((alternate) => ({
+      href: createAbsoluteUrl(alternate.path, siteUrl),
+      hrefLang: alternate.hrefLang
+    }))
   };
 }
