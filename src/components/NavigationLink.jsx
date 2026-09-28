@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
-import { normalizePathname } from "../content/index.js";
-import { UiLink } from "./UiLink.jsx";
+import { normalizePathname } from "src/content/index.js";
+import { UiLink } from "src/components/UiLink.jsx";
 
 export function NavigationLink({
   arrow = "right",

@@ -1,7 +1,7 @@
-import { AppLayout } from "./layouts/AppLayout.jsx";
-import { normalizePathname } from "./content/index.js";
-import { NotFoundPage } from "./pages/NotFoundPage.jsx";
-import { useI18n } from "./useI18n.js";
+import { AppLayout } from "src/layouts/AppLayout.jsx";
+import { normalizePathname } from "src/content/index.js";
+import { NotFoundPage } from "src/pages/NotFoundPage.jsx";
+import { useI18n } from "src/useI18n.js";
 import { useLocation } from "react-router-dom";
 
 export function App() {

@@ -1,11 +1,11 @@
-import { Button } from "../components/Button.jsx";
-import { Field } from "../components/Field.jsx";
-import { FormStatus } from "../components/FormStatus.jsx";
-import { HoneypotField } from "../components/HoneypotField.jsx";
-import { TurnstileWidget } from "../components/TurnstileWidget.jsx";
-import { useContactForm } from "../hooks/useContactForm.js";
-import { className } from "../styles/classNames.js";
-import { useI18n } from "../useI18n.js";
+import { Button } from "src/components/Button.jsx";
+import { Field } from "src/components/Field.jsx";
+import { FormStatus } from "src/components/FormStatus.jsx";
+import { HoneypotField } from "src/components/HoneypotField.jsx";
+import { TurnstileWidget } from "src/components/TurnstileWidget.jsx";
+import { useContactForm } from "src/hooks/useContactForm.js";
+import { className } from "src/styles/classNames.js";
+import { useI18n } from "src/useI18n.js";
 
 const styles = {
   form: {

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { className } from "../styles/classNames.js";
-import { useI18n } from "../useI18n.js";
-import { Pill } from "./Pill.jsx";
+import { className } from "src/styles/classNames.js";
+import { useI18n } from "src/useI18n.js";
+import { Pill } from "src/components/Pill.jsx";
 
 const styles = {
   pill: {

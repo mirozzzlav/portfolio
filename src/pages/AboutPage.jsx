@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import { BinaryClockPill } from "../components/BinaryClockPill.jsx";
-import { Button } from "../components/Button.jsx";
-import { className } from "../styles/classNames.js";
-import { useI18n } from "../useI18n.js";
+import { BinaryClockPill } from "src/components/BinaryClockPill.jsx";
+import { Button } from "src/components/Button.jsx";
+import { className } from "src/styles/classNames.js";
+import { useI18n } from "src/useI18n.js";
 
 const styles = {
   copy: {

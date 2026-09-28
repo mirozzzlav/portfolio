@@ -1,4 +1,4 @@
-import { mergeClassNames } from "../styles/classNames.js";
+import { mergeClassNames } from "src/styles/classNames.js";
 
 const styles = {
   indicator: {

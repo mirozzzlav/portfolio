@@ -1,12 +1,12 @@
 import { Fragment, useEffect } from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
-import { BlurLoadedImage } from "../components/BlurLoadedImage.jsx";
-import { Footer } from "../components/Footer.jsx";
-import { Header } from "../components/Header.jsx";
-import { normalizePathname } from "../content/index.js";
-import { attachPageComponents } from "../pages/index.jsx";
-import { className } from "../styles/classNames.js";
-import { useI18n } from "../useI18n.js";
+import { BlurLoadedImage } from "src/components/BlurLoadedImage.jsx";
+import { Footer } from "src/components/Footer.jsx";
+import { Header } from "src/components/Header.jsx";
+import { normalizePathname } from "src/content/index.js";
+import { attachPageComponents } from "src/pages/index.jsx";
+import { className } from "src/styles/classNames.js";
+import { useI18n } from "src/useI18n.js";
 
 const pageContentVariants = {
   projects: {

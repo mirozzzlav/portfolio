@@ -1,7 +1,7 @@
 import { Link as RouterLink } from "react-router-dom";
-import { mergeClassNames } from "../styles/classNames.js";
-import Arrow from "./Arrow.jsx";
-import { SelectionIndicator } from "./SelectionIndicator.jsx";
+import { mergeClassNames } from "src/styles/classNames.js";
+import Arrow from "src/components/Arrow.jsx";
+import { SelectionIndicator } from "src/components/SelectionIndicator.jsx";
 
 const arrowYTransform = "translateY(calc(0.16em - 2px))";
 const arrowRestTransform = `translateX(0) ${arrowYTransform}`;

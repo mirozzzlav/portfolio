@@ -1,5 +1,5 @@
-import { BlurLoadedImage } from "./BlurLoadedImage.jsx";
-import { mergeClassNames } from "../styles/classNames.js";
+import { BlurLoadedImage } from "src/components/BlurLoadedImage.jsx";
+import { mergeClassNames } from "src/styles/classNames.js";
 
 const styles = {
   surface: {

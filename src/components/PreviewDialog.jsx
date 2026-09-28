@@ -1,9 +1,9 @@
-import { useImageGestures } from "../hooks/useImageGestures.js";
-import { className } from "../styles/classNames.js";
-import { useI18n } from "../useI18n.js";
-import { IconButton } from "./IconButton.jsx";
-import { Lightbox } from "./Lightbox.jsx";
-import { PreviewSurface } from "./PreviewSurface.jsx";
+import { useImageGestures } from "src/hooks/useImageGestures.js";
+import { className } from "src/styles/classNames.js";
+import { useI18n } from "src/useI18n.js";
+import { IconButton } from "src/components/IconButton.jsx";
+import { Lightbox } from "src/components/Lightbox.jsx";
+import { PreviewSurface } from "src/components/PreviewSurface.jsx";
 
 const styles = {
   content: {

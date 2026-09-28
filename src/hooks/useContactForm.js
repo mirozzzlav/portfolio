@@ -3,7 +3,7 @@ import {
   getContactPayload,
   validateContactPayload,
   getContactErrorState
-} from "../utils/contactForm.js";
+} from "src/utils/contactForm.js";
 
 async function readJsonResponse(response) {
   try {

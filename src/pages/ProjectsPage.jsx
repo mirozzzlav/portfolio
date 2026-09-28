@@ -7,14 +7,14 @@ import {
   useRef,
   useState
 } from "react";
-import { ProjectCard } from "../components/ProjectCard.jsx";
-import { ProjectTitleNavigation } from "../components/ProjectTitleNavigation.jsx";
-import { className } from "../styles/classNames.js";
-import { useI18n } from "../useI18n.js";
-import { getSwipeDirection } from "../utils/swipe.js";
+import { ProjectCard } from "src/components/ProjectCard.jsx";
+import { ProjectTitleNavigation } from "src/components/ProjectTitleNavigation.jsx";
+import { className } from "src/styles/classNames.js";
+import { useI18n } from "src/useI18n.js";
+import { getSwipeDirection } from "src/utils/swipe.js";
 
 const PreviewDialog = lazy(() =>
-  import("../components/PreviewDialog.jsx").then((module) => ({
+  import("src/components/PreviewDialog.jsx").then((module) => ({
     default: module.PreviewDialog
   }))
 );

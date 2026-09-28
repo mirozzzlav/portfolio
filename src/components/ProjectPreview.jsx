@@ -1,5 +1,5 @@
-import { className } from "../styles/classNames.js";
-import { PreviewSurface } from "./PreviewSurface.jsx";
+import { className } from "src/styles/classNames.js";
+import { PreviewSurface } from "src/components/PreviewSurface.jsx";
 
 const styles = {
   preview: {

@@ -1,8 +1,8 @@
-import { className } from "../styles/classNames.js";
-import { useI18n } from "../useI18n.js";
-import { ProjectPreview } from "./ProjectPreview.jsx";
-import { TagList } from "./TagList.jsx";
-import { UiLink } from "./UiLink.jsx";
+import { className } from "src/styles/classNames.js";
+import { useI18n } from "src/useI18n.js";
+import { ProjectPreview } from "src/components/ProjectPreview.jsx";
+import { TagList } from "src/components/TagList.jsx";
+import { UiLink } from "src/components/UiLink.jsx";
 
 const styles = {
   card: {

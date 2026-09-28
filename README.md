@@ -4,6 +4,12 @@ Jednoduché osobné portfolio pre programátora alebo tvorcu digitálneho conten
 
 Projekt je postavený na Reacte, Vite, React Routeri a Emotion. Lokalizovaný obsah je oddelený v `src/content/sk.json` a `src/content/en.json`.
 
+Importy v aplikácii používajú alias `src/`, napríklad
+`import { Button } from "src/components/Button.jsx"`. Alias je nastavený vo Vite
+a v `jsconfig.json` pre podporu v IDE. Súbory načítavané priamo cez Node.js
+(konfigurácia, testy, prerender a zdieľané moduly pre obsah, routy a SEO) používajú
+relatívne importy, pretože Node.js aliasy z Vite nevyhodnocuje.
+
 ## Spustenie lokálne
 
 ```bash

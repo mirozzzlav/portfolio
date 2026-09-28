@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import { Button } from "../components/Button.jsx";
-import EyeLogo from "../components/EyeLogo.jsx";
-import { className } from "../styles/classNames.js";
-import { useI18n } from "../useI18n.js";
+import { Button } from "src/components/Button.jsx";
+import EyeLogo from "src/components/EyeLogo.jsx";
+import { className } from "src/styles/classNames.js";
+import { useI18n } from "src/useI18n.js";
 
 const styles = {
   notFound: {

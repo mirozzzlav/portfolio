@@ -1,10 +1,10 @@
-import { mergeClassNames } from "../styles/classNames.js";
+import { mergeClassNames } from "src/styles/classNames.js";
 import {
   compactControlSize,
   controlFrame,
   controlSurface,
   pillContent
-} from "../styles/controlStyles.js";
+} from "src/styles/controlStyles.js";
 
 const styles = {
   pill: {

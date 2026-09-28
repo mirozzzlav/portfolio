@@ -3,8 +3,8 @@ import {
   clamp,
   getBoundedOffset,
   getContainedImageSize
-} from "../utils/imageGeometry.js";
-import { getSwipeDirection } from "../utils/swipe.js";
+} from "src/utils/imageGeometry.js";
+import { getSwipeDirection } from "src/utils/swipe.js";
 
 const minZoom = 1;
 const maxZoom = 3;

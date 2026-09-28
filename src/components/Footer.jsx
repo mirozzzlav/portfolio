@@ -1,8 +1,8 @@
 import { Fragment } from "react";
-import { className } from "../styles/classNames.js";
-import { useI18n } from "../useI18n.js";
-import { CurrentYear } from "./CurrentYear.jsx";
-import { NavigationLink } from "./NavigationLink.jsx";
+import { className } from "src/styles/classNames.js";
+import { useI18n } from "src/useI18n.js";
+import { CurrentYear } from "src/components/CurrentYear.jsx";
+import { NavigationLink } from "src/components/NavigationLink.jsx";
 
 const styles = {
   footer: {

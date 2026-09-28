@@ -1,6 +1,6 @@
-import { AboutPage } from "./AboutPage.jsx";
-import { ContactPage } from "./ContactPage.jsx";
-import { ProjectsPage } from "./ProjectsPage.jsx";
+import { AboutPage } from "src/pages/AboutPage.jsx";
+import { ContactPage } from "src/pages/ContactPage.jsx";
+import { ProjectsPage } from "src/pages/ProjectsPage.jsx";
 
 const pageComponentsBySection = {
   about: AboutPage,

@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { className } from "../styles/classNames.js";
-import { useI18n } from "../useI18n.js";
-import { Button } from "./Button.jsx";
-import { NavigationLink } from "./NavigationLink.jsx";
-import EyeLogo from "./EyeLogo.jsx";
+import { className } from "src/styles/classNames.js";
+import { useI18n } from "src/useI18n.js";
+import { Button } from "src/components/Button.jsx";
+import { NavigationLink } from "src/components/NavigationLink.jsx";
+import EyeLogo from "src/components/EyeLogo.jsx";
 
 const styles = {
   header: {

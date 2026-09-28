@@ -1,5 +1,6 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import { fileURLToPath } from "node:url";
 import { replaceDocumentMetadata } from "./src/seoTags.js";
 
 function normalizeRoute(pathname) {
@@ -7,6 +8,11 @@ function normalizeRoute(pathname) {
 }
 
 export default defineConfig({
+  resolve: {
+    alias: {
+      src: fileURLToPath(new URL("./src", import.meta.url))
+    }
+  },
   build: {
     rollupOptions: {
       output: {

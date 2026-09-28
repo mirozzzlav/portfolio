@@ -1,5 +1,5 @@
-import { className } from "../styles/classNames.js";
-import { Pill } from "./Pill.jsx";
+import { className } from "src/styles/classNames.js";
+import { Pill } from "src/components/Pill.jsx";
 
 const styles = {
   list: {

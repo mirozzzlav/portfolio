@@ -1,10 +1,10 @@
-import { mergeClassNames } from "../styles/classNames.js";
+import { mergeClassNames } from "src/styles/classNames.js";
 import {
   controlAccent,
   controlFrame,
   controlSurface
-} from "../styles/controlStyles.js";
-import { SelectionIndicator } from "./SelectionIndicator.jsx";
+} from "src/styles/controlStyles.js";
+import { SelectionIndicator } from "src/components/SelectionIndicator.jsx";
 
 const iconButtonBase = {
   appearance: "none",

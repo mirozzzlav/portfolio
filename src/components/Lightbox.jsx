@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
-import { mergeClassNames } from "../styles/classNames.js";
-import { IconButton } from "./IconButton.jsx";
+import { mergeClassNames } from "src/styles/classNames.js";
+import { IconButton } from "src/components/IconButton.jsx";
 
 const styles = {
   root: {

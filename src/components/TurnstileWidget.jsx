@@ -1,5 +1,5 @@
 import { forwardRef, useEffect, useImperativeHandle, useRef } from "react";
-import { className } from "../styles/classNames.js";
+import { className } from "src/styles/classNames.js";
 
 const turnstileScriptId = "cloudflare-turnstile-script";
 const styles = { turnstile: { minHeight: 0 } };

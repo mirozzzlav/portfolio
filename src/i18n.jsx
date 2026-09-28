@@ -4,9 +4,9 @@ import {
   getContent,
   getLanguageFromPathname,
   getLanguageLinks
-} from "./content/index.js";
-import { I18nContext } from "./i18nContext.js";
-import { getPageRouteDefinitions, getRedirectRoutes } from "./routes.js";
+} from "src/content/index.js";
+import { I18nContext } from "src/i18nContext.js";
+import { getPageRouteDefinitions, getRedirectRoutes } from "src/routes.js";
 
 export function I18nProvider({ children }) {
   const location = useLocation();

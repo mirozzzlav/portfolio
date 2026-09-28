@@ -1,7 +1,7 @@
 import { Global } from "@emotion/react";
-import { App } from "./App.jsx";
-import { I18nProvider } from "./i18n.jsx";
-import { globalStyles } from "./styles/globalStyles.js";
+import { App } from "src/App.jsx";
+import { I18nProvider } from "src/i18n.jsx";
+import { globalStyles } from "src/styles/globalStyles.js";
 
 export function Root() {
   return (

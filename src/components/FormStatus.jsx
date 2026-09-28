@@ -1,4 +1,4 @@
-import { className } from "../styles/classNames.js";
+import { className } from "src/styles/classNames.js";
 
 const styles = {
   status: {

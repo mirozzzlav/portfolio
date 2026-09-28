@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router-dom";
-import { Root } from "./Root.jsx";
+import { Root } from "src/Root.jsx";
 
 export function render(url) {
   return renderToString(

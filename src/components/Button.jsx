@@ -1,11 +1,11 @@
-import { mergeClassNames } from "../styles/classNames.js";
+import { mergeClassNames } from "src/styles/classNames.js";
 import {
   compactControlSize,
   controlAccent,
   controlFrame,
   controlSurface,
   pillContent
-} from "../styles/controlStyles.js";
+} from "src/styles/controlStyles.js";
 
 const activeButton = {
   ...controlAccent,
