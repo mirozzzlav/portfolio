@@ -1,8 +1,9 @@
-import { useEffect } from "react";
+import { Fragment, useEffect } from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { BlurLoadedImage } from "../components/BlurLoadedImage.jsx";
 import { Footer } from "../components/Footer.jsx";
 import { Header } from "../components/Header.jsx";
+import { normalizePathname } from "../content/index.js";
 import { attachPageComponents } from "../pages/index.jsx";
 import { className } from "../styles/classNames.js";
 import { useI18n } from "../useI18n.js";
@@ -158,7 +159,10 @@ export function AppLayout() {
   const location = useLocation();
   const { redirects, routes } = useI18n();
   const pageRoutes = attachPageComponents(routes);
-  const currentRoute = pageRoutes.find((route) => route.path === location.pathname);
+  const currentPathname = normalizePathname(location.pathname);
+  const currentRoute = pageRoutes.find(
+    (route) => normalizePathname(route.path) === currentPathname
+  );
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
@@ -174,13 +178,16 @@ export function AppLayout() {
           data-section={currentRoute?.sectionId}
         >
           <Routes>
-            {pageRoutes.map(({ Component, path, sectionId, title }) => (
-              <Route
-                path={path}
-                element={renderPage(Component, sectionId, title)}
-                key={path}
-              />
-            ))}
+            {pageRoutes.map(({ Component, path, sectionId, title }) => {
+              const element = renderPage(Component, sectionId, title);
+
+              return (
+                <Fragment key={path}>
+                  <Route path={path} element={element} />
+                  {path === "/" ? null : <Route path={`${path}/`} element={element} />}
+                </Fragment>
+              );
+            })}
             {redirects.map(({ from, to }) => (
               <Route path={from} element={<Navigate to={to} replace />} key={from} />
             ))}
