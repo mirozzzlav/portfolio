@@ -155,6 +155,12 @@ function renderPage(Component, sectionId, title) {
   );
 }
 
+function CanonicalRedirect({ to }) {
+  const location = useLocation();
+
+  return <Navigate to={`${to}${location.search}${location.hash}`} replace />;
+}
+
 export function AppLayout() {
   const location = useLocation();
   const { redirects, routes } = useI18n();
@@ -180,17 +186,35 @@ export function AppLayout() {
           <Routes>
             {pageRoutes.map(({ Component, path, sectionId, title }) => {
               const element = renderPage(Component, sectionId, title);
+              const nonCanonicalPath = normalizePathname(path);
 
               return (
                 <Fragment key={path}>
                   <Route path={path} element={element} />
-                  {path === "/" ? null : <Route path={`${path}/`} element={element} />}
+                  {nonCanonicalPath === path ? null : (
+                    <Route
+                      path={nonCanonicalPath}
+                      element={<CanonicalRedirect to={path} />}
+                    />
+                  )}
                 </Fragment>
               );
             })}
-            {redirects.map(({ from, to }) => (
-              <Route path={from} element={<Navigate to={to} replace />} key={from} />
-            ))}
+            {redirects.map(({ from, to }) => {
+              const nonCanonicalFrom = normalizePathname(from);
+
+              return (
+                <Fragment key={from}>
+                  <Route path={from} element={<CanonicalRedirect to={to} />} />
+                  {nonCanonicalFrom === from ? null : (
+                    <Route
+                      path={nonCanonicalFrom}
+                      element={<CanonicalRedirect to={to} />}
+                    />
+                  )}
+                </Fragment>
+              );
+            })}
             <Route path="*" element={<Navigate to={routes[0].path} replace />} />
           </Routes>
         </main>

@@ -19,6 +19,12 @@ export function normalizePathname(pathname = "/") {
   return trimmedPathname || "/";
 }
 
+export function canonicalizePathname(pathname = "/") {
+  const normalizedPathname = normalizePathname(pathname);
+
+  return normalizedPathname === "/" ? "/" : `${normalizedPathname}/`;
+}
+
 export function getContent(language = defaultLanguage) {
   return languageContent[language] || languageContent[defaultLanguage];
 }
@@ -41,12 +47,12 @@ export function removeLanguagePrefix(pathname) {
 
 export function localizePath(pathname, language) {
   const normalizedPathname = normalizePathname(pathname);
+  const localizedPathname =
+    language === defaultLanguage
+      ? normalizedPathname
+      : `/${language}${normalizedPathname === "/" ? "" : normalizedPathname}`;
 
-  if (language === defaultLanguage) {
-    return normalizedPathname;
-  }
-
-  return `/${language}${normalizedPathname === "/" ? "" : normalizedPathname}`;
+  return canonicalizePathname(localizedPathname);
 }
 
 export function getAlternatePath(pathname, language) {

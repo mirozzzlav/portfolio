@@ -1,4 +1,5 @@
 import {
+  canonicalizePathname,
   getContent,
   getLanguageFromPathname,
   getSeoAlternates
@@ -23,6 +24,7 @@ export function createAbsoluteUrl(pathname, siteUrl = siteSeo.siteUrl) {
 export function getRouteSeo(pathname, siteUrl = siteSeo.siteUrl) {
   const language = getLanguageFromPathname(pathname);
   const content = getContent(language);
+  const canonicalPathname = canonicalizePathname(pathname);
 
   return {
     ...siteSeo,
@@ -31,7 +33,7 @@ export function getRouteSeo(pathname, siteUrl = siteSeo.siteUrl) {
     htmlLang: content.language.htmlLang,
     language,
     locale: content.language.locale,
-    canonicalUrl: createAbsoluteUrl(pathname, siteUrl),
+    canonicalUrl: createAbsoluteUrl(canonicalPathname, siteUrl),
     imageUrl: createAbsoluteUrl(siteSeo.imagePath, siteUrl),
     alternates: getSeoAlternates(pathname).map((alternate) => ({
       href: createAbsoluteUrl(alternate.path, siteUrl),
