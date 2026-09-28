@@ -24,7 +24,11 @@ const styles = {
 export function SelectionIndicator({ className, isActive = false }) {
   return (
     <span
-      className={mergeClassNames(styles.indicator, isActive && styles.active, className)}
+      className={mergeClassNames(
+        styles.indicator,
+        isActive && styles.active,
+        className
+      )}
       data-selection-indicator
       aria-hidden="true"
     />

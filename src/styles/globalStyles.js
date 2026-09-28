@@ -159,15 +159,6 @@ export const globalStyles = {
     ":root": {
       "--header-height": "72px",
       "--section-inline-gap": "var(--space-4)"
-    },
-
-    "html, body": {
-      minHeight: "100%"
-    },
-
-    body: {
-      overflowX: "hidden",
-      overflowY: "auto"
     }
   }
 };

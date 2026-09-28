@@ -21,6 +21,7 @@ http://localhost:5173
 ```bash
 npm run lint
 npm run format:check
+npm test
 ```
 
 Produkčný build:

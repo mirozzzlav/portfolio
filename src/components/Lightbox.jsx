@@ -141,10 +141,7 @@ export function Lightbox({
   }
 
   return createPortal(
-    <div
-      className={mergeClassNames(styles.root, className)}
-      data-disable-page-wheel-navigation
-    >
+    <div className={mergeClassNames(styles.root, className)}>
       <div
         className={mergeClassNames(styles.backdrop)}
         onClick={onClose}

@@ -11,6 +11,7 @@ import { ProjectCard } from "../components/ProjectCard.jsx";
 import { ProjectTitleNavigation } from "../components/ProjectTitleNavigation.jsx";
 import { className } from "../styles/classNames.js";
 import { useI18n } from "../useI18n.js";
+import { getSwipeDirection } from "../utils/swipe.js";
 
 const PreviewDialog = lazy(() =>
   import("../components/PreviewDialog.jsx").then((module) => ({
@@ -39,9 +40,6 @@ const styles = {
     }
   }
 };
-
-const swipeThreshold = 48;
-const swipeDirectionRatio = 1.25;
 
 function isKeyboardNavigationTarget(target) {
   return Boolean(
@@ -110,19 +108,15 @@ export function ProjectsPage() {
       return;
     }
 
-    const touch = event.changedTouches[0];
-    const deltaX = touch.clientX - touchStart.current.x;
-    const deltaY = touch.clientY - touchStart.current.y;
-    const absX = Math.abs(deltaX);
-    const absY = Math.abs(deltaY);
+    const direction = getSwipeDirection(touchStart.current, event.changedTouches[0]);
     touchStart.current = null;
 
-    if (absX < swipeThreshold || absX < absY * swipeDirectionRatio) {
+    if (!direction) {
       return;
     }
 
     event.preventDefault();
-    navigateProject(deltaX < 0 ? 1 : -1);
+    navigateProject(direction);
   }
 
   useEffect(() => {

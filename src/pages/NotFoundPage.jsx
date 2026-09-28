@@ -54,11 +54,7 @@ export function NotFoundPage() {
       <h1 id="not-found-title" className={className(styles.title)}>
         {content.notFound.title}
       </h1>
-      <Button
-        as={Link}
-        className={className(styles.action)}
-        to={routes[0].path}
-      >
+      <Button as={Link} className={className(styles.action)} to={routes[0].path}>
         {content.notFound.action}
       </Button>
     </section>

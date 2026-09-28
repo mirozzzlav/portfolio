@@ -78,7 +78,7 @@ const styles = {
     minHeight: "40px",
     padding: "var(--space-1) var(--space-2)",
     svg: {
-      color: "var(--colors-ink)"
+      color: "var(--color-ink)"
     }
   },
 

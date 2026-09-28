@@ -31,14 +31,9 @@ const styles = {
     },
 
     "@media (max-width: 780px)": {
-      gridTemplateColumns: "1fr auto",
       justifyItems: "stretch",
       gap: "var(--space-2)",
-      padding: "var(--space-2) var(--space-3)",
-
-      p: {
-        textAlign: "right"
-      }
+      padding: "var(--space-2) var(--space-3)"
     }
   },
 
