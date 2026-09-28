@@ -13,8 +13,8 @@
   },
   "routes": {
     "about": {
-      "label": "About",
-      "title": "About"
+      "label": "About me",
+      "title": "About me"
     },
     "projects": {
       "label": "Projects",
@@ -38,7 +38,7 @@
     "github": "GitHub",
     "binaryClock": "Binary clock",
     "technologies": "Technologies used",
-    "viewPreviews": "View previews",
+    "viewPreviews": "Previews",
     "openProject": "Open project",
     "projectNavigation": "Project navigation",
     "previousProject": "Previous",
