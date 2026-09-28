@@ -9,6 +9,7 @@ import {
 } from "react";
 import portfolioData from "../../data.json";
 import { ProjectCard } from "../components/ProjectCard.jsx";
+import { ProjectTitleNavigation } from "../components/ProjectTitleNavigation.jsx";
 import { className } from "../styles/classNames.js";
 
 const PreviewDialog = lazy(() =>
@@ -55,6 +56,7 @@ export function ProjectsPage() {
   const [preview, setPreview] = useState(null);
   const touchStart = useRef(null);
   const projects = portfolioData.projects;
+  const activeProject = projects[activeProjectIndex];
 
   const trackStyle = useMemo(
     () => ({ transform: `translateX(-${activeProjectIndex * 100}%)` }),
@@ -164,16 +166,19 @@ export function ProjectsPage() {
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
+        <ProjectTitleNavigation
+          hasNext={activeProjectIndex < projects.length - 1}
+          hasPrevious={activeProjectIndex > 0}
+          onNext={() => navigateProject(1)}
+          onPrevious={() => navigateProject(-1)}
+          title={activeProject.title}
+        />
         <div className={className(styles.track)} style={trackStyle}>
           {projects.map((project, projectIndex) => (
             <ProjectCard
-              hasNextProject={projectIndex < projects.length - 1}
-              hasPreviousProject={projectIndex > 0}
               isActive={projectIndex === activeProjectIndex}
               key={project.title}
-              onNextProject={() => navigateProject(1)}
               onPreviewOpen={openPreview}
-              onPreviousProject={() => navigateProject(-1)}
               project={project}
             />
           ))}

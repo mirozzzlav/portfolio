@@ -19,109 +19,7 @@ const styles = {
     }
   },
 
-  titleAndNavWrapper: {
-    display: "flex",
-    gap: "var(--space-2)",
-    marginBottom: "var(--space-2)",
-    justifyContent: "space-between"
-  },
-
-  titlePill: {
-    display: "flex",
-    width: "fit-content",
-    maxWidth: "100%",
-    border: "1px solid var(--color-border)",
-    borderLeft: "var(--space-0) solid var(--palette-accent-fine)",
-    borderRadius:
-      "var(--radius-lg) var(--radius-pill) var(--radius-pill) var(--radius-lg)",
-    background:
-      "color-mix(in srgb, var(--palette-surface-muted), var(--color-transparent) 34%)",
-    alignItems: "center"
-  },
-  title: {
-    minWidth: 0,
-    margin: 0,
-    padding: "0 var(--space-4) 0 var(--space-2)",
-    color: "var(--color-text)",
-    fontSize: "clamp(1.05rem, 2.4vw, 1.35rem)",
-    fontWeight: "var(--font-weight-semibold)",
-    lineHeight: "var(--line-height-heading)",
-    textAlign: "left"
-  },
-
-  titleNav: {
-    display: "inline-flex",
-    alignItems: "center",
-    minHeight: "44px",
-    overflow: "hidden",
-    border: "1px solid var(--color-border)",
-    borderRadius: "var(--radius-pill)",
-    background:
-      "color-mix(in srgb, var(--palette-surface-muted), var(--color-transparent) 34%)"
-  },
-
-  titleNavButton: {
-    appearance: "none",
-    display: "inline-flex",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: 0,
-    minHeight: "100%",
-    border: 0,
-    borderRadius: 0,
-    padding: "0 var(--space-2)",
-    background: "var(--color-transparent)",
-    color: "var(--color-accent)",
-    cursor: "pointer",
-    font: "inherit",
-    fontSize: "0.88rem",
-    fontWeight: "var(--font-weight-semibold)",
-    lineHeight: "var(--line-height-compact)",
-    whiteSpace: "nowrap",
-
-    "&:hover:not(:disabled)": {
-      background: "var(--palette-accent-soft)"
-    },
-
-    "& + &": {
-      borderLeft: "1px solid var(--color-border)"
-    },
-
-    "&:focus-visible": {
-      outline: "2px solid var(--color-accent)",
-      outlineOffset: "-2px"
-    },
-
-    "&:disabled": {
-      cursor: "default",
-      opacity: 0.36
-    },
-
-    "@media (max-width: 520px)": {
-      padding: "0 var(--space-1)"
-    }
-  },
-
-  titleNavLabel: {
-    "@media (max-width: 520px)": {
-      position: "absolute",
-      width: "1px",
-      height: "1px",
-      overflow: "hidden",
-      clip: "rect(0 0 0 0)",
-      whiteSpace: "nowrap"
-    }
-  },
-
-  titleNavIcon: {
-    display: "block",
-    flex: "none",
-    width: "1rem",
-    height: "1rem"
-  },
-
   descriptionFrame: {
-    position: "relative",
     width: "min(100%, 68ch)",
     marginBottom: "var(--space-2)"
   },
@@ -209,7 +107,6 @@ const styles = {
   },
 
   gallery: {
-    position: "relative",
     display: "grid",
     gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
     gridTemplateRows: "repeat(2, minmax(0, 1fr))",
@@ -217,18 +114,11 @@ const styles = {
     gap: "var(--space-0)",
     width: "100%",
     height: "100%",
-    maxWidth: "100%",
-    margin: 0,
-
-    "@media (max-width: 780px)": {
-      gridTemplateColumns: "repeat(2, minmax(0, 1fr))"
-    }
+    margin: 0
   },
 
   previewWrapper: {
     position: "relative",
-    display: "grid",
-    gap: "var(--space-0)",
     width: "160px",
     aspectRatio: "1",
     maxWidth: "100%",
@@ -250,8 +140,6 @@ const styles = {
     justifyContent: "center",
     flexDirection: "column",
     gap: "var(--space-0)",
-    width: "100%",
-    height: "100%",
     border:
       "1px solid color-mix(in srgb, var(--color-surface) 42%, var(--color-transparent))",
     borderRadius: "var(--radius-sm)",
@@ -299,100 +187,34 @@ const styles = {
   }
 };
 
-export function ProjectCard({
-  hasNextProject,
-  hasPreviousProject,
-  isActive,
-  onNextProject,
-  onPreviewOpen,
-  onPreviousProject,
-  project
-}) {
-  const previewImages = project.images.slice(0, 4);
+export function ProjectCard({ isActive, onPreviewOpen, project }) {
+  const { description, galleryLabel, images, technologies, title, type, url } = project;
+  const previewImages = images.slice(0, 4);
 
   return (
     <article className={className(styles.card)} aria-hidden={!isActive}>
-      <div className={className(styles.titleAndNavWrapper)}>
-        <div className={className(styles.titlePill)}>
-          <h3 className={className(styles.title)}>{project.title}</h3>
-        </div>
-        <div className={className(styles.titleNav)} aria-label="Prepínanie projektov">
-          <button
-            className={className(styles.titleNavButton)}
-            type="button"
-            disabled={!isActive || !hasPreviousProject}
-            tabIndex={isActive ? 0 : -1}
-            onClick={(event) => {
-              event.currentTarget.blur();
-              onPreviousProject();
-            }}
-          >
-            <svg
-              className={className(styles.titleNavIcon)}
-              viewBox="0 0 16 16"
-              aria-hidden="true"
-            >
-              <path
-                d="M10 3.5 5.5 8l4.5 4.5"
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="1.8"
-              />
-            </svg>
-            <span className={className(styles.titleNavLabel)}>Predošlý</span>
-          </button>
-          <button
-            className={className(styles.titleNavButton)}
-            type="button"
-            disabled={!isActive || !hasNextProject}
-            tabIndex={isActive ? 0 : -1}
-            onClick={(event) => {
-              event.currentTarget.blur();
-              onNextProject();
-            }}
-          >
-            <span className={className(styles.titleNavLabel)}>Ďalší</span>
-            <svg
-              className={className(styles.titleNavIcon)}
-              viewBox="0 0 16 16"
-              aria-hidden="true"
-            >
-              <path
-                d="M6 3.5 10.5 8 6 12.5"
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="1.8"
-              />
-            </svg>
-          </button>
-        </div>
-      </div>
       <div className={className(styles.header)}>
         <p className={className(styles.category)} data-project-category>
-          {project.type}
+          {type}
         </p>
       </div>
       <div className={className(styles.descriptionFrame)}>
         <div className={className(styles.descriptionViewport)}>
-          <p className={className(styles.description)}>{project.description}</p>
+          <p className={className(styles.description)}>{description}</p>
         </div>
       </div>
       <div className={className(styles.tags)}>
-        <TagList items={project.technologies} ariaLabel="Použité technológie" />
+        <TagList items={technologies} ariaLabel="Použité technológie" />
       </div>
       {previewImages.length > 0 ? (
         <div className={className(styles.previewWrapper)}>
-          <div className={className(styles.gallery)} aria-label={project.galleryLabel}>
+          <div className={className(styles.gallery)} aria-label={galleryLabel}>
             {previewImages.map((image, imageIndex) => (
               <ProjectPreview
                 image={image}
                 isInteractive={isActive}
-                key={`${project.title}-${image.alt}`}
-                onOpen={() => onPreviewOpen(project.images, imageIndex)}
+                key={`${title}-${image.alt}`}
+                onOpen={() => onPreviewOpen(images, imageIndex)}
               />
             ))}
           </div>
@@ -401,7 +223,7 @@ export function ProjectCard({
             type="button"
             disabled={!isActive}
             tabIndex={isActive ? 0 : -1}
-            onClick={() => onPreviewOpen(project.images, 0)}
+            onClick={() => onPreviewOpen(images, 0)}
           >
             <svg
               className={className(styles.previewButtonIcon)}
@@ -430,10 +252,10 @@ export function ProjectCard({
       ) : null}
       <a
         className={className(styles.link)}
-        href={project.url}
+        href={url}
         target="_blank"
         rel="noreferrer"
-        aria-label={`Otvoriť projekt ${project.title}`}
+        aria-label={`Otvoriť projekt ${title}`}
         tabIndex={isActive ? 0 : -1}
       >
         Otvoriť projekt
