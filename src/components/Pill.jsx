@@ -1,45 +1,32 @@
 import { mergeClassNames } from "../styles/classNames.js";
+import {
+  compactControlSize,
+  controlFrame,
+  controlSurface,
+  pillContent
+} from "../styles/controlStyles.js";
 
 const styles = {
   pill: {
-    display: "inline-flex",
-    alignItems: "center",
-    justifyContent: "center",
-    border: "1px solid var(--color-border)",
-    borderRadius: "var(--radius-pill)",
-    background: "var(--color-surface)",
-    color: "var(--color-ink)",
-    fontWeight: "var(--font-weight-semibold)",
-    lineHeight: "var(--line-height-solid)",
-    textTransform: "uppercase",
-
-    svg: {
-      flex: "none",
-      color: "var(--palette-accent-fine)"
-    }
+    ...controlFrame,
+    ...controlSurface,
+    ...pillContent
   },
 
   normal: {
-    gap: "0.4rem",
-    minHeight: "38px",
-    padding: "0 var(--space-2)",
-    fontSize: "0.84rem",
-
-    svg: {
-      width: "16px",
-      height: "16px"
-    }
+    ...compactControlSize,
+    fontSize: "var(--font-size-xs)"
   },
 
   compact: {
-    gap: "0.32rem",
-    minHeight: "30px",
+    gap: "var(--control-gap-sm)",
+    minHeight: "var(--control-height-sm)",
     padding: "0 var(--space-1)",
-    fontSize: "0.78rem",
+    fontSize: "var(--font-size-2xs)",
 
     svg: {
-      width: "14px",
-      height: "14px"
+      width: "var(--icon-size-sm)",
+      height: "var(--icon-size-sm)"
     }
   }
 };

@@ -50,6 +50,8 @@ export const globalStyles = {
     "--header-height": "76px",
     "--section-inline-gap": "var(--space-5)",
 
+    "--font-size-2xs": "0.78rem",
+    "--font-size-xs": "0.84rem",
     "--font-size-sm": "0.92rem",
     "--font-size-md": "1.08rem",
     "--font-family-digital-numeric": '"DSEG7 Modern", monospace',
@@ -73,6 +75,18 @@ export const globalStyles = {
     "--space-5": "2rem",
     "--space-6": "3rem",
     "--space-7": "4rem",
+
+    "--control-height-sm": "30px",
+    "--control-height-md": "38px",
+    "--control-height-lg": "46px",
+    "--control-gap-sm": "0.32rem",
+    "--control-gap-md": "0.4rem",
+    "--icon-button-size-md": "40px",
+    "--icon-button-size-lg": "44px",
+    "--icon-size-sm": "14px",
+    "--icon-size-md": "16px",
+    "--border-width-thin": "1px",
+    "--transition-duration-fast": "160ms",
 
     "--radius-sm": "8px",
     "--radius-md": "8px",

@@ -1,9 +1,14 @@
 import { mergeClassNames } from "../styles/classNames.js";
+import {
+  compactControlSize,
+  controlAccent,
+  controlFrame,
+  controlSurface,
+  pillContent
+} from "../styles/controlStyles.js";
 
 const activeButton = {
-  borderColor: "var(--palette-accent-fine)",
-  background: "var(--palette-accent-fine)",
-  color: "var(--color-on-accent)",
+  ...controlAccent,
 
   svg: {
     color: "var(--color-on-accent)"
@@ -12,44 +17,24 @@ const activeButton = {
 
 const styles = {
   button: {
-    display: "inline-flex",
-    alignItems: "center",
-    justifyContent: "center",
+    font: "inherit",
+    ...controlFrame,
+    ...pillContent,
     justifySelf: "start",
     gap: "var(--space-1)",
-    minHeight: "46px",
+    minHeight: "var(--control-height-lg)",
     padding: "0 var(--space-4)",
-    border: "1px solid var(--color-border)",
-    borderRadius: "var(--radius-pill)",
     cursor: "pointer",
-    font: "inherit",
-    fontSize: "0.84rem",
-    fontWeight: "var(--font-weight-semibold)",
+    fontSize: "var(--font-size-xs)",
     letterSpacing: 0,
-    lineHeight: "var(--line-height-solid)",
-    textTransform: "uppercase",
-    transition: "background 160ms ease, border-color 160ms ease, color 160ms ease",
-
-    svg: {
-      flex: "none",
-      color: "var(--palette-accent-fine)"
-    }
+    transition:
+      "background var(--transition-duration-fast) ease, border-color var(--transition-duration-fast) ease, color var(--transition-duration-fast) ease"
   },
 
-  compact: {
-    gap: "0.4rem",
-    minHeight: "38px",
-    padding: "0 var(--space-2)",
-
-    svg: {
-      width: "16px",
-      height: "16px"
-    }
-  },
+  compact: compactControlSize,
 
   outline: {
-    background: "var(--color-surface)",
-    color: "var(--color-ink)",
+    ...controlSurface,
 
     "&:hover": {
       borderColor: "var(--palette-ink)",
@@ -67,9 +52,7 @@ const styles = {
     color: "var(--palette-ink)",
 
     "&:hover": {
-      borderColor: "var(--palette-accent-fine)",
-      background: "var(--palette-accent-fine)",
-      color: "var(--color-on-accent)",
+      ...controlAccent,
       outline: "3px solid var(--palette-accent-soft)",
       outlineOffset: "var(--space-0)"
     }
