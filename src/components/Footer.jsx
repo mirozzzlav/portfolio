@@ -59,7 +59,17 @@ const styles = {
   link: {
     gap: "var(--space-1)",
     borderRadius: "var(--radius-pill)",
-    padding: "var(--space-0) 0"
+    padding: "var(--space-0) 0",
+
+    "@media (max-width: 780px)": {
+      "&[aria-current='true']": {
+        color: "var(--palette-accent-fine)"
+      },
+
+      "[data-selection-indicator]": {
+        display: "none"
+      }
+    }
   },
 
   separator: {
