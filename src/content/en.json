@@ -13,8 +13,8 @@
   },
   "routes": {
     "about": {
-      "label": "About me",
-      "title": "About me"
+      "label": "About Me",
+      "title": "About Me"
     },
     "projects": {
       "label": "Projects",
