@@ -83,14 +83,7 @@ const styles = {
     marginTop: "var(--space-1)",
     alignSelf: "center",
     color: "var(--color-accent)",
-    fontSize: "1rem",
-    fontWeight: "var(--font-weight-medium)",
-    lineHeight: "var(--line-height-compact)",
-    padding: 0,
-
-    "@media (max-width: 780px)": {
-      fontSize: "0.92rem"
-    }
+    padding: 0
   },
 
   gallery: {
@@ -243,8 +236,7 @@ export function ProjectCard({ isActive, onPreviewOpen, project }) {
       <UiLink
         className={className(styles.link)}
         href={url}
-        variant="menu"
-        showIndicator={false}
+        hasSquare={false}
         target="_blank"
         rel="noreferrer"
         aria-label={`${content.ui.openProject} ${title}`}

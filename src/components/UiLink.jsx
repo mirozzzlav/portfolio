@@ -1,24 +1,24 @@
 import { Link as RouterLink } from "react-router-dom";
 import { mergeClassNames } from "../styles/classNames.js";
+import Arrow from "./Arrow.jsx";
 import { SelectionIndicator } from "./SelectionIndicator.jsx";
 
-const arrowRestTransform = "translateY(calc(0.16em - 1px)) rotate(45deg)";
-const arrowActiveTransform =
-  "translateX(var(--space-0)) translateY(calc(0.16em - 1px)) rotate(45deg)";
+const arrowYTransform = "translateY(calc(0.16em - 2px))";
+const arrowRestTransform = `translateX(0) ${arrowYTransform}`;
+const arrowLeftHoverTransform = `translateX(calc(-1 * var(--space-0))) ${arrowYTransform}`;
+const arrowRightHoverTransform = `translateX(var(--space-0)) ${arrowYTransform}`;
 
-const activeMenuItem = {
-  fontWeight: "var(--font-weight-semibold)",
-
-  "[data-navigation-arrow]": {
-    opacity: 1,
-    transform: arrowActiveTransform
-  }
+const activeLink = {
+  fontWeight: "var(--font-weight-semibold)"
 };
 
-const hoverMenuItem = {
-  "[data-navigation-arrow]": {
-    opacity: 1,
-    transform: arrowActiveTransform
+const hoverLink = {
+  "[data-navigation-arrow='left']": {
+    transform: arrowLeftHoverTransform
+  },
+
+  "[data-navigation-arrow='right']": {
+    transform: arrowRightHoverTransform
   },
 
   "[data-selection-indicator]": {
@@ -28,183 +28,119 @@ const hoverMenuItem = {
 };
 
 const styles = {
-  menu: {
-    display: "grid",
-    gridTemplateColumns: "auto 1fr auto",
+  link: {
+    appearance: "none",
+    display: "flex",
     alignItems: "center",
-    columnGap: "var(--space-2)",
+    gap: "var(--space-0)",
     position: "relative",
+    border: 0,
     borderRadius: "var(--radius-md)",
     padding: "var(--space-2) var(--space-3) var(--space-2) var(--space-2)",
+    background: "var(--color-transparent)",
+    color: "inherit",
+    cursor: "pointer",
+    font: "inherit",
+    fontSize: "var(--font-size-sm)",
     textAlign: "left",
     transition: "background 160ms ease, color 160ms ease",
 
-    "&:not(:last-child)": {
-      borderBottom: "1px solid var(--palette-surface-muted)"
+    "&:hover": hoverLink,
+
+    "&:disabled": {
+      cursor: "default",
+      opacity: 0.36
     },
 
-    "&:not([aria-current='true']):hover": hoverMenuItem
+    "&:disabled [data-navigation-arrow]": {
+      transform: arrowRestTransform
+    },
+
+    "&:disabled [data-selection-indicator]": {
+      borderColor: "var(--color-border)",
+      background: "var(--color-surface)"
+    }
   },
 
-  menuWithoutIndicator: {
-    gridTemplateColumns: "1fr auto"
-  },
+  linkActive: activeLink,
 
-  menuArrow: {
-    gridColumn: 3,
-    gridRow: 1,
-    alignSelf: "center",
-    justifySelf: "center",
-    width: "7px",
-    height: "7px",
-    borderTop: "2px solid currentColor",
-    borderRight: "2px solid currentColor",
-    opacity: "var(--opacity-medium)",
-    transform: arrowRestTransform,
-    transition: "opacity 160ms ease, transform 160ms ease"
-  },
-
-  menuActive: activeMenuItem,
-
-  menuLabel: {
-    display: "block",
-    lineHeight: "var(--line-height-solid)"
-  },
-
-  menuIndicator: {
-    gridColumn: 1,
-    gridRow: 1,
-    alignSelf: "center",
-    justifySelf: "center",
+  square: {
+    flex: "none",
+    marginRight: "var(--space-0)",
     transform: "translateY(calc(0.01em + 1px))"
   },
 
-  menuText: {
-    gridColumn: 2,
-    gridRow: 1,
+  text: {
     display: "block",
+    flex: "1 1 auto",
+    minWidth: 0,
     lineHeight: "var(--line-height-solid)",
     transform: "translateY(-0.01em)"
   },
 
-  menuTextWithoutIndicator: {
-    gridColumn: 1
-  },
-
-  menuArrowWithoutIndicator: {
-    gridColumn: 2
-  },
-
-  footer: {
-    position: "relative",
-    display: "inline-flex",
-    alignItems: "center",
-    gap: "var(--space-1)",
-    borderRadius: "var(--radius-pill)",
-    padding: "var(--space-0) 0",
-    transition: "color 160ms ease",
-
-    "&:not([aria-current='true']):hover": {
-      color: "var(--color-ink)",
-
-      "[data-selection-indicator]": {
-        borderColor: "var(--palette-accent-fine)",
-        background: "var(--palette-accent-fine)"
-      }
-    },
-
-    "&[aria-current='true']:hover": {
-      color: "var(--palette-accent-fine)"
-    }
-  },
-
-  footerActive: {
-    color: "var(--palette-accent-fine)"
+  arrow: {
+    transform: arrowRestTransform,
+    transition: "transform 160ms ease"
   }
 };
 
-const linkVariants = {
-  footer: styles.footer,
-  menu: styles.menu
-};
+function LinkContent({
+  arrow = "right",
+  children,
+  hasSquare = true,
+  isCurrent = false
+}) {
+  const hasLeftArrow = arrow === "left";
+  const hasRightArrow = arrow === "right";
 
-const activeLinkVariants = {
-  footer: styles.footerActive,
-  menu: styles.menuActive
-};
-
-export function NavigationArrowIndicator({ className }) {
-  return (
-    <span
-      aria-hidden="true"
-      className={mergeClassNames(styles.menuArrow, className)}
-      data-navigation-arrow
-    />
-  );
-}
-
-export function MenuItemContent({ children, isCurrent = false, showIndicator = true }) {
   return (
     <>
-      {showIndicator ? (
+      {hasSquare ? (
         <SelectionIndicator
-          className={mergeClassNames(styles.menuIndicator)}
+          className={mergeClassNames(styles.square)}
           isActive={isCurrent}
         />
       ) : null}
-      <span
-        className={mergeClassNames(
-          styles.menuText,
-          !showIndicator && styles.menuTextWithoutIndicator
-        )}
-      >
-        {children}
-      </span>
-      <NavigationArrowIndicator
-        className={mergeClassNames(!showIndicator && styles.menuArrowWithoutIndicator)}
-      />
+      {hasLeftArrow ? (
+        <Arrow
+          className={mergeClassNames(styles.arrow)}
+          data-navigation-arrow="left"
+          direction="left"
+        />
+      ) : null}
+      <span className={mergeClassNames(styles.text)}>{children}</span>
+      {hasRightArrow ? (
+        <Arrow
+          className={mergeClassNames(styles.arrow)}
+          data-navigation-arrow="right"
+          direction="right"
+        />
+      ) : null}
     </>
   );
 }
 
-function renderLinkContent(children, isCurrent, variant, showIndicator) {
-  if (variant === "footer") {
-    return (
-      <>
-        <SelectionIndicator isActive={isCurrent} />
-        <span className={mergeClassNames(styles.menuLabel)}>{children}</span>
-      </>
-    );
-  }
-
-  if (variant !== "menu") {
-    return children;
-  }
-
-  return (
-    <MenuItemContent isCurrent={isCurrent} showIndicator={showIndicator}>
-      {children}
-    </MenuItemContent>
-  );
-}
-
 export function UiLink({
+  arrow = "right",
   children,
   className,
+  hasSquare = true,
   href,
   isCurrent = false,
-  showIndicator = true,
   to,
-  variant = "footer",
+  type = "button",
   ...props
 }) {
   const linkClassName = mergeClassNames(
-    linkVariants[variant],
-    variant === "menu" && !showIndicator && styles.menuWithoutIndicator,
-    isCurrent && activeLinkVariants[variant],
+    styles.link,
+    isCurrent && styles.linkActive,
     className
   );
-  const content = renderLinkContent(children, isCurrent, variant, showIndicator);
+  const content = (
+    <LinkContent arrow={arrow} hasSquare={hasSquare} isCurrent={isCurrent}>
+      {children}
+    </LinkContent>
+  );
 
   if (to) {
     return (
@@ -216,6 +152,19 @@ export function UiLink({
       >
         {content}
       </RouterLink>
+    );
+  }
+
+  if (!href) {
+    return (
+      <button
+        aria-current={isCurrent ? "true" : undefined}
+        className={linkClassName}
+        type={type}
+        {...props}
+      >
+        {content}
+      </button>
     );
   }
 

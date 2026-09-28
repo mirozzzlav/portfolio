@@ -107,12 +107,17 @@ const styles = {
     background: "var(--surface-solid)",
     boxShadow: "var(--shadow-menu)",
     color: "var(--color-ink)",
-    fontSize: "var(--font-size-sm)",
     fontWeight: "var(--font-weight-regular)",
     pointerEvents: "none",
     transform: "translateY(calc(-1 * var(--space-1)))",
     visibility: "hidden",
     transition: "transform 160ms ease, visibility 160ms ease"
+  },
+
+  navLink: {
+    "&:not(:last-child)": {
+      borderBottom: "1px solid var(--palette-surface-muted)"
+    }
   },
 
   navOpen: {
@@ -212,6 +217,7 @@ export function Header() {
             >
               {routes.map((item) => (
                 <NavigationLink
+                  className={className(styles.navLink)}
                   item={item}
                   key={item.path}
                   onSelect={() => setIsMenuOpen(false)}

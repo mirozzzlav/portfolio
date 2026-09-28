@@ -23,7 +23,6 @@ const styles = {
     boxShadow:
       "0 -6px 16px color-mix(in srgb, var(--palette-ink) 4%, var(--color-transparent))",
     color: "var(--color-ink)",
-    fontSize: "var(--font-size-sm)",
 
     p: {
       fontWeight: "var(--font-weight-semibold)",
@@ -57,6 +56,12 @@ const styles = {
     }
   },
 
+  link: {
+    gap: "var(--space-1)",
+    borderRadius: "var(--radius-pill)",
+    padding: "var(--space-0) 0"
+  },
+
   separator: {
     color: "var(--color-border)",
     fontWeight: "var(--font-weight-regular)",
@@ -87,7 +92,11 @@ export function Footer() {
                 |
               </span>
             ) : null}
-            <NavigationLink item={item} variant="footer" />
+            <NavigationLink
+              arrow={null}
+              className={className(styles.link)}
+              item={item}
+            />
           </Fragment>
         ))}
       </nav>

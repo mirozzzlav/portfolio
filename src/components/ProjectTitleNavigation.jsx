@@ -1,19 +1,11 @@
 import { className } from "../styles/classNames.js";
 import { useI18n } from "../useI18n.js";
+import { UiLink } from "./UiLink.jsx";
 
 const pillBase = {
   border: "1px solid var(--color-border)",
   background:
     "color-mix(in srgb, var(--palette-surface-muted), var(--color-transparent) 34%)"
-};
-
-const visuallyHidden = {
-  position: "absolute",
-  width: "1px",
-  height: "1px",
-  overflow: "hidden",
-  clip: "rect(0 0 0 0)",
-  whiteSpace: "nowrap"
 };
 
 const styles = {
@@ -27,7 +19,6 @@ const styles = {
     width: "min(100%, 680px)",
 
     "@media (max-width: 620px)": {
-      alignItems: "stretch",
       gap: "var(--space-1)"
     }
   },
@@ -62,37 +53,17 @@ const styles = {
   },
 
   navigationPill: {
-    ...pillBase,
     display: "inline-flex",
-    alignItems: "stretch",
-    flex: "none",
-    minHeight: "44px",
-    overflow: "hidden",
-    borderRadius: "var(--radius-pill)"
+    flex: "none"
   },
 
   navigationButton: {
-    appearance: "none",
-    display: "inline-flex",
-    alignItems: "center",
     justifyContent: "center",
-    gap: 0,
-    minHeight: "44px",
-    border: 0,
     borderRadius: 0,
     padding: "0 var(--space-2)",
-    background: "var(--color-transparent)",
     color: "var(--color-accent)",
-    cursor: "pointer",
-    font: "inherit",
-    fontSize: "0.88rem",
-    fontWeight: "var(--font-weight-semibold)",
     lineHeight: "var(--line-height-compact)",
     whiteSpace: "nowrap",
-
-    "&:hover:not(:disabled)": {
-      background: "var(--palette-accent-soft)"
-    },
 
     "& + &": {
       borderLeft: "1px solid var(--color-border)"
@@ -103,53 +74,17 @@ const styles = {
       outlineOffset: "-2px"
     },
 
-    "&:disabled": {
-      cursor: "default",
-      opacity: 0.36
+    "&:not(:disabled):hover": {
+      color: "var(--palette-accent-fine)"
     },
 
     "@media (max-width: 520px)": {
       padding: "0 var(--space-1)"
     }
-  },
-
-  navigationLabel: {
-    "@media (max-width: 520px)": {
-      ...visuallyHidden
-    }
-  },
-
-  navigationIcon: {
-    display: "block",
-    flex: "none",
-    width: "1rem",
-    height: "1rem"
   }
 };
 
-export function ProjectNavigationArrow({ direction }) {
-  const path =
-    direction === "previous" ? "M10 3.5 5.5 8l4.5 4.5" : "M6 3.5 10.5 8 6 12.5";
-
-  return (
-    <svg
-      className={className(styles.navigationIcon)}
-      viewBox="0 0 16 16"
-      aria-hidden="true"
-    >
-      <path
-        d={path}
-        fill="none"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="1.8"
-      />
-    </svg>
-  );
-}
-
-export function ProjectTitlePill({ title }) {
+function ProjectTitlePill({ title }) {
   return (
     <div className={className(styles.titlePill)}>
       <h3 className={className(styles.title)}>{title}</h3>
@@ -157,7 +92,7 @@ export function ProjectTitlePill({ title }) {
   );
 }
 
-export function ProjectNavigationControls({
+function ProjectNavigationControls({
   hasNext,
   hasPrevious,
   isInteractive = true,
@@ -171,50 +106,51 @@ export function ProjectNavigationControls({
       className={className(styles.navigationPill)}
       aria-label={content.ui.projectNavigation}
     >
-      <button
+      <UiLink
+        arrow="left"
         className={className(styles.navigationButton)}
-        type="button"
         disabled={!isInteractive || !hasPrevious}
-        tabIndex={isInteractive ? 0 : -1}
+        hasSquare={false}
         onClick={(event) => {
           event.currentTarget.blur();
           onPrevious();
         }}
       >
-        <ProjectNavigationArrow direction="previous" />
-        <span className={className(styles.navigationLabel)}>
-          {content.ui.previousProject}
-        </span>
-      </button>
-      <button
+        {content.ui.previousProject}
+      </UiLink>
+      <UiLink
+        arrow="right"
         className={className(styles.navigationButton)}
-        type="button"
         disabled={!isInteractive || !hasNext}
-        tabIndex={isInteractive ? 0 : -1}
+        hasSquare={false}
         onClick={(event) => {
           event.currentTarget.blur();
           onNext();
         }}
       >
-        <span className={className(styles.navigationLabel)}>
-          {content.ui.nextProject}
-        </span>
-        <ProjectNavigationArrow direction="next" />
-      </button>
+        {content.ui.nextProject}
+      </UiLink>
     </div>
   );
 }
 
-export function ProjectTitleNavigation(props) {
+export function ProjectTitleNavigation({
+  hasNext,
+  hasPrevious,
+  isInteractive,
+  onNext,
+  onPrevious,
+  title
+}) {
   return (
     <div className={className(styles.wrapper)}>
-      <ProjectTitlePill title={props.title} />
+      <ProjectTitlePill title={title} />
       <ProjectNavigationControls
-        hasNext={props.hasNext}
-        hasPrevious={props.hasPrevious}
-        isInteractive={props.isInteractive}
-        onNext={props.onNext}
-        onPrevious={props.onPrevious}
+        hasNext={hasNext}
+        hasPrevious={hasPrevious}
+        isInteractive={isInteractive}
+        onNext={onNext}
+        onPrevious={onPrevious}
       />
     </div>
   );
