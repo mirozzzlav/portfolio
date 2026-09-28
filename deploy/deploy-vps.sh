@@ -3,22 +3,13 @@ set -euo pipefail
 
 APP_DIR="${APP_DIR:-/var/www/html/portfolio}"
 REMOTE="${REMOTE:-origin}"
-BRANCH="${BRANCH:-}"
+BRANCH="${BRANCH:-main}"
 API_SERVICE="${API_SERVICE:-portfolio-api}"
 
 cd "$APP_DIR"
 
 if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   echo "Not a git repository: $APP_DIR" >&2
-  exit 1
-fi
-
-if [[ -z "$BRANCH" ]]; then
-  BRANCH="$(git branch --show-current)"
-fi
-
-if [[ -z "$BRANCH" ]]; then
-  echo "Cannot detect current git branch. Set BRANCH=main explicitly." >&2
   exit 1
 fi
 

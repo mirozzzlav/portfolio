@@ -95,7 +95,13 @@ This creates a certificate for `mirofurinda.com` only. It should not replace the
    ./deploy/deploy-vps.sh
    ```
 
-   The script pulls the current branch, installs Node dependencies when package files changed, builds the frontend, prepares the API virtualenv, and restarts `portfolio-api` when permitted.
+   The script pulls `origin/main` by default, installs Node dependencies when package files changed, builds the frontend, prepares the API virtualenv, and restarts `portfolio-api` when permitted.
+
+   To deploy a different branch explicitly:
+
+   ```bash
+   BRANCH=dev ./deploy/deploy-vps.sh
+   ```
 
 3. Or build the frontend manually:
 
