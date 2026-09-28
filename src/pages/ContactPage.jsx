@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "../components/Button.jsx";
 import { Field } from "../components/Field.jsx";
 import { FormStatus } from "../components/FormStatus.jsx";
@@ -35,8 +35,15 @@ const styles = {
     display: "grid",
     justifyItems: "start",
     gap: "var(--space-2)"
+  },
+
+  turnstile: {
+    minHeight: "65px"
   }
 };
+
+const turnstileSiteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY || "";
+const turnstileScriptId = "cloudflare-turnstile-script";
 
 function getPayload(form) {
   const formData = new FormData(form);
@@ -45,7 +52,8 @@ function getPayload(form) {
     name: String(formData.get("name") || ""),
     email: String(formData.get("email") || ""),
     message: String(formData.get("message") || ""),
-    company: String(formData.get("company") || "")
+    company: String(formData.get("company") || ""),
+    turnstileToken: String(formData.get("cf-turnstile-response") || "")
   };
 }
 
@@ -113,6 +121,75 @@ async function readJsonResponse(response) {
   }
 }
 
+function resetTurnstile() {
+  if (typeof window !== "undefined" && window.turnstile) {
+    window.turnstile.reset();
+  }
+}
+
+function TurnstileWidget() {
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    if (!turnstileSiteKey) {
+      return undefined;
+    }
+
+    let isMounted = true;
+
+    function renderWidget() {
+      if (
+        !isMounted ||
+        !containerRef.current ||
+        !window.turnstile ||
+        containerRef.current.dataset.turnstileRendered === "true"
+      ) {
+        return;
+      }
+
+      window.turnstile.render(containerRef.current, {
+        sitekey: turnstileSiteKey,
+        theme: "auto"
+      });
+      containerRef.current.dataset.turnstileRendered = "true";
+    }
+
+    const existingScript = document.getElementById(turnstileScriptId);
+    if (existingScript) {
+      if (window.turnstile) {
+        renderWidget();
+      } else {
+        existingScript.addEventListener("load", renderWidget, { once: true });
+      }
+
+      return () => {
+        isMounted = false;
+        existingScript.removeEventListener("load", renderWidget);
+      };
+    }
+
+    const script = document.createElement("script");
+    script.id = turnstileScriptId;
+    script.src =
+      "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+    script.async = true;
+    script.defer = true;
+    script.addEventListener("load", renderWidget, { once: true });
+    document.head.append(script);
+
+    return () => {
+      isMounted = false;
+      script.removeEventListener("load", renderWidget);
+    };
+  }, []);
+
+  if (!turnstileSiteKey) {
+    return null;
+  }
+
+  return <div ref={containerRef} className={className(styles.turnstile)} />;
+}
+
 export function ContactPage() {
   const { content } = useI18n();
   const contact = content.contact;
@@ -171,9 +248,12 @@ export function ContactPage() {
 
         setFieldErrors(responseFieldErrors);
         setSubmitState({
-          messageKey: hasFieldErrors(responseFieldErrors)
-            ? "validationError"
-            : "networkError",
+          messageKey:
+            data?.code === "turnstile_failed"
+              ? "turnstileError"
+              : hasFieldErrors(responseFieldErrors)
+                ? "validationError"
+                : "networkError",
           type: "error"
         });
         return;
@@ -190,6 +270,7 @@ export function ContactPage() {
         type: "error"
       });
     } finally {
+      resetTurnstile();
       setIsSubmitting(false);
     }
   }
@@ -231,6 +312,7 @@ export function ContactPage() {
         onChange={() => clearFieldError("message")}
       />
       <HoneypotField />
+      <TurnstileWidget />
       <div className={className(styles.actions)}>
         <FormStatus type={submitState.type}>
           {submitState.messageKey ? contact[submitState.messageKey] : ""}

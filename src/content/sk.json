@@ -71,6 +71,7 @@
     "submit": "Odoslať",
     "submitting": "Odosielam",
     "validationError": "Nepodarilo sa odoslať správu. Skontrolujte vyplnené polia.",
+    "turnstileError": "Nepodarilo sa overiť ochranu formulára. Skúste to znova.",
     "success": "Správa bola odoslaná. Ozvem sa vám čo najskôr.",
     "networkError": "Správu sa nepodarilo odoslať. Skúste to, prosím, neskôr."
   },

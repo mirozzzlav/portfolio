@@ -106,6 +106,7 @@ This creates a certificate for `mirofurinda.com` only. It should not replace the
 3. Or build the frontend manually:
 
    ```bash
+   export VITE_TURNSTILE_SITE_KEY=0x4AAAA...
    npm ci
    npm run build
    ```
@@ -139,3 +140,9 @@ This creates a certificate for `mirofurinda.com` only. It should not replace the
    ```
 
 Keep `MAIL_DRY_RUN=true` until the domain and Resend SMTP are ready. For Resend, set `SMTP_HOST=smtp.resend.com`, `SMTP_USERNAME=resend`, and `SMTP_PASSWORD` to a Resend API key. The sender domain in `CONTACT_FROM_EMAIL` must be verified in Resend.
+
+For contact form bot protection, create a Cloudflare Turnstile widget for the
+production hostname. Put the public site key in `.env.production` using
+`.env.production.example` as a template. Put the matching private
+`TURNSTILE_SECRET_KEY` in `api/.env` using `deploy/portfolio-api.env.example` as
+a template. Non-production environments can leave both unset.

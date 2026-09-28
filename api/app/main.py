@@ -6,6 +6,7 @@ from fastapi.responses import JSONResponse
 from app.mailer import MailDeliveryError, send_contact_email
 from app.schemas import ContactRequest, ContactResponse, HealthResponse
 from app.settings import get_settings
+from app.turnstile import TurnstileVerificationError, verify_turnstile_token
 
 settings = get_settings()
 
@@ -16,6 +17,18 @@ FIELD_ERROR_MESSAGES = {
     "email": "Zadajte platný e-mail.",
     "message": "Napíšte správu aspoň s jedným slovom.",
 }
+
+
+def get_client_ip(request: Request) -> str | None:
+    cf_connecting_ip = request.headers.get("cf-connecting-ip")
+    if cf_connecting_ip:
+        return cf_connecting_ip
+
+    forwarded_for = request.headers.get("x-forwarded-for")
+    if forwarded_for:
+        return forwarded_for.split(",", 1)[0].strip()
+
+    return request.client.host if request.client else None
 
 if settings.contact_allowed_origins:
     app.add_middleware(
@@ -61,8 +74,22 @@ async def contact(payload: ContactRequest, request: Request) -> ContactResponse:
     if payload.company:
         return ContactResponse(ok=True)
 
+    client_ip = get_client_ip(request)
+
     try:
-        await send_contact_email(payload, settings, request.client.host if request.client else None)
+        await verify_turnstile_token(payload.turnstile_token, settings, client_ip)
+    except TurnstileVerificationError:
+        return JSONResponse(
+            status_code=status.HTTP_403_FORBIDDEN,
+            content={
+                "ok": False,
+                "code": "turnstile_failed",
+                "message": "Nepodarilo sa overiť ochranu formulára. Skúste to znova.",
+            },
+        )
+
+    try:
+        await send_contact_email(payload, settings, client_ip)
     except MailDeliveryError:
         return JSONResponse(
             status_code=status.HTTP_502_BAD_GATEWAY,

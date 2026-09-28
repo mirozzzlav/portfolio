@@ -42,6 +42,21 @@ curl -X POST http://127.0.0.1:8001/api/contact \
   -d '{"name":"Test","email":"test@example.com","message":"Ahoj"}'
 ```
 
+## Cloudflare Turnstile
+
+Set `TURNSTILE_SECRET_KEY` in the API environment to require server-side Turnstile
+verification before any contact email is sent. Keep it empty locally if you want to
+test the form without Cloudflare.
+
+The frontend needs the matching public site key:
+
+```env
+VITE_TURNSTILE_SITE_KEY=0x4AAAA...
+```
+
+The API validates tokens through Cloudflare's Siteverify endpoint:
+`https://challenges.cloudflare.com/turnstile/v0/siteverify`.
+
 ## Resend SMTP
 
 Use these SMTP values:

@@ -1,4 +1,4 @@
-from pydantic import BaseModel, EmailStr, Field, field_validator
+from pydantic import BaseModel, ConfigDict, EmailStr, Field, field_validator
 
 
 class HealthResponse(BaseModel):
@@ -10,10 +10,17 @@ class ContactResponse(BaseModel):
 
 
 class ContactRequest(BaseModel):
+    model_config = ConfigDict(populate_by_name=True)
+
     name: str = Field(min_length=1, max_length=120)
     email: EmailStr
     message: str = Field(min_length=1, max_length=4000)
     company: str | None = Field(default=None, max_length=200)
+    turnstile_token: str | None = Field(
+        default=None,
+        alias="turnstileToken",
+        max_length=2048,
+    )
 
     @field_validator("name")
     @classmethod

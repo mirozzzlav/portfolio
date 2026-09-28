@@ -31,6 +31,8 @@ class Settings(BaseModel):
     contact_from_email: str = Field(min_length=3)
     contact_allowed_origins: list[str]
     mail_dry_run: bool
+    turnstile_secret_key: str
+    turnstile_verify_url: str
     smtp_host: str = Field(min_length=1)
     smtp_port: int
     smtp_username: str = Field(min_length=1)
@@ -46,6 +48,11 @@ def get_settings() -> Settings:
         contact_from_email=os.environ["CONTACT_FROM_EMAIL"],
         contact_allowed_origins=_get_list("CONTACT_ALLOWED_ORIGINS"),
         mail_dry_run=_get_bool("MAIL_DRY_RUN", False),
+        turnstile_secret_key=os.getenv("TURNSTILE_SECRET_KEY", ""),
+        turnstile_verify_url=os.getenv(
+            "TURNSTILE_VERIFY_URL",
+            "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+        ),
         smtp_host=os.getenv("SMTP_HOST", "smtp.mx.cloudflare.net"),
         smtp_port=_get_int("SMTP_PORT", 465),
         smtp_username=os.getenv("SMTP_USERNAME", "api_token"),
