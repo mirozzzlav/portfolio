@@ -2,19 +2,23 @@ import { Link as RouterLink } from "react-router-dom";
 import { mergeClassNames } from "../styles/classNames.js";
 import { SelectionIndicator } from "./SelectionIndicator.jsx";
 
+const arrowRestTransform = "translateY(calc(0.16em - 1px)) rotate(45deg)";
+const arrowActiveTransform =
+  "translateX(var(--space-0)) translateY(calc(0.16em - 1px)) rotate(45deg)";
+
 const activeMenuItem = {
   fontWeight: "var(--font-weight-semibold)",
 
-  "&::before": {
+  "[data-navigation-arrow]": {
     opacity: 1,
-    transform: "translateX(var(--space-0)) rotate(45deg)"
+    transform: arrowActiveTransform
   }
 };
 
 const hoverMenuItem = {
-  "&::before": {
+  "[data-navigation-arrow]": {
     opacity: 1,
-    transform: "translateX(var(--space-0)) rotate(45deg)"
+    transform: arrowActiveTransform
   },
 
   "[data-selection-indicator]": {
@@ -28,7 +32,7 @@ const styles = {
     display: "grid",
     gridTemplateColumns: "auto 1fr auto",
     alignItems: "center",
-    gap: "var(--space-3)",
+    columnGap: "var(--space-2)",
     position: "relative",
     borderRadius: "var(--radius-md)",
     padding: "var(--space-2) var(--space-3) var(--space-2) var(--space-2)",
@@ -39,20 +43,25 @@ const styles = {
       borderBottom: "1px solid var(--palette-surface-muted)"
     },
 
-    "&::before": {
-      gridColumn: 3,
-      gridRow: 1,
-      width: "7px",
-      height: "7px",
-      borderTop: "2px solid currentColor",
-      borderRight: "2px solid currentColor",
-      content: '""',
-      opacity: "var(--opacity-medium)",
-      transform: "rotate(45deg)",
-      transition: "opacity 160ms ease, transform 160ms ease"
-    },
-
     "&:not([aria-current='true']):hover": hoverMenuItem
+  },
+
+  menuWithoutIndicator: {
+    gridTemplateColumns: "1fr auto"
+  },
+
+  menuArrow: {
+    gridColumn: 3,
+    gridRow: 1,
+    alignSelf: "center",
+    justifySelf: "center",
+    width: "7px",
+    height: "7px",
+    borderTop: "2px solid currentColor",
+    borderRight: "2px solid currentColor",
+    opacity: "var(--opacity-medium)",
+    transform: arrowRestTransform,
+    transition: "opacity 160ms ease, transform 160ms ease"
   },
 
   menuActive: activeMenuItem,
@@ -60,6 +69,30 @@ const styles = {
   menuLabel: {
     display: "block",
     lineHeight: "var(--line-height-solid)"
+  },
+
+  menuIndicator: {
+    gridColumn: 1,
+    gridRow: 1,
+    alignSelf: "center",
+    justifySelf: "center",
+    transform: "translateY(calc(0.01em + 1px))"
+  },
+
+  menuText: {
+    gridColumn: 2,
+    gridRow: 1,
+    display: "block",
+    lineHeight: "var(--line-height-solid)",
+    transform: "translateY(-0.01em)"
+  },
+
+  menuTextWithoutIndicator: {
+    gridColumn: 1
+  },
+
+  menuArrowWithoutIndicator: {
+    gridColumn: 2
   },
 
   footer: {
@@ -100,7 +133,41 @@ const activeLinkVariants = {
   menu: styles.menuActive
 };
 
-function renderLinkContent(children, isCurrent, variant) {
+export function NavigationArrowIndicator({ className }) {
+  return (
+    <span
+      aria-hidden="true"
+      className={mergeClassNames(styles.menuArrow, className)}
+      data-navigation-arrow
+    />
+  );
+}
+
+export function MenuItemContent({ children, isCurrent = false, showIndicator = true }) {
+  return (
+    <>
+      {showIndicator ? (
+        <SelectionIndicator
+          className={mergeClassNames(styles.menuIndicator)}
+          isActive={isCurrent}
+        />
+      ) : null}
+      <span
+        className={mergeClassNames(
+          styles.menuText,
+          !showIndicator && styles.menuTextWithoutIndicator
+        )}
+      >
+        {children}
+      </span>
+      <NavigationArrowIndicator
+        className={mergeClassNames(!showIndicator && styles.menuArrowWithoutIndicator)}
+      />
+    </>
+  );
+}
+
+function renderLinkContent(children, isCurrent, variant, showIndicator) {
   if (variant === "footer") {
     return (
       <>
@@ -115,10 +182,9 @@ function renderLinkContent(children, isCurrent, variant) {
   }
 
   return (
-    <>
-      <SelectionIndicator isActive={isCurrent} />
-      <span className={mergeClassNames(styles.menuLabel)}>{children}</span>
-    </>
+    <MenuItemContent isCurrent={isCurrent} showIndicator={showIndicator}>
+      {children}
+    </MenuItemContent>
   );
 }
 
@@ -127,16 +193,18 @@ export function UiLink({
   className,
   href,
   isCurrent = false,
+  showIndicator = true,
   to,
   variant = "footer",
   ...props
 }) {
   const linkClassName = mergeClassNames(
     linkVariants[variant],
+    variant === "menu" && !showIndicator && styles.menuWithoutIndicator,
     isCurrent && activeLinkVariants[variant],
     className
   );
-  const content = renderLinkContent(children, isCurrent, variant);
+  const content = renderLinkContent(children, isCurrent, variant, showIndicator);
 
   if (to) {
     return (

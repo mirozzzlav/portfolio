@@ -1,6 +1,7 @@
 import { className } from "../styles/classNames.js";
 import { ProjectPreview } from "./ProjectPreview.jsx";
 import { TagList } from "./TagList.jsx";
+import { UiLink } from "./UiLink.jsx";
 
 const styles = {
   card: {
@@ -77,33 +78,18 @@ const styles = {
   },
 
   link: {
-    display: "inline-flex",
-    alignItems: "center",
     width: "fit-content",
     marginTop: "var(--space-1)",
     alignSelf: "center",
     color: "var(--color-accent)",
     fontSize: "1rem",
-    fontWeight: "var(--font-weight-semibold)",
+    fontWeight: "var(--font-weight-medium)",
     lineHeight: "var(--line-height-compact)",
-    textDecoration: "none",
-
-    "&:hover svg": {
-      transform: "translateX(var(--space-0))"
-    },
+    padding: 0,
 
     "@media (max-width: 780px)": {
       fontSize: "0.92rem"
     }
-  },
-
-  linkIcon: {
-    display: "block",
-    flex: "none",
-    width: "1rem",
-    height: "1rem",
-    marginLeft: "var(--space-1)",
-    transition: "transform 160ms ease"
   },
 
   gallery: {
@@ -250,30 +236,18 @@ export function ProjectCard({ isActive, onPreviewOpen, project }) {
           </button>
         </div>
       ) : null}
-      <a
+      <UiLink
         className={className(styles.link)}
         href={url}
+        variant="menu"
+        showIndicator={false}
         target="_blank"
         rel="noreferrer"
         aria-label={`Otvoriť projekt ${title}`}
         tabIndex={isActive ? 0 : -1}
       >
         Otvoriť projekt
-        <svg
-          className={className(styles.linkIcon)}
-          viewBox="0 0 16 16"
-          aria-hidden="true"
-        >
-          <path
-            d="M4 8h8m-3-3 3 3-3 3"
-            fill="none"
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="1.75"
-          />
-        </svg>
-      </a>
+      </UiLink>
     </article>
   );
 }
