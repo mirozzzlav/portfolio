@@ -16,13 +16,11 @@ const styles = {
     background: "var(--color-surface)",
     color: "var(--color-text)",
     font: "inherit",
-    transition:
-      "background 160ms ease, border-color 160ms ease, outline-color 160ms ease",
+    transition: "background 160ms ease, border-color 160ms ease",
 
     "&:focus": {
       background: "var(--color-surface)",
-      borderColor: "var(--color-accent)",
-      outline: "3px solid var(--color-focus-ring)"
+      borderColor: "var(--color-focus-ring)"
     },
 
     "&[aria-invalid='true']": {

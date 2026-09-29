@@ -25,7 +25,7 @@ const styles = {
 };
 
 export function PreviewSurface({
-  as: Component = "span",
+  as: Component = "div",
   aspectRatio = "1",
   className,
   image,

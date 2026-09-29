@@ -8,12 +8,7 @@ const styles = {
     cursor: "zoom-in",
     color: "var(--color-text)",
     font: "inherit",
-    textAlign: "left",
-
-    "&:focus-visible": {
-      outline: "2px solid var(--color-accent)",
-      outlineOffset: "3px"
-    }
+    textAlign: "left"
   }
 };
 
@@ -31,14 +26,12 @@ export function ProjectPreview({ image, isInteractive, onOpen }) {
 
   return (
     <PreviewSurface
-      as="button"
       className={className(styles.preview)}
       image={image}
       imageLoading="lazy"
-      type="button"
       aria-label={image.alt}
-      tabIndex={isInteractive ? 0 : -1}
-      onClick={isInteractive ? onOpen : undefined}
+      tabIndex={-1}
+      onClick={onOpen}
       onKeyDown={handleKeyDown}
     />
   );

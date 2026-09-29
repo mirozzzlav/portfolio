@@ -13,8 +13,8 @@ const styles = {
     width: "100%",
     minHeight: 0,
     overflow: "visible",
-    padding: 0,
     background: "var(--color-transparent)",
+    padding: "var(--space-0)",
 
     "@media (max-width: 780px)": {
       minHeight: "auto"
@@ -83,7 +83,7 @@ const styles = {
     marginTop: "var(--space-1)",
     alignSelf: "center",
     color: "var(--color-accent)",
-    padding: 0
+    paddingBlock: 0
   },
 
   gallery: {
@@ -134,11 +134,6 @@ const styles = {
     fontWeight: "var(--font-weight-semibold)",
     lineHeight: "var(--line-height-compact)",
     textAlign: "center",
-
-    "&:focus-visible": {
-      outline: "2px solid var(--color-accent)",
-      outlineOffset: "3px"
-    },
 
     "&:disabled": {
       cursor: "default",

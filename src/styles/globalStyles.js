@@ -40,7 +40,7 @@ export const globalStyles = {
     "--color-background": "var(--color-surface)",
     "--color-text": "var(--color-ink)",
     "--color-on-accent": "var(--color-surface)",
-    "--color-focus-ring": "var(--palette-accent-soft)",
+    "--color-focus-ring": "var(--palette-accent-fine)",
     "--color-transparent": "transparent",
     "--color-nav-hover":
       "color-mix(in srgb, var(--palette-accent-soft) var(--opacity-strong), var(--color-transparent))",
@@ -152,9 +152,9 @@ export const globalStyles = {
     lineHeight: "var(--line-height-heading)"
   },
 
-  ":where(a, button, input, textarea):focus-visible": {
+  ":where(a, button, input, textarea, select, [tabindex]):focus-visible": {
     outline: "3px solid var(--color-focus-ring)",
-    outlineOffset: "var(--space-0)"
+    outlineOffset: 0
   },
 
   "@keyframes section-enter": {

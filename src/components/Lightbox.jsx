@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
+import { useFocusTrap } from "src/hooks/useFocusTrap.js";
 import { mergeClassNames } from "src/styles/classNames.js";
 import { IconButton } from "src/components/IconButton.jsx";
 
@@ -111,6 +112,8 @@ export function Lightbox({
   onClose,
   onKeyDown
 }) {
+  const panelRef = useFocusTrap(isOpen);
+
   useEffect(() => {
     if (!isOpen) {
       return undefined;
@@ -148,11 +151,16 @@ export function Lightbox({
         aria-hidden="true"
       />
       <div
+        ref={panelRef}
         className={mergeClassNames(styles.panel)}
         role="dialog"
+        tabIndex={-1}
         aria-modal="true"
         aria-labelledby={labelledBy}
       >
+        <div className={mergeClassNames(contentClassName, styles.content)}>
+          {children}
+        </div>
         <IconButton
           className={mergeClassNames(styles.close)}
           aria-label={closeLabel}
@@ -170,9 +178,6 @@ export function Lightbox({
             />
           </svg>
         </IconButton>
-        <div className={mergeClassNames(contentClassName, styles.content)}>
-          {children}
-        </div>
       </div>
     </div>,
     document.body

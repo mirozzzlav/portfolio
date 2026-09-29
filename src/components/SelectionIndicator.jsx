@@ -17,7 +17,7 @@ const styles = {
   active: {
     borderColor: "var(--palette-accent-fine)",
     background: "var(--palette-accent-fine)",
-    boxShadow: "0 0 0 var(--space-0) var(--color-focus-ring)"
+    boxShadow: "0 0 0 var(--space-0) var(--palette-accent-soft)"
   }
 };
 

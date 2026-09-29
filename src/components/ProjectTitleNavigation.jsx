@@ -54,32 +54,24 @@ const styles = {
 
   navigationPill: {
     display: "inline-flex",
-    flex: "none"
+    gap: "var(--space-1)"
+  },
+
+  navigationSeparator: {
+    flex: "none",
+    alignSelf: "stretch",
+    width: "1px",
+    background: "var(--color-border)"
   },
 
   navigationButton: {
     justifyContent: "center",
-    borderRadius: 0,
-    padding: "0 var(--space-2)",
     color: "var(--color-accent)",
     lineHeight: "var(--line-height-compact)",
     whiteSpace: "nowrap",
 
-    "& + &": {
-      borderLeft: "1px solid var(--color-border)"
-    },
-
-    "&:focus-visible": {
-      outline: "2px solid var(--color-accent)",
-      outlineOffset: "-2px"
-    },
-
     "&:not(:disabled):hover": {
       color: "var(--palette-accent-fine)"
-    },
-
-    "@media (max-width: 520px)": {
-      padding: "0 var(--space-1)"
     }
   }
 };
@@ -118,6 +110,7 @@ function ProjectNavigationControls({
       >
         {content.ui.previousProject}
       </UiLink>
+      <span className={className(styles.navigationSeparator)} aria-hidden="true" />
       <UiLink
         arrow="right"
         className={className(styles.navigationButton)}

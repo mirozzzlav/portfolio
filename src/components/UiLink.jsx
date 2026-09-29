@@ -36,7 +36,7 @@ const styles = {
     position: "relative",
     border: 0,
     borderRadius: "var(--radius-md)",
-    padding: "var(--space-2) var(--space-3) var(--space-2) var(--space-2)",
+    paddingInline: "var(--space-2)",
     background: "var(--color-transparent)",
     color: "inherit",
     cursor: "pointer",
@@ -46,6 +46,15 @@ const styles = {
     transition: "background 160ms ease, color 160ms ease",
 
     "&:hover": hoverLink,
+
+    "&:focus-visible": {
+      outline: "1.5px solid var(--color-focus-ring)",
+      outlineOffset: "2px",
+
+      "@media (forced-colors: active)": {
+        outlineColor: "Highlight"
+      }
+    },
 
     "&:disabled": {
       cursor: "default",

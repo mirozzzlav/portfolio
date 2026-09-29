@@ -28,7 +28,12 @@ const styles = {
     fontSize: "var(--font-size-xs)",
     letterSpacing: 0,
     transition:
-      "background var(--transition-duration-fast) ease, border-color var(--transition-duration-fast) ease, color var(--transition-duration-fast) ease"
+      "background var(--transition-duration-fast) ease, border-color var(--transition-duration-fast) ease, color var(--transition-duration-fast) ease",
+
+    "&:not(:disabled):not(:focus-visible):hover": {
+      outline: "3px solid var(--palette-accent-soft)",
+      outlineOffset: "var(--space-0)"
+    }
   },
 
   compact: compactControlSize,
@@ -38,9 +43,7 @@ const styles = {
 
     "&:hover": {
       borderColor: "var(--palette-ink)",
-      background: "var(--color-surface)",
-      outline: "3px solid var(--color-focus-ring)",
-      outlineOffset: "var(--space-0)"
+      background: "var(--color-surface)"
     },
 
     "&:active, &[aria-expanded='true']": activeButton
@@ -51,20 +54,12 @@ const styles = {
     background: "var(--palette-accent-soft)",
     color: "var(--palette-ink)",
 
-    "&:hover": {
-      ...controlAccent,
-      outline: "3px solid var(--palette-accent-soft)",
-      outlineOffset: "var(--space-0)"
-    }
+    "&:hover": controlAccent
   },
 
   disabled: {
     cursor: "not-allowed",
-    opacity: 0.58,
-
-    "&:hover": {
-      outline: "none"
-    }
+    opacity: 0.58
   }
 };
 

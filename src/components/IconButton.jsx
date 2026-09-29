@@ -16,11 +16,6 @@ const iconButtonBase = {
   cursor: "pointer",
   font: "inherit",
   lineHeight: "var(--line-height-solid)",
-  outline: "none",
-
-  "&:focus": {
-    outline: 0
-  },
 
   "&::-moz-focus-inner": {
     border: 0
@@ -29,7 +24,7 @@ const iconButtonBase = {
 
 const activeButton = {
   ...controlAccent,
-  boxShadow: "0 0 0 var(--space-0) var(--color-focus-ring)"
+  boxShadow: "0 0 0 var(--space-0) var(--palette-accent-soft)"
 };
 
 const styles = {
@@ -41,17 +36,7 @@ const styles = {
     transition:
       "background var(--transition-duration-fast) ease, border-color var(--transition-duration-fast) ease, box-shadow var(--transition-duration-fast) ease, color var(--transition-duration-fast) ease",
 
-    "&:hover, &:active": controlAccent,
-
-    "&:focus": {
-      outline: 0,
-      boxShadow: "none"
-    },
-
-    "&:focus-visible": {
-      outline: 0,
-      boxShadow: "0 0 0 var(--space-0) var(--color-focus-ring)"
-    }
+    "&:hover, &:active": controlAccent
   },
 
   selectorButton: {
@@ -65,10 +50,6 @@ const styles = {
     "&:hover [data-selection-indicator], &:active [data-selection-indicator]": {
       borderColor: "var(--palette-accent-fine)",
       background: "var(--palette-accent-fine)"
-    },
-
-    "&:focus-visible [data-selection-indicator]": {
-      boxShadow: "0 0 0 var(--space-0) var(--color-focus-ring)"
     }
   },
 

@@ -254,9 +254,9 @@ export function PreviewDialog({ preview, onClose, onNavigate }) {
     >
       <div className={className(styles.viewer)} onClick={handleViewerClick}>
         <IconButton
-          className={className([styles.nav, styles.navPrev])}
-          aria-label={content.ui.previousImage}
-          onClick={() => onNavigate(-1)}
+          className={className([styles.nav, styles.navNext])}
+          aria-label={content.ui.nextImage}
+          onClick={() => onNavigate(1)}
           size="lg"
         />
 
@@ -319,9 +319,9 @@ export function PreviewDialog({ preview, onClose, onNavigate }) {
         </div>
 
         <IconButton
-          className={className([styles.nav, styles.navNext])}
-          aria-label={content.ui.nextImage}
-          onClick={() => onNavigate(1)}
+          className={className([styles.nav, styles.navPrev])}
+          aria-label={content.ui.previousImage}
+          onClick={() => onNavigate(-1)}
           size="lg"
         />
       </div>

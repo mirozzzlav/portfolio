@@ -115,6 +115,9 @@ const styles = {
   },
 
   navLink: {
+    "&": {
+      paddingBlock: "var(--space-2)"
+    },
     "&:not(:last-child)": {
       borderBottom: "1px solid var(--palette-surface-muted)"
     }

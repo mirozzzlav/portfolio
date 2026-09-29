@@ -42,7 +42,7 @@ const styles = {
     flexWrap: "wrap",
     alignItems: "center",
     justifyContent: "flex-start",
-    gap: "var(--space-2)",
+    gap: "var(--space-1)",
     color: "var(--color-ink)",
     fontWeight: "var(--font-weight-medium)",
 
@@ -53,9 +53,6 @@ const styles = {
 
   link: {
     gap: "var(--space-1)",
-    borderRadius: "var(--radius-pill)",
-    padding: "var(--space-0) 0",
-
     "@media (max-width: 780px)": {
       "&[aria-current='true']": {
         color: "var(--palette-accent-fine)"
