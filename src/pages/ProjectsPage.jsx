@@ -25,7 +25,12 @@ const styles = {
     width: "100%",
     minHeight: 0,
     overflow: "hidden",
-    touchAction: "pan-y"
+    touchAction: "pan-y",
+    /* This trick is to see outlines of the children buttons */
+    left: "calc(var(--space-0) * -1)",
+    paddingLeft: "var(--space-0)",
+    top: "calc(var(--space-0) * -1)",
+    paddingBottom: "var(--space-0)"
   },
 
   track: {

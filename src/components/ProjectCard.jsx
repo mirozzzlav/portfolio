@@ -14,7 +14,6 @@ const styles = {
     minHeight: 0,
     overflow: "visible",
     background: "var(--color-transparent)",
-    padding: "var(--space-0)",
 
     "@media (max-width: 780px)": {
       minHeight: "auto"
