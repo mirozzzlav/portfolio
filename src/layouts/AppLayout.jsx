@@ -1,21 +1,7 @@
-import { Fragment, useEffect } from "react";
-import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { BlurLoadedImage } from "src/components/BlurLoadedImage.jsx";
 import { Footer } from "src/components/Footer.jsx";
 import { Header } from "src/components/Header.jsx";
-import { normalizePathname } from "src/content/index.js";
-import { attachPageComponents } from "src/pages/index.jsx";
 import { className } from "src/styles/classNames.js";
-import { useI18n } from "src/useI18n.js";
-
-const pageContentVariants = {
-  projects: {
-    display: "grid",
-    gridTemplateRows: "auto auto",
-    gap: "var(--space-1)",
-    maxWidth: "none"
-  }
-};
 
 const styles = {
   appBody: {
@@ -64,146 +50,16 @@ const styles = {
   visualImageMedia: {
     display: "block",
     objectFit: "contain"
-  },
-  pageSection: {
-    "--section-space": "var(--section-inline-gap)",
-
-    gridArea: "1 / 1",
-    width: "100%",
-    display: "grid",
-    gridTemplateRows: "auto auto",
-    gap: "var(--section-space)",
-    minHeight: 0,
-    padding: 0,
-    animation: "section-enter 280ms ease-out both",
-
-    "@media (prefers-reduced-motion: reduce)": {
-      animation: "none",
-      opacity: 1,
-      transform: "none"
-    }
-  },
-
-  pageHeading: {
-    display: "grid",
-    gap: "var(--space-1)"
-  },
-
-  pageTitle: {
-    position: "relative",
-    display: "inline-block",
-    width: "fit-content",
-    margin: 0,
-    padding: "0 var(--space-1) var(--space-0) 0",
-    color: "var(--palette-ink)",
-    fontSize: "clamp(1.2rem, 3vw, 2.55rem)",
-    fontWeight: "var(--font-weight-bold)",
-    lineHeight: "var(--line-height-display)",
-    letterSpacing: 0,
-
-    "&::before": {
-      position: "absolute",
-      right: 0,
-      bottom: 0,
-      left: "14%",
-      zIndex: -1,
-      height: "38%",
-      borderRadius: "var(--radius-sm)",
-      background: "var(--palette-accent-soft)",
-      content: '""'
-    },
-
-    "@media (max-width: 780px)": {
-      fontSize: "clamp(1.8rem, 8vw, 2.2rem)"
-    }
-  },
-
-  pageContent: {
-    maxWidth: "75ch",
-    overflow: "visible",
-    padding: 0
   }
 };
 
-function renderPage(Component, sectionId, title) {
-  return (
-    <section
-      id={sectionId}
-      className={className(styles.pageSection)}
-      aria-label={title}
-    >
-      <div className={className(styles.pageHeading)}>
-        <h2 className={className(styles.pageTitle)}>{title}</h2>
-      </div>
-      <div className={className([styles.pageContent, pageContentVariants[sectionId]])}>
-        <Component />
-      </div>
-    </section>
-  );
-}
-
-function CanonicalRedirect({ to }) {
-  const location = useLocation();
-
-  return <Navigate to={`${to}${location.search}${location.hash}`} replace />;
-}
-
-export function AppLayout() {
-  const location = useLocation();
-  const { redirects, routes } = useI18n();
-  const pageRoutes = attachPageComponents(routes);
-  const currentPathname = normalizePathname(location.pathname);
-  const currentRoute = pageRoutes.find(
-    (route) => normalizePathname(route.path) === currentPathname
-  );
-
-  useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-  }, [location.pathname]);
-
+export function AppLayout({ children, sectionId }) {
   return (
     <>
       <Header />
       <div className={className(styles.appBody)}>
-        <main
-          id="top"
-          className={className(styles.main)}
-          data-section={currentRoute?.sectionId}
-        >
-          <Routes>
-            {pageRoutes.map(({ Component, path, sectionId, title }) => {
-              const element = renderPage(Component, sectionId, title);
-              const nonCanonicalPath = normalizePathname(path);
-
-              return (
-                <Fragment key={path}>
-                  <Route path={path} element={element} />
-                  {nonCanonicalPath === path ? null : (
-                    <Route
-                      path={nonCanonicalPath}
-                      element={<CanonicalRedirect to={path} />}
-                    />
-                  )}
-                </Fragment>
-              );
-            })}
-            {redirects.map(({ from, to }) => {
-              const nonCanonicalFrom = normalizePathname(from);
-
-              return (
-                <Fragment key={from}>
-                  <Route path={from} element={<CanonicalRedirect to={to} />} />
-                  {nonCanonicalFrom === from ? null : (
-                    <Route
-                      path={nonCanonicalFrom}
-                      element={<CanonicalRedirect to={to} />}
-                    />
-                  )}
-                </Fragment>
-              );
-            })}
-            <Route path="*" element={<Navigate to={routes[0].path} replace />} />
-          </Routes>
+        <main id="top" className={className(styles.main)} data-section={sectionId}>
+          {children}
         </main>
         <aside className={className(styles.visualPanel)} aria-hidden="true">
           <BlurLoadedImage
