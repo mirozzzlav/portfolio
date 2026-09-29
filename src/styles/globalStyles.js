@@ -153,8 +153,8 @@ export const globalStyles = {
   },
 
   ":where(a, button, input, textarea, select, [tabindex]):focus-visible": {
-    outline: "3px solid var(--color-focus-ring)",
-    outlineOffset: 0
+    outline: "2px solid var(--color-focus-ring)",
+    outlineOffset: "2px"
   },
 
   "@keyframes section-enter": {
