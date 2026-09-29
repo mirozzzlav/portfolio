@@ -1,8 +1,8 @@
 import { className } from "src/styles/classNames.js";
 import { useI18n } from "src/useI18n.js";
-import { ProjectPreview } from "src/components/ProjectPreview.jsx";
 import { TagList } from "src/components/TagList.jsx";
 import { UiLink } from "src/components/UiLink.jsx";
+import { PreviewSurface } from "src/components/PreviewSurface.jsx";
 
 const styles = {
   card: {
@@ -185,12 +185,11 @@ export function ProjectCard({ isActive, onPreviewOpen, project }) {
       {previewImages.length > 0 ? (
         <div className={className(styles.previewWrapper)}>
           <div className={className(styles.gallery)} aria-label={galleryLabel}>
-            {previewImages.map((image, imageIndex) => (
-              <ProjectPreview
-                image={image}
-                isInteractive={isActive}
+            {previewImages.map((image) => (
+              <PreviewSurface
                 key={`${title}-${image.alt}`}
-                onOpen={() => onPreviewOpen(images, imageIndex)}
+                image={image}
+                tabIndex={-1}
               />
             ))}
           </div>
