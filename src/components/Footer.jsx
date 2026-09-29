@@ -54,10 +54,6 @@ const styles = {
   link: {
     gap: "var(--space-1)",
     "@media (max-width: 780px)": {
-      "&[aria-current='true']": {
-        color: "var(--palette-accent-fine)"
-      },
-
       "[data-selection-indicator]": {
         display: "none"
       }
