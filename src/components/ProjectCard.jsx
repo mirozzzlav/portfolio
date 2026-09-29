@@ -97,7 +97,7 @@ const styles = {
     margin: 0
   },
 
-  previewWrapper: {
+  previewsGroup: {
     position: "relative",
     width: "160px",
     aspectRatio: "1",
@@ -162,9 +162,54 @@ const styles = {
   }
 };
 
+export function PreviewsGroup({ previewImages, images, onClick, title, isActive }) {
+  const { content } = useI18n();
+  return (
+    <div className={className(styles.previewsGroup)}>
+      <div className={className(styles.gallery)}>
+        {previewImages.map((image) => (
+          <PreviewSurface key={`${title}-${image.alt}`} image={image} tabIndex={-1} />
+        ))}
+      </div>
+      <button
+        className={className(styles.previewButton)}
+        type="button"
+        disabled={!isActive}
+        tabIndex={isActive ? 0 : -1}
+        onClick={() => onClick(images, 0)}
+      >
+        <svg
+          className={className(styles.previewButtonIcon)}
+          viewBox="0 0 16 16"
+          aria-hidden="true"
+        >
+          <path
+            d="M2 8s2.1-3.5 6-3.5S14 8 14 8s-2.1 3.5-6 3.5S2 8 2 8Z"
+            fill="none"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="1.45"
+          />
+          <path
+            d="M8 6.25a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Z"
+            fill="none"
+            stroke="currentColor"
+            strokeLinejoin="round"
+            strokeWidth="1.45"
+          />
+        </svg>
+        <span className={className(styles.previewButtonText)}>
+          {content.ui.viewPreviews}
+        </span>
+      </button>
+    </div>
+  );
+}
+
 export function ProjectCard({ isActive, onPreviewOpen, project }) {
   const { content } = useI18n();
-  const { description, galleryLabel, images, technologies, title, type, url } = project;
+  const { description, images, technologies, title, type, url } = project;
   const previewImages = images.slice(0, 4);
 
   return (
@@ -183,49 +228,13 @@ export function ProjectCard({ isActive, onPreviewOpen, project }) {
         <TagList items={technologies} ariaLabel={content.ui.technologies} />
       </div>
       {previewImages.length > 0 ? (
-        <div className={className(styles.previewWrapper)}>
-          <div className={className(styles.gallery)} aria-label={galleryLabel}>
-            {previewImages.map((image) => (
-              <PreviewSurface
-                key={`${title}-${image.alt}`}
-                image={image}
-                tabIndex={-1}
-              />
-            ))}
-          </div>
-          <button
-            className={className(styles.previewButton)}
-            type="button"
-            disabled={!isActive}
-            tabIndex={isActive ? 0 : -1}
-            onClick={() => onPreviewOpen(images, 0)}
-          >
-            <svg
-              className={className(styles.previewButtonIcon)}
-              viewBox="0 0 16 16"
-              aria-hidden="true"
-            >
-              <path
-                d="M2 8s2.1-3.5 6-3.5S14 8 14 8s-2.1 3.5-6 3.5S2 8 2 8Z"
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="1.45"
-              />
-              <path
-                d="M8 6.25a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Z"
-                fill="none"
-                stroke="currentColor"
-                strokeLinejoin="round"
-                strokeWidth="1.45"
-              />
-            </svg>
-            <span className={className(styles.previewButtonText)}>
-              {content.ui.viewPreviews}
-            </span>
-          </button>
-        </div>
+        <PreviewsGroup
+          previewImages={previewImages}
+          images={images}
+          isActive={isActive}
+          onClick={onPreviewOpen}
+          title={title}
+        />
       ) : null}
       <UiLink
         className={className(styles.link)}

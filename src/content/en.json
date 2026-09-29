@@ -88,7 +88,6 @@
       "type": "Web application",
       "description": "Priatelia is an app for meeting new people and activity partners based on interests, sympathy, and proximity. When two users like each other, the app connects them and opens a space for conversation.",
       "url": "https://priatelia.wondercules.com",
-      "galleryLabel": "Project previews for Priatelia",
       "images": [
         {
           "src": "/assets/projects/priatelia/1.webp",
@@ -118,7 +117,6 @@
       "type": "Web application",
       "description": "Digital archive helps organize, search, and filter documents by categories, authors, and approvers. It includes a multi-level approval workflow; the demo uses simulated data.",
       "url": "https://archive.wondercules.com",
-      "galleryLabel": "Project previews for Digital archive",
       "images": [
         {
           "src": "/assets/projects/archive/1.webp",
@@ -148,7 +146,6 @@
       "type": "Web application",
       "description": "Yokaid helps people find reliable tradespeople and professionals using a map, ratings, and real experiences from other users. Visitors quickly see who works nearby and what others have written about them.",
       "url": "https://yokaid.wondercules.com",
-      "galleryLabel": "Project previews for Yokaid",
       "images": [
         {
           "src": "/assets/projects/yokaid/1.webp",
