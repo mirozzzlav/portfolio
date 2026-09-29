@@ -1,17 +1,9 @@
-import {
-  Suspense,
-  lazy,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState
-} from "react";
+import { Suspense, lazy, useMemo, useState } from "react";
 import { ProjectCard } from "src/components/ProjectCard.jsx";
 import { ProjectTitleNavigation } from "src/components/ProjectTitleNavigation.jsx";
+import { useProjectNavigation } from "src/hooks/useProjectNavigation.js";
 import { className } from "src/styles/classNames.js";
 import { useI18n } from "src/useI18n.js";
-import { getSwipeDirection } from "src/utils/swipe.js";
 
 const PreviewDialog = lazy(() =>
   import("src/components/PreviewDialog.jsx").then((module) => ({
@@ -46,20 +38,14 @@ const styles = {
   }
 };
 
-function isKeyboardNavigationTarget(target) {
-  return Boolean(
-    target?.closest?.(
-      'input, textarea, select, button, a, [role="button"], [role="dialog"]'
-    )
-  );
-}
-
 export function ProjectsPage() {
   const { content } = useI18n();
-  const [activeProjectIndex, setActiveProjectIndex] = useState(0);
   const [preview, setPreview] = useState(null);
-  const touchStart = useRef(null);
   const projects = content.projects;
+  const { activeProjectIndex, navigateProject, touchHandlers } = useProjectNavigation({
+    projectCount: projects.length,
+    disabled: Boolean(preview)
+  });
   const activeProject = projects[activeProjectIndex];
 
   const trackStyle = useMemo(
@@ -70,15 +56,6 @@ export function ProjectsPage() {
   function openPreview(images, imageIndex) {
     setPreview({ images, imageIndex });
   }
-
-  const navigateProject = useCallback(
-    (direction) => {
-      setActiveProjectIndex((currentIndex) =>
-        Math.min(Math.max(currentIndex + direction, 0), projects.length - 1)
-      );
-    },
-    [projects.length]
-  );
 
   function navigatePreview(direction) {
     setPreview((currentPreview) => {
@@ -95,77 +72,9 @@ export function ProjectsPage() {
     });
   }
 
-  function handleTouchStart(event) {
-    if (projects.length <= 1 || preview || event.touches.length !== 1) {
-      touchStart.current = null;
-      return;
-    }
-
-    const touch = event.touches[0];
-    touchStart.current = {
-      x: touch.clientX,
-      y: touch.clientY
-    };
-  }
-
-  function handleTouchEnd(event) {
-    if (!touchStart.current || projects.length <= 1 || preview) {
-      return;
-    }
-
-    const direction = getSwipeDirection(touchStart.current, event.changedTouches[0]);
-    touchStart.current = null;
-
-    if (!direction) {
-      return;
-    }
-
-    event.preventDefault();
-    navigateProject(direction);
-  }
-
-  useEffect(() => {
-    if (projects.length <= 1 || preview) {
-      return undefined;
-    }
-
-    function handleKeyDown(event) {
-      if (
-        event.defaultPrevented ||
-        event.altKey ||
-        event.ctrlKey ||
-        event.metaKey ||
-        event.shiftKey ||
-        isKeyboardNavigationTarget(event.target)
-      ) {
-        return;
-      }
-
-      if (event.key === "ArrowLeft") {
-        event.preventDefault();
-        navigateProject(-1);
-      }
-
-      if (event.key === "ArrowRight") {
-        event.preventDefault();
-        navigateProject(1);
-      }
-    }
-
-    document.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [navigateProject, preview, projects.length]);
-
   return (
     <>
-      <div
-        className={className(styles.stage)}
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
-      >
+      <div className={className(styles.stage)} {...touchHandlers}>
         <ProjectTitleNavigation
           hasNext={activeProjectIndex < projects.length - 1}
           hasPrevious={activeProjectIndex > 0}
