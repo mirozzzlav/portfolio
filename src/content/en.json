@@ -84,36 +84,6 @@
   },
   "projects": [
     {
-      "title": "Aikido Dojo Levice",
-      "type": "Presentation website",
-      "description": "The presentation website for the Aikido club in Levice introduces the philosophy of the martial art and shares club news and training photos. Visitors can find the current schedule for children and adults, meet the instructors, and contact the club through a simple form.",
-      "url": "https://aikidolevice.sk",
-      "galleryLabel": "Aikido Dojo Levice project previews",
-      "images": [
-        {
-          "src": "/assets/projects/aikidolevice/1.webp",
-          "placeholderSrc": "/assets/projects/aikidolevice/1-placeholder.webp",
-          "alt": "Introduction to the martial art of Aikido"
-        },
-        {
-          "src": "/assets/projects/aikidolevice/2.webp",
-          "placeholderSrc": "/assets/projects/aikidolevice/2-placeholder.webp",
-          "alt": "Aikido Dojo Levice news"
-        },
-        {
-          "src": "/assets/projects/aikidolevice/3.webp",
-          "placeholderSrc": "/assets/projects/aikidolevice/3-placeholder.webp",
-          "alt": "Aikido Dojo Levice gallery and training schedule"
-        },
-        {
-          "src": "/assets/projects/aikidolevice/4.webp",
-          "placeholderSrc": "/assets/projects/aikidolevice/4-placeholder.webp",
-          "alt": "Contact form and website footer"
-        }
-      ],
-      "technologies": ["Responsive design", "Gallery", "Contact form"]
-    },
-    {
       "title": "Priatelia",
       "type": "Web application",
       "description": "Priatelia is an app for meeting new people and activity partners based on interests, sympathy, and proximity. When two users like each other, the app connects them and opens a space for conversation.",
@@ -199,6 +169,36 @@
         }
       ],
       "technologies": ["Map", "Reviews", "Search"]
+    },
+    {
+      "title": "Aikido Dojo Levice",
+      "type": "Presentation website",
+      "description": "The presentation website for the Aikido club in Levice introduces the philosophy of the martial art and shares club news and training photos. Visitors can find the current schedule for children and adults, meet the instructors, and contact the club through a simple form.",
+      "url": "https://aikidolevice.sk",
+      "galleryLabel": "Aikido Dojo Levice project previews",
+      "images": [
+        {
+          "src": "/assets/projects/aikidolevice/1.webp",
+          "placeholderSrc": "/assets/projects/aikidolevice/1-placeholder.webp",
+          "alt": "Introduction to the martial art of Aikido"
+        },
+        {
+          "src": "/assets/projects/aikidolevice/2.webp",
+          "placeholderSrc": "/assets/projects/aikidolevice/2-placeholder.webp",
+          "alt": "Aikido Dojo Levice news"
+        },
+        {
+          "src": "/assets/projects/aikidolevice/3.webp",
+          "placeholderSrc": "/assets/projects/aikidolevice/3-placeholder.webp",
+          "alt": "Aikido Dojo Levice gallery and training schedule"
+        },
+        {
+          "src": "/assets/projects/aikidolevice/4.webp",
+          "placeholderSrc": "/assets/projects/aikidolevice/4-placeholder.webp",
+          "alt": "Contact form and website footer"
+        }
+      ],
+      "technologies": ["Responsive design", "Gallery", "Contact form"]
     }
   ]
 }
