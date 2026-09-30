@@ -222,14 +222,8 @@ export function PreviewDialog({ preview, onClose, onNavigate }) {
     onNavigate(direction);
   }
 
-  const {
-    stageRef,
-    transformRef,
-    isZoomed,
-    transform,
-    getRenderedImageRect,
-    touchHandlers
-  } = useImageGestures({ src: image?.src, onSwipe: navigate });
+  const { stageRef, transformRef, transform, getRenderedImageRect, touchHandlers } =
+    useImageGestures({ src: image?.src, onSwipe: navigate });
 
   if (!preview) {
     return null;
@@ -287,10 +281,7 @@ export function PreviewDialog({ preview, onClose, onNavigate }) {
             <div
               ref={transformRef}
               className={className(styles.transformLayer)}
-              style={{
-                cursor: isZoomed ? "grab" : "zoom-in",
-                transform
-              }}
+              style={{ transform }}
             >
               <PreviewSurface
                 aspectRatio="auto"
