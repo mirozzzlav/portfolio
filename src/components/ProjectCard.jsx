@@ -85,7 +85,7 @@ const styles = {
     paddingBlock: 0
   },
 
-  gallery: {
+  previewsGroupThumbs: {
     display: "grid",
     gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
     gridTemplateRows: "repeat(2, minmax(0, 1fr))",
@@ -165,7 +165,7 @@ export function PreviewsGroup({ previewImages, images, onClick, title, isActive 
   const { content } = useI18n();
   return (
     <div className={className(styles.previewsGroup)}>
-      <div className={className(styles.gallery)}>
+      <div className={className(styles.previewsGroupThumbs)}>
         {previewImages.map((image) => (
           <PreviewSurface key={`${title}-${image.alt}`} image={image} tabIndex={-1} />
         ))}

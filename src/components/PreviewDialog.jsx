@@ -41,6 +41,14 @@ const styles = {
       borderRight: "2px solid currentColor",
       content: '""'
     },
+    "&:disabled, &:disabled:hover, &:disabled:active": {
+      borderColor: "var(--color-border)",
+      background: "var(--surface-solid)",
+      boxShadow: "none",
+      color: "var(--color-text)",
+      cursor: "default",
+      opacity: 0.36
+    },
 
     "@media (max-width: 780px)": {
       width: "44px",
@@ -200,6 +208,20 @@ const styles = {
 export function PreviewDialog({ preview, onClose, onNavigate }) {
   const { content } = useI18n();
   const image = preview?.images[preview.imageIndex];
+  const canNavigatePrevious = preview?.imageIndex > 0;
+  const canNavigateNext = preview?.imageIndex < preview?.images.length - 1;
+
+  function navigate(direction) {
+    if (
+      (direction < 0 && !canNavigatePrevious) ||
+      (direction > 0 && !canNavigateNext)
+    ) {
+      return;
+    }
+
+    onNavigate(direction);
+  }
+
   const {
     stageRef,
     transformRef,
@@ -207,7 +229,7 @@ export function PreviewDialog({ preview, onClose, onNavigate }) {
     transform,
     getRenderedImageRect,
     touchHandlers
-  } = useImageGestures({ src: image?.src, onSwipe: onNavigate });
+  } = useImageGestures({ src: image?.src, onSwipe: navigate });
 
   if (!preview) {
     return null;
@@ -215,11 +237,11 @@ export function PreviewDialog({ preview, onClose, onNavigate }) {
 
   function handleLightboxKeyDown(event) {
     if (event.key === "ArrowLeft") {
-      onNavigate(-1);
+      navigate(-1);
     }
 
     if (event.key === "ArrowRight") {
-      onNavigate(1);
+      navigate(1);
     }
   }
 
@@ -256,10 +278,10 @@ export function PreviewDialog({ preview, onClose, onNavigate }) {
         <IconButton
           className={className([styles.nav, styles.navNext])}
           aria-label={content.ui.nextImage}
-          onClick={() => onNavigate(1)}
+          disabled={!canNavigateNext}
+          onClick={() => navigate(1)}
           size="lg"
         />
-
         <div className={className(styles.stageGroup)}>
           <div ref={stageRef} className={className(styles.stage)} {...touchHandlers}>
             <div
@@ -321,7 +343,8 @@ export function PreviewDialog({ preview, onClose, onNavigate }) {
         <IconButton
           className={className([styles.nav, styles.navPrev])}
           aria-label={content.ui.previousImage}
-          onClick={() => onNavigate(-1)}
+          disabled={!canNavigatePrevious}
+          onClick={() => navigate(-1)}
           size="lg"
         />
       </div>

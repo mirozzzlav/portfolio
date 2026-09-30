@@ -65,9 +65,10 @@ export function ProjectsPage() {
 
       return {
         ...currentPreview,
-        imageIndex:
-          (currentPreview.imageIndex + direction + currentPreview.images.length) %
-          currentPreview.images.length
+        imageIndex: Math.min(
+          Math.max(currentPreview.imageIndex + direction, 0),
+          currentPreview.images.length - 1
+        )
       };
     });
   }
