@@ -84,6 +84,36 @@
   },
   "projects": [
     {
+      "title": "Aikido Dojo Levice",
+      "type": "Prezentačná webová stránka",
+      "description": "Prezentačná stránka levického Aikido klubu približuje filozofiu bojového umenia, prináša klubové novinky a galériu z tréningov. Záujemcovia na nej nájdu aktuálny rozvrh pre deti aj dospelých, predstavenie trénerov a jednoduchý kontaktný formulár.",
+      "url": "https://aikidolevice.sk",
+      "galleryLabel": "Ukážky projektu Aikido Dojo Levice",
+      "images": [
+        {
+          "src": "/assets/projects/aikidolevice/1.webp",
+          "placeholderSrc": "/assets/projects/aikidolevice/1-placeholder.webp",
+          "alt": "Predstavenie bojového umenia aikido"
+        },
+        {
+          "src": "/assets/projects/aikidolevice/2.webp",
+          "placeholderSrc": "/assets/projects/aikidolevice/2-placeholder.webp",
+          "alt": "Novinky Aikido Dojo Levice"
+        },
+        {
+          "src": "/assets/projects/aikidolevice/3.webp",
+          "placeholderSrc": "/assets/projects/aikidolevice/3-placeholder.webp",
+          "alt": "Galéria a rozvrh tréningov Aikido Dojo Levice"
+        },
+        {
+          "src": "/assets/projects/aikidolevice/4.webp",
+          "placeholderSrc": "/assets/projects/aikidolevice/4-placeholder.webp",
+          "alt": "Kontaktný formulár a päta webovej stránky"
+        }
+      ],
+      "technologies": ["Responzívny dizajn", "Galéria", "Kontaktný formulár"]
+    },
+    {
       "title": "Priatelia",
       "type": "Webová aplikácia",
       "description": "Priatelia je aplikácia na spoznávanie nových ľudí a parťákov podľa záľub, sympatií a blízkosti. Keď si dvaja používatelia navzájom dajú like, aplikácia ich prepojí a otvorí im priestor na konverzáciu.",
