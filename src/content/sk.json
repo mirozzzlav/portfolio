@@ -183,22 +183,22 @@
         {
           "src": "/assets/projects/aikidolevice/1.webp",
           "placeholderSrc": "/assets/projects/aikidolevice/1-placeholder.webp",
-          "alt": "Predstavenie bojového umenia aikido"
+          "alt": "Predstavenie bojového umenia aikido a klubové novinky"
         },
         {
           "src": "/assets/projects/aikidolevice/2.webp",
           "placeholderSrc": "/assets/projects/aikidolevice/2-placeholder.webp",
-          "alt": "Novinky Aikido Dojo Levice"
+          "alt": "Klubové novinky a galéria Aikido Dojo Levice"
         },
         {
           "src": "/assets/projects/aikidolevice/3.webp",
           "placeholderSrc": "/assets/projects/aikidolevice/3-placeholder.webp",
-          "alt": "Galéria a rozvrh tréningov Aikido Dojo Levice"
+          "alt": "Fotogaléria a rozvrh tréningov Aikido Dojo Levice"
         },
         {
           "src": "/assets/projects/aikidolevice/4.webp",
           "placeholderSrc": "/assets/projects/aikidolevice/4-placeholder.webp",
-          "alt": "Kontaktný formulár a päta webovej stránky"
+          "alt": "Rozvrh tréningov a tréneri Aikido Dojo Levice"
         }
       ],
       "technologies": ["Responzívny dizajn", "Galéria", "Kontaktný formulár"]

@@ -180,22 +180,22 @@
         {
           "src": "/assets/projects/aikidolevice/1.webp",
           "placeholderSrc": "/assets/projects/aikidolevice/1-placeholder.webp",
-          "alt": "Introduction to the martial art of Aikido"
+          "alt": "Introduction to Aikido and club news"
         },
         {
           "src": "/assets/projects/aikidolevice/2.webp",
           "placeholderSrc": "/assets/projects/aikidolevice/2-placeholder.webp",
-          "alt": "Aikido Dojo Levice news"
+          "alt": "Aikido Dojo Levice club news and gallery"
         },
         {
           "src": "/assets/projects/aikidolevice/3.webp",
           "placeholderSrc": "/assets/projects/aikidolevice/3-placeholder.webp",
-          "alt": "Aikido Dojo Levice gallery and training schedule"
+          "alt": "Aikido Dojo Levice photo gallery and training schedule"
         },
         {
           "src": "/assets/projects/aikidolevice/4.webp",
           "placeholderSrc": "/assets/projects/aikidolevice/4-placeholder.webp",
-          "alt": "Contact form and website footer"
+          "alt": "Aikido Dojo Levice training schedule and instructors"
         }
       ],
       "technologies": ["Responsive design", "Gallery", "Contact form"]
