@@ -58,7 +58,20 @@ const styles = {
   }
 };
 
-export function AppLayout({ children, sectionId, title }) {
+export function AppLayout({
+  children,
+  sectionId,
+  title,
+  aside = (
+    <BlurLoadedImage
+      className={className(styles.visualImage)}
+      imageClassName={className(styles.visualImageMedia)}
+      src="/assets/bg.webp"
+      placeholderSrc="/assets/bg-placeholder.webp"
+      alt=""
+    />
+  )
+}) {
   return (
     <>
       <Header />
@@ -69,15 +82,7 @@ export function AppLayout({ children, sectionId, title }) {
             {children}
           </PageSection>
         </main>
-        <aside className={className(styles.visualPanel)} aria-hidden="true">
-          <BlurLoadedImage
-            className={className(styles.visualImage)}
-            imageClassName={className(styles.visualImageMedia)}
-            src="/assets/bg.webp"
-            placeholderSrc="/assets/bg-placeholder.webp"
-            alt=""
-          />
-        </aside>
+        <aside className={className(styles.visualPanel)}>{aside}</aside>
       </div>
       <Footer />
     </>
