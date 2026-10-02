@@ -79,7 +79,7 @@ const styles = {
 function ProjectTitlePill({ title }) {
   return (
     <div className={className(styles.titlePill)}>
-      <h3 className={className(styles.title)}>{title}</h3>
+      <h2 className={className(styles.title)}>{title}</h2>
     </div>
   );
 }

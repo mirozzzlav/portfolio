@@ -1,6 +1,5 @@
 import { Fragment, useEffect } from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
-import { PageSection } from "src/components/PageSection.jsx";
 import { normalizePathname } from "src/content/index.js";
 import { AppLayout } from "src/layouts/AppLayout.jsx";
 import { NotFoundPage } from "src/pages/NotFoundPage.jsx";
@@ -36,14 +35,10 @@ export function AppRoutes() {
   }
 
   return (
-    <AppLayout sectionId={currentRoute?.sectionId}>
+    <AppLayout sectionId={currentRoute?.sectionId} title={currentRoute?.title}>
       <Routes>
-        {pageRoutes.map(({ Component, path, sectionId, title }) => {
-          const element = (
-            <PageSection sectionId={sectionId} title={title}>
-              <Component />
-            </PageSection>
-          );
+        {pageRoutes.map(({ Component, path }) => {
+          const element = <Component />;
           const nonCanonicalPath = normalizePathname(path);
 
           return (
