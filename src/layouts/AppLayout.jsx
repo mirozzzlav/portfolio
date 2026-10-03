@@ -48,7 +48,7 @@ const styles = {
     }
   },
   game: {
-    width: "min(100%, 520px)",
+    width: "min(100%, 470px)",
     minWidth: 0
   }
 };

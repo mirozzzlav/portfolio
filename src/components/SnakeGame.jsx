@@ -1,5 +1,4 @@
 import { keyframes } from "@emotion/css";
-import { Button } from "src/components/Button.jsx";
 import { GRID_SIZE, useSnakeGame } from "src/hooks/useSnakeGame.js";
 import { className, mergeClassNames } from "src/styles/classNames.js";
 import { useI18n } from "src/useI18n.js";
@@ -34,7 +33,7 @@ const styles = {
     display: "inline-flex",
     alignItems: "center",
     justifyContent: "center",
-    width: "var(--control-width-xs)",
+    width: "var(--control-height-sm)",
     padding: "0 var(--space-1) 0 var(--space-1)",
     border: "var(--border-width-thin) solid currentColor",
     borderBottomWidth: "calc(3 * var(--border-width-thin))",
@@ -53,8 +52,7 @@ const styles = {
     gridTemplateColumns: `repeat(${GRID_SIZE}, 1fr)`,
     gridTemplateRows: `repeat(${GRID_SIZE}, 1fr)`,
     // Scale the gutters with the board so the cells stay square at every size.
-    gap: "0.75%",
-    padding: "0.75%"
+    gap: "0.75%"
   },
   cell: { minWidth: 0, minHeight: 0, borderRadius: "var(--radius-sm)" },
   body: { background: "var(--snake-color)" },
