@@ -3,7 +3,6 @@ import { GRID_SIZE, useSnakeGame } from "src/hooks/useSnakeGame.js";
 import { className, mergeClassNames } from "src/styles/classNames.js";
 import { useI18n } from "src/useI18n.js";
 import { useMemo } from "react";
-import { UiLink } from "src/components/UiLink.jsx";
 
 const blink = keyframes({
   "0%, 100%": { opacity: 1 },
@@ -23,24 +22,36 @@ const styles = {
     justifyContent: "space-between",
     gap: "var(--space-1)",
     marginTop: "var(--space-1)",
-    fontSize: "var(--font-size-sm)"
+    fontSize: "var(--font-size-sm)",
+    textTransform: "uppercase"
   },
   score: {
     fontFamily: "var(--font-family-digital-numeric)",
     paddingLeft: "var(--space-0)"
   },
-  key: {
+  button: {
+    all: "unset",
+    cursor: "pointer",
     display: "inline-flex",
     alignItems: "center",
-    justifyContent: "center",
-    width: "var(--control-height-sm)",
-    padding: "0 var(--space-1) 0 var(--space-1)",
-    border: "var(--border-width-thin) solid currentColor",
-    borderBottomWidth: "calc(3 * var(--border-width-thin))",
-    borderRadius: "var(--radius-sm)",
-    font: "inherit",
-    fontWeight: "var(--font-weight-bold)",
-    marginRight: "var(--space-1)"
+    gap: "var(--space-0)",
+    "&:focus, &:focus-visible": {
+      outline: "none",
+      "& > kbd": {
+        background: "var(--color-focus-ring)"
+      }
+    },
+
+    "& > kbd": {
+      display: "inline-flex",
+      alignItems: "center",
+      justifyContent: "center",
+      aspectRatio: 1,
+      height: "var(--control-height-sm)",
+      border: "var(--border-width-thin) solid currentColor",
+      borderBottomWidth: "calc(3 * var(--border-width-thin))",
+      borderRadius: "var(--radius-sm)"
+    }
   },
   board: {
     boxShadow: "var(--shadow-menu)",
@@ -119,20 +130,17 @@ export function SnakeGame({ speed, snakeClassName, foodClassName }) {
         })}
       </div>
       <div className={className(styles.footer)}>
-        <UiLink
+        <button
           disabled={crashing}
-          hasSquare={false}
-          arrow={null}
           onClick={isDemo ? startGame : togglePause}
           aria-label={actionLabel}
           aria-keyshortcuts={isDemo ? "s" : "p"}
           title={labels.instructions}
+          className={className(styles.button)}
         >
-          <kbd className={className(styles.key)} aria-hidden="true">
-            {isDemo ? "S" : "P"}
-          </kbd>
+          <kbd aria-hidden="true">{isDemo ? "S" : "P"}</kbd>
           <span>{actionLabel}</span>
-        </UiLink>
+        </button>
         <span>
           {labels.score}{" "}
           <span className={className(styles.score)}>{scoreZeroPrefixed}</span>

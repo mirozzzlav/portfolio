@@ -50,12 +50,12 @@
     "redirectTitle": "Presmerovanie"
   },
   "snakeGame": {
-    "label": "Hra Had",
-    "score": "Skóre",
-    "start": "Štart",
-    "pause": "Pauza",
-    "resume": "Pokračovať",
-    "instructions": "S: štart, P: pauza, šípky alebo WASD: pohyb."
+    "label": "Snake game",
+    "score": "Score",
+    "start": "Start",
+    "pause": "Pause",
+    "resume": "Resume",
+    "instructions": "S: start, P: pause, arrow keys or WASD: move."
   },
   "notFound": {
     "title": "Stránka sa nenašla",
