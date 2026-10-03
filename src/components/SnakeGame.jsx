@@ -50,7 +50,8 @@ const styles = {
       height: "var(--control-height-sm)",
       border: "var(--border-width-thin) solid currentColor",
       borderBottomWidth: "calc(3 * var(--border-width-thin))",
-      borderRadius: "var(--radius-sm)"
+      borderRadius: "var(--radius-sm)",
+      fontWeight: "var(--font-weight-semibold)"
     }
   },
   board: {
