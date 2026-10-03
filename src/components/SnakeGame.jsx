@@ -22,7 +22,7 @@ const styles = {
     alignItems: "center",
     justifyContent: "space-between",
     gap: "var(--space-1)",
-    marginTop: "var(--space-0)",
+    marginTop: "var(--space-1)",
     fontSize: "var(--font-size-sm)"
   },
   score: {
@@ -43,6 +43,7 @@ const styles = {
     marginRight: "var(--space-1)"
   },
   board: {
+    boxShadow: "var(--shadow-menu)",
     width: "100%",
     border: "var(--border-width-thin) solid var(--color-border)",
     borderRadius: "var(--radius-sm)",
@@ -52,7 +53,8 @@ const styles = {
     gridTemplateColumns: `repeat(${GRID_SIZE}, 1fr)`,
     gridTemplateRows: `repeat(${GRID_SIZE}, 1fr)`,
     // Scale the gutters with the board so the cells stay square at every size.
-    gap: "0.75%"
+    gap: "0.75%",
+    padding: "0.75%"
   },
   cell: { minWidth: 0, minHeight: 0, borderRadius: "var(--radius-sm)" },
   body: { background: "var(--snake-color)" },
