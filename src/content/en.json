@@ -49,6 +49,14 @@
     "continue": "Continue",
     "redirectTitle": "Redirect"
   },
+  "snakeGame": {
+    "label": "Snake game",
+    "score": "Score",
+    "start": "Start",
+    "pause": "Pause",
+    "resume": "Resume",
+    "instructions": "S: start, P: pause, arrow keys or WASD: move."
+  },
   "notFound": {
     "title": "Page not found",
     "action": "Back home"

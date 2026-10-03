@@ -49,6 +49,14 @@
     "continue": "Pokračovať",
     "redirectTitle": "Presmerovanie"
   },
+  "snakeGame": {
+    "label": "Hra Had",
+    "score": "Skóre",
+    "start": "Štart",
+    "pause": "Pauza",
+    "resume": "Pokračovať",
+    "instructions": "S: štart, P: pauza, šípky alebo WASD: pohyb."
+  },
   "notFound": {
     "title": "Stránka sa nenašla",
     "action": "Späť domov"

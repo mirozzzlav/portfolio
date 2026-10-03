@@ -1,8 +1,12 @@
-import { BlurLoadedImage } from "src/components/BlurLoadedImage.jsx";
 import { Footer } from "src/components/Footer.jsx";
 import { Header } from "src/components/Header.jsx";
 import { PageHeading } from "src/components/PageHeading.jsx";
 import { PageSection } from "src/components/PageSection.jsx";
+import { SnakeGame } from "src/components/SnakeGame.jsx";
+import {
+  MOBILE_OR_TABLET_QUERY,
+  useIsMobileOrTablet
+} from "src/hooks/useIsMobileOrTablet.js";
 import { className } from "src/styles/classNames.js";
 
 const styles = {
@@ -17,7 +21,7 @@ const styles = {
     padding:
       "calc(var(--header-height) + var(--space-3)) var(--main-inline-pad) var(--space-7)",
 
-    "@media (max-width: 1000px)": {
+    [`@media ${MOBILE_OR_TABLET_QUERY}`]: {
       gridTemplateColumns: "minmax(0, 1fr)"
     }
   },
@@ -39,22 +43,13 @@ const styles = {
     overflow: "hidden",
     background: "var(--color-background)",
 
-    "@media (max-width: 1000px)": {
+    [`@media ${MOBILE_OR_TABLET_QUERY}`]: {
       display: "none"
     }
   },
-  visualImage: {
-    display: "block",
+  game: {
     width: "min(100%, 520px)",
-    height: "auto",
-    aspectRatio: "1",
-    minWidth: 0,
-    overflow: "hidden",
-    borderRadius: "var(--radius-sm)"
-  },
-  visualImageMedia: {
-    display: "block",
-    objectFit: "contain"
+    minWidth: 0
   }
 };
 
@@ -63,15 +58,13 @@ export function AppLayout({
   sectionId,
   title,
   aside = (
-    <BlurLoadedImage
-      className={className(styles.visualImage)}
-      imageClassName={className(styles.visualImageMedia)}
-      src="/assets/bg.webp"
-      placeholderSrc="/assets/bg-placeholder.webp"
-      alt=""
-    />
+    <div className={className(styles.game)}>
+      <SnakeGame />
+    </div>
   )
 }) {
+  const isMobileOrTablet = useIsMobileOrTablet();
+
   return (
     <>
       <Header />
@@ -82,7 +75,9 @@ export function AppLayout({
             {children}
           </PageSection>
         </main>
-        <aside className={className(styles.visualPanel)}>{aside}</aside>
+        {!isMobileOrTablet && (
+          <aside className={className(styles.visualPanel)}>{aside}</aside>
+        )}
       </div>
       <Footer />
     </>
