@@ -7,7 +7,7 @@ import {
 
 export const siteSeo = {
   siteUrl: "https://mirofurinda.com",
-  imagePath: "/assets/social.jpg",
+  imagePath: "/assets/social_image.jpg",
   twitterCard: "summary_large_image"
 };
 
