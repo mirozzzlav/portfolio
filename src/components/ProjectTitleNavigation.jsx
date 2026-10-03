@@ -54,7 +54,8 @@ const styles = {
 
   navigationPill: {
     display: "inline-flex",
-    gap: "var(--space-1)"
+    gap: "var(--space-1)",
+    paddingRight: "var(--space-0)"
   },
 
   navigationSeparator: {
