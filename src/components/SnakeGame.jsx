@@ -4,6 +4,7 @@ import { GRID_SIZE, useSnakeGame } from "src/hooks/useSnakeGame.js";
 import { className, mergeClassNames } from "src/styles/classNames.js";
 import { useI18n } from "src/useI18n.js";
 import { useMemo } from "react";
+import { UiLink } from "src/components/UiLink.jsx";
 
 const blink = keyframes({
   "0%, 100%": { opacity: 1 },
@@ -22,7 +23,7 @@ const styles = {
     alignItems: "center",
     justifyContent: "space-between",
     gap: "var(--space-1)",
-    marginTop: "var(--space-3)",
+    marginTop: "var(--space-0)",
     fontSize: "var(--font-size-sm)"
   },
   score: {
@@ -33,27 +34,20 @@ const styles = {
     display: "inline-flex",
     alignItems: "center",
     justifyContent: "center",
-    minWidth: "var(--control-height-sm)",
-    height: "var(--control-height-sm)",
-    padding: "0 var(--space-1)",
+    width: "var(--control-width-xs)",
+    padding: "0 var(--space-1) 0 var(--space-1)",
     border: "var(--border-width-thin) solid currentColor",
     borderBottomWidth: "calc(3 * var(--border-width-thin))",
     borderRadius: "var(--radius-sm)",
     font: "inherit",
-    fontWeight: "var(--font-weight-bold)"
+    fontWeight: "var(--font-weight-bold)",
+    marginRight: "var(--space-1)"
   },
   board: {
     width: "100%",
     border: "var(--border-width-thin) solid var(--color-border)",
     borderRadius: "var(--radius-sm)",
-    "&:not(:focus-visible)": {
-      outline: "3px solid var(--palette-accent-soft)",
-      outlineOffset: "var(--space-0)"
-    },
     transition: "border-color var(--transition-duration-fast) ease",
-    "&:hover": {
-      borderColor: "var(--palette-ink)"
-    },
     aspectRatio: "1",
     display: "grid",
     gridTemplateColumns: `repeat(${GRID_SIZE}, 1fr)`,
@@ -62,7 +56,7 @@ const styles = {
     gap: "0.75%",
     padding: "0.75%"
   },
-  cell: { minWidth: 0, minHeight: 0 },
+  cell: { minWidth: 0, minHeight: 0, borderRadius: "var(--radius-sm)" },
   body: { background: "var(--snake-color)" },
   food: { background: "var(--food-color)" },
   crash: {
@@ -125,11 +119,10 @@ export function SnakeGame({ speed, snakeClassName, foodClassName }) {
         })}
       </div>
       <div className={className(styles.footer)}>
-        <Button
-          type="button"
-          variant="outline"
+        <UiLink
           disabled={crashing}
-          compact
+          hasSquare={false}
+          arrow={null}
           onClick={isDemo ? startGame : togglePause}
           aria-label={actionLabel}
           aria-keyshortcuts={isDemo ? "s" : "p"}
@@ -139,7 +132,7 @@ export function SnakeGame({ speed, snakeClassName, foodClassName }) {
             {isDemo ? "S" : "P"}
           </kbd>
           <span>{actionLabel}</span>
-        </Button>
+        </UiLink>
         <span>
           {labels.score}{" "}
           <span className={className(styles.score)}>{scoreZeroPrefixed}</span>
