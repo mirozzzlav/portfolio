@@ -3,7 +3,7 @@ import { className } from "src/styles/classNames.js";
 import { useI18n } from "src/useI18n.js";
 import { CurrentYear } from "src/components/CurrentYear.jsx";
 import { NavigationLink } from "src/components/NavigationLink.jsx";
-import { MOBILE_OR_TABLET_QUERY } from "src/hooks/useIsMobileOrTablet.js";
+import { useMobileKeyboard } from "src/hooks/useMobileKeyboard.js";
 
 const styles = {
   footer: {
@@ -35,13 +35,6 @@ const styles = {
       justifyItems: "stretch",
       gap: "var(--space-2)",
       padding: "var(--space-2) var(--space-3)"
-    },
-
-    [`@media ${MOBILE_OR_TABLET_QUERY}`]: {
-      // Keep the footer in document flow while the mobile form is being edited.
-      "body:has([data-section='contact'] :is(input, textarea):focus) &": {
-        position: "static"
-      }
     }
   },
 
@@ -87,9 +80,10 @@ const styles = {
 
 export function Footer() {
   const { content, routes } = useI18n();
+  const isKeyboardOpen = useMobileKeyboard();
 
   return (
-    <footer className={className(styles.footer)}>
+    <footer className={className(styles.footer)} hidden={isKeyboardOpen}>
       <nav className={className(styles.nav)} aria-label={content.ui.footerNavigation}>
         {routes.map((item, itemIndex) => (
           <Fragment key={item.path}>
