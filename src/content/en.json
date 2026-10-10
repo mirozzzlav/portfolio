@@ -100,22 +100,22 @@
         {
           "src": "/assets/projects/priatelia/1.webp",
           "placeholderSrc": "/assets/projects/priatelia/1-placeholder.webp",
-          "alt": "Browsing nearby people by criteria"
+          "alt": "Discovering people by city, distance, age, and gender"
         },
         {
           "src": "/assets/projects/priatelia/2.webp",
           "placeholderSrc": "/assets/projects/priatelia/2-placeholder.webp",
-          "alt": "Person profile with interests and preferences"
+          "alt": "Connected person's profile with interests, bio, and photo gallery"
         },
         {
           "src": "/assets/projects/priatelia/3.webp",
           "placeholderSrc": "/assets/projects/priatelia/3-placeholder.webp",
-          "alt": "Editing profile details, interests, and photos"
+          "alt": "Editing your profile, location, interests, bio, and photos"
         },
         {
           "src": "/assets/projects/priatelia/4.webp",
           "placeholderSrc": "/assets/projects/priatelia/4-placeholder.webp",
-          "alt": "Chat after users connect with each other"
+          "alt": "Chat between connected users with message contents hidden"
         }
       ],
       "technologies": ["Matching", "Chat", "Profiles"]

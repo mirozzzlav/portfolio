@@ -101,22 +101,22 @@
         {
           "src": "/assets/projects/priatelia/1.webp",
           "placeholderSrc": "/assets/projects/priatelia/1-placeholder.webp",
-          "alt": "Prehliadanie ľudí z okolia podľa kritérií"
+          "alt": "Objavovanie ľudí podľa mesta, vzdialenosti, veku a pohlavia"
         },
         {
           "src": "/assets/projects/priatelia/2.webp",
           "placeholderSrc": "/assets/projects/priatelia/2-placeholder.webp",
-          "alt": "Profil človeka s opisom záľub a sympatií"
+          "alt": "Detail prepojeného profilu so záujmami, opisom a fotogalériou"
         },
         {
           "src": "/assets/projects/priatelia/3.webp",
           "placeholderSrc": "/assets/projects/priatelia/3-placeholder.webp",
-          "alt": "Úprava profilu, záujmov a fotiek"
+          "alt": "Úprava vlastného profilu, lokality, záujmov, bio a fotiek"
         },
         {
           "src": "/assets/projects/priatelia/4.webp",
           "placeholderSrc": "/assets/projects/priatelia/4-placeholder.webp",
-          "alt": "Chat po vzájomnom prepojení používateľov"
+          "alt": "Chat medzi prepojenými používateľmi so skrytým obsahom správ"
         }
       ],
       "technologies": ["Matching", "Chat", "Profily"]
