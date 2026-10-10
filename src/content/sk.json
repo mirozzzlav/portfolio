@@ -65,7 +65,7 @@
     "paragraphs": [
       "Ahoj, moje meno je Miro a som web developer. Tvorím weby a webové aplikácie, ktoré vnímam ako malé digitálne priestory, do ktorých človek občas z rôznych dôvodov vstupuje.",
       "Z farieb, tvarov, kódu a prázdneho miesta skladám celok, ktorý má byť príjemný na pohľad aj prirodzený na používanie.",
-      "Priťahuje ma atmosféra, rytmus a detail. Baví ma hľadať pokoj v zložitosti a zvýrazniť to podstatné."
+      "Priťahuje ma atmosféra, rytmus a detail. Baví ma hľadať pokoj v zložitosti a zvýrazniť to podstatné. Moje práce si môžete pozrieť v [projektoch](/projects)."
     ]
   },
   "contact": {
@@ -94,7 +94,7 @@
     {
       "title": "Priatelia",
       "type": "Webová aplikácia",
-      "description": "Priatelia je aplikácia na spoznávanie nových ľudí a parťákov podľa záľub, sympatií a blízkosti. Keď si dvaja používatelia navzájom dajú like, aplikácia ich prepojí a otvorí im priestor na konverzáciu.",
+      "description": "Priatelia pomáha spoznávať nových ľudí a nájsť parťákov na spoločné záľuby. Projekt som vytvoril samostatne – od návrhu vzhľadu až po fungujúcu aplikáciu.",
       "url": "https://priatelia.wondercules.com",
       "galleryLabel": "Ukážky projektu Priatelia",
       "images": [
@@ -119,12 +119,19 @@
           "alt": "Chat medzi prepojenými používateľmi so skrytým obsahom správ"
         }
       ],
-      "technologies": ["Matching", "Chat", "Profily"]
+      "technologies": ["Matching", "Chat", "Profily"],
+      "featuresTitle": "Čo aplikácia robí",
+      "features": [
+        "Vytvorenie profilu s fotkami a záujmami.",
+        "Objavovanie ľudí podľa mesta, vzdialenosti, veku a pohlavia.",
+        "Prepojenie používateľov po vzájomnom lajku.",
+        "Chat medzi prepojenými používateľmi."
+      ]
     },
     {
       "title": "Digitálny archív",
       "type": "Webová aplikácia",
-      "description": "Digitálny archív slúži na prehľadné triedenie, vyhľadávanie a filtrovanie dokumentov podľa kategórií, autorov a schvaľovateľov. Súčasťou je viacúrovňový approval workflow; demo používa simulované dáta.",
+      "description": "Digitálny archív slúži na prehľadnú správu dokumentov na jednom mieste. Na projekte som sa venoval najmä vývoju frontendu v Reacte a návrhu komunikácie s API. [Demo](https://archive.wondercules.com) používa simulované dáta a môžete sa doň prihlásiť ľubovoľnými prihlasovacími údajmi.",
       "url": "https://archive.wondercules.com",
       "galleryLabel": "Ukážky projektu Digitálny archív",
       "images": [
@@ -149,12 +156,19 @@
           "alt": "Správa kategórií v digitálnom archíve"
         }
       ],
-      "technologies": ["Správa dokumentov", "Filtrovanie", "Approval workflow"]
+      "technologies": ["Správa dokumentov", "Filtrovanie", "Approval workflow"],
+      "featuresTitle": "Čo aplikácia robí",
+      "features": [
+        "Pridávanie dokumentov a ich triedenie do kategórií.",
+        "Vyhľadávanie a filtrovanie podľa kategórie, autora alebo schvaľovateľa.",
+        "Viacúrovňové schvaľovanie dokumentov a sledovanie ich stavu.",
+        "Správa kategórií dokumentov."
+      ]
     },
     {
       "title": "Yokaid",
       "type": "Webová aplikácia",
-      "description": "Yokaid pomáha nájsť spoľahlivých remeselníkov a profesionálov podľa mapy, hodnotení a reálnych skúseností ľudí. Návštevník rýchlo vidí, kto pôsobí v okolí a čo o ňom napísali ostatní.",
+      "description": "Yokaid pomáha nájsť remeselníkov a profesionálov v okolí podľa hodnotení a skúseností ostatných. Projekt som vytvoril samostatne – od návrhu vzhľadu až po fungujúcu aplikáciu.",
       "url": "https://yokaid.wondercules.com",
       "galleryLabel": "Ukážky projektu Yokaid",
       "images": [
@@ -179,12 +193,19 @@
           "alt": "Vyhľadávanie profesionálov podľa mena"
         }
       ],
-      "technologies": ["Mapa", "Recenzie", "Vyhľadávanie"]
+      "technologies": ["Mapa", "Recenzie", "Vyhľadávanie"],
+      "featuresTitle": "Čo aplikácia robí",
+      "features": [
+        "Zobrazenie profesionálov na mape.",
+        "Vyhľadávanie profesionálov podľa mena.",
+        "Prezeranie profilov s hodnoteniami a recenziami.",
+        "Pridávanie vlastných recenzií a zdieľanie skúseností."
+      ]
     },
     {
       "title": "Aikido Levice",
       "type": "Prezentačná webová stránka",
-      "description": "Prezentačná stránka levického Aikido klubu približuje filozofiu bojového umenia, prináša klubové novinky a galériu z tréningov. Záujemcovia na nej nájdu aktuálny rozvrh pre deti aj dospelých, predstavenie trénerov a jednoduchý kontaktný formulár.",
+      "description": "Webová stránka Aikido Levice predstavuje klub a približuje filozofiu bojového umenia aikido. Web som vytvoril samostatne – od návrhu vzhľadu až po fungujúcu webovú stránku.",
       "url": "https://aikidolevice.sk",
       "galleryLabel": "Ukážky projektu Aikido Dojo Levice",
       "images": [
@@ -209,7 +230,14 @@
           "alt": "Rozvrh tréningov a tréneri Aikido Dojo Levice"
         }
       ],
-      "technologies": ["Responzívny dizajn", "Galéria", "Kontaktný formulár"]
+      "technologies": ["Responzívny dizajn", "Galéria", "Kontaktný formulár"],
+      "featuresTitle": "Čo web ponúka",
+      "features": [
+        "Rozvrh tréningov pre deti aj dospelých.",
+        "Predstavenie trénerov a informácie o aikide.",
+        "Klubové novinky a fotogaléria z tréningov.",
+        "Kontaktný formulár na oslovenie klubu."
+      ]
     }
   ]
 }

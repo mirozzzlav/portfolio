@@ -65,7 +65,7 @@
     "paragraphs": [
       "Hi, my name is Miro and I am a web developer. I create websites and web applications that I see as small digital spaces people enter for different reasons.",
       "I combine colors, shapes, code, and empty space into a whole that should feel pleasant to look at and natural to use.",
-      "I am drawn to atmosphere, rhythm, and detail. I enjoy finding calm in complexity and bringing the essential parts forward."
+      "I am drawn to atmosphere, rhythm, and detail. I enjoy finding calm in complexity and bringing the essential parts forward. You can explore my work in the [projects section](/projects)."
     ]
   },
   "contact": {
@@ -94,7 +94,7 @@
     {
       "title": "Priatelia",
       "type": "Web application",
-      "description": "Priatelia is an app for meeting new people and activity partners based on interests, sympathy, and proximity. When two users like each other, the app connects them and opens a space for conversation.",
+      "description": "Priatelia helps people meet others and find partners for shared interests. I built the project independently – from the visual design to a working application.",
       "url": "https://priatelia.wondercules.com",
       "images": [
         {
@@ -118,12 +118,19 @@
           "alt": "Chat between connected users with message contents hidden"
         }
       ],
-      "technologies": ["Matching", "Chat", "Profiles"]
+      "technologies": ["Matching", "Chat", "Profiles"],
+      "featuresTitle": "What the app does",
+      "features": [
+        "Create a profile with photos and interests.",
+        "Discover people by city, distance, age, and gender.",
+        "Connect users when they like each other.",
+        "Chat with connected users."
+      ]
     },
     {
       "title": "Digital archive",
       "type": "Web application",
-      "description": "Digital archive helps organize, search, and filter documents by categories, authors, and approvers. It includes a multi-level approval workflow; the demo uses simulated data.",
+      "description": "Digital archive brings document management into one place. My role focused mainly on developing the frontend in React and designing its communication with the API. The [demo](https://archive.wondercules.com) uses simulated data and you can sign in with any login credentials.",
       "url": "https://archive.wondercules.com",
       "images": [
         {
@@ -147,12 +154,19 @@
           "alt": "Managing categories in the digital archive"
         }
       ],
-      "technologies": ["Document management", "Filtering", "Approval workflow"]
+      "technologies": ["Document management", "Filtering", "Approval workflow"],
+      "featuresTitle": "What the app does",
+      "features": [
+        "Add documents and organize them into categories.",
+        "Search and filter by category, author, or approver.",
+        "Approve documents through multiple levels and track their status.",
+        "Manage document categories."
+      ]
     },
     {
       "title": "Yokaid",
       "type": "Web application",
-      "description": "Yokaid helps people find reliable tradespeople and professionals using a map, ratings, and real experiences from other users. Visitors quickly see who works nearby and what others have written about them.",
+      "description": "Yokaid helps people find tradespeople and professionals nearby using ratings and experiences shared by others. I built the project independently – from the visual design to a working application.",
       "url": "https://yokaid.wondercules.com",
       "images": [
         {
@@ -176,12 +190,19 @@
           "alt": "Searching professionals by name"
         }
       ],
-      "technologies": ["Map", "Reviews", "Search"]
+      "technologies": ["Map", "Reviews", "Search"],
+      "featuresTitle": "What the app does",
+      "features": [
+        "Discover professionals on a map.",
+        "Search for professionals by name.",
+        "View profiles with ratings and reviews.",
+        "Add reviews and share personal experiences."
+      ]
     },
     {
       "title": "Aikido Levice",
       "type": "Presentation website",
-      "description": "The presentation website for the Aikido club in Levice introduces the philosophy of the martial art and shares club news and training photos. Visitors can find the current schedule for children and adults, meet the instructors, and contact the club through a simple form.",
+      "description": "The Aikido Levice website introduces the club and the philosophy of the martial art. I built the website independently – from the visual design to a working website.",
       "url": "https://aikidolevice.sk",
       "galleryLabel": "Aikido Dojo Levice project previews",
       "images": [
@@ -206,7 +227,14 @@
           "alt": "Aikido Dojo Levice training schedule and instructors"
         }
       ],
-      "technologies": ["Responsive design", "Gallery", "Contact form"]
+      "technologies": ["Responsive design", "Gallery", "Contact form"],
+      "featuresTitle": "What the website offers",
+      "features": [
+        "Training schedules for children and adults.",
+        "Instructor profiles and information about Aikido.",
+        "Club news and training photo galleries.",
+        "A contact form to reach the club."
+      ]
     }
   ]
 }
