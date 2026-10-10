@@ -26,6 +26,7 @@ export const globalStyles = {
     "--color-border": "var(--palette-border)",
     "--color-ink": "var(--palette-ink)",
     "--color-accent": "var(--palette-ink)",
+    "--color-link": "var(--palette-accent-fine)",
     "--color-error": "var(--palette-error)",
     "--color-success": "var(--palette-success)",
     "--surface-frosted":

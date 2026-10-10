@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { BinaryClockPill } from "src/components/BinaryClockPill.jsx";
 import { Button } from "src/components/Button.jsx";
+import { InlineLinks } from "src/components/InlineLinks.jsx";
 import { className } from "src/styles/classNames.js";
 import { useI18n } from "src/useI18n.js";
 
@@ -67,7 +68,9 @@ export function AboutPage() {
   return (
     <div className={className(styles.copy)}>
       {content.about.paragraphs.map((paragraph) => (
-        <p key={paragraph}>{paragraph}</p>
+        <p key={paragraph}>
+          <InlineLinks text={paragraph} />
+        </p>
       ))}
 
       <div className={className(styles.actions)} aria-label={content.ui.contactLinks}>

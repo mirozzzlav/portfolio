@@ -3,6 +3,7 @@ import { useI18n } from "src/useI18n.js";
 import { TagList } from "src/components/TagList.jsx";
 import { UiLink } from "src/components/UiLink.jsx";
 import { PreviewSurface } from "src/components/PreviewSurface.jsx";
+import { InlineLinks } from "src/components/InlineLinks.jsx";
 
 const styles = {
   card: {
@@ -26,6 +27,8 @@ const styles = {
   },
 
   descriptionViewport: {
+    display: "grid",
+    gap: "var(--space-2)",
     paddingRight: "var(--space-2)",
 
     "@media (max-width: 780px)": {
@@ -59,6 +62,21 @@ const styles = {
       gap: "var(--space-1)",
       flexWrap: "nowrap"
     }
+  },
+
+  featuresHeading: {
+    margin: "0 0 var(--space-0)",
+    fontSize: "inherit",
+    fontWeight: "var(--font-weight-semibold)",
+    lineHeight: "inherit"
+  },
+
+  featuresList: {
+    display: "grid",
+    gap: "var(--space-0)",
+    margin: 0,
+    paddingLeft: "var(--space-3)",
+    listStyleType: "disc"
   },
 
   category: {
@@ -208,7 +226,16 @@ export function PreviewsGroup({ previewImages, images, onClick, title, isActive 
 
 export function ProjectCard({ isActive, onPreviewOpen, project }) {
   const { content } = useI18n();
-  const { description, images, technologies, title, type, url } = project;
+  const {
+    description,
+    featuresTitle,
+    features,
+    images,
+    technologies,
+    title,
+    type,
+    url
+  } = project;
   const previewImages = images.slice(0, 4);
 
   return (
@@ -220,7 +247,21 @@ export function ProjectCard({ isActive, onPreviewOpen, project }) {
       </div>
       <div className={className(styles.descriptionFrame)}>
         <div className={className(styles.descriptionViewport)}>
-          <p className={className(styles.description)}>{description}</p>
+          <p className={className(styles.description)}>
+            <InlineLinks text={description} tabIndex={isActive ? 0 : -1} />
+          </p>
+          {features?.length > 0 ? (
+            <section className={className(styles.description)}>
+              <h3 className={className(styles.featuresHeading)}>{featuresTitle}</h3>
+              <ul className={className(styles.featuresList)}>
+                {features.map((feature) => (
+                  <li key={feature}>
+                    <InlineLinks text={feature} tabIndex={isActive ? 0 : -1} />
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ) : null}
         </div>
       </div>
       <div className={className(styles.tags)}>

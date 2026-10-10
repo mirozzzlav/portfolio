@@ -4,6 +4,19 @@ Jednoduché osobné portfolio pre programátora alebo tvorcu digitálneho conten
 
 Projekt je postavený na Reacte, Vite, React Routeri a Emotion. Lokalizovaný obsah je oddelený v `src/content/sk.json` a `src/content/en.json`.
 
+V odsekoch `about.paragraphs`, popisoch projektov `description` a odrážkach
+`features` sa dajú pridávať odkazy zápisom `[text odkazu](adresa)`, napríklad:
+
+```json
+"Moje práce si môžete pozrieť v [projektoch](/projects)."
+"Vyskúšajte [demo](https://archive.wondercules.com)."
+```
+
+Interné adresy začínajú `/` a automaticky sa prispôsobia aktuálnemu jazyku.
+Podporované sú aj odkazy `https://`, `http://`, `mailto:`, `tel:` a kotvy `#`.
+Jeden text môže obsahovať viac odkazov; ostatný text sa zobrazuje bez zmeny.
+Ide o jednoduchý zápis odkazov, nie o podporu celého Markdownu alebo HTML.
+
 Importy v aplikácii používajú alias `src/`, napríklad
 `import { Button } from "src/components/Button.jsx"`. Alias je nastavený vo Vite
 a v `jsconfig.json` pre podporu v IDE. Súbory načítavané priamo cez Node.js
