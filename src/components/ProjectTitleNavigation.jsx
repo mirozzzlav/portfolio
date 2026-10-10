@@ -12,7 +12,7 @@ const styles = {
   wrapper: {
     display: "flex",
     alignItems: "center",
-    flexWrap: "wrap",
+    flexWrap: "nowrap",
     gap: "var(--space-2)",
     marginBottom: "var(--space-2)",
     justifyContent: "space-between",
@@ -54,8 +54,8 @@ const styles = {
 
   navigationPill: {
     display: "inline-flex",
-    gap: "var(--space-1)",
-    paddingRight: "var(--space-0)"
+    flex: "none",
+    gap: "var(--space-1)"
   },
 
   navigationSeparator: {
@@ -67,6 +67,7 @@ const styles = {
 
   navigationButton: {
     justifyContent: "center",
+    paddingInline: 0,
     color: "var(--color-accent)",
     lineHeight: "var(--line-height-compact)",
     whiteSpace: "nowrap",
