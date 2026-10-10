@@ -76,6 +76,7 @@ export const globalStyles = {
     "--space-5": "2rem",
     "--space-6": "3rem",
     "--space-7": "4rem",
+    "--space-8": "5rem",
 
     "--control-height-sm": "30px",
     "--control-height-md": "38px",

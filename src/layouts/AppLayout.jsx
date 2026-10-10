@@ -19,7 +19,7 @@ const styles = {
     alignItems: "start",
     gap: "var(--section-inline-gap) var(--space-6)",
     padding:
-      "calc(var(--header-height) + var(--space-3)) var(--main-inline-pad) var(--space-7)",
+      "calc(var(--header-height) + var(--space-3)) var(--main-inline-pad) var(--space-8)",
 
     [`@media ${MOBILE_OR_TABLET_QUERY}`]: {
       gridTemplateColumns: "minmax(0, 1fr)"
