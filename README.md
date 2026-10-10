@@ -4,6 +4,23 @@ Jednoduché osobné portfolio pre programátora alebo tvorcu digitálneho conten
 
 Projekt je postavený na Reacte, Vite, React Routeri a Emotion. Lokalizovaný obsah je oddelený v `src/content/sk.json` a `src/content/en.json`.
 
+Tagy projektov v poli `technologies` podporujú text alebo objekt s voliteľnou ikonou:
+
+```json
+"technologies": [
+  { "label": "React", "icon": "react" },
+  { "label": "REST API", "icon": "api" },
+  { "label": "Tag bez ikony" },
+  "Pôvodný textový tag"
+]
+```
+
+Podporované ikony: `python`, `fastapi`, `docker`, `react`, `chakra-ui`, `go`,
+`gin`, `api`, `page` a `tag`. Vynechaná alebo prázdna ikona zobrazí iba text.
+Textové tagy a neznáme názvy ikon používajú všeobecnú ikonu štítku.
+Jednofarebné logá technológií pochádzajú zo [Simple Icons](https://github.com/simple-icons/simple-icons)
+(CC0) a sú uložené priamo v projekte.
+
 V odsekoch `about.paragraphs`, popisoch projektov `description` a odrážkach
 `features` sa dajú pridávať odkazy zápisom `[text odkazu](adresa)`, napríklad:
 
