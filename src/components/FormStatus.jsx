@@ -7,7 +7,7 @@ const styles = {
     gap: "var(--space-1)",
     width: "100%",
     maxWidth: "100%",
-    margin: "var(--space-1) 0 0",
+    margin: "0 0 var(--space-3) 0",
     padding: "var(--space-1) var(--space-2)",
     border: "1px solid currentColor",
     borderRadius: "var(--radius-xl)",
