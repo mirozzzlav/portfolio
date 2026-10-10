@@ -119,7 +119,28 @@
           "alt": "Chat medzi prepojenými používateľmi so skrytým obsahom správ"
         }
       ],
-      "technologies": ["Matching", "Chat", "Profily"],
+      "technologies": [
+        {
+          "label": "Python",
+          "icon": "python"
+        },
+        {
+          "label": "FastAPI",
+          "icon": "fastapi"
+        },
+        {
+          "label": "Docker",
+          "icon": "docker"
+        },
+        {
+          "label": "React",
+          "icon": "react"
+        },
+        {
+          "label": "Chakra UI",
+          "icon": "chakra-ui"
+        }
+      ],
       "featuresTitle": "Čo aplikácia robí",
       "features": [
         "Vytvorenie profilu s fotkami a záujmami.",
@@ -156,7 +177,16 @@
           "alt": "Správa kategórií v digitálnom archíve"
         }
       ],
-      "technologies": ["Správa dokumentov", "Filtrovanie", "Approval workflow"],
+      "technologies": [
+        {
+          "label": "React",
+          "icon": "react"
+        },
+        {
+          "label": "REST API",
+          "icon": "api"
+        }
+      ],
       "featuresTitle": "Čo aplikácia robí",
       "features": [
         "Pridávanie dokumentov a ich triedenie do kategórií.",
@@ -193,7 +223,28 @@
           "alt": "Vyhľadávanie profesionálov podľa mena"
         }
       ],
-      "technologies": ["Mapa", "Recenzie", "Vyhľadávanie"],
+      "technologies": [
+        {
+          "label": "Golang",
+          "icon": "go"
+        },
+        {
+          "label": "Gin",
+          "icon": "gin"
+        },
+        {
+          "label": "Docker",
+          "icon": "docker"
+        },
+        {
+          "label": "React",
+          "icon": "react"
+        },
+        {
+          "label": "Chakra UI",
+          "icon": "chakra-ui"
+        }
+      ],
       "featuresTitle": "Čo aplikácia robí",
       "features": [
         "Zobrazenie profesionálov na mape.",
@@ -230,7 +281,16 @@
           "alt": "Rozvrh tréningov a tréneri Aikido Dojo Levice"
         }
       ],
-      "technologies": ["Responzívny dizajn", "Galéria", "Kontaktný formulár"],
+      "technologies": [
+        {
+          "label": "React",
+          "icon": "react"
+        },
+        {
+          "label": "Single page",
+          "icon": "page"
+        }
+      ],
       "featuresTitle": "Čo web ponúka",
       "features": [
         "Rozvrh tréningov pre deti aj dospelých.",

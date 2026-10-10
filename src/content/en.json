@@ -118,7 +118,28 @@
           "alt": "Chat between connected users with message contents hidden"
         }
       ],
-      "technologies": ["Matching", "Chat", "Profiles"],
+      "technologies": [
+        {
+          "label": "Python",
+          "icon": "python"
+        },
+        {
+          "label": "FastAPI",
+          "icon": "fastapi"
+        },
+        {
+          "label": "Docker",
+          "icon": "docker"
+        },
+        {
+          "label": "React",
+          "icon": "react"
+        },
+        {
+          "label": "Chakra UI",
+          "icon": "chakra-ui"
+        }
+      ],
       "featuresTitle": "What the app does",
       "features": [
         "Create a profile with photos and interests.",
@@ -154,7 +175,16 @@
           "alt": "Managing categories in the digital archive"
         }
       ],
-      "technologies": ["Document management", "Filtering", "Approval workflow"],
+      "technologies": [
+        {
+          "label": "React",
+          "icon": "react"
+        },
+        {
+          "label": "REST API",
+          "icon": "api"
+        }
+      ],
       "featuresTitle": "What the app does",
       "features": [
         "Add documents and organize them into categories.",
@@ -190,7 +220,28 @@
           "alt": "Searching professionals by name"
         }
       ],
-      "technologies": ["Map", "Reviews", "Search"],
+      "technologies": [
+        {
+          "label": "Golang",
+          "icon": "go"
+        },
+        {
+          "label": "Gin",
+          "icon": "gin"
+        },
+        {
+          "label": "Docker",
+          "icon": "docker"
+        },
+        {
+          "label": "React",
+          "icon": "react"
+        },
+        {
+          "label": "Chakra UI",
+          "icon": "chakra-ui"
+        }
+      ],
       "featuresTitle": "What the app does",
       "features": [
         "Discover professionals on a map.",
@@ -227,7 +278,16 @@
           "alt": "Aikido Dojo Levice training schedule and instructors"
         }
       ],
-      "technologies": ["Responsive design", "Gallery", "Contact form"],
+      "technologies": [
+        {
+          "label": "React",
+          "icon": "react"
+        },
+        {
+          "label": "Single page",
+          "icon": "page"
+        }
+      ],
       "featuresTitle": "What the website offers",
       "features": [
         "Training schedules for children and adults.",
