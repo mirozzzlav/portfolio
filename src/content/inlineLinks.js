@@ -23,10 +23,15 @@ export function parseInlineLinks(text, language) {
   const parts = [];
   let cursor = 0;
 
-  for (const match of text.matchAll(/\[([^\]\n]+)\]\(([^()\s]+)\)/g)) {
-    const link = resolveLink(match[2], language);
+  for (const match of text.matchAll(
+    /\[([^\]\n]+)\]\(([^()\s]+)\)|\*\*([^*\n]+)\*\*/g
+  )) {
+    const part =
+      match[3] !== undefined
+        ? { type: "strong", text: match[3] }
+        : { ...resolveLink(match[2], language), text: match[1] };
 
-    if (!link) {
+    if (!part.type) {
       continue;
     }
 
@@ -34,7 +39,7 @@ export function parseInlineLinks(text, language) {
       parts.push({ type: "text", text: text.slice(cursor, match.index) });
     }
 
-    parts.push({ ...link, text: match[1] });
+    parts.push(part);
     cursor = match.index + match[0].length;
   }
 

@@ -2,6 +2,22 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { parseInlineLinks } from "../src/content/inlineLinks.js";
 
+test("parses explicit bold markers alongside localized links", () => {
+  assert.deepEqual(
+    parseInlineLinks("Hi, I'm **Miro**. See [projects](/projects).", "en"),
+    [
+      { type: "text", text: "Hi, I'm " },
+      { type: "strong", text: "Miro" },
+      { type: "text", text: ". See " },
+      { type: "internal", text: "projects", href: "/en/projects/" },
+      { type: "text", text: "." }
+    ]
+  );
+  assert.deepEqual(parseInlineLinks("Miro **unfinished", "sk"), [
+    { type: "text", text: "Miro **unfinished" }
+  ]);
+});
+
 test("preserves plain text and parses multiple links in a sentence", () => {
   assert.deepEqual(parseInlineLinks("Text bez odkazu.", "sk"), [
     { type: "text", text: "Text bez odkazu." }

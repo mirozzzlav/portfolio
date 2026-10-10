@@ -63,9 +63,9 @@
   },
   "about": {
     "paragraphs": [
-      "Hi, my name is Miro and I am a web developer. I create websites and web applications that I see as small digital spaces people enter for different reasons.",
-      "I combine colors, shapes, code, and empty space into a whole that should feel pleasant to look at and natural to use.",
-      "I am drawn to atmosphere, rhythm, and detail. I enjoy finding calm in complexity and bringing the essential parts forward. You can explore my work in the [projects section](/projects)."
+      "Hi, I'm **Miro** and I create websites and web applications — from visual design and the user interface to the backend and a working website.",
+      "I combine colors, shapes, code, and empty space into a whole that should feel pleasant to look at and natural to use. I care about the details and about making sure the application works well. I enjoy finding calm in complexity and bringing the essential parts forward.",
+      "I work with React on the frontend and Python and its web frameworks on the backend. You can explore my work in the [projects section](/projects)."
     ]
   },
   "contact": {

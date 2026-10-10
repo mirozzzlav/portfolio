@@ -19,6 +19,10 @@ export function InlineLinks({ text, tabIndex }) {
       return part.text;
     }
 
+    if (part.type === "strong") {
+      return <strong key={index}>{part.text}</strong>;
+    }
+
     const linkProps = { className: className(styles.link), tabIndex };
 
     return part.type === "internal" ? (
