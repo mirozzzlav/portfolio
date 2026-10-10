@@ -98,23 +98,23 @@
       "url": "https://priatelia.wondercules.com",
       "images": [
         {
-          "src": "/assets/projects/priatelia/1.webp",
-          "placeholderSrc": "/assets/projects/priatelia/1-placeholder.webp",
+          "src": "/assets/projects/priatelia/1.webp?v=e6ec9b0",
+          "placeholderSrc": "/assets/projects/priatelia/1-placeholder.webp?v=e6ec9b0",
           "alt": "Discovering people by city, distance, age, and gender"
         },
         {
-          "src": "/assets/projects/priatelia/2.webp",
-          "placeholderSrc": "/assets/projects/priatelia/2-placeholder.webp",
+          "src": "/assets/projects/priatelia/2.webp?v=e6ec9b0",
+          "placeholderSrc": "/assets/projects/priatelia/2-placeholder.webp?v=e6ec9b0",
           "alt": "Connected person's profile with interests, bio, and photo gallery"
         },
         {
-          "src": "/assets/projects/priatelia/3.webp",
-          "placeholderSrc": "/assets/projects/priatelia/3-placeholder.webp",
+          "src": "/assets/projects/priatelia/3.webp?v=e6ec9b0",
+          "placeholderSrc": "/assets/projects/priatelia/3-placeholder.webp?v=e6ec9b0",
           "alt": "Editing your profile, location, interests, bio, and photos"
         },
         {
-          "src": "/assets/projects/priatelia/4.webp",
-          "placeholderSrc": "/assets/projects/priatelia/4-placeholder.webp",
+          "src": "/assets/projects/priatelia/4.webp?v=e6ec9b0",
+          "placeholderSrc": "/assets/projects/priatelia/4-placeholder.webp?v=e6ec9b0",
           "alt": "Chat between connected users with message contents hidden"
         }
       ],
