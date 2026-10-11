@@ -72,6 +72,7 @@ const sizes = {
 };
 
 export function IconButton({
+  as: Component = "button",
   "aria-label": ariaLabel,
   children,
   className,
@@ -83,7 +84,7 @@ export function IconButton({
   const isSelector = size === "sm" && !children;
 
   return (
-    <button
+    <Component
       aria-label={ariaLabel}
       className={mergeClassNames(
         isSelector ? styles.selectorButton : styles.button,
@@ -91,10 +92,10 @@ export function IconButton({
         !isSelector && isActive && styles.active,
         className
       )}
-      type={type}
+      type={Component === "button" ? type : undefined}
       {...props}
     >
       {isSelector ? <SelectionIndicator isActive={isActive} /> : children}
-    </button>
+    </Component>
   );
 }
