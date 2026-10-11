@@ -38,6 +38,31 @@ const styles = {
 
   compact: compactControlSize,
 
+  iconOnly: {
+    appearance: "none",
+    WebkitTapHighlightColor: "var(--color-transparent)",
+    flex: "none",
+    width: "var(--control-height-lg)",
+    height: "var(--control-height-lg)",
+    gap: 0,
+    padding: 0,
+
+    svg: {
+      width: "var(--icon-size-lg)",
+      height: "var(--icon-size-lg)"
+    }
+  },
+
+  compactIconOnly: {
+    width: "var(--control-height-md)",
+    height: "var(--control-height-md)",
+
+    svg: {
+      width: "var(--icon-size-md)",
+      height: "var(--icon-size-md)"
+    }
+  },
+
   outline: {
     ...controlSurface,
 
@@ -73,6 +98,8 @@ export function Button({
   children,
   className,
   compact = false,
+  iconOnly = false,
+  type = "button",
   variant = "outline",
   ...props
 }) {
@@ -82,9 +109,12 @@ export function Button({
         styles.button,
         buttonVariants[variant],
         compact && styles.compact,
+        iconOnly && styles.iconOnly,
+        iconOnly && compact && styles.compactIconOnly,
         props.disabled && styles.disabled,
         className
       )}
+      type={Component === "button" ? type : undefined}
       {...props}
     >
       {children}

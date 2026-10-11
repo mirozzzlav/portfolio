@@ -2,7 +2,7 @@ import { mediaQueries } from "src/styles/mediaQueries.js";
 import { useImageGestures } from "src/hooks/useImageGestures.js";
 import { className } from "src/styles/classNames.js";
 import { useI18n } from "src/useI18n.js";
-import { IconButton } from "src/components/IconButton.jsx";
+import { Button } from "src/components/Button.jsx";
 import { Lightbox } from "src/components/Lightbox.jsx";
 import { PreviewSurface } from "src/components/PreviewSurface.jsx";
 
@@ -266,12 +266,12 @@ export function PreviewDialog({ preview, onClose, onNavigate }) {
       onKeyDown={handleLightboxKeyDown}
     >
       <div className={className(styles.viewer)} onClick={handleViewerClick}>
-        <IconButton
+        <Button
           className={className([styles.nav, styles.navNext])}
           aria-label={content.ui.nextImage}
           disabled={!canNavigateNext}
           onClick={() => navigate(1)}
-          size="lg"
+          iconOnly
         />
         <div className={className(styles.stageGroup)}>
           <div ref={stageRef} className={className(styles.stage)} {...touchHandlers}>
@@ -328,12 +328,12 @@ export function PreviewDialog({ preview, onClose, onNavigate }) {
           </div>
         </div>
 
-        <IconButton
+        <Button
           className={className([styles.nav, styles.navPrev])}
           aria-label={content.ui.previousImage}
           disabled={!canNavigatePrevious}
           onClick={() => navigate(-1)}
-          size="lg"
+          iconOnly
         />
       </div>
     </Lightbox>

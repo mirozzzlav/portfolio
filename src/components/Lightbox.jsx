@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { createPortal } from "react-dom";
 import { useFocusTrap } from "src/hooks/useFocusTrap.js";
 import { mergeClassNames } from "src/styles/classNames.js";
-import { IconButton } from "src/components/IconButton.jsx";
+import { Button } from "src/components/Button.jsx";
 
 const styles = {
   root: {
@@ -82,15 +82,7 @@ const styles = {
     svg: {
       display: "block",
       width: "var(--icon-size-lg)",
-      height: "var(--icon-size-lg)",
-
-      path: {
-        stroke: "var(--palette-accent-fine)"
-      }
-    },
-
-    "&:hover svg path, &:active svg path": {
-      stroke: "var(--color-on-accent)"
+      height: "var(--icon-size-lg)"
     },
 
     [`@media ${mediaQueries.mobile}`]: {
@@ -161,11 +153,11 @@ export function Lightbox({
         <div className={mergeClassNames(contentClassName, styles.content)}>
           {children}
         </div>
-        <IconButton
+        <Button
           className={mergeClassNames(styles.close)}
           aria-label={closeLabel}
           onClick={onClose}
-          size="lg"
+          iconOnly
         >
           <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
             <path
@@ -177,7 +169,7 @@ export function Lightbox({
               strokeWidth="2"
             />
           </svg>
-        </IconButton>
+        </Button>
       </div>
     </div>,
     document.body

@@ -53,11 +53,7 @@ const styles = {
   },
 
   languageToggle: {
-    width: "var(--header-control-width)",
-    height: "var(--control-height-md)",
-    minHeight: "var(--control-height-md)",
-    gap: "var(--control-gap-md)",
-    padding: 0
+    minWidth: "var(--header-control-width)"
   },
 
   languageFlag: {
@@ -73,27 +69,17 @@ const styles = {
   },
 
   menuToggle: {
-    gap: "var(--space-0)",
     minWidth: "var(--header-control-width)",
-    height: "var(--control-height-md)",
-    minHeight: "var(--control-height-md)",
-    padding: "var(--space-1) var(--space-2)",
-    svg: {
-      color: "var(--color-ink)"
-    }
-  },
 
-  menuToggleLabel: {
-    fontSize: "var(--font-size-xs)",
-    fontWeight: "var(--font-weight-semibold)",
-    lineHeight: "var(--line-height-solid)"
+    svg: {
+      color: "var(--color-ink)",
+      width: "var(--icon-size-lg)",
+      height: "var(--icon-size-lg)"
+    }
   },
 
   menuToggleIcon: {
     display: "block",
-    width: "var(--icon-size-lg)",
-    height: "var(--icon-size-lg)",
-    color: "currentColor",
     transition: "color var(--transition-duration-fast) ease"
   },
 
@@ -190,15 +176,14 @@ export function Header() {
           <div className={className(styles.menu)} ref={menuRef}>
             <Button
               className={className(styles.menuToggle)}
+              compact
               type="button"
               aria-controls="site-menu"
               aria-expanded={isMenuOpen}
               aria-label={isMenuOpen ? content.ui.closeMenu : content.ui.openMenu}
               onClick={() => setIsMenuOpen((currentValue) => !currentValue)}
             >
-              <span className={className(styles.menuToggleLabel)}>
-                {content.ui.menu}
-              </span>
+              <span>{content.ui.menu}</span>
               <svg
                 className={className(styles.menuToggleIcon)}
                 viewBox="0 0 144 124.7"
