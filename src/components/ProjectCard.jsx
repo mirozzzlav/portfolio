@@ -2,9 +2,24 @@ import { mediaQueries } from "src/styles/mediaQueries.js";
 import { className } from "src/styles/classNames.js";
 import { useI18n } from "src/useI18n.js";
 import { TagList } from "src/components/TagList.jsx";
-import { UiLink } from "src/components/UiLink.jsx";
 import { PreviewSurface } from "src/components/PreviewSurface.jsx";
 import { InlineLinks } from "src/components/InlineLinks.jsx";
+
+const divider = {
+  position: "relative",
+
+  "&::before": {
+    content: '""',
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    height: "var(--border-width-thin)",
+    background: "var(--color-border)",
+    boxShadow: "var(--shadow-divider)",
+    pointerEvents: "none"
+  }
+};
 
 const styles = {
   card: {
@@ -17,24 +32,32 @@ const styles = {
     overflow: "visible",
     background: "var(--color-transparent)",
 
+    "> *": {
+      width: "min(100%, var(--project-description-width))",
+      minWidth: 0
+    },
+
     [`@media ${mediaQueries.mobile}`]: {
       minHeight: "auto",
       gap: "var(--space-3)"
     }
   },
 
-  descriptionFrame: {
-    width: "min(100%, var(--project-description-width))"
-  },
-
   descriptionViewport: {
     display: "grid",
     gap: "var(--space-3)",
-    paddingRight: "var(--space-2)",
+
+    "> section": {
+      ...divider,
+      paddingTop: "var(--space-3)"
+    },
 
     [`@media ${mediaQueries.mobile}`]: {
       gap: "var(--space-2)",
-      paddingRight: "var(--space-1)"
+
+      "> section": {
+        paddingTop: "var(--space-2)"
+      }
     }
   },
 
@@ -91,7 +114,7 @@ const styles = {
         width: "calc(var(--space-2) / 2)",
         height: "calc(var(--space-2) / 2)",
         borderRadius: "var(--radius-xs)",
-        background: "var(--color-border)"
+        background: "var(--color-ink)"
       }
     }
   },
@@ -101,10 +124,13 @@ const styles = {
     width: "fit-content",
     marginBottom: 0,
     color: "var(--palette-accent-fine)",
+    fontFamily: "var(--font-family-condensed)",
+    fontStretch: "semi-condensed",
     fontSize: "var(--font-size-base)",
     fontWeight: "var(--font-weight-semibold)",
     lineHeight: "var(--line-height-compact)",
-    letterSpacing: 0,
+    letterSpacing: "var(--letter-spacing-condensed)",
+    textTransform: "uppercase",
     opacity: 1,
 
     [`@media ${mediaQueries.mobile}`]: {
@@ -113,7 +139,10 @@ const styles = {
   },
 
   link: {
-    width: "fit-content"
+    color: "var(--color-link)",
+    fontWeight: "var(--font-weight-medium)",
+    textDecoration: "underline",
+    textUnderlineOffset: "var(--space-0)"
   },
 
   previewsGroupThumbs: {
@@ -186,11 +215,14 @@ const styles = {
   },
 
   resources: {
+    ...divider,
     display: "grid",
     gap: "var(--space-4)",
+    paddingTop: "var(--space-4)",
 
     [`@media ${mediaQueries.mobile}`]: {
-      gap: "var(--space-3)"
+      gap: "var(--space-3)",
+      paddingTop: "var(--space-3)"
     }
   },
 
@@ -267,10 +299,22 @@ export function ProjectCard({ isActive, onPreviewOpen, project }) {
           {type}
         </p>
       </div>
-      <div className={className(styles.descriptionFrame)}>
+      <div>
         <div className={className(styles.descriptionViewport)}>
           <p className={className(styles.description)}>
             <InlineLinks text={description} tabIndex={isActive ? 0 : -1} />
+            <br />
+            <a
+              className={className(styles.link)}
+              href={url}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`${content.ui.openProject} ${title}`}
+              title={`${content.ui.openProject} ${title}`}
+              tabIndex={isActive ? 0 : -1}
+            >
+              {content.ui.openProject}
+            </a>
           </p>
           {features?.length > 0 ? (
             <section className={className(styles.description)}>
@@ -298,18 +342,6 @@ export function ProjectCard({ isActive, onPreviewOpen, project }) {
               title={title}
             />
           ) : null}
-          <UiLink
-            hasSquare={false}
-            className={className(styles.link)}
-            href={url}
-            target="_blank"
-            rel="noreferrer"
-            aria-label={`${content.ui.openProject} ${title}`}
-            title={`${content.ui.openProject} ${title}`}
-            tabIndex={isActive ? 0 : -1}
-          >
-            {content.ui.openProject}
-          </UiLink>
         </div>
       </div>
     </article>

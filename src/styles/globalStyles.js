@@ -65,10 +65,15 @@ export const globalStyles = {
     "--surface-solid": "var(--color-surface)",
     "--shadow-menu":
       "0 12px 28px color-mix(in srgb, var(--palette-ink) var(--opacity-subtle), var(--color-transparent))",
+    "--shadow-divider":
+      "0 var(--space-0) var(--space-0) color-mix(in srgb, var(--palette-ink) var(--opacity-subtle), var(--color-transparent))",
 
     // Typography
     "--font-family-ui":
       'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
+    "--font-family-condensed":
+      '"Arial Narrow", "Liberation Sans Narrow", "Roboto Condensed", var(--font-family-ui)',
+    "--letter-spacing-condensed": "-0.02em",
     "--font-size-base": "1rem",
     "--font-size-lg": "1.25rem",
     "--font-size-page-title": "clamp(1.8rem, 1.55rem + 1.25vw, 2.55rem)",
@@ -135,8 +140,8 @@ export const globalStyles = {
     "--radius-pill": "999px",
 
     // Component dimensions
-    "--project-thumbnail-size": "160px",
-    "--project-thumbnail-size-mobile": "128px",
+    "--project-thumbnail-size": "128px",
+    "--project-thumbnail-size-mobile": "96px",
     "--project-header-min-height": "1.2rem",
     "--preview-title-min-height-mobile": "3.5rem",
     "--header-control-width": "70px",
