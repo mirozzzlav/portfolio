@@ -11,28 +11,29 @@ const styles = {
     flex: "0 0 100%",
     display: "grid",
     alignContent: "start",
-    gap: 0,
+    gap: "var(--space-4)",
     width: "100%",
     minHeight: 0,
     overflow: "visible",
     background: "var(--color-transparent)",
 
     [`@media ${mediaQueries.mobile}`]: {
-      minHeight: "auto"
+      minHeight: "auto",
+      gap: "var(--space-3)"
     }
   },
 
   descriptionFrame: {
-    width: "min(100%, var(--project-description-width))",
-    marginBottom: "var(--space-2)"
+    width: "min(100%, var(--project-description-width))"
   },
 
   descriptionViewport: {
     display: "grid",
-    gap: "var(--space-2)",
+    gap: "var(--space-3)",
     paddingRight: "var(--space-2)",
 
     [`@media ${mediaQueries.mobile}`]: {
+      gap: "var(--space-2)",
       paddingRight: "var(--space-1)"
     }
   },
@@ -56,7 +57,6 @@ const styles = {
     gap: "var(--space-2)",
     width: "100%",
     minHeight: "var(--project-header-min-height)",
-    marginBottom: "var(--space-2)",
     lineHeight: "var(--line-height-compact)",
 
     [`@media ${mediaQueries.mobile}`]: {
@@ -66,7 +66,7 @@ const styles = {
   },
 
   featuresHeading: {
-    margin: "0 0 var(--space-0)",
+    margin: "0 0 var(--space-1)",
     fontSize: "inherit",
     fontWeight: "var(--font-weight-semibold)",
     lineHeight: "inherit"
@@ -76,8 +76,24 @@ const styles = {
     display: "grid",
     gap: "var(--space-0)",
     margin: 0,
-    paddingLeft: "var(--space-3)",
-    listStyleType: "disc"
+    padding: 0,
+    listStyle: "none",
+
+    li: {
+      position: "relative",
+      paddingLeft: "calc(var(--space-1) * 2)",
+
+      "&::before": {
+        content: '""',
+        position: "absolute",
+        left: 0,
+        top: "calc((1em * var(--line-height-body) - var(--space-2) / 2) / 2)",
+        width: "calc(var(--space-2) / 2)",
+        height: "calc(var(--space-2) / 2)",
+        borderRadius: "var(--radius-xs)",
+        background: "var(--color-border)"
+      }
+    }
   },
 
   category: {
@@ -97,11 +113,7 @@ const styles = {
   },
 
   link: {
-    width: "fit-content",
-    marginTop: "var(--space-1)",
-    alignSelf: "center",
-    color: "var(--color-accent)",
-    paddingBlock: 0
+    width: "fit-content"
   },
 
   previewsGroupThumbs: {
@@ -120,7 +132,7 @@ const styles = {
     width: "var(--project-thumbnail-size)",
     aspectRatio: "1",
     maxWidth: "100%",
-    margin: "0 0 var(--space-1)",
+    margin: 0,
 
     [`@media ${mediaQueries.mobile}`]: {
       width: "var(--project-thumbnail-size-mobile)"
@@ -173,9 +185,19 @@ const styles = {
     color: "var(--color-text)"
   },
 
-  tags: {
-    boxSizing: "border-box",
-    marginBottom: "var(--space-3)"
+  resources: {
+    display: "grid",
+    gap: "var(--space-4)",
+
+    [`@media ${mediaQueries.mobile}`]: {
+      gap: "var(--space-3)"
+    }
+  },
+
+  previewActions: {
+    display: "grid",
+    gap: "var(--space-1)",
+    justifyItems: "start"
   }
 };
 
@@ -253,7 +275,7 @@ export function ProjectCard({ isActive, onPreviewOpen, project }) {
           {features?.length > 0 ? (
             <section className={className(styles.description)}>
               <h3 className={className(styles.featuresHeading)}>{featuresTitle}</h3>
-              <ul className={className(styles.featuresList)}>
+              <ul className={className(styles.featuresList)} role="list">
                 {features.map((feature) => (
                   <li key={feature}>
                     <InlineLinks text={feature} tabIndex={isActive ? 0 : -1} />
@@ -264,29 +286,32 @@ export function ProjectCard({ isActive, onPreviewOpen, project }) {
           ) : null}
         </div>
       </div>
-      <div className={className(styles.tags)}>
+      <div className={className(styles.resources)}>
         <TagList items={technologies} ariaLabel={content.ui.technologies} />
+        <div className={className(styles.previewActions)}>
+          {previewImages.length > 0 ? (
+            <PreviewsGroup
+              previewImages={previewImages}
+              images={images}
+              isActive={isActive}
+              onClick={onPreviewOpen}
+              title={title}
+            />
+          ) : null}
+          <UiLink
+            hasSquare={false}
+            className={className(styles.link)}
+            href={url}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={`${content.ui.openProject} ${title}`}
+            title={`${content.ui.openProject} ${title}`}
+            tabIndex={isActive ? 0 : -1}
+          >
+            {content.ui.openProject}
+          </UiLink>
+        </div>
       </div>
-      {previewImages.length > 0 ? (
-        <PreviewsGroup
-          previewImages={previewImages}
-          images={images}
-          isActive={isActive}
-          onClick={onPreviewOpen}
-          title={title}
-        />
-      ) : null}
-      <UiLink
-        className={className(styles.link)}
-        href={url}
-        hasSquare={false}
-        target="_blank"
-        rel="noreferrer"
-        aria-label={`${content.ui.openProject} ${title}`}
-        tabIndex={isActive ? 0 : -1}
-      >
-        {content.ui.openProject}
-      </UiLink>
     </article>
   );
 }

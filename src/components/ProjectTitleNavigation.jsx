@@ -14,7 +14,7 @@ const styles = {
     alignItems: "center",
     flexWrap: "nowrap",
     gap: "var(--space-2)",
-    marginBottom: "var(--space-2)",
+    marginBottom: "var(--space-1)",
     justifyContent: "space-between",
     width: "min(100%, var(--project-navigation-width))",
 
