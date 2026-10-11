@@ -34,12 +34,7 @@ export const globalStyles = {
 
     // Opacity, surfaces and shadows
     "--opacity-disabled": 0.36,
-    "--opacity-disabled-preview": 0.45,
     "--opacity-disabled-button": 0.58,
-    "--surface-preview-border":
-      "color-mix(in srgb, var(--color-surface) 42%, var(--color-transparent))",
-    "--surface-preview-button":
-      "color-mix(in srgb, var(--color-surface) 52%, var(--color-transparent))",
     "--surface-preview-title":
       "color-mix(in srgb, var(--surface-solid) 78%, var(--color-transparent))",
     "--surface-project-title":
@@ -122,7 +117,6 @@ export const globalStyles = {
     "--field-textarea-min-height": "132px",
     "--icon-button-size-xl": "48px",
     "--icon-size-lg": "22px",
-    "--icon-size-preview": "2.5rem",
     "--icon-size-status": "1.28rem",
     "--selection-indicator-size": "0.66rem",
     "--radius-xs": "2px",
@@ -140,8 +134,6 @@ export const globalStyles = {
     "--radius-pill": "999px",
 
     // Component dimensions
-    "--project-thumbnail-size": "128px",
-    "--project-thumbnail-size-mobile": "96px",
     "--project-header-min-height": "1.2rem",
     "--preview-title-min-height-mobile": "3.5rem",
     "--header-control-width": "70px",
@@ -199,6 +191,7 @@ export const globalStyles = {
 
   a: {
     color: "inherit",
+    fontWeight: "var(--font-weight-semibold)",
     textDecoration: "none"
   },
 

@@ -1,14 +1,11 @@
 import { Link } from "react-router-dom";
 import { parseInlineLinks } from "src/content/inlineLinks.js";
 import { className } from "src/styles/classNames.js";
+import { textLink } from "src/styles/linkStyles.js";
 import { useI18n } from "src/useI18n.js";
 
 const styles = {
-  link: {
-    color: "var(--color-link)",
-    textDecoration: "underline",
-    textUnderlineOffset: "var(--space-0)"
-  }
+  link: textLink
 };
 
 export function InlineLinks({ text, tabIndex }) {

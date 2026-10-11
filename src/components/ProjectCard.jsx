@@ -1,9 +1,10 @@
 import { mediaQueries } from "src/styles/mediaQueries.js";
 import { className } from "src/styles/classNames.js";
+import { textLink } from "src/styles/linkStyles.js";
 import { useI18n } from "src/useI18n.js";
 import { TagList } from "src/components/TagList.jsx";
-import { PreviewSurface } from "src/components/PreviewSurface.jsx";
 import { InlineLinks } from "src/components/InlineLinks.jsx";
+import { IconLabel } from "src/components/IconLabel.jsx";
 
 const divider = {
   position: "relative",
@@ -76,14 +77,16 @@ const styles = {
   header: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "flex-start",
+    justifyContent: "space-between",
     gap: "var(--space-2)",
-    width: "100%",
+    width: "min(100%, var(--project-description-width))",
+    marginBottom: "var(--space-4)",
     minHeight: "var(--project-header-min-height)",
     lineHeight: "var(--line-height-compact)",
 
     [`@media ${mediaQueries.mobile}`]: {
       gap: "var(--space-1)",
+      marginBottom: "var(--space-3)",
       flexWrap: "nowrap"
     }
   },
@@ -120,7 +123,8 @@ const styles = {
   },
 
   category: {
-    flex: "none",
+    flex: "0 1 auto",
+    minWidth: 0,
     width: "fit-content",
     marginBottom: 0,
     color: "var(--palette-accent-fine)",
@@ -138,122 +142,51 @@ const styles = {
     }
   },
 
-  link: {
-    color: "var(--color-link)",
-    fontWeight: "var(--font-weight-medium)",
-    textDecoration: "underline",
-    textUnderlineOffset: "var(--space-0)"
-  },
-
-  previewsGroupThumbs: {
-    display: "grid",
-    gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
-    gridTemplateRows: "repeat(2, minmax(0, 1fr))",
-    alignItems: "center",
-    gap: "var(--space-0)",
-    width: "100%",
-    height: "100%",
-    margin: 0
-  },
-
-  previewsGroup: {
-    position: "relative",
-    width: "var(--project-thumbnail-size)",
-    aspectRatio: "1",
-    maxWidth: "100%",
-    margin: 0,
-
-    [`@media ${mediaQueries.mobile}`]: {
-      width: "var(--project-thumbnail-size-mobile)"
-    }
-  },
+  link: textLink,
 
   previewButton: {
     appearance: "none",
-    position: "absolute",
-    inset: 0,
-    zIndex: 2,
-    boxSizing: "border-box",
-    display: "inline-flex",
-    alignItems: "center",
     justifyContent: "center",
-    flexDirection: "column",
     gap: "var(--space-0)",
-    border: "var(--border-width-thin) solid var(--surface-preview-border)",
+    minHeight: "var(--control-height-sm)",
+    border: 0,
     borderRadius: "var(--radius-sm)",
-    padding: "var(--space-1)",
-    background: "var(--surface-preview-button)",
-    backdropFilter: "blur(var(--blur-sm))",
-    color: "var(--color-text)",
+    padding: "var(--space-0) var(--space-1)",
+    background: "var(--color-transparent)",
     cursor: "pointer",
-    font: "inherit",
-    fontSize: "var(--font-size-xs)",
-    fontWeight: "var(--font-weight-semibold)",
     lineHeight: "var(--line-height-compact)",
-    textAlign: "center",
+    whiteSpace: "nowrap",
 
-    "&:disabled": {
-      cursor: "default",
-      opacity: "var(--opacity-disabled-preview)"
-    }
-  },
+    "> svg": {
+      width: "calc(var(--icon-size-lg) + var(--space-0))",
+      height: "calc(var(--icon-size-lg) + var(--space-0))"
+    },
 
-  previewButtonIcon: {
-    display: "block",
-    flex: "none",
-    width: "var(--icon-size-preview)",
-    height: "var(--icon-size-preview)",
-    color: "var(--palette-accent-fine)"
-  },
-
-  previewButtonText: {
-    minWidth: 0,
-    maxWidth: "100%",
-    // Optical alignment of the label with its preview icon.
-    marginTop: "-0.18rem",
-    color: "var(--color-text)"
-  },
-
-  resources: {
-    ...divider,
-    display: "grid",
-    gap: "var(--space-4)",
-    paddingTop: "var(--space-4)",
+    "&:hover": {
+      background:
+        "color-mix(in srgb, var(--palette-accent-soft) 50%, var(--color-surface))"
+    },
 
     [`@media ${mediaQueries.mobile}`]: {
-      gap: "var(--space-3)",
-      paddingTop: "var(--space-3)"
+      minWidth: "var(--control-height-md)",
+      minHeight: "var(--control-height-md)"
     }
-  },
-
-  previewActions: {
-    display: "grid",
-    gap: "var(--space-1)",
-    justifyItems: "start"
   }
 };
 
-export function PreviewsGroup({ previewImages, images, onClick, title, isActive }) {
+function PreviewButton({ images, onClick, title }) {
   const { content } = useI18n();
   return (
-    <div className={className(styles.previewsGroup)}>
-      <div className={className(styles.previewsGroupThumbs)}>
-        {previewImages.map((image) => (
-          <PreviewSurface key={`${title}-${image.alt}`} image={image} tabIndex={-1} />
-        ))}
-      </div>
-      <button
-        className={className(styles.previewButton)}
-        type="button"
-        disabled={!isActive}
-        tabIndex={isActive ? 0 : -1}
-        onClick={() => onClick(images, 0)}
-      >
-        <svg
-          className={className(styles.previewButtonIcon)}
-          viewBox="0 0 16 16"
-          aria-hidden="true"
-        >
+    <IconLabel
+      as="button"
+      className={className(styles.previewButton)}
+      type="button"
+      aria-label={`${content.ui.viewPreviews}: ${title}`}
+      title={content.ui.viewPreviews}
+      aria-haspopup="dialog"
+      onClick={() => onClick(images, 0)}
+      icon={
+        <svg viewBox="0 0 16 16" aria-hidden="true">
           <path
             d="M2 8s2.1-3.5 6-3.5S14 8 14 8s-2.1 3.5-6 3.5S2 8 2 8Z"
             fill="none"
@@ -270,35 +203,36 @@ export function PreviewsGroup({ previewImages, images, onClick, title, isActive 
             strokeWidth="1.45"
           />
         </svg>
-        <span className={className(styles.previewButtonText)}>
-          {content.ui.viewPreviews}
-        </span>
-      </button>
+      }
+    >
+      {content.ui.viewPreviews}
+    </IconLabel>
+  );
+}
+
+export function ProjectSubtitle({ project, onPreviewOpen }) {
+  return (
+    <div className={className(styles.header)}>
+      <p className={className(styles.category)} data-project-category>
+        {project.type}
+      </p>
+      {project.images.length > 0 ? (
+        <PreviewButton
+          images={project.images}
+          onClick={onPreviewOpen}
+          title={project.title}
+        />
+      ) : null}
     </div>
   );
 }
 
-export function ProjectCard({ isActive, onPreviewOpen, project }) {
+export function ProjectCard({ isActive, project }) {
   const { content } = useI18n();
-  const {
-    description,
-    featuresTitle,
-    features,
-    images,
-    technologies,
-    title,
-    type,
-    url
-  } = project;
-  const previewImages = images.slice(0, 4);
+  const { description, featuresTitle, features, technologies, title, url } = project;
 
   return (
     <article className={className(styles.card)} aria-hidden={!isActive}>
-      <div className={className(styles.header)}>
-        <p className={className(styles.category)} data-project-category>
-          {type}
-        </p>
-      </div>
       <div>
         <div className={className(styles.descriptionViewport)}>
           <p className={className(styles.description)}>
@@ -328,19 +262,13 @@ export function ProjectCard({ isActive, onPreviewOpen, project }) {
               </ul>
             </section>
           ) : null}
-        </div>
-      </div>
-      <div className={className(styles.resources)}>
-        <TagList items={technologies} ariaLabel={content.ui.technologies} />
-        <div className={className(styles.previewActions)}>
-          {previewImages.length > 0 ? (
-            <PreviewsGroup
-              previewImages={previewImages}
-              images={images}
-              isActive={isActive}
-              onClick={onPreviewOpen}
-              title={title}
-            />
+          {technologies?.length > 0 ? (
+            <section className={className(styles.description)}>
+              <h3 className={className(styles.featuresHeading)}>
+                {content.ui.technologies}
+              </h3>
+              <TagList items={technologies} ariaLabel={content.ui.technologies} />
+            </section>
           ) : null}
         </div>
       </div>

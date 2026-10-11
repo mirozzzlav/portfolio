@@ -1,5 +1,5 @@
 import { Suspense, lazy, useMemo, useState } from "react";
-import { ProjectCard } from "src/components/ProjectCard.jsx";
+import { ProjectCard, ProjectSubtitle } from "src/components/ProjectCard.jsx";
 import { ProjectTitleNavigation } from "src/components/ProjectTitleNavigation.jsx";
 import { useProjectNavigation } from "src/hooks/useProjectNavigation.js";
 import { className } from "src/styles/classNames.js";
@@ -83,12 +83,12 @@ export function ProjectsPage() {
           onPrevious={() => navigateProject(-1)}
           title={activeProject.title}
         />
+        <ProjectSubtitle project={activeProject} onPreviewOpen={openPreview} />
         <div className={className(styles.track)} style={trackStyle}>
           {projects.map((project, projectIndex) => (
             <ProjectCard
               isActive={projectIndex === activeProjectIndex}
               key={project.title}
-              onPreviewOpen={openPreview}
               project={project}
             />
           ))}
