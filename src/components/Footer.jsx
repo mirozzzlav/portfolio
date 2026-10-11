@@ -3,7 +3,6 @@ import { className } from "src/styles/classNames.js";
 import { useI18n } from "src/useI18n.js";
 import { CurrentYear } from "src/components/CurrentYear.jsx";
 import { NavigationLink } from "src/components/NavigationLink.jsx";
-import { useMobileKeyboard } from "src/hooks/useMobileKeyboard.js";
 
 const styles = {
   footer: {
@@ -80,10 +79,9 @@ const styles = {
 
 export function Footer() {
   const { content, routes } = useI18n();
-  const isKeyboardOpen = useMobileKeyboard();
 
   return (
-    <footer className={className(styles.footer)} hidden={isKeyboardOpen}>
+    <footer className={className(styles.footer)}>
       <nav className={className(styles.nav)} aria-label={content.ui.footerNavigation}>
         {routes.map((item, itemIndex) => (
           <Fragment key={item.path}>
