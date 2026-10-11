@@ -9,7 +9,7 @@ const styles = {
     alignItems: "flex-start",
     flexWrap: "wrap",
     columnGap: "var(--space-1)",
-    rowGap: "0.3rem",
+    rowGap: "var(--space-0)",
     margin: 0,
     padding: 0,
     listStyle: "none",

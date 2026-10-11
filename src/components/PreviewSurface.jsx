@@ -9,7 +9,7 @@ const styles = {
     minWidth: 0,
     padding: 0,
     overflow: "hidden",
-    border: "1px solid var(--line-muted)",
+    border: "var(--border-width-thin) solid var(--line-muted)",
     borderRadius: "var(--radius-sm)",
     backgroundColor: "var(--palette-accent-soft)",
     backgroundPosition: "center",

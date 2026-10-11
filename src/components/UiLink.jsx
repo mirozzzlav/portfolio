@@ -3,6 +3,7 @@ import { mergeClassNames } from "src/styles/classNames.js";
 import Arrow from "src/components/Arrow.jsx";
 import { SelectionIndicator } from "src/components/SelectionIndicator.jsx";
 
+// Optical offsets follow the text baseline rather than the spacing scale.
 const arrowYTransform = "translateY(calc(0.16em - 2px))";
 const arrowRestTransform = `translateX(0) ${arrowYTransform}`;
 const arrowLeftHoverTransform = `translateX(calc(-1 * var(--space-0))) ${arrowYTransform}`;
@@ -35,7 +36,7 @@ const styles = {
     gap: "var(--space-0)",
     position: "relative",
     border: 0,
-    borderRadius: "var(--radius-md)",
+    borderRadius: "var(--radius-sm)",
     paddingInline: "var(--space-1)",
     background: "var(--color-transparent)",
     color: "inherit",
@@ -43,7 +44,8 @@ const styles = {
     font: "inherit",
     fontSize: "var(--font-size-sm)",
     textAlign: "left",
-    transition: "background 160ms ease, color 160ms ease",
+    transition:
+      "background var(--transition-duration-fast) ease, color var(--transition-duration-fast) ease",
 
     "&:hover": hoverLink,
 
@@ -55,7 +57,7 @@ const styles = {
 
     "&:disabled": {
       cursor: "default",
-      opacity: 0.36
+      opacity: "var(--opacity-disabled)"
     },
 
     "&:disabled [data-navigation-arrow]": {
@@ -86,7 +88,7 @@ const styles = {
 
   arrow: {
     transform: arrowRestTransform,
-    transition: "transform 160ms ease"
+    transition: "transform var(--transition-duration-fast) ease"
   }
 };
 

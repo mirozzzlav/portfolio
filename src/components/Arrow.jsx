@@ -4,8 +4,8 @@ const styles = {
   icon: {
     display: "block",
     flex: "none",
-    width: "1rem",
-    height: "1rem"
+    width: "var(--space-3)",
+    height: "var(--space-3)"
   }
 };
 

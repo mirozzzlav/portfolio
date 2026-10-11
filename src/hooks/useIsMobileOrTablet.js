@@ -1,7 +1,7 @@
+import { mediaQueries } from "src/styles/mediaQueries.js";
 import { useSyncExternalStore } from "react";
 
-export const MOBILE_OR_TABLET_QUERY =
-  "(max-width: 1000px), (hover: none), (pointer: coarse)";
+export const MOBILE_OR_TABLET_QUERY = mediaQueries.mobileOrTablet;
 
 function subscribe(onChange) {
   const media = window.matchMedia(MOBILE_OR_TABLET_QUERY);

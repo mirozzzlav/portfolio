@@ -9,9 +9,9 @@ const styles = {
     maxWidth: "100%",
     margin: "0 0 var(--space-3) 0",
     padding: "var(--space-1) var(--space-2)",
-    border: "1px solid currentColor",
+    border: "var(--border-width-thin) solid currentColor",
     borderRadius: "var(--radius-xl)",
-    fontSize: "0.92rem",
+    fontSize: "var(--font-size-sm)",
     fontWeight: "var(--font-weight-medium)",
     lineHeight: "var(--line-height-body)",
     textWrap: "pretty"
@@ -20,19 +20,19 @@ const styles = {
   icon: {
     display: "block",
     flex: "none",
-    width: "1.28rem",
-    height: "1.28rem",
+    width: "var(--icon-size-status)",
+    height: "var(--icon-size-status)",
+    // Optical alignment with the first line of text.
     marginTop: "0.08rem"
   },
 
   success: {
-    background:
-      "color-mix(in srgb, var(--color-success) 10%, var(--color-transparent))",
+    background: "var(--surface-status-success)",
     color: "var(--color-success)"
   },
 
   error: {
-    background: "color-mix(in srgb, var(--color-error) 10%, var(--color-transparent))",
+    background: "var(--surface-status-error)",
     color: "var(--color-error)"
   }
 };

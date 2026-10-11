@@ -4,14 +4,14 @@ const styles = {
   indicator: {
     display: "block",
     flex: "none",
-    width: "0.66rem",
-    height: "0.66rem",
-    border: "1px solid var(--color-border)",
-    borderRadius: "2px",
+    width: "var(--selection-indicator-size)",
+    height: "var(--selection-indicator-size)",
+    border: "var(--border-width-thin) solid var(--color-border)",
+    borderRadius: "var(--radius-xs)",
     background: "var(--color-surface)",
     boxShadow: "none",
     transition:
-      "background 160ms ease, border-color 160ms ease, box-shadow 160ms ease, opacity 160ms ease, transform 160ms ease"
+      "background var(--transition-duration-fast) ease, border-color var(--transition-duration-fast) ease, box-shadow var(--transition-duration-fast) ease, opacity var(--transition-duration-fast) ease, transform var(--transition-duration-fast) ease"
   },
 
   active: {

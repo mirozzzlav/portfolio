@@ -41,10 +41,10 @@ const styles = {
 
   selectorButton: {
     ...iconButtonBase,
-    width: "0.66rem",
-    height: "0.66rem",
+    width: "var(--selection-indicator-size)",
+    height: "var(--selection-indicator-size)",
     border: 0,
-    borderRadius: "2px",
+    borderRadius: "var(--radius-xs)",
     background: "var(--color-transparent)",
 
     "&:hover [data-selection-indicator], &:active [data-selection-indicator]": {
@@ -54,13 +54,13 @@ const styles = {
   },
 
   md: {
-    width: "var(--icon-button-size-md)",
-    height: "var(--icon-button-size-md)"
+    width: "var(--control-height-md)",
+    height: "var(--control-height-md)"
   },
 
   lg: {
-    width: "var(--icon-button-size-lg)",
-    height: "var(--icon-button-size-lg)"
+    width: "var(--control-height-lg)",
+    height: "var(--control-height-lg)"
   },
 
   active: activeButton

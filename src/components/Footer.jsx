@@ -1,3 +1,4 @@
+import { mediaQueries } from "src/styles/mediaQueries.js";
 import { Fragment } from "react";
 import { className } from "src/styles/classNames.js";
 import { useI18n } from "src/useI18n.js";
@@ -10,7 +11,7 @@ const styles = {
     right: 0,
     bottom: 0,
     left: 0,
-    zIndex: 20,
+    zIndex: "var(--layer-navigation)",
     display: "grid",
     gridTemplateColumns: "1fr auto",
     alignItems: "center",
@@ -19,9 +20,8 @@ const styles = {
     margin: "0 auto",
     padding: "var(--space-2) var(--space-4)",
     background: "var(--surface-overlay-strong)",
-    backdropFilter: "blur(12px)",
-    boxShadow:
-      "0 -6px 16px color-mix(in srgb, var(--palette-ink) 4%, var(--color-transparent))",
+    backdropFilter: "blur(var(--blur-md))",
+    boxShadow: "var(--shadow-footer)",
     color: "var(--color-ink)",
 
     p: {
@@ -30,7 +30,7 @@ const styles = {
       textAlign: "right"
     },
 
-    "@media (max-width: 780px)": {
+    [`@media ${mediaQueries.mobile}`]: {
       justifyItems: "stretch",
       gap: "var(--space-2)",
       padding: "var(--space-2) var(--space-3)"
@@ -46,14 +46,14 @@ const styles = {
     color: "var(--color-ink)",
     fontWeight: "var(--font-weight-medium)",
 
-    "@media (max-width: 780px)": {
+    [`@media ${mediaQueries.mobile}`]: {
       gap: "var(--space-1)"
     }
   },
 
   link: {
     gap: "var(--space-1)",
-    "@media (max-width: 780px)": {
+    [`@media ${mediaQueries.mobile}`]: {
       "[data-selection-indicator]": {
         display: "none"
       }
@@ -70,9 +70,9 @@ const styles = {
     display: "inline-block",
     color: "var(--color-ink)",
     fontFamily: "var(--font-family-digital-numeric)",
-    fontSize: "0.78em",
+    fontSize: "var(--font-size-footer-year)",
     fontWeight: "var(--font-weight-bold)",
-    letterSpacing: "0.04em",
+    letterSpacing: "var(--letter-spacing-digital)",
     lineHeight: "var(--line-height-solid)"
   }
 };

@@ -72,7 +72,7 @@ const styles = {
   body: { background: "var(--snake-color)" },
   food: { background: "var(--food-color)" },
   crash: {
-    animation: `${blink} 0.42s linear 3`,
+    animation: `${blink} var(--transition-duration-crash) linear 3`,
     "@media (prefers-reduced-motion: reduce)": { animation: "none" }
   }
 };

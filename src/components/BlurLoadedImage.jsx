@@ -23,9 +23,9 @@ const styles = {
   placeholder: {
     zIndex: 0,
     transform: "scale(1.08)",
-    filter: "blur(14px)",
+    filter: "blur(var(--blur-md))",
     opacity: 1,
-    transition: "opacity 180ms ease",
+    transition: "opacity var(--transition-duration-normal) ease",
 
     "[data-loaded='true'] &": {
       opacity: 0
@@ -39,7 +39,7 @@ const styles = {
   fullImage: {
     zIndex: 1,
     opacity: 0,
-    transition: "opacity 220ms ease",
+    transition: "opacity var(--transition-duration-normal) ease",
 
     "[data-loaded='true'] &": {
       opacity: 1

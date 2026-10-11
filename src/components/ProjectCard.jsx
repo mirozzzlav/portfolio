@@ -1,3 +1,4 @@
+import { mediaQueries } from "src/styles/mediaQueries.js";
 import { className } from "src/styles/classNames.js";
 import { useI18n } from "src/useI18n.js";
 import { TagList } from "src/components/TagList.jsx";
@@ -16,13 +17,13 @@ const styles = {
     overflow: "visible",
     background: "var(--color-transparent)",
 
-    "@media (max-width: 780px)": {
+    [`@media ${mediaQueries.mobile}`]: {
       minHeight: "auto"
     }
   },
 
   descriptionFrame: {
-    width: "min(100%, 68ch)",
+    width: "min(100%, var(--project-description-width))",
     marginBottom: "var(--space-2)"
   },
 
@@ -31,7 +32,7 @@ const styles = {
     gap: "var(--space-2)",
     paddingRight: "var(--space-2)",
 
-    "@media (max-width: 780px)": {
+    [`@media ${mediaQueries.mobile}`]: {
       paddingRight: "var(--space-1)"
     }
   },
@@ -39,12 +40,12 @@ const styles = {
   description: {
     marginBottom: 0,
     color: "var(--color-text)",
-    fontSize: "1rem",
+    fontSize: "var(--font-size-base)",
     lineHeight: "var(--line-height-body)",
     textWrap: "pretty",
 
-    "@media (max-width: 780px)": {
-      fontSize: "0.92rem"
+    [`@media ${mediaQueries.mobile}`]: {
+      fontSize: "var(--font-size-sm)"
     }
   },
 
@@ -54,11 +55,11 @@ const styles = {
     justifyContent: "flex-start",
     gap: "var(--space-2)",
     width: "100%",
-    minHeight: "1.2rem",
+    minHeight: "var(--project-header-min-height)",
     marginBottom: "var(--space-2)",
     lineHeight: "var(--line-height-compact)",
 
-    "@media (max-width: 780px)": {
+    [`@media ${mediaQueries.mobile}`]: {
       gap: "var(--space-1)",
       flexWrap: "nowrap"
     }
@@ -84,14 +85,14 @@ const styles = {
     width: "fit-content",
     marginBottom: 0,
     color: "var(--palette-accent-fine)",
-    fontSize: "1rem",
+    fontSize: "var(--font-size-base)",
     fontWeight: "var(--font-weight-semibold)",
     lineHeight: "var(--line-height-compact)",
     letterSpacing: 0,
     opacity: 1,
 
-    "@media (max-width: 780px)": {
-      fontSize: "0.92rem"
+    [`@media ${mediaQueries.mobile}`]: {
+      fontSize: "var(--font-size-sm)"
     }
   },
 
@@ -116,13 +117,13 @@ const styles = {
 
   previewsGroup: {
     position: "relative",
-    width: "160px",
+    width: "var(--project-thumbnail-size)",
     aspectRatio: "1",
     maxWidth: "100%",
     margin: "0 0 var(--space-1)",
 
-    "@media (max-width: 780px)": {
-      width: "128px"
+    [`@media ${mediaQueries.mobile}`]: {
+      width: "var(--project-thumbnail-size-mobile)"
     }
   },
 
@@ -137,38 +138,37 @@ const styles = {
     justifyContent: "center",
     flexDirection: "column",
     gap: "var(--space-0)",
-    border:
-      "1px solid color-mix(in srgb, var(--color-surface) 42%, var(--color-transparent))",
+    border: "var(--border-width-thin) solid var(--surface-preview-border)",
     borderRadius: "var(--radius-sm)",
     padding: "var(--space-1)",
-    background:
-      "color-mix(in srgb, var(--color-surface) 52%, var(--color-transparent))",
-    backdropFilter: "blur(4px)",
+    background: "var(--surface-preview-button)",
+    backdropFilter: "blur(var(--blur-sm))",
     color: "var(--color-text)",
     cursor: "pointer",
     font: "inherit",
-    fontSize: "0.84rem",
+    fontSize: "var(--font-size-xs)",
     fontWeight: "var(--font-weight-semibold)",
     lineHeight: "var(--line-height-compact)",
     textAlign: "center",
 
     "&:disabled": {
       cursor: "default",
-      opacity: 0.45
+      opacity: "var(--opacity-disabled-preview)"
     }
   },
 
   previewButtonIcon: {
     display: "block",
     flex: "none",
-    width: "2.5rem",
-    height: "2.5rem",
+    width: "var(--icon-size-preview)",
+    height: "var(--icon-size-preview)",
     color: "var(--palette-accent-fine)"
   },
 
   previewButtonText: {
     minWidth: 0,
     maxWidth: "100%",
+    // Optical alignment of the label with its preview icon.
     marginTop: "-0.18rem",
     color: "var(--color-text)"
   },

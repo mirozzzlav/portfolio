@@ -1,11 +1,11 @@
+import { mediaQueries } from "src/styles/mediaQueries.js";
 import { className } from "src/styles/classNames.js";
 import { useI18n } from "src/useI18n.js";
 import { UiLink } from "src/components/UiLink.jsx";
 
 const pillBase = {
-  border: "1px solid var(--color-border)",
-  background:
-    "color-mix(in srgb, var(--palette-surface-muted), var(--color-transparent) 34%)"
+  border: "var(--border-width-thin) solid var(--color-border)",
+  background: "var(--surface-project-title)"
 };
 
 const styles = {
@@ -16,9 +16,9 @@ const styles = {
     gap: "var(--space-2)",
     marginBottom: "var(--space-2)",
     justifyContent: "space-between",
-    width: "min(100%, 680px)",
+    width: "min(100%, var(--project-navigation-width))",
 
-    "@media (max-width: 620px)": {
+    [`@media ${mediaQueries.narrow}`]: {
       gap: "var(--space-1)"
     }
   },
@@ -29,12 +29,12 @@ const styles = {
     flex: "0 1 auto",
     alignItems: "center",
     minWidth: 0,
-    minHeight: "44px",
+    minHeight: "var(--control-height-lg)",
     width: "fit-content",
     maxWidth: "100%",
     borderLeft: "var(--space-0) solid var(--palette-accent-fine)",
     borderRadius:
-      "var(--radius-lg) var(--radius-pill) var(--radius-pill) var(--radius-lg)"
+      "var(--radius-sm) var(--radius-pill) var(--radius-pill) var(--radius-sm)"
   },
 
   title: {
@@ -42,7 +42,7 @@ const styles = {
     margin: 0,
     padding: "0 var(--space-4) 0 var(--space-2)",
     color: "var(--color-text)",
-    fontSize: "clamp(1.05rem, 2.4vw, 1.35rem)",
+    fontSize: "var(--font-size-project-title)",
     fontWeight: "var(--font-weight-semibold)",
     lineHeight: "var(--line-height-heading)",
     overflow: "hidden",
@@ -61,7 +61,7 @@ const styles = {
   navigationSeparator: {
     flex: "none",
     alignSelf: "stretch",
-    width: "1px",
+    width: "var(--border-width-thin)",
     background: "var(--color-border)"
   },
 

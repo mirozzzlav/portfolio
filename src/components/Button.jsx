@@ -31,7 +31,7 @@ const styles = {
       "background var(--transition-duration-fast) ease, border-color var(--transition-duration-fast) ease, color var(--transition-duration-fast) ease",
 
     "&:not(:disabled):not(:focus-visible):hover": {
-      outline: "3px solid var(--palette-accent-soft)",
+      outline: "var(--outline-width-hover) solid var(--palette-accent-soft)",
       outlineOffset: "var(--space-0)"
     }
   },
@@ -59,7 +59,7 @@ const styles = {
 
   disabled: {
     cursor: "not-allowed",
-    opacity: 0.58
+    opacity: "var(--opacity-disabled-button)"
   }
 };
 

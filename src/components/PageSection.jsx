@@ -17,7 +17,7 @@ const styles = {
     alignItems: "start",
     minHeight: 0,
     padding: 0,
-    animation: "section-enter 280ms ease-out both",
+    animation: "section-enter var(--transition-duration-page) ease-out both",
 
     "@media (prefers-reduced-motion: reduce)": {
       animation: "none",
@@ -28,7 +28,7 @@ const styles = {
 
   pageContent: {
     minWidth: 0,
-    maxWidth: "75ch",
+    maxWidth: "var(--content-width)",
     overflow: "visible",
     padding: 0
   }

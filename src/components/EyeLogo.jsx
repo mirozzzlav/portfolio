@@ -63,7 +63,10 @@ export default function EyeLogo({ motion = "pointer" }) {
 
   const pupilStyle = {
     transform: `translate(${x}px, ${y}px)`,
-    transition: motion === "auto" ? "transform 160ms linear" : "transform 80ms linear"
+    transition:
+      motion === "auto"
+        ? "transform var(--transition-duration-fast) linear"
+        : "transform var(--transition-duration-instant) linear"
   };
 
   return (

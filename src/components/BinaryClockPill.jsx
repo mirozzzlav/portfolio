@@ -6,8 +6,8 @@ import { Pill } from "src/components/Pill.jsx";
 const styles = {
   pill: {
     "&& svg": {
-      width: "22px",
-      height: "22px"
+      width: "var(--icon-size-lg)",
+      height: "var(--icon-size-lg)"
     }
   },
 
@@ -19,20 +19,20 @@ const styles = {
   time: {
     display: "inline-flex",
     alignItems: "center",
-    gap: "0.16rem",
+    gap: "var(--space-2xs)",
     fontFamily: "var(--font-family-digital-numeric)",
-    fontSize: "0.78rem",
+    fontSize: "var(--font-size-2xs)",
     fontWeight: "var(--font-weight-bold)",
-    letterSpacing: "0.04em"
+    letterSpacing: "var(--letter-spacing-digital)"
   },
 
   separator: {
     color: "var(--palette-accent-fine)",
-    fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
-    fontSize: "0.92rem",
+    fontFamily: "var(--font-family-ui)",
+    fontSize: "var(--font-size-sm)",
     fontWeight: "var(--font-weight-bold)",
     lineHeight: "var(--line-height-solid)",
-    margin: "0 0.22rem"
+    margin: "0 var(--space-0)"
   }
 };
 

@@ -1,3 +1,4 @@
+import { mediaQueries } from "src/styles/mediaQueries.js";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { className } from "src/styles/classNames.js";
@@ -12,11 +13,11 @@ const styles = {
     top: 0,
     right: 0,
     left: 0,
-    zIndex: 20,
+    zIndex: "var(--layer-navigation)",
     width: "100%",
     padding: "var(--space-2) 0",
     background: "var(--surface-frosted)",
-    backdropFilter: "blur(12px)"
+    backdropFilter: "blur(var(--blur-md))"
   },
 
   inner: {
@@ -28,7 +29,7 @@ const styles = {
     margin: "0 auto",
     padding: "0 var(--space-4)",
 
-    "@media (max-width: 780px)": {
+    [`@media ${mediaQueries.mobile}`]: {
       padding: "0 var(--space-3)"
     }
   },
@@ -41,7 +42,7 @@ const styles = {
     svg: {
       display: "block",
       width: "auto",
-      height: "40px"
+      height: "var(--control-height-md)"
     }
   },
 
@@ -52,16 +53,16 @@ const styles = {
   },
 
   languageToggle: {
-    width: "68px",
-    height: "40px",
-    minHeight: "40px",
-    gap: "0.35rem",
+    width: "var(--header-control-width)",
+    height: "var(--control-height-md)",
+    minHeight: "var(--control-height-md)",
+    gap: "var(--control-gap-md)",
     padding: 0
   },
 
   languageFlag: {
     display: "block",
-    fontSize: "1rem",
+    fontSize: "var(--font-size-base)",
     lineHeight: "var(--line-height-solid)"
   },
 
@@ -73,9 +74,9 @@ const styles = {
 
   menuToggle: {
     gap: "var(--space-0)",
-    minWidth: "70px",
-    height: "40px",
-    minHeight: "40px",
+    minWidth: "var(--header-control-width)",
+    height: "var(--control-height-md)",
+    minHeight: "var(--control-height-md)",
     padding: "var(--space-1) var(--space-2)",
     svg: {
       color: "var(--color-ink)"
@@ -83,17 +84,17 @@ const styles = {
   },
 
   menuToggleLabel: {
-    fontSize: "0.84rem",
+    fontSize: "var(--font-size-xs)",
     fontWeight: "var(--font-weight-semibold)",
     lineHeight: "var(--line-height-solid)"
   },
 
   menuToggleIcon: {
     display: "block",
-    width: "22px",
-    height: "22px",
+    width: "var(--icon-size-lg)",
+    height: "var(--icon-size-lg)",
     color: "currentColor",
-    transition: "color 160ms ease"
+    transition: "color var(--transition-duration-fast) ease"
   },
 
   nav: {
@@ -101,9 +102,9 @@ const styles = {
     top: "calc(100% + var(--space-2))",
     right: 0,
     display: "grid",
-    minWidth: "190px",
-    border: "1px solid var(--color-border)",
-    borderRadius: "var(--radius-lg)",
+    minWidth: "var(--header-menu-width)",
+    border: "var(--border-width-thin) solid var(--color-border)",
+    borderRadius: "var(--radius-sm)",
     background: "var(--surface-solid)",
     boxShadow: "var(--shadow-menu)",
     color: "var(--color-ink)",
@@ -111,7 +112,8 @@ const styles = {
     pointerEvents: "none",
     transform: "translateY(calc(-1 * var(--space-1)))",
     visibility: "hidden",
-    transition: "transform 160ms ease, visibility 160ms ease"
+    transition:
+      "transform var(--transition-duration-fast) ease, visibility var(--transition-duration-fast) ease"
   },
 
   navLink: {
@@ -119,7 +121,7 @@ const styles = {
       paddingBlock: "var(--space-2)"
     },
     "&:not(:last-child)": {
-      borderBottom: "1px solid var(--palette-surface-muted)"
+      borderBottom: "var(--border-width-thin) solid var(--palette-surface-muted)"
     }
   },
 

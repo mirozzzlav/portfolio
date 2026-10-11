@@ -29,7 +29,7 @@ const styles = {
     display: "flex",
     width: "100%",
     alignItems: "flex-start",
-    transition: "transform 280ms ease",
+    transition: "transform var(--transition-duration-page) ease",
     willChange: "transform",
 
     "@media (prefers-reduced-motion: reduce)": {

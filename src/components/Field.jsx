@@ -11,12 +11,13 @@ const styles = {
 
   control: {
     width: "100%",
-    border: "1px solid var(--color-border)",
+    border: "var(--border-width-thin) solid var(--color-border)",
     borderRadius: "var(--radius-pill)",
     background: "var(--color-surface)",
     color: "var(--color-text)",
     font: "inherit",
-    transition: "background 160ms ease, border-color 160ms ease",
+    transition:
+      "background var(--transition-duration-fast) ease, border-color var(--transition-duration-fast) ease",
 
     "&:focus": {
       background: "var(--color-surface)",
@@ -29,12 +30,12 @@ const styles = {
   },
 
   input: {
-    minHeight: "44px",
+    minHeight: "var(--control-height-lg)",
     padding: "0 var(--space-2)"
   },
 
   textarea: {
-    minHeight: "132px",
+    minHeight: "var(--field-textarea-min-height)",
     borderRadius: "var(--radius-xl)",
     resize: "none",
     padding: "var(--space-2)"
@@ -43,7 +44,7 @@ const styles = {
   error: {
     marginTop: "calc(-1 * var(--space-0))",
     color: "var(--color-error)",
-    fontSize: "0.84rem",
+    fontSize: "var(--font-size-xs)",
     fontWeight: "var(--font-weight-regular)",
     lineHeight: "var(--line-height-body)"
   }

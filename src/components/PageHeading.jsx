@@ -9,7 +9,7 @@ const styles = {
     margin: 0,
     padding: "0 var(--space-1) var(--space-0) 0",
     color: "var(--palette-ink)",
-    fontSize: "clamp(1.8rem, 1.55rem + 1.25vw, 2.55rem)",
+    fontSize: "var(--font-size-page-title)",
     fontWeight: "var(--font-weight-bold)",
     lineHeight: "var(--line-height-display)",
     letterSpacing: 0,

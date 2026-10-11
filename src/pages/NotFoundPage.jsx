@@ -15,7 +15,7 @@ const styles = {
     textAlign: "center"
   },
   logo: {
-    width: "clamp(88px, 22vw, 148px)",
+    width: "var(--not-found-logo-width)",
     height: "auto",
     marginBottom: "var(--space-5)"
   },
@@ -23,7 +23,7 @@ const styles = {
     margin: 0,
     color: "var(--palette-accent-fine)",
     fontFamily: "var(--font-family-digital-numeric)",
-    fontSize: "clamp(4rem, 16vw, 8rem)",
+    fontSize: "var(--font-size-not-found-code)",
     fontWeight: "var(--font-weight-bold)",
     lineHeight: "var(--line-height-solid)",
     letterSpacing: 0
@@ -31,7 +31,7 @@ const styles = {
   title: {
     margin: 0,
     color: "var(--palette-ink)",
-    fontSize: "clamp(1.6rem, 5vw, 3rem)",
+    fontSize: "var(--font-size-not-found-title)",
     fontWeight: "var(--font-weight-bold)",
     lineHeight: "var(--line-height-heading)",
     letterSpacing: 0

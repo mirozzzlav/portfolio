@@ -1,3 +1,4 @@
+import { mediaQueries } from "src/styles/mediaQueries.js";
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
 import { useFocusTrap } from "src/hooks/useFocusTrap.js";
@@ -11,7 +12,7 @@ const styles = {
     right: 0,
     bottom: 0,
     left: 0,
-    zIndex: 50,
+    zIndex: "var(--layer-modal)",
     display: "block",
     width: "100%",
     height: "100vh",
@@ -31,7 +32,7 @@ const styles = {
     bottom: 0,
     left: 0,
     background: "var(--surface-overlay-strong)",
-    backdropFilter: "blur(14px)"
+    backdropFilter: "blur(var(--blur-md))"
   },
 
   panel: {
@@ -62,27 +63,26 @@ const styles = {
 
   close: {
     position: "fixed",
-    top: "24px",
-    right: "24px",
-    zIndex: 60,
+    top: "var(--space-4)",
+    right: "var(--space-4)",
+    zIndex: "var(--layer-modal-control)",
     display: "inline-flex",
     alignItems: "center",
     justifyContent: "center",
-    width: "48px",
-    height: "48px",
-    borderRadius: "50%",
+    width: "var(--icon-button-size-xl)",
+    height: "var(--icon-button-size-xl)",
+    borderRadius: "var(--radius-pill)",
     background: "var(--surface-solid)",
     color: "var(--palette-accent-fine)",
-    boxShadow:
-      "0 10px 30px color-mix(in srgb, var(--palette-ink) 12%, var(--color-transparent))",
-    fontSize: "1.25rem",
+    boxShadow: "var(--shadow-menu)",
+    fontSize: "var(--font-size-lg)",
     fontWeight: "var(--font-weight-regular)",
-    lineHeight: 1,
+    lineHeight: "var(--line-height-solid)",
 
     svg: {
       display: "block",
-      width: "22px",
-      height: "22px",
+      width: "var(--icon-size-lg)",
+      height: "var(--icon-size-lg)",
 
       path: {
         stroke: "var(--palette-accent-fine)"
@@ -93,11 +93,11 @@ const styles = {
       stroke: "var(--color-on-accent)"
     },
 
-    "@media (max-width: 780px)": {
-      top: "16px",
-      right: "16px",
-      width: "44px",
-      height: "44px"
+    [`@media ${mediaQueries.mobile}`]: {
+      top: "var(--space-3)",
+      right: "var(--space-3)",
+      width: "var(--control-height-lg)",
+      height: "var(--control-height-lg)"
     }
   }
 };

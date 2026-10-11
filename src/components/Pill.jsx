@@ -19,7 +19,7 @@ const styles = {
   },
 
   compact: {
-    gap: "var(--control-gap-sm)",
+    gap: "var(--space-0)",
     minHeight: "var(--control-height-sm)",
     padding: "0 var(--space-1)",
     fontSize: "var(--font-size-2xs)",

@@ -12,7 +12,7 @@ import { className } from "src/styles/classNames.js";
 const styles = {
   appBody: {
     position: "relative",
-    zIndex: 10,
+    zIndex: "var(--layer-content)",
     display: "grid",
     gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
     alignContent: "start",
@@ -28,7 +28,7 @@ const styles = {
 
   main: {
     position: "relative",
-    zIndex: 10,
+    zIndex: "var(--layer-content)",
     display: "grid",
     alignItems: "start",
     width: "100%",
@@ -48,7 +48,7 @@ const styles = {
     }
   },
   game: {
-    width: "min(100%, 470px)",
+    width: "min(100%, var(--game-width))",
     minWidth: 0
   }
 };

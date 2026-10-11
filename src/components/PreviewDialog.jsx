@@ -1,3 +1,4 @@
+import { mediaQueries } from "src/styles/mediaQueries.js";
 import { useImageGestures } from "src/hooks/useImageGestures.js";
 import { className } from "src/styles/classNames.js";
 import { useI18n } from "src/useI18n.js";
@@ -15,7 +16,7 @@ const styles = {
     minHeight: 0,
     padding: 0,
 
-    "@media (max-width: 780px)": {
+    [`@media ${mediaQueries.mobile}`]: {
       alignItems: "stretch"
     }
   },
@@ -24,21 +25,21 @@ const styles = {
     position: "absolute",
     top: "50%",
     zIndex: 2,
-    width: "48px",
-    height: "48px",
-    borderRadius: "50%",
+    width: "var(--icon-button-size-xl)",
+    height: "var(--icon-button-size-xl)",
+    borderRadius: "var(--radius-pill)",
     background: "var(--surface-solid)",
-    boxShadow:
-      "0 10px 30px color-mix(in srgb, var(--palette-ink) 12%, var(--color-transparent))",
+    boxShadow: "var(--shadow-menu)",
 
     "&::before": {
       position: "absolute",
       top: "50%",
       left: "50%",
+      // Chevron geometry stays in pixels, independently of the UI size scale.
       width: "11px",
       height: "11px",
-      borderTop: "2px solid currentColor",
-      borderRight: "2px solid currentColor",
+      borderTop: "var(--border-width-medium) solid currentColor",
+      borderRight: "var(--border-width-medium) solid currentColor",
       content: '""'
     },
     "&:disabled, &:disabled:hover, &:disabled:active": {
@@ -47,14 +48,13 @@ const styles = {
       boxShadow: "none",
       color: "var(--color-text)",
       cursor: "default",
-      opacity: 0.36
+      opacity: "var(--opacity-disabled)"
     },
 
-    "@media (max-width: 780px)": {
-      width: "44px",
-      height: "44px",
-      boxShadow:
-        "0 8px 24px color-mix(in srgb, var(--palette-ink) 10%, var(--color-transparent))"
+    [`@media ${mediaQueries.mobile}`]: {
+      width: "var(--control-height-lg)",
+      height: "var(--control-height-lg)",
+      boxShadow: "var(--shadow-menu)"
     }
   },
 
@@ -66,21 +66,21 @@ const styles = {
       transform: "translate(-35%, -50%) rotate(225deg)"
     },
 
-    "@media (max-width: 780px)": {
+    [`@media ${mediaQueries.mobile}`]: {
       left: "var(--space-2)"
     }
   },
 
   navNext: {
-    right: "24px",
+    right: "var(--space-4)",
     transform: "translateY(-50%)",
 
     "&::before": {
       transform: "translate(-65%, -50%) rotate(45deg)"
     },
 
-    "@media (max-width: 780px)": {
-      right: "16px"
+    [`@media ${mediaQueries.mobile}`]: {
+      right: "var(--space-3)"
     }
   },
 
@@ -95,7 +95,7 @@ const styles = {
     height: "100%",
     minHeight: 0,
 
-    "@media (max-width: 780px)": {
+    [`@media ${mediaQueries.mobile}`]: {
       alignContent: "stretch"
     }
   },
@@ -112,7 +112,7 @@ const styles = {
     height: "100%",
     minHeight: 0,
 
-    "@media (max-width: 780px)": {
+    [`@media ${mediaQueries.mobile}`]: {
       alignContent: "stretch"
     }
   },
@@ -131,7 +131,7 @@ const styles = {
     userSelect: "none",
     WebkitUserSelect: "none",
 
-    "@media (max-width: 780px)": {
+    [`@media ${mediaQueries.mobile}`]: {
       gridColumn: "1",
       gridRow: "1"
     }
@@ -145,8 +145,7 @@ const styles = {
     backgroundColor: "var(--color-transparent)",
     backgroundRepeat: "no-repeat",
     backgroundSize: "contain",
-    boxShadow:
-      "0 20px 60px color-mix(in srgb, var(--palette-ink) 18%, var(--color-transparent))",
+    boxShadow: "var(--shadow-preview)",
 
     img: {
       pointerEvents: "none",
@@ -177,20 +176,18 @@ const styles = {
     alignItems: "center",
     justifyContent: "center",
     gap: "var(--space-1)",
-    minHeight: "4rem",
+    minHeight: "var(--space-7)",
     padding: "var(--space-2) var(--space-6)",
-    background:
-      "color-mix(in srgb, var(--surface-solid) 78%, var(--color-transparent))",
-    backdropFilter: "blur(14px)",
-    boxShadow:
-      "0 -10px 30px color-mix(in srgb, var(--palette-ink) 10%, var(--color-transparent))",
+    background: "var(--surface-preview-title)",
+    backdropFilter: "blur(var(--blur-md))",
+    boxShadow: "var(--shadow-preview-title)",
     marginBottom: 0,
     color: "var(--color-text)",
-    fontSize: "1rem",
+    fontSize: "var(--font-size-base)",
     fontWeight: "var(--font-weight-semibold)",
 
-    "@media (max-width: 780px)": {
-      minHeight: "3.5rem",
+    [`@media ${mediaQueries.mobile}`]: {
+      minHeight: "var(--preview-title-min-height-mobile)",
       padding: "var(--space-2) var(--space-5)",
       lineHeight: "var(--line-height-compact)"
     }
@@ -199,8 +196,8 @@ const styles = {
   titleIcon: {
     display: "block",
     flex: "none",
-    width: "2rem",
-    height: "2rem",
+    width: "var(--space-5)",
+    height: "var(--space-5)",
     color: "var(--palette-accent-fine)"
   }
 };
@@ -287,7 +284,7 @@ export function PreviewDialog({ preview, onClose, onNavigate }) {
                 aspectRatio="auto"
                 className={className(styles.previewSurface)}
                 image={image}
-                radius="var(--radius-md)"
+                radius="var(--radius-sm)"
                 role="img"
                 aria-label={image.alt}
               />
