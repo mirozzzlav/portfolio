@@ -1,6 +1,6 @@
 import { className } from "src/styles/classNames.js";
-import { Pill } from "src/components/Pill.jsx";
 import { TechnologyIcon } from "src/components/TechnologyIcon.jsx";
+import { IconLabel } from "src/components/IconLabel.jsx";
 
 const styles = {
   list: {
@@ -8,15 +8,11 @@ const styles = {
     alignContent: "flex-start",
     alignItems: "flex-start",
     flexWrap: "wrap",
-    columnGap: "var(--space-1)",
-    rowGap: "var(--space-0)",
+    columnGap: "var(--space-3)",
+    rowGap: "var(--space-1)",
     margin: 0,
     padding: 0,
-    listStyle: "none",
-
-    li: {
-      flex: "none"
-    }
+    listStyle: "none"
   }
 };
 
@@ -28,12 +24,14 @@ export function TagList({ ariaLabel, items }) {
           typeof item === "string" ? { label: item, icon: "tag" } : item;
 
         return (
-          <li key={label}>
-            <Pill size="compact">
-              {icon ? <TechnologyIcon name={icon} /> : null}
-              {label}
-            </Pill>
-          </li>
+          <IconLabel
+            as="li"
+            key={label}
+            fontWeight="var(--font-weight-medium)"
+            icon={icon ? <TechnologyIcon name={icon} /> : null}
+          >
+            {label}
+          </IconLabel>
         );
       })}
     </ul>
