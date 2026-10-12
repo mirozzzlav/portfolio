@@ -31,11 +31,6 @@ const styles = {
   }
 };
 
-const sizeStyles = {
-  compact: styles.compact,
-  normal: styles.normal
-};
-
 export function Pill({
   as: Component = "span",
   children,
@@ -45,7 +40,7 @@ export function Pill({
 }) {
   return (
     <Component
-      className={mergeClassNames(styles.pill, sizeStyles[size], className)}
+      className={mergeClassNames(styles.pill, styles[size], className)}
       {...props}
     >
       {children}

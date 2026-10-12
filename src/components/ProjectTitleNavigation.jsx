@@ -67,79 +67,55 @@ const styles = {
   }
 };
 
-function ProjectTitlePill({ title }) {
-  return (
-    <div className={className(styles.titlePill)}>
-      <h2 className={className(styles.title)}>{title}</h2>
-    </div>
-  );
-}
-
-function ProjectNavigationControls({
+export function ProjectTitleNavigation({
   hasNext,
   hasPrevious,
   isInteractive = true,
   onNext,
-  onPrevious
+  onPrevious,
+  title
 }) {
   const { content } = useI18n();
 
   return (
-    <div
-      className={className(styles.navigationPill)}
-      aria-label={content.ui.projectNavigation}
-    >
-      <IconLink
-        size="sm"
-        underline={false}
-        animation="slide"
-        arrow="left"
-        className={className(styles.navigationButton)}
-        disabled={!isInteractive || !hasPrevious}
-        onClick={(event) => {
-          event.currentTarget.blur();
-          onPrevious();
-        }}
-      >
-        {content.ui.previousProject}
-      </IconLink>
-      <span className={className(styles.navigationSeparator)} aria-hidden="true" />
-      <IconLink
-        size="sm"
-        underline={false}
-        animation="slide"
-        arrow="right"
-        className={className(styles.navigationButton)}
-        disabled={!isInteractive || !hasNext}
-        onClick={(event) => {
-          event.currentTarget.blur();
-          onNext();
-        }}
-      >
-        {content.ui.nextProject}
-      </IconLink>
-    </div>
-  );
-}
-
-export function ProjectTitleNavigation({
-  hasNext,
-  hasPrevious,
-  isInteractive,
-  onNext,
-  onPrevious,
-  title
-}) {
-  return (
     <div className={className(styles.wrapper)}>
-      <ProjectTitlePill title={title} />
-      <ProjectNavigationControls
-        hasNext={hasNext}
-        hasPrevious={hasPrevious}
-        isInteractive={isInteractive}
-        onNext={onNext}
-        onPrevious={onPrevious}
-      />
+      <div className={className(styles.titlePill)}>
+        <h2 className={className(styles.title)}>{title}</h2>
+      </div>
+      <div
+        className={className(styles.navigationPill)}
+        aria-label={content.ui.projectNavigation}
+      >
+        <IconLink
+          size="sm"
+          underline={false}
+          animation="slide"
+          arrow="left"
+          className={className(styles.navigationButton)}
+          disabled={!isInteractive || !hasPrevious}
+          onClick={(event) => {
+            event.currentTarget.blur();
+            onPrevious();
+          }}
+        >
+          {content.ui.previousProject}
+        </IconLink>
+        <span className={className(styles.navigationSeparator)} aria-hidden="true" />
+        <IconLink
+          size="sm"
+          underline={false}
+          animation="slide"
+          arrow="right"
+          className={className(styles.navigationButton)}
+          disabled={!isInteractive || !hasNext}
+          onClick={(event) => {
+            event.currentTarget.blur();
+            onNext();
+          }}
+        >
+          {content.ui.nextProject}
+        </IconLink>
+      </div>
     </div>
   );
 }

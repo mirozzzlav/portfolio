@@ -45,11 +45,7 @@ const styles = {
     justifyContent: "flex-start",
     gap: "var(--space-1)",
     color: "var(--color-ink)",
-    fontWeight: "var(--font-weight-medium)",
-
-    [`@media ${mediaQueries.mobile}`]: {
-      gap: "var(--space-1)"
-    }
+    fontWeight: "var(--font-weight-medium)"
   },
 
   link: {

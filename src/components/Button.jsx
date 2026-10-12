@@ -88,11 +88,6 @@ const styles = {
   }
 };
 
-const buttonVariants = {
-  outline: styles.outline,
-  primary: styles.primary
-};
-
 export function Button({
   as: Component = "button",
   children,
@@ -107,7 +102,7 @@ export function Button({
     <Component
       className={mergeClassNames(
         styles.button,
-        buttonVariants[variant],
+        styles[variant],
         compact && styles.compact,
         iconOnly && styles.iconOnly,
         iconOnly && compact && styles.compactIconOnly,

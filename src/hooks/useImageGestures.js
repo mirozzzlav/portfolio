@@ -93,13 +93,7 @@ export function useImageGestures({ src, onSwipe }) {
       return;
     }
 
-    const { zoom, offsetX, offsetY } = liveTransform.current;
-
-    element.style.transform = getTransformStyle({
-      zoom,
-      offsetX,
-      offsetY
-    });
+    element.style.transform = getTransformStyle(liveTransform.current);
   }
 
   /*

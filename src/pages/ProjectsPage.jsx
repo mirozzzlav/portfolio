@@ -1,4 +1,4 @@
-import { Suspense, lazy, useMemo, useState } from "react";
+import { Suspense, lazy, useState } from "react";
 import { ProjectCard, ProjectSubtitle } from "src/components/ProjectCard.jsx";
 import { ProjectTitleNavigation } from "src/components/ProjectTitleNavigation.jsx";
 import { useProjectNavigation } from "src/hooks/useProjectNavigation.js";
@@ -50,11 +50,6 @@ export function ProjectsPage() {
   });
   const activeProject = projects[activeProjectIndex];
 
-  const trackStyle = useMemo(
-    () => ({ transform: `translateX(-${activeProjectIndex * 100}%)` }),
-    [activeProjectIndex]
-  );
-
   function openPreview(images, imageIndex) {
     setPreview({ images, imageIndex });
   }
@@ -86,7 +81,10 @@ export function ProjectsPage() {
           title={activeProject.title}
         />
         <ProjectSubtitle project={activeProject} onPreviewOpen={openPreview} />
-        <div className={className(styles.track)} style={trackStyle}>
+        <div
+          className={className(styles.track)}
+          style={{ transform: `translateX(-${activeProjectIndex * 100}%)` }}
+        >
           {projects.map((project, projectIndex) => (
             <ProjectCard
               isActive={projectIndex === activeProjectIndex}

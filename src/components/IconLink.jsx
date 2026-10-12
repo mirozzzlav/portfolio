@@ -13,14 +13,13 @@ const animations = {
       transition: "translate var(--transition-duration-fast) ease"
     },
 
-    "&:not(:disabled):hover > svg, &:not(:disabled):focus-visible > svg": {
+    "&:not(:disabled):is(:hover, :focus-visible) > svg": {
       translate: "var(--space-0) 0"
     },
 
-    "&:not(:disabled):hover > [data-navigation-arrow='left'], &:not(:disabled):focus-visible > [data-navigation-arrow='left']":
-      {
-        translate: "calc(-1 * var(--space-0)) 0"
-      }
+    "&:not(:disabled):is(:hover, :focus-visible) > [data-navigation-arrow='left']": {
+      translate: "calc(-1 * var(--space-0)) 0"
+    }
   },
   scale: {
     "> svg": {
@@ -74,12 +73,6 @@ const styles = {
       width: "var(--icon-size-md)",
       height: "var(--icon-size-md)"
     }
-
-    // "&:focus-visible": {
-    //   "@media (forced-colors: active)": {
-    //     outlineColor: "Highlight"
-    //   }
-    // }
   },
 
   arrow: {
@@ -126,39 +119,41 @@ export function IconLink({
     styles.reducedMotion,
     className
   );
+  let linkIcon = icon;
+
+  if (!icon && (arrow === "left" || arrow === "right")) {
+    linkIcon = (
+      <Arrow
+        className={mergeClassNames(styles.arrow)}
+        data-navigation-arrow={arrow}
+        direction={arrow}
+      />
+    );
+  } else if (!icon && arrow === "external") {
+    linkIcon = (
+      <svg
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M15 3h6v6m0-6L10 14M9 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-4" />
+      </svg>
+    );
+  }
+
+  const isLeadingArrow = !icon && arrow === "left";
   const content = (
     <>
       {leading}
-      {!icon && arrow === "left" ? (
-        <Arrow
-          className={mergeClassNames(styles.arrow)}
-          data-navigation-arrow="left"
-          direction="left"
-        />
-      ) : null}
+      {isLeadingArrow && linkIcon}
       <span className={mergeClassNames(styles.text)} data-link-text>
         {children}
       </span>
-      {icon ||
-        (arrow === "right" ? (
-          <Arrow
-            className={mergeClassNames(styles.arrow)}
-            data-navigation-arrow="right"
-            direction="right"
-          />
-        ) : arrow === "external" ? (
-          <svg
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M15 3h6v6m0-6L10 14M9 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-4" />
-          </svg>
-        ) : null)}
+      {!isLeadingArrow && linkIcon}
     </>
   );
 
