@@ -28,54 +28,45 @@ const styles = {
 
   descriptionViewport: {
     display: "grid",
-    gap: 0,
+    gap: "var(--space-3)",
 
     "> section": {
       "--project-gradient-start":
-        "color-mix(in srgb, var(--surface-project) 50%, var(--color-transparent))",
+        "color-mix(in srgb, var(--palette-accent-soft) 45%, var(--color-transparent))",
       "--project-gradient-middle":
-        "color-mix(in srgb, var(--surface-project) 15%, var(--color-transparent))",
+        "color-mix(in srgb, var(--palette-accent-soft) 15%, var(--color-transparent))",
       position: "relative",
       isolation: "isolate",
       padding: "var(--space-4)",
       borderRadius:
         "var(--radius-xl) var(--radius-xl) var(--radius-xl) var(--radius-sm)",
 
-      "&::before, &::after": {
+      "&::before": {
+        "--project-corner-direction": "to right",
+        "--project-vertical-direction": "to bottom",
         content: '""',
         position: "absolute",
         inset: 0,
         zIndex: -1,
-        border: "var(--border-width-thin) solid var(--color-border)",
+        border: "var(--border-width-thin) solid var(--palette-accent-fine)",
+        borderRightWidth: 0,
+        borderBottomWidth: 0,
         borderRadius: "inherit",
         pointerEvents: "none",
         backgroundImage:
-          "linear-gradient(var(--project-corner-direction), var(--project-gradient-start), var(--project-gradient-middle) 20%, var(--color-transparent) 65%)",
+          "linear-gradient(var(--project-corner-direction), var(--project-gradient-start), var(--project-gradient-middle) 20%, var(--color-transparent) 85%)",
         maskImage:
-          "linear-gradient(var(--project-corner-direction), var(--color-ink), var(--color-transparent) 65%), linear-gradient(var(--project-vertical-direction), var(--color-ink), var(--color-transparent) 50%)",
+          "linear-gradient(var(--project-corner-direction), var(--color-ink), var(--color-transparent) 85%), linear-gradient(var(--project-vertical-direction), var(--color-ink), var(--color-transparent) 85%)",
         maskComposite: "intersect"
-      },
-
-      "&::before": {
-        "--project-corner-direction": "to right",
-        "--project-vertical-direction": "to bottom",
-        borderRightWidth: 0,
-        borderBottomWidth: 0
-      },
-
-      "&::after": {
-        "--project-corner-direction": "to left",
-        "--project-vertical-direction": "to top",
-        borderTopWidth: 0,
-        borderLeftWidth: 0
       }
     },
 
     "@media (width > 1000px)": {
       "> section": {
-        "--project-gradient-start": "var(--surface-project)",
+        "--project-gradient-start":
+          "color-mix(in srgb, var(--palette-accent-soft) 65%, var(--color-transparent))",
         "--project-gradient-middle":
-          "color-mix(in srgb, var(--surface-project) 30%, var(--color-transparent))"
+          "color-mix(in srgb, var(--palette-accent-soft) 25%, var(--color-transparent))"
       }
     }
   },
