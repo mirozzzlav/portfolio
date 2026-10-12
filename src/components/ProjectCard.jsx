@@ -34,7 +34,7 @@ const styles = {
   descriptionViewport: {
     display: "grid",
     gap: "var(--space-3)",
-    paddingTop: "var(--space-4)",
+    paddingTop: "var(--space-1)",
 
     "> section": {
       position: "relative",
@@ -57,6 +57,11 @@ const styles = {
           "linear-gradient(var(--project-corner-direction), var(--color-ink), var(--color-transparent) 85%), linear-gradient(var(--project-vertical-direction), var(--color-ink), var(--color-transparent) 85%)",
         maskComposite: "intersect"
       }
+    },
+
+    "> section:first-child::before": {
+      borderColor: "var(--color-ink)",
+      maskImage: "none"
     }
   },
 
@@ -66,20 +71,6 @@ const styles = {
     fontSize: "var(--font-size-md)",
     lineHeight: "var(--line-height-body)",
     textWrap: "pretty"
-  },
-
-  header: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "flex-start",
-    gap: "var(--space-2)",
-    width: "min(100%, var(--project-content-width))",
-    minHeight: "var(--project-header-min-height)",
-    lineHeight: "var(--line-height-compact)",
-
-    [`@media ${mediaQueries.mobile}`]: {
-      gap: "var(--space-1)"
-    }
   },
 
   actions: {
@@ -119,27 +110,6 @@ const styles = {
         color: "var(--color-ink)"
       }
     }
-  },
-
-  category: {
-    flex: "0 1 auto",
-    minWidth: 0,
-    width: "fit-content",
-    marginBottom: 0,
-    color: "var(--palette-accent-fine)",
-    fontFamily: "var(--font-family-condensed)",
-    fontStretch: "semi-condensed",
-    fontSize: "var(--font-size-md)",
-    fontWeight: "var(--font-weight-semibold)",
-    lineHeight: "var(--line-height-compact)",
-    letterSpacing: "var(--letter-spacing-condensed)",
-    textTransform: "uppercase",
-    opacity: 1,
-    paddingBlock: "var(--space-0)",
-
-    [`@media ${mediaQueries.mobile}`]: {
-      fontSize: "var(--font-size-base)"
-    }
   }
 };
 
@@ -148,6 +118,7 @@ function PreviewButton({ images, onClick, title }) {
   return (
     <IconLink
       size="sm"
+      underline={false}
       aria-label={`${content.ui.viewPreviews}: ${title}`}
       title={content.ui.viewPreviews}
       aria-haspopup="dialog"
@@ -173,32 +144,28 @@ function PreviewButton({ images, onClick, title }) {
   );
 }
 
-export function ProjectSubtitle({ project, onPreviewOpen }) {
+export function ProjectActions({ project, onPreviewOpen }) {
   const { content } = useI18n();
   return (
-    <div className={className(styles.header)}>
-      <p className={className(styles.category)} data-project-category>
-        {project.type}
-      </p>
-      <div className={className(styles.actions)}>
-        {project.images.length > 0 ? (
-          <PreviewButton
-            images={project.images}
-            onClick={onPreviewOpen}
-            title={project.title}
-          />
-        ) : null}
-        <IconLink
-          size="sm"
-          href={project.url}
-          target="_blank"
-          rel="noreferrer"
-          aria-label={`${content.ui.openProject} ${project.title}`}
-          title={`${content.ui.openProject} ${project.title}`}
-        >
-          {content.ui.openProject}
-        </IconLink>
-      </div>
+    <div className={className(styles.actions)}>
+      {project.images.length > 0 ? (
+        <PreviewButton
+          images={project.images}
+          onClick={onPreviewOpen}
+          title={project.title}
+        />
+      ) : null}
+      <IconLink
+        size="sm"
+        underline={false}
+        href={project.url}
+        target="_blank"
+        rel="noreferrer"
+        aria-label={`${content.ui.openProject} ${project.title}`}
+        title={`${content.ui.openProject} ${project.title}`}
+      >
+        {content.ui.openProject}
+      </IconLink>
     </div>
   );
 }

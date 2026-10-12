@@ -1,5 +1,5 @@
 import { Suspense, lazy, useState } from "react";
-import { ProjectCard, ProjectSubtitle } from "src/components/ProjectCard.jsx";
+import { ProjectActions, ProjectCard } from "src/components/ProjectCard.jsx";
 import { ProjectTitleNavigation } from "src/components/ProjectTitleNavigation.jsx";
 import { useProjectNavigation } from "src/hooks/useProjectNavigation.js";
 import { className } from "src/styles/classNames.js";
@@ -18,9 +18,6 @@ const styles = {
     minHeight: 0,
     overflow: "hidden",
     touchAction: "pan-y",
-    /* This trick is to see outlines of the children buttons */
-    left: "calc(var(--space-0) * -1)",
-    paddingLeft: "var(--space-0)",
     top: "calc(var(--space-0) * -1)",
     paddingBottom: "var(--space-0)"
   },
@@ -74,13 +71,16 @@ export function ProjectsPage() {
     <>
       <div className={className(styles.stage)} {...touchHandlers}>
         <ProjectTitleNavigation
+          actions={
+            <ProjectActions project={activeProject} onPreviewOpen={openPreview} />
+          }
           hasNext={activeProjectIndex < projects.length - 1}
           hasPrevious={activeProjectIndex > 0}
           onNext={() => navigateProject(1)}
           onPrevious={() => navigateProject(-1)}
           title={activeProject.title}
+          subtitle={activeProject.type}
         />
-        <ProjectSubtitle project={activeProject} onPreviewOpen={openPreview} />
         <div
           className={className(styles.track)}
           style={{ transform: `translateX(-${activeProjectIndex * 100}%)` }}

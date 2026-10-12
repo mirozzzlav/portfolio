@@ -5,17 +5,18 @@ import { IconLink } from "src/components/IconLink.jsx";
 
 const styles = {
   wrapper: {
+    display: "grid",
+    gap: "var(--space-4)",
+    marginBottom: "var(--space-2xs)",
+    width: "min(100%, var(--project-content-width))"
+  },
+
+  actionsRow: {
     display: "flex",
     alignItems: "center",
-    flexWrap: "nowrap",
-    gap: "var(--space-2)",
-    marginBottom: "var(--space-2xs)",
     justifyContent: "space-between",
-    width: "min(100%, var(--project-content-width))",
-
-    [`@media ${mediaQueries.narrow}`]: {
-      gap: "var(--space-1)"
-    }
+    flexWrap: "wrap",
+    gap: "var(--space-2) var(--space-3)"
   },
 
   titlePill: {
@@ -23,7 +24,9 @@ const styles = {
     background: "var(--surface-project)",
     display: "flex",
     flex: "0 1 auto",
-    alignItems: "center",
+    flexDirection: "column",
+    justifyContent: "center",
+    padding: "var(--space-1) var(--space-4) var(--space-1) var(--space-2)",
     minWidth: 0,
     minHeight: "var(--control-height-lg)",
     width: "fit-content",
@@ -36,7 +39,6 @@ const styles = {
   title: {
     minWidth: 0,
     margin: 0,
-    padding: "0 var(--space-4) 0 var(--space-2)",
     color: "var(--color-text)",
     fontSize: "var(--font-size-project-title)",
     fontWeight: "var(--font-weight-semibold)",
@@ -47,11 +49,29 @@ const styles = {
     whiteSpace: "nowrap"
   },
 
+  subtitle: {
+    minWidth: 0,
+    margin: 0,
+    paddingTop: "var(--space-2xs)",
+    color: "var(--palette-accent-fine)",
+    fontFamily: "var(--font-family-condensed)",
+    fontStretch: "semi-condensed",
+    fontSize: "var(--font-size-sm)",
+    fontWeight: "var(--font-weight-semibold)",
+    lineHeight: "var(--line-height-compact)",
+    letterSpacing: "var(--letter-spacing-condensed)",
+    textTransform: "uppercase"
+  },
+
   navigationPill: {
     display: "inline-flex",
     flex: "none",
     gap: "var(--space-1)",
-    marginRight: "var(--space-0)"
+    marginRight: "var(--space-0)",
+
+    [`@media ${mediaQueries.mobile}`]: {
+      marginTop: "var(--space-1)"
+    }
   },
 
   navigationSeparator: {
@@ -68,11 +88,13 @@ const styles = {
 };
 
 export function ProjectTitleNavigation({
+  actions,
   hasNext,
   hasPrevious,
   isInteractive = true,
   onNext,
   onPrevious,
+  subtitle,
   title
 }) {
   const { content } = useI18n();
@@ -81,40 +103,46 @@ export function ProjectTitleNavigation({
     <div className={className(styles.wrapper)}>
       <div className={className(styles.titlePill)}>
         <h2 className={className(styles.title)}>{title}</h2>
+        <p className={className(styles.subtitle)} data-project-category>
+          {subtitle}
+        </p>
       </div>
-      <div
-        className={className(styles.navigationPill)}
-        aria-label={content.ui.projectNavigation}
-      >
-        <IconLink
-          size="sm"
-          underline={false}
-          animation="slide"
-          arrow="left"
-          className={className(styles.navigationButton)}
-          disabled={!isInteractive || !hasPrevious}
-          onClick={(event) => {
-            event.currentTarget.blur();
-            onPrevious();
-          }}
+      <div className={className(styles.actionsRow)}>
+        {actions}
+        <div
+          className={className(styles.navigationPill)}
+          aria-label={content.ui.projectNavigation}
         >
-          {content.ui.previousProject}
-        </IconLink>
-        <span className={className(styles.navigationSeparator)} aria-hidden="true" />
-        <IconLink
-          size="sm"
-          underline={false}
-          animation="slide"
-          arrow="right"
-          className={className(styles.navigationButton)}
-          disabled={!isInteractive || !hasNext}
-          onClick={(event) => {
-            event.currentTarget.blur();
-            onNext();
-          }}
-        >
-          {content.ui.nextProject}
-        </IconLink>
+          <IconLink
+            size="sm"
+            underline={false}
+            animation="slide"
+            arrow="left"
+            className={className(styles.navigationButton)}
+            disabled={!isInteractive || !hasPrevious}
+            onClick={(event) => {
+              event.currentTarget.blur();
+              onPrevious();
+            }}
+          >
+            {content.ui.previousProject}
+          </IconLink>
+          <span className={className(styles.navigationSeparator)} aria-hidden="true" />
+          <IconLink
+            size="sm"
+            underline={false}
+            animation="slide"
+            arrow="right"
+            className={className(styles.navigationButton)}
+            disabled={!isInteractive || !hasNext}
+            onClick={(event) => {
+              event.currentTarget.blur();
+              onNext();
+            }}
+          >
+            {content.ui.nextProject}
+          </IconLink>
+        </div>
       </div>
     </div>
   );
