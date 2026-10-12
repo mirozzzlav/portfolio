@@ -207,6 +207,7 @@ export function Header() {
             >
               {routes.map((item) => (
                 <NavigationLink
+                  variant="menu"
                   className={className(styles.navLink)}
                   item={item}
                   key={item.path}

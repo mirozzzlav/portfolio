@@ -1,11 +1,19 @@
-import { Link } from "react-router-dom";
+import { IconLink } from "src/components/IconLink.jsx";
 import { parseInlineLinks } from "src/content/inlineLinks.js";
 import { className } from "src/styles/classNames.js";
-import { textLink } from "src/styles/linkStyles.js";
 import { useI18n } from "src/useI18n.js";
 
 const styles = {
-  link: textLink
+  link: {
+    fontSize: "inherit",
+    lineHeight: "inherit",
+    maxWidth: "100%",
+    whiteSpace: "normal",
+
+    "> [data-link-text]": {
+      lineHeight: "inherit"
+    }
+  }
 };
 
 export function InlineLinks({ text, tabIndex }) {
@@ -20,16 +28,16 @@ export function InlineLinks({ text, tabIndex }) {
       return <strong key={index}>{part.text}</strong>;
     }
 
-    const linkProps = { className: className(styles.link), tabIndex };
-
-    return part.type === "internal" ? (
-      <Link key={index} to={part.href} {...linkProps}>
+    return (
+      <IconLink
+        key={index}
+        className={className(styles.link)}
+        tabIndex={tabIndex}
+        to={part.type === "internal" ? part.href : undefined}
+        href={part.type === "external" ? part.href : undefined}
+      >
         {part.text}
-      </Link>
-    ) : (
-      <a key={index} href={part.href} {...linkProps}>
-        {part.text}
-      </a>
+      </IconLink>
     );
   });
 }

@@ -3,12 +3,15 @@ import { normalizePathname } from "src/content/index.js";
 import { UiLink } from "src/components/UiLink.jsx";
 
 export function NavigationLink({
+  animation = "slide",
   arrow = "right",
   className,
   hasSquare = true,
   isCurrent,
   item,
-  onSelect
+  onSelect,
+  size = "sm",
+  variant = "standard"
 }) {
   const location = useLocation();
   const matchedRoute =
@@ -17,12 +20,15 @@ export function NavigationLink({
 
   return (
     <UiLink
+      animation={animation}
       arrow={arrow}
       className={className}
       hasSquare={hasSquare}
       isCurrent={isActive}
       to={item.path}
       onClick={onSelect}
+      variant={variant}
+      size={size}
     >
       {item.label}
     </UiLink>

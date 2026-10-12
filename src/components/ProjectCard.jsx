@@ -1,10 +1,9 @@
 import { mediaQueries } from "src/styles/mediaQueries.js";
 import { className } from "src/styles/classNames.js";
-import { textLink } from "src/styles/linkStyles.js";
 import { useI18n } from "src/useI18n.js";
 import { TagList } from "src/components/TagList.jsx";
 import { InlineLinks } from "src/components/InlineLinks.jsx";
-import { IconLabel } from "src/components/IconLabel.jsx";
+import { IconLink } from "src/components/IconLink.jsx";
 import { SelectionIndicator } from "src/components/SelectionIndicator.jsx";
 
 const styles = {
@@ -82,6 +81,20 @@ const styles = {
     }
   },
 
+  actions: {
+    display: "flex",
+    alignItems: "center",
+    flexWrap: "wrap",
+    gap: "var(--space-3)"
+  },
+
+  previewButton: {
+    "> svg": {
+      width: "calc(var(--icon-size-lg) + var(--space-0))",
+      height: "calc(var(--icon-size-lg) + var(--space-0))"
+    }
+  },
+
   blockHeading: {
     display: "flex",
     alignItems: "center",
@@ -133,46 +146,15 @@ const styles = {
     [`@media ${mediaQueries.mobile}`]: {
       fontSize: "var(--font-size-base)"
     }
-  },
-
-  link: {
-    ...textLink,
-    whiteSpace: "nowrap"
-  },
-
-  previewButton: {
-    appearance: "none",
-    fontSize: "var(--font-size-sm)",
-    justifyContent: "center",
-    gap: "var(--space-0)",
-    border: 0,
-    borderRadius: "var(--radius-sm)",
-    padding: 0,
-    background: "var(--color-transparent)",
-    cursor: "pointer",
-    lineHeight: "var(--line-height-compact)",
-    whiteSpace: "nowrap",
-
-    "> svg": {
-      order: 1,
-      transition: "transform var(--transition-duration-fast) ease",
-      width: "calc(var(--icon-size-lg) + var(--space-0))",
-      height: "calc(var(--icon-size-lg) + var(--space-0))"
-    },
-
-    "&:hover > svg": {
-      transform: "scale(1.2)"
-    }
   }
 };
 
 function PreviewButton({ images, onClick, title }) {
   const { content } = useI18n();
   return (
-    <IconLabel
-      as="button"
+    <IconLink
+      size="sm"
       className={className(styles.previewButton)}
-      type="button"
       aria-label={`${content.ui.viewPreviews}: ${title}`}
       title={content.ui.viewPreviews}
       aria-haspopup="dialog"
@@ -198,30 +180,43 @@ function PreviewButton({ images, onClick, title }) {
       }
     >
       {content.ui.viewPreviews}
-    </IconLabel>
+    </IconLink>
   );
 }
 
 export function ProjectSubtitle({ project, onPreviewOpen }) {
+  const { content } = useI18n();
   return (
     <div className={className(styles.header)}>
       <p className={className(styles.category)} data-project-category>
         {project.type}
       </p>
-      {project.images.length > 0 ? (
-        <PreviewButton
-          images={project.images}
-          onClick={onPreviewOpen}
-          title={project.title}
-        />
-      ) : null}
+      <div className={className(styles.actions)}>
+        {project.images.length > 0 ? (
+          <PreviewButton
+            images={project.images}
+            onClick={onPreviewOpen}
+            title={project.title}
+          />
+        ) : null}
+        <IconLink
+          size="sm"
+          href={project.url}
+          target="_blank"
+          rel="noreferrer"
+          aria-label={`${content.ui.openProject} ${project.title}`}
+          title={`${content.ui.openProject} ${project.title}`}
+        >
+          {content.ui.openProject}
+        </IconLink>
+      </div>
     </div>
   );
 }
 
 export function ProjectCard({ isActive, project }) {
   const { content } = useI18n();
-  const { description, featuresTitle, features, technologies, title, url } = project;
+  const { description, featuresTitle, features, technologies } = project;
 
   return (
     <article className={className(styles.card)} aria-hidden={!isActive}>
@@ -233,18 +228,7 @@ export function ProjectCard({ isActive, project }) {
               {content.ui.projectDescription}
             </h3>
             <p className={className(styles.description)}>
-              <InlineLinks text={description} tabIndex={isActive ? 0 : -1} />{" "}
-              <a
-                className={className(styles.link)}
-                href={url}
-                target="_blank"
-                rel="noreferrer"
-                aria-label={`${content.ui.openProject} ${title}`}
-                title={`${content.ui.openProject} ${title}`}
-                tabIndex={isActive ? 0 : -1}
-              >
-                {content.ui.openProject}
-              </a>
+              <InlineLinks text={description} tabIndex={isActive ? 0 : -1} />
             </p>
           </section>
           {features?.length > 0 ? (
