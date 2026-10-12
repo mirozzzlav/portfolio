@@ -10,8 +10,8 @@ const styles = {
     paddingInline: "var(--space-1)",
 
     "&:not(:disabled):hover [data-selection-indicator]": {
-      borderColor: "var(--palette-accent-fine)",
-      background: "var(--palette-accent-fine)"
+      borderColor: "var(--palette-accent-brown)",
+      background: "var(--palette-accent-brown)"
     },
 
     "&:disabled [data-selection-indicator]": {

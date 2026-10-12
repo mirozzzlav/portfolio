@@ -15,9 +15,9 @@ const styles = {
   },
 
   active: {
-    borderColor: "var(--palette-accent-fine)",
-    background: "var(--palette-accent-fine)",
-    boxShadow: "0 0 0 var(--space-0) var(--palette-accent-soft)"
+    borderColor: "var(--palette-accent-brown)",
+    background: "var(--palette-accent-brown)",
+    boxShadow: "0 0 0 var(--space-0) var(--palette-accent-brown-soft)"
   }
 };
 

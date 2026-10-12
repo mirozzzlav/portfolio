@@ -13,6 +13,9 @@ export const globalStyles = {
     "--palette-ink": "#000000",
     "--palette-accent-soft": "#dcecff",
     "--palette-accent-fine": "#49a1f7",
+    "--palette-accent-brown": "#8a5434",
+    "--palette-accent-brown-soft":
+      "color-mix(in srgb, var(--palette-accent-brown) var(--opacity-muted), var(--color-surface))",
     "--palette-surface-muted": "#f2f5f7",
     "--palette-surface": "#ffffff",
     "--palette-border": "#c9d1dc",
@@ -69,10 +72,11 @@ export const globalStyles = {
     "--font-family-condensed":
       '"Arial Narrow", "Liberation Sans Narrow", "Roboto Condensed", var(--font-family-ui)',
     "--letter-spacing-condensed": "-0.02em",
+    "--letter-spacing-project-title": "0.02em",
     "--font-size-base": "1rem",
     "--font-size-lg": "1.25rem",
-    "--font-size-page-title": "clamp(1.8rem, 1.55rem + 1.25vw, 2.55rem)",
-    "--font-size-project-title": "clamp(1.05rem, 2.4vw, 1.35rem)",
+    "--font-size-page-title": "2.7rem",
+    "--font-size-project-title": "1.9rem",
     "--font-size-not-found-code": "clamp(4rem, 16vw, 8rem)",
     "--font-size-not-found-title": "clamp(1.6rem, 5vw, 3rem)",
     "--font-size-footer-year": "0.78em",
@@ -86,6 +90,7 @@ export const globalStyles = {
     "--font-weight-medium": 500,
     "--font-weight-semibold": 600,
     "--font-weight-bold": 700,
+    "--font-weight-extrabold": 800,
     "--line-height-none": 0,
     "--line-height-solid": 1,
     "--line-height-compact": 1.1,
@@ -95,7 +100,7 @@ export const globalStyles = {
 
     // Spacing and layout
     "--content-width": "75ch",
-    "--project-content-width": "68ch",
+    "--project-actions-min-width": "24rem",
     "--game-width": "470px",
     "--main-inline-pad": "var(--space-5)",
     "--header-height": "76px",

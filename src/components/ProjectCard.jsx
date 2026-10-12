@@ -22,7 +22,7 @@ const styles = {
     },
 
     "> *": {
-      width: "min(100%, var(--project-content-width))",
+      width: "100%",
       minWidth: 0
     },
 
@@ -60,8 +60,7 @@ const styles = {
     },
 
     "> section:first-child::before": {
-      borderColor: "var(--color-ink)",
-      maskImage: "none"
+      display: "none"
     }
   },
 
@@ -77,7 +76,12 @@ const styles = {
     display: "flex",
     alignItems: "center",
     flexWrap: "wrap",
-    gap: "var(--space-3)"
+    gap: "var(--space-3)",
+    minWidth: "min(100%, var(--project-actions-min-width))",
+
+    [`@media ${mediaQueries.mobile}`]: {
+      minWidth: 0
+    }
   },
 
   blockHeading: {
@@ -85,7 +89,7 @@ const styles = {
     alignItems: "center",
     gap: "var(--space-2)",
     margin: "0 0 var(--space-2)",
-    fontSize: "var(--font-size-lg)",
+    fontSize: "var(--font-size-md)",
     fontWeight: "var(--font-weight-semibold)",
     lineHeight: "inherit"
   },

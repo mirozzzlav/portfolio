@@ -1,4 +1,4 @@
-import { mediaQueries } from "src/styles/mediaQueries.js";
+import { useEffect, useRef, useState } from "react";
 import { className } from "src/styles/classNames.js";
 import { useI18n } from "src/useI18n.js";
 import { IconLink } from "src/components/IconLink.jsx";
@@ -6,9 +6,14 @@ import { IconLink } from "src/components/IconLink.jsx";
 const styles = {
   wrapper: {
     display: "grid",
-    gap: "var(--space-4)",
-    marginBottom: "var(--space-2xs)",
-    width: "min(100%, var(--project-content-width))"
+    gap: "var(--space-2xs)",
+    paddingBottom: "var(--space-2)",
+    borderBottom: "var(--border-width-thin) solid var(--color-border)",
+    width: "100%",
+
+    "&[data-title-wrapped='true']": {
+      gap: "var(--space-2)"
+    }
   },
 
   actionsRow: {
@@ -19,21 +24,12 @@ const styles = {
     gap: "var(--space-2) var(--space-3)"
   },
 
-  titlePill: {
-    border: "var(--border-width-thin) solid var(--color-border)",
-    background: "var(--surface-project)",
+  titleBlock: {
     display: "flex",
-    flex: "0 1 auto",
-    flexDirection: "column",
-    justifyContent: "center",
-    padding: "var(--space-1) var(--space-4) var(--space-1) var(--space-2)",
-    minWidth: 0,
-    minHeight: "var(--control-height-lg)",
-    width: "fit-content",
-    maxWidth: "100%",
-    borderLeft: "var(--space-0) solid var(--palette-accent-fine)",
-    borderRadius:
-      "var(--radius-sm) var(--radius-pill) var(--radius-pill) var(--radius-sm)"
+    alignItems: "baseline",
+    flexWrap: "wrap",
+    gap: "0 var(--space-2)",
+    minWidth: 0
   },
 
   title: {
@@ -41,36 +37,38 @@ const styles = {
     margin: 0,
     color: "var(--color-text)",
     fontSize: "var(--font-size-project-title)",
-    fontWeight: "var(--font-weight-semibold)",
+    fontWeight: "var(--font-weight-extrabold)",
+    letterSpacing: "var(--letter-spacing-project-title)",
+    textTransform: "uppercase",
     lineHeight: "var(--line-height-heading)",
-    overflow: "hidden",
     textAlign: "left",
-    textOverflow: "ellipsis",
-    whiteSpace: "nowrap"
+    overflowWrap: "anywhere"
   },
 
   subtitle: {
     minWidth: 0,
     margin: 0,
-    paddingTop: "var(--space-2xs)",
-    color: "var(--palette-accent-fine)",
-    fontFamily: "var(--font-family-condensed)",
-    fontStretch: "semi-condensed",
+    color: "var(--palette-accent-brown)",
     fontSize: "var(--font-size-sm)",
-    fontWeight: "var(--font-weight-semibold)",
-    lineHeight: "var(--line-height-compact)",
-    letterSpacing: "var(--letter-spacing-condensed)",
-    textTransform: "uppercase"
+    fontWeight: "var(--font-weight-medium)",
+    lineHeight: "var(--line-height-compact)"
   },
 
-  navigationPill: {
+  navigation: {
     display: "inline-flex",
+    alignItems: "center",
     flex: "none",
     gap: "var(--space-1)",
     marginRight: "var(--space-0)",
+    padding: "var(--space-1) var(--space-2)",
+    border: "var(--border-width-thin) solid var(--color-transparent)",
+    borderRadius: "var(--radius-pill)",
 
-    [`@media ${mediaQueries.mobile}`]: {
-      marginTop: "var(--space-1)"
+    "&[data-wrapped='true']": {
+      marginTop: "var(--space-2)",
+      marginBottom: "var(--space-0)",
+      borderColor: "var(--color-border)",
+      background: "var(--surface-project)"
     }
   },
 
@@ -98,19 +96,55 @@ export function ProjectTitleNavigation({
   title
 }) {
   const { content } = useI18n();
+  const titleBlockRef = useRef(null);
+  const [isSubtitleWrapped, setIsSubtitleWrapped] = useState(false);
+  const actionsRowRef = useRef(null);
+  const navigationRef = useRef(null);
+  const [isWrapped, setIsWrapped] = useState(false);
+
+  useEffect(() => {
+    const row = actionsRowRef.current;
+    const navigation = navigationRef.current;
+    const actionLinks = row.firstElementChild;
+    const titleBlock = titleBlockRef.current;
+    const heading = titleBlock.firstElementChild;
+    const subtitleText = titleBlock.lastElementChild;
+
+    const observer = new ResizeObserver(() => {
+      setIsSubtitleWrapped(
+        subtitleText.getBoundingClientRect().top >=
+          heading.getBoundingClientRect().bottom
+      );
+      setIsWrapped(
+        navigation.getBoundingClientRect().top >=
+          actionLinks.getBoundingClientRect().bottom
+      );
+    });
+
+    observer.observe(row);
+    observer.observe(actionLinks);
+    observer.observe(navigation);
+    observer.observe(titleBlock);
+    observer.observe(heading);
+    observer.observe(subtitleText);
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <div className={className(styles.wrapper)}>
-      <div className={className(styles.titlePill)}>
+    <div className={className(styles.wrapper)} data-title-wrapped={isSubtitleWrapped}>
+      <div ref={titleBlockRef} className={className(styles.titleBlock)}>
         <h2 className={className(styles.title)}>{title}</h2>
         <p className={className(styles.subtitle)} data-project-category>
-          {subtitle}
+          # {subtitle}
         </p>
       </div>
-      <div className={className(styles.actionsRow)}>
+      <div ref={actionsRowRef} className={className(styles.actionsRow)}>
         {actions}
         <div
-          className={className(styles.navigationPill)}
+          ref={navigationRef}
+          className={className(styles.navigation)}
+          data-wrapped={isWrapped}
           aria-label={content.ui.projectNavigation}
         >
           <IconLink
