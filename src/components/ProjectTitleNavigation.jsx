@@ -1,12 +1,7 @@
 import { mediaQueries } from "src/styles/mediaQueries.js";
 import { className } from "src/styles/classNames.js";
 import { useI18n } from "src/useI18n.js";
-import { UiLink } from "src/components/UiLink.jsx";
-
-const pillBase = {
-  border: "var(--border-width-thin) solid var(--color-border)",
-  background: "var(--surface-project)"
-};
+import { IconLink } from "src/components/IconLink.jsx";
 
 const styles = {
   wrapper: {
@@ -24,7 +19,8 @@ const styles = {
   },
 
   titlePill: {
-    ...pillBase,
+    border: "var(--border-width-thin) solid var(--color-border)",
+    background: "var(--surface-project)",
     display: "flex",
     flex: "0 1 auto",
     alignItems: "center",
@@ -48,7 +44,6 @@ const styles = {
     overflow: "hidden",
     textAlign: "left",
     textOverflow: "ellipsis",
-    textWrap: "nowrap",
     whiteSpace: "nowrap"
   },
 
@@ -68,14 +63,7 @@ const styles = {
 
   navigationButton: {
     justifyContent: "center",
-    paddingInline: 0,
-    color: "var(--color-accent)",
-    lineHeight: "var(--line-height-solid)",
-    whiteSpace: "nowrap",
-
-    "&:not(:disabled):hover": {
-      color: "var(--palette-accent-fine)"
-    }
+    lineHeight: "var(--line-height-solid)"
   }
 };
 
@@ -101,31 +89,33 @@ function ProjectNavigationControls({
       className={className(styles.navigationPill)}
       aria-label={content.ui.projectNavigation}
     >
-      <UiLink
+      <IconLink
+        size="sm"
+        animation="slide"
         arrow="left"
         className={className(styles.navigationButton)}
         disabled={!isInteractive || !hasPrevious}
-        hasSquare={false}
         onClick={(event) => {
           event.currentTarget.blur();
           onPrevious();
         }}
       >
         {content.ui.previousProject}
-      </UiLink>
+      </IconLink>
       <span className={className(styles.navigationSeparator)} aria-hidden="true" />
-      <UiLink
+      <IconLink
+        size="sm"
+        animation="slide"
         arrow="right"
         className={className(styles.navigationButton)}
         disabled={!isInteractive || !hasNext}
-        hasSquare={false}
         onClick={(event) => {
           event.currentTarget.blur();
           onNext();
         }}
       >
         {content.ui.nextProject}
-      </UiLink>
+      </IconLink>
     </div>
   );
 }
