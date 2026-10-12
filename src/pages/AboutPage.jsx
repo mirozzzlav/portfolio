@@ -21,9 +21,10 @@ const styles = {
 
   actions: {
     display: "flex",
+    marginTop: "calc(-1 * var(--space-1))",
     flexWrap: "wrap",
     alignItems: "center",
-    gap: "var(--space-2)"
+    gap: "var(--space-1)"
   }
 };
 
