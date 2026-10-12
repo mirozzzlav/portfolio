@@ -5,7 +5,7 @@ import { UiLink } from "src/components/UiLink.jsx";
 
 const pillBase = {
   border: "var(--border-width-thin) solid var(--color-border)",
-  background: "var(--surface-project-title)"
+  background: "var(--surface-project)"
 };
 
 const styles = {

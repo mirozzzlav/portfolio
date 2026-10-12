@@ -37,7 +37,7 @@ export const globalStyles = {
     "--opacity-disabled-button": 0.58,
     "--surface-preview-title":
       "color-mix(in srgb, var(--surface-solid) 78%, var(--color-transparent))",
-    "--surface-project-title":
+    "--surface-project":
       "color-mix(in srgb, var(--palette-surface-muted), var(--color-transparent) var(--opacity-medium))",
     "--surface-status-success":
       "color-mix(in srgb, var(--color-success) 10%, var(--color-transparent))",
