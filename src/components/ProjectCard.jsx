@@ -31,13 +31,10 @@ const styles = {
     gap: "var(--space-3)",
 
     "> section": {
-      "--project-gradient-start":
-        "color-mix(in srgb, var(--palette-accent-soft) 45%, var(--color-transparent))",
-      "--project-gradient-middle":
-        "color-mix(in srgb, var(--palette-accent-soft) 15%, var(--color-transparent))",
       position: "relative",
       isolation: "isolate",
       padding: "var(--space-4)",
+      paddingRight: 0,
       borderRadius:
         "var(--radius-xl) var(--radius-xl) var(--radius-xl) var(--radius-sm)",
 
@@ -48,25 +45,21 @@ const styles = {
         position: "absolute",
         inset: 0,
         zIndex: -1,
-        border: "var(--border-width-thin) solid var(--palette-accent-fine)",
+        border: "var(--border-width-medium) solid var(--palette-accent-soft)",
         borderRightWidth: 0,
         borderBottomWidth: 0,
         borderRadius: "inherit",
         pointerEvents: "none",
-        backgroundImage:
-          "linear-gradient(var(--project-corner-direction), var(--project-gradient-start), var(--project-gradient-middle) 20%, var(--color-transparent) 85%)",
         maskImage:
           "linear-gradient(var(--project-corner-direction), var(--color-ink), var(--color-transparent) 85%), linear-gradient(var(--project-vertical-direction), var(--color-ink), var(--color-transparent) 85%)",
         maskComposite: "intersect"
       }
     },
 
-    "@media (width > 1000px)": {
-      "> section": {
-        "--project-gradient-start":
-          "color-mix(in srgb, var(--palette-accent-soft) 65%, var(--color-transparent))",
-        "--project-gradient-middle":
-          "color-mix(in srgb, var(--palette-accent-soft) 25%, var(--color-transparent))"
+    [`@media ${mediaQueries.mobile}`]: {
+      "> section::before": {
+        borderTopWidth: "var(--border-width-thin)",
+        borderLeftWidth: "var(--border-width-thin)"
       }
     }
   },
