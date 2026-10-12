@@ -46,18 +46,18 @@ const styles = {
 
   descriptionViewport: {
     display: "grid",
-    gap: "var(--space-3)",
+    gap: "var(--space-4)",
 
     "> section": {
       ...divider,
-      paddingTop: "var(--space-3)"
+      paddingTop: "var(--space-4)"
     },
 
     [`@media ${mediaQueries.mobile}`]: {
-      gap: "var(--space-2)",
+      gap: "var(--space-3)",
 
       "> section": {
-        paddingTop: "var(--space-2)"
+        paddingTop: "var(--space-3)"
       }
     }
   },
@@ -65,13 +65,9 @@ const styles = {
   description: {
     marginBottom: 0,
     color: "var(--color-text)",
-    fontSize: "var(--font-size-base)",
+    fontSize: "var(--font-size-md)",
     lineHeight: "var(--line-height-body)",
-    textWrap: "pretty",
-
-    [`@media ${mediaQueries.mobile}`]: {
-      fontSize: "var(--font-size-sm)"
-    }
+    textWrap: "pretty"
   },
 
   header: {
@@ -92,7 +88,7 @@ const styles = {
   },
 
   featuresHeading: {
-    margin: "0 0 var(--space-1)",
+    margin: "0 0 var(--space-2)",
     fontSize: "inherit",
     fontWeight: "var(--font-weight-semibold)",
     lineHeight: "inherit"
@@ -100,7 +96,7 @@ const styles = {
 
   featuresList: {
     display: "grid",
-    gap: "var(--space-0)",
+    gap: "var(--space-1)",
     margin: 0,
     padding: 0,
     listStyle: "none",

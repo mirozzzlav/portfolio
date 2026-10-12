@@ -11,7 +11,7 @@ const styles = {
     color: "var(--palette-ink)",
     fontSize: "var(--font-size-page-title)",
     fontWeight: "var(--font-weight-bold)",
-    lineHeight: "var(--line-height-display)",
+    lineHeight: "var(--line-height-page-title)",
     letterSpacing: 0,
 
     "&::before": {

@@ -90,9 +90,8 @@ export const globalStyles = {
     "--line-height-solid": 1,
     "--line-height-compact": 1.1,
     "--line-height-heading": 1.2,
-    "--line-height-body": 1.6,
-    "--line-height-prose": 1.72,
-    "--line-height-display": 0.98,
+    "--line-height-body": 1.72,
+    "--line-height-page-title": 0.98,
 
     // Spacing and layout
     "--content-width": "75ch",

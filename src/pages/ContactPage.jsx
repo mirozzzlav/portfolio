@@ -19,7 +19,7 @@ const styles = {
     marginBottom: "var(--space-1)",
     color: "var(--color-text)",
     fontSize: "var(--font-size-md)",
-    lineHeight: "var(--line-height-prose)",
+    lineHeight: "var(--line-height-body)",
     textWrap: "pretty"
   },
 
