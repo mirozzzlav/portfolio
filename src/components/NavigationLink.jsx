@@ -34,8 +34,7 @@ export function NavigationLink({
   isCurrent,
   item,
   onSelect,
-  size = "sm",
-  variant = "menu"
+  size = "sm"
 }) {
   const location = useLocation();
   const matchedRoute =
@@ -48,7 +47,7 @@ export function NavigationLink({
       arrow={arrow}
       aria-current={isActive ? "true" : undefined}
       className={mergeClassNames(styles.link, className)}
-      underline={variant !== "menu"}
+      underline={false}
       leading={
         hasSquare ? (
           <SelectionIndicator

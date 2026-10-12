@@ -1,6 +1,5 @@
 import { Link as RouterLink } from "react-router-dom";
 import { mergeClassNames } from "src/styles/classNames.js";
-import { standardLink } from "src/styles/linkStyles.js";
 import Arrow from "src/components/Arrow.jsx";
 
 const sizes = {
@@ -35,14 +34,20 @@ const animations = {
 };
 
 const styles = {
-  noUnderline: {
+  hoverUnderline: {
     "&:not(:disabled):hover, &:not(:disabled):hover > [data-link-text]": {
-      textDecorationLine: "none"
+      textDecorationLine: "underline",
+      textDecorationColor: "var(--palette-accent-fine)",
+      textDecorationThickness: "var(--border-width-medium)",
+      textUnderlineOffset: "calc(var(--space-2) / 2)"
     }
   },
 
   link: {
-    ...standardLink,
+    color: "var(--color-ink)",
+    fontWeight: "var(--font-weight-semibold)",
+    textDecoration: "none",
+    cursor: "pointer",
     appearance: "none",
     display: "inline-flex",
     alignItems: "center",
@@ -56,6 +61,11 @@ const styles = {
     lineHeight: "var(--line-height-compact)",
     textAlign: "left",
     whiteSpace: "nowrap",
+
+    "&:disabled": {
+      cursor: "default",
+      opacity: "var(--opacity-disabled)"
+    },
 
     "> svg": {
       color: "var(--palette-accent-fine)",
@@ -110,7 +120,7 @@ export function IconLink({
 }) {
   const linkClassName = mergeClassNames(
     styles.link,
-    underline ? null : styles.noUnderline,
+    underline && styles.hoverUnderline,
     sizes[size] || sizes.md,
     animations[animation] || animations.scale,
     styles.reducedMotion,
