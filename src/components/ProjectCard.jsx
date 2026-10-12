@@ -15,6 +15,7 @@ const styles = {
     minHeight: 0,
     overflow: "visible",
     background: "var(--color-transparent)",
+    paddingInline: "var(--space-0)",
 
     "&[aria-hidden='true']": {
       clipPath: "inset(0)"
@@ -88,13 +89,6 @@ const styles = {
     gap: "var(--space-3)"
   },
 
-  previewButton: {
-    "> svg": {
-      width: "calc(var(--icon-size-lg) + var(--space-0))",
-      height: "calc(var(--icon-size-lg) + var(--space-0))"
-    }
-  },
-
   blockHeading: {
     display: "flex",
     alignItems: "center",
@@ -154,28 +148,23 @@ function PreviewButton({ images, onClick, title }) {
   return (
     <IconLink
       size="sm"
-      className={className(styles.previewButton)}
       aria-label={`${content.ui.viewPreviews}: ${title}`}
       title={content.ui.viewPreviews}
       aria-haspopup="dialog"
       onClick={() => onClick(images, 0)}
       icon={
-        <svg viewBox="0 0 16 16" aria-hidden="true">
-          <path
-            d="M2 8s2.1-3.5 6-3.5S14 8 14 8s-2.1 3.5-6 3.5S2 8 2 8Z"
-            fill="none"
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="1.45"
-          />
-          <path
-            d="M8 6.25a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5Z"
-            fill="none"
-            stroke="currentColor"
-            strokeLinejoin="round"
-            strokeWidth="1.45"
-          />
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <rect x="3" y="3" width="18" height="18" rx="2" />
+          <circle cx="8.5" cy="8.5" r="1.5" />
+          <path d="m21 15-5-5L5 21" />
         </svg>
       }
     >
