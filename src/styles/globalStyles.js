@@ -44,7 +44,7 @@ export const globalStyles = {
     "--surface-status-error":
       "color-mix(in srgb, var(--color-error) 10%, var(--color-transparent))",
     "--shadow-footer":
-      "0 -6px 16px color-mix(in srgb, var(--palette-ink) 4%, var(--color-transparent))",
+      "0 calc(-1 * var(--space-1)) var(--space-4) color-mix(in srgb, var(--palette-ink) var(--opacity-subtle), var(--color-transparent))",
     "--shadow-preview":
       "0 20px 60px color-mix(in srgb, var(--palette-ink) var(--opacity-muted), var(--color-transparent))",
     "--shadow-preview-title":
