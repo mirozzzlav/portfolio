@@ -27,6 +27,8 @@ const styles = {
 
   track: {
     display: "flex",
+    // Keep the previous card outside the stage's focus-outline gutter.
+    columnGap: "var(--space-0)",
     width: "100%",
     alignItems: "flex-start",
     transition: "transform var(--transition-duration-page) ease",

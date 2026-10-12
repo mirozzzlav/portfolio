@@ -6,29 +6,12 @@ import { TagList } from "src/components/TagList.jsx";
 import { InlineLinks } from "src/components/InlineLinks.jsx";
 import { IconLabel } from "src/components/IconLabel.jsx";
 
-const divider = {
-  position: "relative",
-
-  "&::before": {
-    content: '""',
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    height: "var(--border-width-thin)",
-    background: "var(--color-border)",
-    boxShadow: "var(--shadow-divider)",
-    pointerEvents: "none"
-  }
-};
-
 const styles = {
   card: {
-    flex: "0 0 100%",
+    flex: "0 0 calc(100% - var(--space-0))",
     display: "grid",
     alignContent: "start",
-    gap: "var(--space-4)",
-    width: "100%",
+    width: "calc(100% - var(--space-0))",
     minHeight: 0,
     overflow: "visible",
     background: "var(--color-transparent)",
@@ -39,25 +22,60 @@ const styles = {
     },
 
     [`@media ${mediaQueries.mobile}`]: {
-      minHeight: "auto",
-      gap: "var(--space-3)"
+      minHeight: "auto"
     }
   },
 
   descriptionViewport: {
     display: "grid",
-    gap: "var(--space-4)",
+    gap: 0,
 
     "> section": {
-      ...divider,
-      paddingTop: "var(--space-4)"
+      "--project-gradient-start":
+        "color-mix(in srgb, var(--surface-project) 50%, var(--color-transparent))",
+      "--project-gradient-middle":
+        "color-mix(in srgb, var(--surface-project) 15%, var(--color-transparent))",
+      position: "relative",
+      isolation: "isolate",
+      padding: "var(--space-4)",
+      borderRadius:
+        "var(--radius-xl) var(--radius-xl) var(--radius-xl) var(--radius-sm)",
+
+      "&::before, &::after": {
+        content: '""',
+        position: "absolute",
+        inset: 0,
+        zIndex: -1,
+        border: "var(--border-width-thin) solid var(--color-border)",
+        borderRadius: "inherit",
+        pointerEvents: "none",
+        backgroundImage:
+          "linear-gradient(var(--project-corner-direction), var(--project-gradient-start), var(--project-gradient-middle) 20%, var(--color-transparent) 65%)",
+        maskImage:
+          "linear-gradient(var(--project-corner-direction), var(--color-ink), var(--color-transparent) 65%), linear-gradient(var(--project-vertical-direction), var(--color-ink), var(--color-transparent) 50%)",
+        maskComposite: "intersect"
+      },
+
+      "&::before": {
+        "--project-corner-direction": "to right",
+        "--project-vertical-direction": "to bottom",
+        borderRightWidth: 0,
+        borderBottomWidth: 0
+      },
+
+      "&::after": {
+        "--project-corner-direction": "to left",
+        "--project-vertical-direction": "to top",
+        borderTopWidth: 0,
+        borderLeftWidth: 0
+      }
     },
 
-    [`@media ${mediaQueries.mobile}`]: {
-      gap: "var(--space-3)",
-
+    "@media (width > 1000px)": {
       "> section": {
-        paddingTop: "var(--space-3)"
+        "--project-gradient-start": "var(--surface-project)",
+        "--project-gradient-middle":
+          "color-mix(in srgb, var(--surface-project) 30%, var(--color-transparent))"
       }
     }
   },
@@ -82,8 +100,7 @@ const styles = {
 
     [`@media ${mediaQueries.mobile}`]: {
       gap: "var(--space-1)",
-      marginBottom: "var(--space-3)",
-      flexWrap: "nowrap"
+      marginBottom: "var(--space-3)"
     }
   },
 
