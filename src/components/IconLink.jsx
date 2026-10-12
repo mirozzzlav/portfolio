@@ -28,13 +28,19 @@ const animations = {
       transition: "scale var(--transition-duration-fast) ease"
     },
 
-    "&:not(:disabled):hover > svg, &:not(:disabled):focus-visible > svg": {
+    "&:not(:disabled):hover > svg": {
       scale: "1.2"
     }
   }
 };
 
 const styles = {
+  noUnderline: {
+    "&:not(:disabled):hover, &:not(:disabled):hover > [data-link-text]": {
+      textDecorationLine: "none"
+    }
+  },
+
   link: {
     ...standardLink,
     appearance: "none",
@@ -43,7 +49,7 @@ const styles = {
     gap: "var(--space-1)",
     position: "relative",
     border: 0,
-    borderRadius: "var(--radius-sm)",
+    borderRadius: "var(--radius-pill)",
     padding: 0,
     background: "var(--color-transparent)",
     fontFamily: "inherit",
@@ -57,13 +63,13 @@ const styles = {
       flex: "none",
       width: "var(--icon-size-md)",
       height: "var(--icon-size-md)"
-    },
-
-    "&:focus-visible": {
-      "@media (forced-colors: active)": {
-        outlineColor: "Highlight"
-      }
     }
+
+    // "&:focus-visible": {
+    //   "@media (forced-colors: active)": {
+    //     outlineColor: "Highlight"
+    //   }
+    // }
   },
 
   arrow: {
@@ -99,10 +105,12 @@ export function IconLink({
   size = "md",
   to,
   type = "button",
+  underline = true,
   ...props
 }) {
   const linkClassName = mergeClassNames(
     styles.link,
+    underline ? null : styles.noUnderline,
     sizes[size] || sizes.md,
     animations[animation] || animations.scale,
     styles.reducedMotion,

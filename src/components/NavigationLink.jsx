@@ -11,7 +11,7 @@ export function NavigationLink({
   item,
   onSelect,
   size = "sm",
-  variant = "standard"
+  variant = "menu"
 }) {
   const location = useLocation();
   const matchedRoute =

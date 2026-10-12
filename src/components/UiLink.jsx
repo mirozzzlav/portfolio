@@ -18,16 +18,6 @@ const styles = {
     }
   },
 
-  menu: {
-    "&:not(:disabled):hover, &:not(:disabled):focus-visible": {
-      textDecorationLine: "none",
-
-      "> [data-link-text]": {
-        textDecorationLine: "none"
-      }
-    }
-  },
-
   square: {
     marginRight: "var(--space-0)",
     transform: "translateY(calc(0.01em + 1px))"
@@ -51,11 +41,8 @@ export function UiLink({
       animation={animation}
       arrow={arrow}
       aria-current={isCurrent ? "true" : undefined}
-      className={mergeClassNames(
-        styles.link,
-        variant === "menu" && styles.menu,
-        className
-      )}
+      className={mergeClassNames(styles.link, className)}
+      underline={variant !== "menu"}
       leading={
         hasSquare ? (
           <SelectionIndicator

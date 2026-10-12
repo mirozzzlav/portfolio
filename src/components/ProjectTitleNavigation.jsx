@@ -51,7 +51,7 @@ const styles = {
     display: "inline-flex",
     flex: "none",
     gap: "var(--space-1)",
-    marginRight: "var(--space-2xs)"
+    marginRight: "var(--space-0)"
   },
 
   navigationSeparator: {
@@ -91,6 +91,7 @@ function ProjectNavigationControls({
     >
       <IconLink
         size="sm"
+        underline={false}
         animation="slide"
         arrow="left"
         className={className(styles.navigationButton)}
@@ -105,6 +106,7 @@ function ProjectNavigationControls({
       <span className={className(styles.navigationSeparator)} aria-hidden="true" />
       <IconLink
         size="sm"
+        underline={false}
         animation="slide"
         arrow="right"
         className={className(styles.navigationButton)}

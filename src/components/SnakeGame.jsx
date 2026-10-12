@@ -13,8 +13,7 @@ const styles = {
   game: {
     width: "100%",
     "--snake-color": "var(--color-ink)",
-    "--food-color": "var(--palette-accent-fine)",
-    padding: "var(--space-1)"
+    "--food-color": "var(--palette-accent-fine)"
   },
   footer: {
     display: "flex",
@@ -36,7 +35,7 @@ const styles = {
     alignItems: "center",
     gap: "var(--space-0)",
     "&:focus, &:focus-visible": {
-      outline: "none",
+      boxShadow: "none",
       "& > kbd": {
         background: "var(--color-focus-ring)"
       }

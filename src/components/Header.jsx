@@ -104,7 +104,9 @@ const styles = {
 
   navLink: {
     "&": {
-      paddingBlock: "var(--space-2)"
+      paddingInline: "var(--space-3)",
+      paddingBlock: "var(--space-2)",
+      borderRadius: "inherit"
     },
     "&:not(:last-child)": {
       borderBottom: "var(--border-width-thin) solid var(--palette-surface-muted)"

@@ -6,7 +6,6 @@ import { useI18n } from "src/useI18n.js";
 const styles = {
   link: {
     fontSize: "inherit",
-    lineHeight: "inherit",
     maxWidth: "100%",
     whiteSpace: "normal",
 
