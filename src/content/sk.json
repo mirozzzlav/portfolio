@@ -40,6 +40,7 @@
     "technologies": "Použité technológie",
     "viewPreviews": "Pozrieť náhľady",
     "openProject": "Otvoriť projekt",
+    "projectDescription": "O projekte",
     "projectNavigation": "Prepínanie projektov",
     "previousProject": "Predošlý",
     "nextProject": "Ďalší",
@@ -94,7 +95,7 @@
     {
       "title": "Priatelia",
       "type": "Webová aplikácia",
-      "description": "Priatelia pomáha spoznávať nových ľudí a nájsť parťákov na spoločné záľuby. Projekt som vytvoril samostatne – od návrhu vzhľadu až po fungujúcu aplikáciu.",
+      "description": "Projekt Priatelia pomáha spoznávať nových ľudí a nájsť parťákov na spoločné záľuby. Projekt som vytvoril samostatne – od návrhu vzhľadu až po fungujúcu aplikáciu.",
       "url": "https://priatelia.wondercules.com",
       "galleryLabel": "Ukážky projektu Priatelia",
       "images": [
@@ -141,7 +142,7 @@
           "icon": "chakra-ui"
         }
       ],
-      "featuresTitle": "Čo aplikácia robí",
+      "featuresTitle": "Čo to dokáže",
       "features": [
         "Vytvorenie profilu s fotkami a záujmami.",
         "Objavovanie ľudí podľa mesta, vzdialenosti, veku a pohlavia.",
@@ -187,7 +188,7 @@
           "icon": "api"
         }
       ],
-      "featuresTitle": "Čo aplikácia robí",
+      "featuresTitle": "Čo to dokáže",
       "features": [
         "Pridávanie dokumentov a ich triedenie do kategórií.",
         "Vyhľadávanie a filtrovanie podľa kategórie, autora alebo schvaľovateľa.",
@@ -245,7 +246,7 @@
           "icon": "chakra-ui"
         }
       ],
-      "featuresTitle": "Čo aplikácia robí",
+      "featuresTitle": "Čo to dokáže",
       "features": [
         "Zobrazenie profesionálov na mape.",
         "Vyhľadávanie profesionálov podľa mena.",
@@ -291,7 +292,7 @@
           "icon": "page"
         }
       ],
-      "featuresTitle": "Čo web ponúka",
+      "featuresTitle": "Čo to dokáže",
       "features": [
         "Rozvrh tréningov pre deti aj dospelých.",
         "Predstavenie trénerov a informácie o aikide.",

@@ -87,7 +87,7 @@ const styles = {
     }
   },
 
-  featuresHeading: {
+  blockHeading: {
     margin: "0 0 var(--space-2)",
     fontSize: "inherit",
     fontWeight: "var(--font-weight-semibold)",
@@ -138,7 +138,10 @@ const styles = {
     }
   },
 
-  link: textLink,
+  link: {
+    ...textLink,
+    whiteSpace: "nowrap"
+  },
 
   previewButton: {
     appearance: "none",
@@ -231,24 +234,28 @@ export function ProjectCard({ isActive, project }) {
     <article className={className(styles.card)} aria-hidden={!isActive}>
       <div>
         <div className={className(styles.descriptionViewport)}>
-          <p className={className(styles.description)}>
-            <InlineLinks text={description} tabIndex={isActive ? 0 : -1} />
-            <br />
-            <a
-              className={className(styles.link)}
-              href={url}
-              target="_blank"
-              rel="noreferrer"
-              aria-label={`${content.ui.openProject} ${title}`}
-              title={`${content.ui.openProject} ${title}`}
-              tabIndex={isActive ? 0 : -1}
-            >
-              {content.ui.openProject}
-            </a>
-          </p>
+          <section className={className(styles.description)}>
+            <h3 className={className(styles.blockHeading)}>
+              {content.ui.projectDescription}
+            </h3>
+            <p className={className(styles.description)}>
+              <InlineLinks text={description} tabIndex={isActive ? 0 : -1} />{" "}
+              <a
+                className={className(styles.link)}
+                href={url}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`${content.ui.openProject} ${title}`}
+                title={`${content.ui.openProject} ${title}`}
+                tabIndex={isActive ? 0 : -1}
+              >
+                {content.ui.openProject}
+              </a>
+            </p>
+          </section>
           {features?.length > 0 ? (
             <section className={className(styles.description)}>
-              <h3 className={className(styles.featuresHeading)}>{featuresTitle}</h3>
+              <h3 className={className(styles.blockHeading)}>{featuresTitle}</h3>
               <ul className={className(styles.featuresList)} role="list">
                 {features.map((feature) => (
                   <li key={feature}>
@@ -260,7 +267,7 @@ export function ProjectCard({ isActive, project }) {
           ) : null}
           {technologies?.length > 0 ? (
             <section className={className(styles.description)}>
-              <h3 className={className(styles.featuresHeading)}>
+              <h3 className={className(styles.blockHeading)}>
                 {content.ui.technologies}
               </h3>
               <TagList items={technologies} ariaLabel={content.ui.technologies} />

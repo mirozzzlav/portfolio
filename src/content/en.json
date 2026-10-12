@@ -40,6 +40,7 @@
     "technologies": "Technologies used",
     "viewPreviews": "Previews",
     "openProject": "Open project",
+    "projectDescription": "About the project",
     "projectNavigation": "Project navigation",
     "previousProject": "Previous",
     "nextProject": "Next",
@@ -94,7 +95,7 @@
     {
       "title": "Priatelia",
       "type": "Web application",
-      "description": "Priatelia helps people meet others and find partners for shared interests. I built the project independently – from the visual design to a working application.",
+      "description": "The Priatelia project helps people meet others and find partners for shared interests. I built the project independently – from the visual design to a working application.",
       "url": "https://priatelia.wondercules.com",
       "images": [
         {
@@ -140,7 +141,7 @@
           "icon": "chakra-ui"
         }
       ],
-      "featuresTitle": "What the app does",
+      "featuresTitle": "What it can do",
       "features": [
         "Create a profile with photos and interests.",
         "Discover people by city, distance, age, and gender.",
@@ -185,7 +186,7 @@
           "icon": "api"
         }
       ],
-      "featuresTitle": "What the app does",
+      "featuresTitle": "What it can do",
       "features": [
         "Add documents and organize them into categories.",
         "Search and filter by category, author, or approver.",
@@ -242,7 +243,7 @@
           "icon": "chakra-ui"
         }
       ],
-      "featuresTitle": "What the app does",
+      "featuresTitle": "What it can do",
       "features": [
         "Discover professionals on a map.",
         "Search for professionals by name.",
@@ -288,7 +289,7 @@
           "icon": "page"
         }
       ],
-      "featuresTitle": "What the website offers",
+      "featuresTitle": "What it can do",
       "features": [
         "Training schedules for children and adults.",
         "Instructor profiles and information about Aikido.",
