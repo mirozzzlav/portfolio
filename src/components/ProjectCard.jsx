@@ -5,6 +5,7 @@ import { useI18n } from "src/useI18n.js";
 import { TagList } from "src/components/TagList.jsx";
 import { InlineLinks } from "src/components/InlineLinks.jsx";
 import { IconLabel } from "src/components/IconLabel.jsx";
+import { SelectionIndicator } from "src/components/SelectionIndicator.jsx";
 
 const styles = {
   card: {
@@ -15,6 +16,10 @@ const styles = {
     minHeight: 0,
     overflow: "visible",
     background: "var(--color-transparent)",
+
+    "&[aria-hidden='true']": {
+      clipPath: "inset(0)"
+    },
 
     "> *": {
       width: "min(100%, var(--project-content-width))",
@@ -29,14 +34,13 @@ const styles = {
   descriptionViewport: {
     display: "grid",
     gap: "var(--space-3)",
+    paddingTop: "var(--space-3)",
 
     "> section": {
       position: "relative",
       isolation: "isolate",
-      padding: "var(--space-4)",
-      paddingRight: 0,
-      borderRadius:
-        "var(--radius-xl) var(--radius-xl) var(--radius-xl) var(--radius-sm)",
+      padding: "var(--space-1) 0",
+      paddingTop: "var(--space-3)",
 
       "&::before": {
         "--project-corner-direction": "to right",
@@ -45,21 +49,14 @@ const styles = {
         position: "absolute",
         inset: 0,
         zIndex: -1,
-        border: "var(--border-width-medium) solid var(--palette-accent-soft)",
+        border: "var(--border-width-thin) solid var(--color-border)",
+        borderLeftWidth: 0,
         borderRightWidth: 0,
         borderBottomWidth: 0,
-        borderRadius: "inherit",
         pointerEvents: "none",
         maskImage:
           "linear-gradient(var(--project-corner-direction), var(--color-ink), var(--color-transparent) 85%), linear-gradient(var(--project-vertical-direction), var(--color-ink), var(--color-transparent) 85%)",
         maskComposite: "intersect"
-      }
-    },
-
-    [`@media ${mediaQueries.mobile}`]: {
-      "> section::before": {
-        borderTopWidth: "var(--border-width-thin)",
-        borderLeftWidth: "var(--border-width-thin)"
       }
     }
   },
@@ -89,8 +86,11 @@ const styles = {
   },
 
   blockHeading: {
+    display: "flex",
+    alignItems: "center",
+    gap: "var(--space-2)",
     margin: "0 0 var(--space-2)",
-    fontSize: "inherit",
+    fontSize: "var(--font-size-lg)",
     fontWeight: "var(--font-weight-semibold)",
     lineHeight: "inherit"
   },
@@ -107,14 +107,12 @@ const styles = {
       paddingLeft: "calc(var(--space-1) * 2)",
 
       "&::before": {
-        content: '""',
+        content: '"–"',
+        fontWeight: "var(--font-weight-bold)",
         position: "absolute",
         left: 0,
-        top: "calc((1em * var(--line-height-body) - var(--space-2) / 2) / 2)",
-        width: "calc(var(--space-2) / 2)",
-        height: "calc(var(--space-2) / 2)",
-        borderRadius: "var(--radius-xs)",
-        background: "var(--color-ink)"
+        top: 0,
+        color: "var(--color-ink)"
       }
     }
   },
@@ -237,6 +235,7 @@ export function ProjectCard({ isActive, project }) {
         <div className={className(styles.descriptionViewport)}>
           <section className={className(styles.description)}>
             <h3 className={className(styles.blockHeading)}>
+              <SelectionIndicator isActive />
               {content.ui.projectDescription}
             </h3>
             <p className={className(styles.description)}>
@@ -256,7 +255,10 @@ export function ProjectCard({ isActive, project }) {
           </section>
           {features?.length > 0 ? (
             <section className={className(styles.description)}>
-              <h3 className={className(styles.blockHeading)}>{featuresTitle}</h3>
+              <h3 className={className(styles.blockHeading)}>
+                <SelectionIndicator isActive />
+                {featuresTitle}
+              </h3>
               <ul className={className(styles.featuresList)} role="list">
                 {features.map((feature) => (
                   <li key={feature}>
@@ -269,6 +271,7 @@ export function ProjectCard({ isActive, project }) {
           {technologies?.length > 0 ? (
             <section className={className(styles.description)}>
               <h3 className={className(styles.blockHeading)}>
+                <SelectionIndicator isActive />
                 {content.ui.technologies}
               </h3>
               <TagList items={technologies} ariaLabel={content.ui.technologies} />
