@@ -81,7 +81,11 @@ const styles = {
 
   navigationButton: {
     justifyContent: "center",
-    lineHeight: "var(--line-height-solid)"
+    lineHeight: "var(--line-height-solid)",
+
+    "> svg": {
+      color: "var(--color-ink)"
+    }
   }
 };
 

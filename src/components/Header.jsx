@@ -103,6 +103,9 @@ const styles = {
   },
 
   navLink: {
+    "> svg": {
+      color: "var(--palette-accent-brown)"
+    },
     "&": {
       paddingInline: "var(--space-3)",
       paddingBlock: "var(--space-2)",
