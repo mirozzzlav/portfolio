@@ -14,7 +14,7 @@ const styles = {
     alignItems: "center",
     flexWrap: "nowrap",
     gap: "var(--space-2)",
-    marginBottom: "var(--space-1)",
+    marginBottom: "var(--space-2xs)",
     justifyContent: "space-between",
     width: "min(100%, var(--project-content-width))",
 
@@ -70,7 +70,7 @@ const styles = {
     justifyContent: "center",
     paddingInline: 0,
     color: "var(--color-accent)",
-    lineHeight: "var(--line-height-compact)",
+    lineHeight: "var(--line-height-solid)",
     whiteSpace: "nowrap",
 
     "&:not(:disabled):hover": {
