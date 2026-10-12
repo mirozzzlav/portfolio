@@ -34,13 +34,12 @@ const styles = {
   descriptionViewport: {
     display: "grid",
     gap: "var(--space-3)",
-    paddingTop: "var(--space-3)",
+    paddingTop: "var(--space-4)",
 
     "> section": {
       position: "relative",
       isolation: "isolate",
-      padding: "var(--space-1) 0",
-      paddingTop: "var(--space-3)",
+      padding: "var(--space-3) 0",
 
       "&::before": {
         "--project-corner-direction": "to right",
@@ -71,17 +70,15 @@ const styles = {
 
   header: {
     display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
+    flexDirection: "column",
+    alignItems: "flex-start",
     gap: "var(--space-2)",
     width: "min(100%, var(--project-content-width))",
-    marginBottom: "var(--space-4)",
     minHeight: "var(--project-header-min-height)",
     lineHeight: "var(--line-height-compact)",
 
     [`@media ${mediaQueries.mobile}`]: {
-      gap: "var(--space-1)",
-      marginBottom: "var(--space-3)"
+      gap: "var(--space-1)"
     }
   },
 
@@ -125,15 +122,16 @@ const styles = {
     color: "var(--palette-accent-fine)",
     fontFamily: "var(--font-family-condensed)",
     fontStretch: "semi-condensed",
-    fontSize: "var(--font-size-base)",
+    fontSize: "var(--font-size-md)",
     fontWeight: "var(--font-weight-semibold)",
     lineHeight: "var(--line-height-compact)",
     letterSpacing: "var(--letter-spacing-condensed)",
     textTransform: "uppercase",
     opacity: 1,
+    paddingBlock: "var(--space-0)",
 
     [`@media ${mediaQueries.mobile}`]: {
-      fontSize: "var(--font-size-sm)"
+      fontSize: "var(--font-size-base)"
     }
   },
 
@@ -144,30 +142,26 @@ const styles = {
 
   previewButton: {
     appearance: "none",
+    fontSize: "var(--font-size-sm)",
     justifyContent: "center",
     gap: "var(--space-0)",
-    minHeight: "var(--control-height-sm)",
     border: 0,
     borderRadius: "var(--radius-sm)",
-    padding: "var(--space-0) var(--space-1)",
+    padding: 0,
     background: "var(--color-transparent)",
     cursor: "pointer",
     lineHeight: "var(--line-height-compact)",
     whiteSpace: "nowrap",
 
     "> svg": {
+      order: 1,
+      transition: "transform var(--transition-duration-fast) ease",
       width: "calc(var(--icon-size-lg) + var(--space-0))",
       height: "calc(var(--icon-size-lg) + var(--space-0))"
     },
 
-    "&:hover": {
-      background:
-        "color-mix(in srgb, var(--palette-accent-soft) 50%, var(--color-surface))"
-    },
-
-    [`@media ${mediaQueries.mobile}`]: {
-      minWidth: "var(--control-height-md)",
-      minHeight: "var(--control-height-md)"
+    "&:hover > svg": {
+      transform: "scale(1.2)"
     }
   }
 };
