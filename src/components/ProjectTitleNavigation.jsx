@@ -16,7 +16,7 @@ const styles = {
     gap: "var(--space-2)",
     marginBottom: "var(--space-1)",
     justifyContent: "space-between",
-    width: "min(100%, var(--project-navigation-width))",
+    width: "min(100%, var(--project-content-width))",
 
     [`@media ${mediaQueries.narrow}`]: {
       gap: "var(--space-1)"
@@ -55,7 +55,8 @@ const styles = {
   navigationPill: {
     display: "inline-flex",
     flex: "none",
-    gap: "var(--space-1)"
+    gap: "var(--space-1)",
+    marginRight: "var(--space-2xs)"
   },
 
   navigationSeparator: {

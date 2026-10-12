@@ -96,8 +96,7 @@ export const globalStyles = {
 
     // Spacing and layout
     "--content-width": "75ch",
-    "--project-description-width": "68ch",
-    "--project-navigation-width": "680px",
+    "--project-content-width": "68ch",
     "--game-width": "470px",
     "--main-inline-pad": "var(--space-5)",
     "--header-height": "76px",

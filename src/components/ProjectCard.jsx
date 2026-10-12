@@ -34,7 +34,7 @@ const styles = {
     background: "var(--color-transparent)",
 
     "> *": {
-      width: "min(100%, var(--project-description-width))",
+      width: "min(100%, var(--project-content-width))",
       minWidth: 0
     },
 
@@ -79,7 +79,7 @@ const styles = {
     alignItems: "center",
     justifyContent: "space-between",
     gap: "var(--space-2)",
-    width: "min(100%, var(--project-description-width))",
+    width: "min(100%, var(--project-content-width))",
     marginBottom: "var(--space-4)",
     minHeight: "var(--project-header-min-height)",
     lineHeight: "var(--line-height-compact)",
