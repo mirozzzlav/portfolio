@@ -4,6 +4,7 @@ const linkIcon = `url("data:image/svg+xml,${encodeURIComponent(
 
 export const textLink = {
   color: "var(--color-link)",
+  fontWeight: "var(--font-weight-medium)",
   paddingInlineEnd: "var(--space-1)",
   textUnderlineOffset: "var(--space-0)",
 
