@@ -50,14 +50,13 @@ const styles = {
     appearance: "none",
     display: "inline-flex",
     alignItems: "center",
-    gap: "var(--space-1)",
+    gap: "var(--space-0)",
     position: "relative",
     border: 0,
     borderRadius: "var(--radius-pill)",
     padding: 0,
     background: "var(--color-transparent)",
     fontFamily: "inherit",
-    lineHeight: "var(--line-height-compact)",
     textAlign: "left",
     whiteSpace: "nowrap",
 
@@ -83,9 +82,7 @@ const styles = {
   text: {
     display: "block",
     flex: "1 1 auto",
-    minWidth: 0,
-    lineHeight: "var(--line-height-solid)",
-    transform: "translateY(-0.01em)"
+    minWidth: 0
   },
 
   reducedMotion: {

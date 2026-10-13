@@ -4,6 +4,7 @@ import { className } from "src/styles/classNames.js";
 import { useI18n } from "src/useI18n.js";
 import { CurrentYear } from "src/components/CurrentYear.jsx";
 import { NavigationLink } from "src/components/NavigationLink.jsx";
+import { Separator } from "src/components/Separator.jsx";
 
 const styles = {
   footer: {
@@ -32,7 +33,6 @@ const styles = {
     },
 
     [`@media ${mediaQueries.mobile}`]: {
-      justifyItems: "stretch",
       gap: "var(--space-2)",
       padding: "var(--space-2) var(--space-3)"
     }
@@ -42,28 +42,16 @@ const styles = {
     display: "flex",
     flexWrap: "wrap",
     alignItems: "center",
-    justifyContent: "flex-start",
-    gap: "var(--space-1)",
-    color: "var(--color-ink)",
-    fontWeight: "var(--font-weight-medium)",
-    [`@media ${mediaQueries.mobile}`]: {
-      gap: 0
-    }
+    gap: "var(--space-1)"
   },
 
   link: {
-    gap: "var(--space-0)"
-  },
-
-  separator: {
-    color: "var(--color-border)",
-    fontWeight: "var(--font-weight-regular)",
-    lineHeight: "var(--line-height-solid)"
+    lineHeight: "var(--line-height-solid)",
+    gap: "var(--space-1)"
   },
 
   year: {
     display: "inline-block",
-    color: "var(--color-ink)",
     fontFamily: "var(--font-family-digital-numeric)",
     fontSize: "var(--font-size-footer-year)",
     fontWeight: "var(--font-weight-bold)",
@@ -80,11 +68,7 @@ export function Footer() {
       <nav className={className(styles.nav)} aria-label={content.ui.footerNavigation}>
         {routes.map((item, itemIndex) => (
           <Fragment key={item.path}>
-            {itemIndex > 0 ? (
-              <span className={className(styles.separator)} aria-hidden="true">
-                |
-              </span>
-            ) : null}
+            {itemIndex > 0 ? <Separator /> : null}
             <NavigationLink
               arrow={null}
               className={className(styles.link)}

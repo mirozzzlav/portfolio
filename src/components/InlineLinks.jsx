@@ -7,11 +7,7 @@ const styles = {
   link: {
     fontSize: "inherit",
     maxWidth: "100%",
-    whiteSpace: "normal",
-
-    "> [data-link-text]": {
-      lineHeight: "inherit"
-    }
+    whiteSpace: "normal"
   }
 };
 

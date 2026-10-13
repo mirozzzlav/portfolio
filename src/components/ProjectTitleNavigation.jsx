@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { className } from "src/styles/classNames.js";
 import { useI18n } from "src/useI18n.js";
 import { IconLink } from "src/components/IconLink.jsx";
+import { Separator } from "src/components/Separator.jsx";
 
 const styles = {
   wrapper: {
@@ -70,13 +71,6 @@ const styles = {
       borderColor: "var(--color-border)",
       background: "var(--surface-project)"
     }
-  },
-
-  navigationSeparator: {
-    flex: "none",
-    alignSelf: "stretch",
-    width: "var(--border-width-thin)",
-    background: "var(--color-border)"
   },
 
   navigationButton: {
@@ -161,7 +155,7 @@ export function ProjectTitleNavigation({
           >
             {content.ui.previousProject}
           </IconLink>
-          <span className={className(styles.navigationSeparator)} aria-hidden="true" />
+          <Separator />
           <IconLink
             size="sm"
             underline={false}

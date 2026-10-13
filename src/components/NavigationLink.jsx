@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 import { normalizePathname } from "src/content/index.js";
-import { mergeClassNames, className as clsName } from "src/styles/classNames.js";
+import { mergeClassNames } from "src/styles/classNames.js";
 import { IconLink } from "src/components/IconLink.jsx";
 import { SelectionIndicator } from "src/components/SelectionIndicator.jsx";
 
@@ -18,11 +18,6 @@ const styles = {
       borderColor: "var(--color-border)",
       background: "var(--color-surface)"
     }
-  },
-
-  square: {
-    marginRight: "var(--space-0)",
-    transform: "translateY(calc(0.01em + 1px))"
   }
 };
 
@@ -48,11 +43,7 @@ export function NavigationLink({
       aria-current={isActive ? "true" : undefined}
       className={mergeClassNames(styles.link, className)}
       underline={false}
-      leading={
-        hasSquare ? (
-          <SelectionIndicator className={clsName(styles.square)} isActive={isActive} />
-        ) : null
-      }
+      leading={hasSquare ? <SelectionIndicator isActive={isActive} /> : null}
       to={item.path}
       onClick={onSelect}
       size={size}

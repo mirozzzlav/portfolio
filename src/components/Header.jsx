@@ -1,10 +1,11 @@
 import { mediaQueries } from "src/styles/mediaQueries.js";
-import { useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { className } from "src/styles/classNames.js";
 import { useI18n } from "src/useI18n.js";
 import { Button } from "src/components/Button.jsx";
 import { NavigationLink } from "src/components/NavigationLink.jsx";
+import { Separator } from "src/components/Separator.jsx";
 import EyeLogo from "src/components/EyeLogo.jsx";
 
 const styles = {
@@ -93,8 +94,6 @@ const styles = {
     borderRadius: "var(--radius-sm)",
     background: "var(--surface-solid)",
     boxShadow: "var(--shadow-menu)",
-    color: "var(--color-ink)",
-    fontWeight: "var(--font-weight-regular)",
     pointerEvents: "none",
     transform: "translateY(calc(-1 * var(--space-1)))",
     visibility: "hidden",
@@ -103,16 +102,12 @@ const styles = {
   },
 
   navLink: {
+    paddingInline: "var(--space-3)",
+    paddingBlock: "var(--space-2)",
+    borderRadius: "inherit",
+
     "> svg": {
       color: "var(--palette-ink)"
-    },
-    "&": {
-      paddingInline: "var(--space-3)",
-      paddingBlock: "var(--space-2)",
-      borderRadius: "inherit"
-    },
-    "&:not(:last-child)": {
-      borderBottom: "var(--border-width-thin) solid var(--palette-surface-muted)"
     }
   },
 
@@ -210,13 +205,15 @@ export function Header() {
               data-open={isMenuOpen ? "true" : "false"}
               aria-label={content.ui.mainNavigation}
             >
-              {routes.map((item) => (
-                <NavigationLink
-                  className={className(styles.navLink)}
-                  item={item}
-                  key={item.path}
-                  onSelect={() => setIsMenuOpen(false)}
-                />
+              {routes.map((item, itemIndex) => (
+                <Fragment key={item.path}>
+                  {itemIndex > 0 ? <Separator orientation="horizontal" /> : null}
+                  <NavigationLink
+                    className={className(styles.navLink)}
+                    item={item}
+                    onSelect={() => setIsMenuOpen(false)}
+                  />
+                </Fragment>
               ))}
             </nav>
           </div>
