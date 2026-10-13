@@ -45,16 +45,14 @@ const styles = {
     justifyContent: "flex-start",
     gap: "var(--space-1)",
     color: "var(--color-ink)",
-    fontWeight: "var(--font-weight-medium)"
+    fontWeight: "var(--font-weight-medium)",
+    [`@media ${mediaQueries.mobile}`]: {
+      gap: 0
+    }
   },
 
   link: {
-    gap: "var(--space-1)",
-    [`@media ${mediaQueries.mobile}`]: {
-      "[data-selection-indicator]": {
-        display: "none"
-      }
-    }
+    gap: "var(--space-0)"
   },
 
   separator: {
