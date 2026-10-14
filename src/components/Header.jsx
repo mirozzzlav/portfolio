@@ -105,6 +105,7 @@ const styles = {
     paddingInline: "var(--space-3)",
     paddingBlock: "var(--space-2)",
     borderRadius: "inherit",
+    gap: "var(--space-1)",
 
     "> svg": {
       color: "var(--palette-ink)"
