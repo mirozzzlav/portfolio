@@ -93,31 +93,31 @@
   },
   "projects": [
     {
-      "title": "Priatelia",
+      "title": "Priatelu",
       "type": "Webová aplikácia",
-      "description": "Projekt Priatelia pomáha spoznávať nových ľudí a nájsť parťákov na spoločné záľuby. Projekt som vytvoril samostatne – od návrhu vzhľadu až po fungujúcu aplikáciu.",
-      "url": "https://priatelia.wondercules.com",
-      "galleryLabel": "Ukážky projektu Priatelia",
+      "description": "Priatelu pomáha spoznávať nových ľudí v okolí a nájsť parťákov na rozhovor, výlety a spoločné záľuby. Aplikáciu som vytvoril samostatne – od návrhu vzhľadu až po fungujúci frontend a backend.",
+      "url": "https://priatelu.sk",
+      "galleryLabel": "Ukážky projektu Priatelu",
       "images": [
         {
-          "src": "/assets/projects/priatelia/1.webp?v=e6ec9b0",
-          "placeholderSrc": "/assets/projects/priatelia/1-placeholder.webp?v=e6ec9b0",
-          "alt": "Objavovanie ľudí podľa mesta, vzdialenosti, veku a pohlavia"
+          "src": "/assets/projects/priatelu/1.webp",
+          "placeholderSrc": "/assets/projects/priatelu/1-placeholder.webp",
+          "alt": "Priatelu: objavovanie ľudí v okolí s profilom, záujmami a možnosťou prepojenia"
         },
         {
-          "src": "/assets/projects/priatelia/2.webp?v=e6ec9b0",
-          "placeholderSrc": "/assets/projects/priatelia/2-placeholder.webp?v=e6ec9b0",
-          "alt": "Detail prepojeného profilu so záujmami, opisom a fotogalériou"
+          "src": "/assets/projects/priatelu/2.webp",
+          "placeholderSrc": "/assets/projects/priatelu/2-placeholder.webp",
+          "alt": "Priatelu: detail ukážkového profilu s opisom, záujmami a fotogalériou"
         },
         {
-          "src": "/assets/projects/priatelia/3.webp?v=e6ec9b0",
-          "placeholderSrc": "/assets/projects/priatelia/3-placeholder.webp?v=e6ec9b0",
-          "alt": "Úprava vlastného profilu, lokality, záujmov, bio a fotiek"
+          "src": "/assets/projects/priatelu/3.webp",
+          "placeholderSrc": "/assets/projects/priatelu/3-placeholder.webp",
+          "alt": "Priatelu: úprava vlastného profilu, fotiek, lokality a záujmov"
         },
         {
-          "src": "/assets/projects/priatelia/4.webp?v=e6ec9b0",
-          "placeholderSrc": "/assets/projects/priatelia/4-placeholder.webp?v=e6ec9b0",
-          "alt": "Chat medzi prepojenými používateľmi so skrytým obsahom správ"
+          "src": "/assets/projects/priatelu/4.webp?v=conversation",
+          "placeholderSrc": "/assets/projects/priatelu/4-placeholder.webp?v=conversation",
+          "alt": "Priatelu: obojstranná konverzácia s Ninou so skrytým obsahom správ"
         }
       ],
       "technologies": [

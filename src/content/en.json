@@ -93,30 +93,30 @@
   },
   "projects": [
     {
-      "title": "Priatelia",
+      "title": "Priatelu",
       "type": "Web application",
-      "description": "The Priatelia project helps people meet others and find partners for shared interests. I built the project independently – from the visual design to a working application.",
-      "url": "https://priatelia.wondercules.com",
+      "description": "Priatelu helps people meet others nearby and find companions for conversations, trips, and shared interests. I built the application independently – from visual design to a working frontend and backend.",
+      "url": "https://priatelu.sk",
       "images": [
         {
-          "src": "/assets/projects/priatelia/1.webp?v=e6ec9b0",
-          "placeholderSrc": "/assets/projects/priatelia/1-placeholder.webp?v=e6ec9b0",
-          "alt": "Discovering people by city, distance, age, and gender"
+          "src": "/assets/projects/priatelu/1.webp",
+          "placeholderSrc": "/assets/projects/priatelu/1-placeholder.webp",
+          "alt": "Priatelu: discovering people nearby with profiles, interests, and connection options"
         },
         {
-          "src": "/assets/projects/priatelia/2.webp?v=e6ec9b0",
-          "placeholderSrc": "/assets/projects/priatelia/2-placeholder.webp?v=e6ec9b0",
-          "alt": "Connected person's profile with interests, bio, and photo gallery"
+          "src": "/assets/projects/priatelu/2.webp",
+          "placeholderSrc": "/assets/projects/priatelu/2-placeholder.webp",
+          "alt": "Priatelu: sample profile with a bio, interests, and photo gallery"
         },
         {
-          "src": "/assets/projects/priatelia/3.webp?v=e6ec9b0",
-          "placeholderSrc": "/assets/projects/priatelia/3-placeholder.webp?v=e6ec9b0",
-          "alt": "Editing your profile, location, interests, bio, and photos"
+          "src": "/assets/projects/priatelu/3.webp",
+          "placeholderSrc": "/assets/projects/priatelu/3-placeholder.webp",
+          "alt": "Priatelu: editing your profile, photos, location, and interests"
         },
         {
-          "src": "/assets/projects/priatelia/4.webp?v=e6ec9b0",
-          "placeholderSrc": "/assets/projects/priatelia/4-placeholder.webp?v=e6ec9b0",
-          "alt": "Chat between connected users with message contents hidden"
+          "src": "/assets/projects/priatelu/4.webp?v=conversation",
+          "placeholderSrc": "/assets/projects/priatelu/4-placeholder.webp?v=conversation",
+          "alt": "Priatelu: two-way conversation with Nina with message contents hidden"
         }
       ],
       "technologies": [
@@ -147,7 +147,8 @@
         "Discover people by city, distance, age, and gender.",
         "Connect users when they like each other.",
         "Chat with connected users."
-      ]
+      ],
+      "galleryLabel": "Priatelu project previews"
     },
     {
       "title": "Digital archive",
