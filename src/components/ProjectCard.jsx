@@ -59,6 +59,10 @@ const styles = {
       }
     },
 
+    "> section:first-child": {
+      paddingTop: 0
+    },
+
     "> section:first-child::before": {
       display: "none"
     }

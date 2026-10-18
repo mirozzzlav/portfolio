@@ -6,9 +6,14 @@ import { Separator } from "src/components/Separator.jsx";
 
 const styles = {
   wrapper: {
+    position: "sticky",
+    top: "var(--header-height)",
+    zIndex: "var(--layer-content)",
     display: "grid",
     gap: "var(--space-2xs)",
+    paddingTop: "var(--space-2)",
     paddingBottom: "var(--space-2)",
+    background: "var(--surface-solid)",
     borderBottom: "var(--border-width-thin) solid var(--color-border)",
     width: "100%",
 
