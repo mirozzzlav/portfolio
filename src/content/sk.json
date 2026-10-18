@@ -153,7 +153,7 @@
     {
       "title": "Digitálny archív",
       "type": "Webová aplikácia",
-      "description": "Digitálny archív slúži na prehľadnú správu dokumentov na jednom mieste. Na projekte som sa venoval najmä vývoju frontendu v Reacte a návrhu komunikácie s API. [Demo](https://archive.wondercules.com) používa simulované dáta a môžete sa doň prihlásiť ľubovoľnými prihlasovacími údajmi.",
+      "description": "Digitálny archív slúži na prehľadnú správu dokumentov. Venoval som sa najmä frontendu v Reacte a komunikácii s API. [Demo](https://archive.wondercules.com) používa simulované dáta a prihlásite sa ľubovoľnými údajmi.",
       "url": "https://archive.wondercules.com",
       "galleryLabel": "Ukážky projektu Digitálny archív",
       "images": [
@@ -190,10 +190,10 @@
       ],
       "featuresTitle": "Čo to dokáže",
       "features": [
-        "Pridávanie dokumentov a ich triedenie do kategórií.",
-        "Vyhľadávanie a filtrovanie podľa kategórie, autora alebo schvaľovateľa.",
-        "Viacúrovňové schvaľovanie dokumentov a sledovanie ich stavu.",
-        "Správa kategórií dokumentov."
+        "Pridávanie a triedenie dokumentov.",
+        "Filtrovanie podľa kategórie, autora či schvaľovateľa.",
+        "Viacúrovňové schvaľovanie a sledovanie stavu.",
+        "Správa kategórií."
       ]
     },
     {
