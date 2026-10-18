@@ -27,7 +27,6 @@ export function TagList({ ariaLabel, items }) {
           <IconLabel
             as="li"
             key={label}
-            fontWeight="var(--font-weight-medium)"
             icon={icon ? <TechnologyIcon name={icon} /> : null}
           >
             {label}

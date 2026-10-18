@@ -5,7 +5,7 @@ const styles = {
     display: "inline-flex",
     flex: "none",
     alignItems: "center",
-    gap: "var(--space-1)",
+    gap: "var(--space-0)",
     color: "var(--color-text)",
     font: "inherit",
     fontSize: "var(--font-size-base)",
@@ -24,7 +24,7 @@ export function IconLabel({
   as: Component = "span",
   children,
   className,
-  fontWeight = "var(--font-weight-semibold)",
+  fontWeight = "var(--font-weight-medium)",
   icon,
   ...props
 }) {

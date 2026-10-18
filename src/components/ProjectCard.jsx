@@ -125,7 +125,7 @@ function PreviewButton({ images, onClick, title }) {
   const { content } = useI18n();
   return (
     <IconLink
-      size="sm"
+      iconPosition="start"
       underline={false}
       aria-label={`${content.ui.viewPreviews}: ${title}`}
       title={content.ui.viewPreviews}
@@ -164,7 +164,7 @@ export function ProjectActions({ project, onPreviewOpen }) {
         />
       ) : null}
       <IconLink
-        size="sm"
+        iconPosition="start"
         underline={false}
         href={project.url}
         target="_blank"

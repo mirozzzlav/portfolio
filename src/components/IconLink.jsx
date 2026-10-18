@@ -4,7 +4,7 @@ import Arrow from "src/components/Arrow.jsx";
 
 const sizes = {
   sm: { fontSize: "var(--font-size-sm)" },
-  md: { fontSize: "var(--font-size-md)" }
+  md: { fontSize: "var(--font-size-base)" }
 };
 
 const animations = {
@@ -44,7 +44,7 @@ const styles = {
 
   link: {
     color: "var(--color-ink)",
-    fontWeight: "var(--font-weight-semibold)",
+    fontWeight: "var(--font-weight-medium)",
     textDecoration: "none",
     cursor: "pointer",
     appearance: "none",
@@ -101,6 +101,7 @@ export function IconLink({
   className,
   href,
   icon,
+  iconPosition = !icon && arrow === "left" ? "start" : "end",
   leading,
   size = "md",
   to,
@@ -142,15 +143,15 @@ export function IconLink({
     );
   }
 
-  const isLeadingArrow = !icon && arrow === "left";
+  const isLeadingIcon = iconPosition === "start";
   const content = (
     <>
       {leading}
-      {isLeadingArrow && linkIcon}
+      {isLeadingIcon && linkIcon}
       <span className={mergeClassNames(styles.text)} data-link-text>
         {children}
       </span>
-      {!isLeadingArrow && linkIcon}
+      {!isLeadingIcon && linkIcon}
     </>
   );
 

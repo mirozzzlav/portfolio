@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { className } from "src/styles/classNames.js";
 import { useI18n } from "src/useI18n.js";
 import { IconLink } from "src/components/IconLink.jsx";
+import { IconLabel } from "src/components/IconLabel.jsx";
+import { TechnologyIcon } from "src/components/TechnologyIcon.jsx";
 import { Separator } from "src/components/Separator.jsx";
 
 const styles = {
@@ -53,11 +55,7 @@ const styles = {
 
   subtitle: {
     minWidth: 0,
-    margin: 0,
-    color: "var(--palette-accent-brown)",
-    fontSize: "var(--font-size-sm)",
-    fontWeight: "var(--font-weight-medium)",
-    lineHeight: "var(--line-height-compact)"
+    margin: 0
   },
 
   navigation: {
@@ -134,9 +132,15 @@ export function ProjectTitleNavigation({
     <div className={className(styles.wrapper)} data-title-wrapped={isSubtitleWrapped}>
       <div ref={titleBlockRef} className={className(styles.titleBlock)}>
         <h2 className={className(styles.title)}>{title}</h2>
-        <p className={className(styles.subtitle)} data-project-category>
-          # {subtitle}
-        </p>
+        <IconLabel
+          as="p"
+          className={className(styles.subtitle)}
+          fontWeight="var(--font-weight-semibold)"
+          icon={<TechnologyIcon name="hash" />}
+          data-project-category
+        >
+          {subtitle}
+        </IconLabel>
       </div>
       <div ref={actionsRowRef} className={className(styles.actionsRow)}>
         {actions}

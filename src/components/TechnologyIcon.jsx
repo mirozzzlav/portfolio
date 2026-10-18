@@ -2,6 +2,7 @@
 import brandPaths from "./technologyIcons.json";
 
 const outlinePaths = {
+  hash: "M4 9h16M3 15h16M10 3 8 21M16 3l-2 18",
   api: "M4 8h16m-4-4 4 4-4 4M20 16H4m4-4-4 4 4 4",
   page: "M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8l-5-5Zm0 0v5h5M9 12h6M9 16h6",
   tag: "M5 5v7l7 7a2 2 0 0 0 3 0l4-4a2 2 0 0 0 0-3l-7-7H6a1 1 0 0 0-1 1Zm4 3h.01"
