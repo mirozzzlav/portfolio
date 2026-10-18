@@ -1,7 +1,7 @@
 import { mediaQueries } from "src/styles/mediaQueries.js";
 import { mergeClassNames } from "src/styles/classNames.js";
-import { useImageGestures } from "src/hooks/useImageGestures.js";
-import { PreviewSurface } from "src/components/PreviewSurface.jsx";
+import { useImageGestures } from "src/components/Lightbox/useImageGestures.js";
+import { PreviewSurface } from "src/components/Lightbox/PreviewSurface.jsx";
 
 const styles = {
   viewer: {
