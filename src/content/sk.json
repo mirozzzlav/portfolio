@@ -47,6 +47,7 @@
     "closePreview": "Zatvoriť náhľad",
     "previousImage": "Predchádzajúci obrázok",
     "nextImage": "Ďalší obrázok",
+    "imageDescriptionNotFound": "Popis obrázku sa nenašiel",
     "continue": "Pokračovať",
     "redirectTitle": "Presmerovanie"
   },

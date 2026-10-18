@@ -4,10 +4,13 @@ import { ProjectTitleNavigation } from "src/components/ProjectTitleNavigation.js
 import { useProjectNavigation } from "src/hooks/useProjectNavigation.js";
 import { className } from "src/styles/classNames.js";
 import { useI18n } from "src/useI18n.js";
+import { ArrowButton } from "src/components/Lightbox/ArrowButton.jsx";
+import { CloseButton } from "src/components/Lightbox/CloseButton.jsx";
+import { Description } from "src/components/Lightbox/Description.jsx";
 
-const PreviewDialog = lazy(() =>
-  import("src/components/PreviewDialog.jsx").then((module) => ({
-    default: module.PreviewDialog
+const Lightbox = lazy(() =>
+  import("src/components/Lightbox/Lightbox.jsx").then((module) => ({
+    default: module.Lightbox
   }))
 );
 
@@ -52,22 +55,6 @@ export function ProjectsPage() {
     setPreview({ images, imageIndex });
   }
 
-  function navigatePreview(direction) {
-    setPreview((currentPreview) => {
-      if (!currentPreview) {
-        return currentPreview;
-      }
-
-      return {
-        ...currentPreview,
-        imageIndex: Math.min(
-          Math.max(currentPreview.imageIndex + direction, 0),
-          currentPreview.images.length - 1
-        )
-      };
-    });
-  }
-
   return (
     <>
       <div className={className(styles.stage)} {...touchHandlers}>
@@ -98,10 +85,33 @@ export function ProjectsPage() {
 
       {preview ? (
         <Suspense fallback={null}>
-          <PreviewDialog
-            preview={preview}
+          <Lightbox
+            images={preview.images}
+            initialImageIndex={preview.imageIndex}
+            isOpen
             onClose={() => setPreview(null)}
-            onNavigate={navigatePreview}
+            missingDescription={content.ui.imageDescriptionNotFound}
+            closeButton={
+              <CloseButton
+                label={content.ui.closePreview}
+                onClick={() => setPreview(null)}
+              />
+            }
+            description={(text, props) => <Description {...props}>{text}</Description>}
+            nextButton={(props) => (
+              <ArrowButton
+                direction="next"
+                aria-label={content.ui.nextImage}
+                {...props}
+              />
+            )}
+            previousButton={(props) => (
+              <ArrowButton
+                direction="previous"
+                aria-label={content.ui.previousImage}
+                {...props}
+              />
+            )}
           />
         </Suspense>
       ) : null}
