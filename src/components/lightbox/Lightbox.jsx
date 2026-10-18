@@ -3,8 +3,8 @@ import { createPortal } from "react-dom";
 import { useFocusTrap } from "src/hooks/useFocusTrap.js";
 import { mergeClassNames } from "src/styles/classNames.js";
 import { mediaQueries } from "src/styles/mediaQueries.js";
-import { Backdrop } from "src/components/Lightbox/Backdrop.jsx";
-import { ImageViewer } from "src/components/Lightbox/ImageViewer.jsx";
+import { Backdrop } from "src/components/lightbox/Backdrop.jsx";
+import { ImageViewer } from "src/components/lightbox/ImageViewer.jsx";
 
 const styles = {
   root: {

@@ -4,12 +4,12 @@ import { ProjectTitleNavigation } from "src/components/ProjectTitleNavigation.js
 import { useProjectNavigation } from "src/hooks/useProjectNavigation.js";
 import { className } from "src/styles/classNames.js";
 import { useI18n } from "src/useI18n.js";
-import { ArrowButton } from "src/components/Lightbox/ArrowButton.jsx";
-import { CloseButton } from "src/components/Lightbox/CloseButton.jsx";
-import { Description } from "src/components/Lightbox/Description.jsx";
+import { ArrowButton } from "src/components/lightbox/ArrowButton.jsx";
+import { CloseButton } from "src/components/lightbox/CloseButton.jsx";
+import { Description } from "src/components/lightbox/Description.jsx";
 
 const Lightbox = lazy(() =>
-  import("src/components/Lightbox/Lightbox.jsx").then((module) => ({
+  import("src/components/lightbox/Lightbox.jsx").then((module) => ({
     default: module.Lightbox
   }))
 );
