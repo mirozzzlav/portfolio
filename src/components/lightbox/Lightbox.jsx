@@ -1,10 +1,13 @@
 import { useCallback, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
+import { useI18n } from "src/useI18n.js";
 import { useFocusTrap } from "src/hooks/useFocusTrap.js";
 import { mergeClassNames } from "src/styles/classNames.js";
 import { mediaQueries } from "src/styles/mediaQueries.js";
 import { Backdrop } from "src/components/lightbox/Backdrop.jsx";
 import { ImageViewer } from "src/components/lightbox/ImageViewer.jsx";
+import { ArrowButton } from "src/components/lightbox/ArrowButton.jsx";
+import { CloseButton } from "src/components/lightbox/CloseButton.jsx";
 
 const styles = {
   root: {
@@ -63,17 +66,15 @@ const styles = {
 
 export function Lightbox({
   className,
-  closeButton,
   description,
   images = [],
   initialImageIndex = 0,
   isOpen,
   missingDescription = "Image description not found",
-  nextButton,
   onClose,
-  previousButton,
   showDescriptionFromImageAlt = true
 }) {
+  const { content } = useI18n();
   const [imageIndex, setImageIndex] = useState(initialImageIndex);
   const activeIndex = Math.min(Math.max(imageIndex, 0), Math.max(images.length - 1, 0));
   const image = images[activeIndex];
@@ -138,7 +139,12 @@ export function Lightbox({
         aria-label={imageDescription}
       >
         <div className={mergeClassNames(styles.content)}>
-          {nextButton?.({ disabled: !canNavigateNext, onClick: () => navigate(1) })}
+          <ArrowButton
+            direction="next"
+            aria-label={content.ui.nextImage}
+            disabled={!canNavigateNext}
+            onClick={() => navigate(1)}
+          />
           <ImageViewer
             image={image}
             imageDescription={imageDescription}
@@ -150,12 +156,14 @@ export function Lightbox({
                 : undefined
             }
           />
-          {previousButton?.({
-            disabled: !canNavigatePrevious,
-            onClick: () => navigate(-1)
-          })}
+          <ArrowButton
+            direction="previous"
+            aria-label={content.ui.previousImage}
+            disabled={!canNavigatePrevious}
+            onClick={() => navigate(-1)}
+          />
         </div>
-        {closeButton}
+        <CloseButton label={content.ui.closePreview} onClick={onClose} />
       </div>
     </div>,
     document.body

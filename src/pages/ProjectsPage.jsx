@@ -4,8 +4,6 @@ import { ProjectTitleNavigation } from "src/components/ProjectTitleNavigation.js
 import { useProjectNavigation } from "src/hooks/useProjectNavigation.js";
 import { className } from "src/styles/classNames.js";
 import { useI18n } from "src/useI18n.js";
-import { ArrowButton } from "src/components/lightbox/ArrowButton.jsx";
-import { CloseButton } from "src/components/lightbox/CloseButton.jsx";
 import { Description } from "src/components/lightbox/Description.jsx";
 
 const Lightbox = lazy(() =>
@@ -91,27 +89,7 @@ export function ProjectsPage() {
             isOpen
             onClose={() => setPreview(null)}
             missingDescription={content.ui.imageDescriptionNotFound}
-            closeButton={
-              <CloseButton
-                label={content.ui.closePreview}
-                onClick={() => setPreview(null)}
-              />
-            }
             description={(text, props) => <Description {...props}>{text}</Description>}
-            nextButton={(props) => (
-              <ArrowButton
-                direction="next"
-                aria-label={content.ui.nextImage}
-                {...props}
-              />
-            )}
-            previousButton={(props) => (
-              <ArrowButton
-                direction="previous"
-                aria-label={content.ui.previousImage}
-                {...props}
-              />
-            )}
           />
         </Suspense>
       ) : null}
