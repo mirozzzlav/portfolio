@@ -6,8 +6,7 @@ Wants=network-online.target
 [Service]
 Type=simple
 WorkingDirectory=/var/www/html/portfolio/api
-EnvironmentFile=/var/www/html/portfolio/api/.env
-ExecStart=/var/www/html/portfolio/api/.venv/bin/uvicorn app.main:app --host 127.0.0.1 --port 8001
+ExecStart=/var/www/html/portfolio/api/.venv/bin/uvicorn app.main:app --host 127.0.0.1 --port 8001 --env-file /var/www/html/portfolio/.env
 Restart=on-failure
 RestartSec=5
 User=miro

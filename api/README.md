@@ -9,10 +9,12 @@ cd api
 python -m venv .venv
 source .venv/bin/activate
 pip install -e .
-cp .env.example .env
+cp ../.env.example ../.env
 ```
 
-Fill `.env` with real values. Do not commit `.env`.
+Fill the repository root `.env` with real values. If it already exists, keep it
+and add missing settings from `.env.example`. Docker, frontend and API share
+this file; `api/.env` is no longer used. Do not commit `.env`.
 
 For local development without a real SMTP account or domain, keep:
 
@@ -25,7 +27,7 @@ With dry run enabled, contact requests validate successfully and print email met
 Run the API:
 
 ```bash
-uvicorn app.main:app --reload --host 127.0.0.1 --port 8001 --env-file .env
+uvicorn app.main:app --reload --host 127.0.0.1 --port 8001 --env-file ../.env
 ```
 
 Health check:

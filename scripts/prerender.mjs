@@ -1,8 +1,8 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { cache, flush } from "@emotion/css";
 import path from "node:path";
-import process from "node:process";
 import { fileURLToPath } from "node:url";
+import { loadEnv } from "vite";
 import { getContent, supportedLanguages } from "../src/content/index.js";
 import { getPageRouteDefinitions, getRedirectRoutes } from "../src/routes.js";
 import { getRouteSeo, normalizeSiteUrl, siteSeo } from "../src/seo.js";
@@ -13,7 +13,8 @@ const projectRoot = path.resolve(dirname, "..");
 const distDir = path.join(projectRoot, "dist");
 const templatePath = path.join(distDir, "index.html");
 const serverEntryPath = path.join(distDir, "server", "entry-server.js");
-const siteUrl = normalizeSiteUrl(process.env.SITE_URL || siteSeo.siteUrl);
+const env = loadEnv("production", projectRoot, "");
+const siteUrl = normalizeSiteUrl(env.SITE_URL || siteSeo.siteUrl);
 
 const routes = supportedLanguages.flatMap((language) =>
   getPageRouteDefinitions(language).map((route) => route.path)
