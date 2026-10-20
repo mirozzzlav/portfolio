@@ -27,10 +27,37 @@ Lokálny príklad má `MAIL_DRY_RUN=true` a prázdne Turnstile kľúče.
 
 ### Nasadenie za Nginxom na hostiteľovi
 
+Na aktuálnom VPS port `8080` používa `yokaid_api_main`. Pre portfolio nastav
+`HTTP_PORT=8081`; tento port bol pri kontrole 2026-10-20 voľný.
+Pripravená konfigurácia [nginx-docker.example](nginx-docker.example) vychádza zo
+živej konfigurácie `/etc/nginx/sites-available/mirofurinda.com`, zachováva HTTPS,
+presmerovanie `www` a existujúci rate limit. Všetky požiadavky posiela na `8081`.
+Pôvodné `root`, `try_files` a samostatná proxy `/api/` na `8001` sa odstránia,
+pretože frontend aj API už obsluhuje Caddy v Compose.
+
+Najprv nasaď publikovaný commit s Docker konfiguráciou, zachovaj serverový `.env`,
+nastav v ňom `HTTP_PORT=8081` a spusti `docker compose up -d --build`.
+Over `docker compose ps`, `curl -I http://127.0.0.1:8081/en/projects` a API cestu
+bez odoslania správy cez `curl -i http://127.0.0.1:8081/api/contact`
+(API má pre GET vrátiť `405`, pretože endpoint prijíma POST).
+Až potom prepni Nginx:
+
+```bash
+sudo cp -a /etc/nginx/sites-available/mirofurinda.com /etc/nginx/sites-available/mirofurinda.com.before-docker
+sudo cp deploy/nginx-docker.example /etc/nginx/sites-available/mirofurinda.com
+sudo nginx -t && sudo systemctl reload nginx
+curl -I https://mirofurinda.com/en/projects
+curl -i https://mirofurinda.com/api/contact
+```
+
+Ak test zlyhá, obnov zálohu pred ďalším reloadom. Staré `portfolio-api` na porte
+`8001` možno odstaviť až po overení fungovania Docker API cez verejnú doménu.
+Ostatné aplikácie na VPS ponechaj bez zmien.
+
 V koreňovom `.env` nastav:
 
 ```dotenv
-HTTP_PORT=8080
+HTTP_PORT=8081
 DOMAIN_NAME=mirofurinda.com
 SITE_URL=https://${DOMAIN_NAME}
 VITE_TURNSTILE_SITE_KEY=verejny_turnstile_kluc
@@ -42,7 +69,7 @@ V existujúcom HTTPS `server` bloku pre `mirofurinda.com` použi:
 
 ```nginx
 location / {
-    proxy_pass http://127.0.0.1:8080;
+    proxy_pass http://127.0.0.1:8081;
     proxy_set_header Host $host;
     proxy_set_header X-Real-IP $remote_addr;
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;

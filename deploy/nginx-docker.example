@@ -1,0 +1,60 @@
+# Adapted from the live mirofurinda.com configuration.
+# Set HTTP_PORT=8081 in the server .env before starting Compose.
+# Port 8080 is already used by YoKaiD on this VPS.
+server {
+    listen 80;
+    server_name mirofurinda.com www.mirofurinda.com;
+
+    return 301 https://mirofurinda.com$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    server_name mirofurinda.com;
+
+    ssl_certificate /etc/letsencrypt/live/mirofurinda.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/mirofurinda.com/privkey.pem;
+
+    gzip on;
+    gzip_vary on;
+    gzip_min_length 1024;
+    gzip_types
+        application/javascript
+        application/json
+        application/xml
+        image/svg+xml
+        text/css
+        text/javascript
+        text/plain
+        text/xml;
+
+    proxy_http_version 1.1;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+
+    location ~* ^/assets/.*\.(?:avif|css|gif|ico|jpe?g|js|png|svg|webp|woff2?)$ {
+        proxy_pass http://127.0.0.1:8081;
+        expires 1y;
+        add_header Cache-Control "public, max-age=31536000, immutable";
+    }
+
+    # Caddy serves the frontend and routes /api/* to the Compose API service.
+    location / {
+        proxy_pass http://127.0.0.1:8081;
+        add_header Cache-Control "no-cache" always;
+    }
+
+    include snippets/rate-limit.conf;
+}
+
+server {
+    listen 443 ssl;
+    server_name www.mirofurinda.com;
+
+    ssl_certificate /etc/letsencrypt/live/mirofurinda.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/mirofurinda.com/privkey.pem;
+
+    return 301 https://mirofurinda.com$request_uri;
+}
