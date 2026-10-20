@@ -89,13 +89,12 @@ Pri prechode zo staršieho nastavenia presuň hodnoty z `api/.env` do koreňové
 `.env`; `api/.env` sa už nepoužíva. Web bude dostupný na `http://localhost:8080`. Lokálny príklad
 má odosielanie e-mailov vypnuté cez `MAIL_DRY_RUN=true`.
 
-Caddy obsluhuje zostavené React stránky a presmeruje `/api/*` na samostatný
-FastAPI kontajner. API nemá publikovaný port. Node.js sa používa iba pri builde.
-Docker publikuje iba HTTP na `127.0.0.1:8080`; doménu, HTTPS a certifikáty
-spravuje Nginx na hostiteľovi.
+Jeden kontajner s FastAPI obsluhuje zostavené React stránky aj `/api/*`.
+Node.js sa používa iba pri builde; Caddy nie je potrebný.
+Docker publikuje HTTP iba na `127.0.0.1:${HTTP_PORT}` (predvolene `8080`).
 
-Nastavenie Nginx proxy a produkčného formulára je v
-[deploy/README.md](deploy/README.md#docker-compose-s-caddy).
+Postup nasadenia a nastavenie produkčného formulára je v
+[deploy/README.md](deploy/README.md).
 
 ## Lokálny projektový kontext
 

@@ -1,8 +1,11 @@
+from pathlib import Path
+
 from fastapi import FastAPI, Request, status
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
+from app.frontend import mount_frontend
 from app.mailer import MailDeliveryError, send_contact_email
 from app.schemas import ContactRequest, ContactResponse, HealthResponse
 from app.settings import get_settings
@@ -100,3 +103,6 @@ async def contact(payload: ContactRequest, request: Request) -> ContactResponse:
         )
 
     return ContactResponse(ok=True)
+
+
+mount_frontend(app, Path(__file__).resolve().parents[2] / "dist")

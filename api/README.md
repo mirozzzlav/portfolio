@@ -2,6 +2,18 @@
 
 Small FastAPI service for the portfolio contact form. It sends email through a generic SMTP client (`aiosmtplib`) and can be configured for Resend SMTP.
 
+In production the same FastAPI process serves the React build from the root
+`dist/` directory. Prerendered routes take priority over the React shell fallback;
+API routes and missing assets never fall back to HTML. Docker builds the frontend
+and packages it with the API into one `web` container. Without `dist/`, the API
+still runs independently alongside the local Vite development server.
+
+Routing checks (from `api/`, with the API environment activated):
+
+```bash
+python -m unittest discover -s tests -v
+```
+
 ## Local setup
 
 ```bash
