@@ -47,7 +47,11 @@ const styles = {
 
   link: {
     lineHeight: "var(--line-height-solid)",
-    gap: "var(--space-1)"
+    gap: "var(--space-1)",
+
+    [`@media ${mediaQueries.mobile}`]: {
+      paddingInline: "var(--space-0)"
+    }
   },
 
   year: {
