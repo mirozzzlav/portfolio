@@ -96,7 +96,7 @@
     {
       "title": "Priatelu",
       "type": "Webová aplikácia",
-      "description": "Priatelu pomáha spoznávať nových ľudí v okolí a nájsť parťákov na rozhovor, výlety a spoločné záľuby. Aplikáciu som vytvoril samostatne – od návrhu vzhľadu až po fungujúci frontend a backend.",
+      "description": "Priatelu spája ľudí v okolí podľa spoločných záujmov. Pomáha nájsť parťákov na rozhovor, výlety či spoločné aktivity. Aplikáciu som vytvoril samostatne od návrhu vzhľadu po frontend a backend.",
       "url": "https://priatelu.sk",
       "galleryLabel": "Ukážky projektu Priatelu",
       "images": [
@@ -145,16 +145,15 @@
       ],
       "featuresTitle": "Čo to dokáže",
       "features": [
-        "Vytvorenie profilu s fotkami a záujmami.",
+        "Vytvorenie a úprava profilu s fotkami, opisom a záujmami.",
         "Objavovanie ľudí podľa mesta, vzdialenosti, veku a pohlavia.",
-        "Prepojenie používateľov po vzájomnom lajku.",
-        "Chat medzi prepojenými používateľmi."
+        "Prepojenie po vzájomnom lajku a spoločný chat."
       ]
     },
     {
       "title": "Digitálny archív",
       "type": "Webová aplikácia",
-      "description": "Digitálny archív slúži na prehľadnú správu dokumentov. Venoval som sa najmä frontendu v Reacte a komunikácii s API. [Demo](https://archive.wondercules.com) používa simulované dáta a prihlásite sa ľubovoľnými údajmi.",
+      "description": "Digitálny archív slúži na prehľadnú správu dokumentov. Venoval som sa najmä frontendu v Reacte a napojeniu na API. [Demo](https://archive.wondercules.com) používa simulované dáta a prijíma ľubovoľné prihlasovacie údaje.",
       "url": "https://archive.wondercules.com",
       "galleryLabel": "Ukážky projektu Digitálny archív",
       "images": [
@@ -191,16 +190,15 @@
       ],
       "featuresTitle": "Čo to dokáže",
       "features": [
-        "Pridávanie a triedenie dokumentov.",
-        "Filtrovanie podľa kategórie, autora či schvaľovateľa.",
-        "Viacúrovňové schvaľovanie a sledovanie stavu.",
-        "Správa kategórií."
+        "Pridávanie a triedenie dokumentov do spravovateľných kategórií.",
+        "Filtrovanie dokumentov podľa kategórie, autora či schvaľovateľa.",
+        "Viacúrovňové schvaľovanie dokumentov so sledovaním ich stavu."
       ]
     },
     {
       "title": "Yokaid",
       "type": "Webová aplikácia",
-      "description": "Yokaid pomáha nájsť remeselníkov a profesionálov v okolí podľa hodnotení a skúseností ostatných. Projekt som vytvoril samostatne – od návrhu vzhľadu až po fungujúcu aplikáciu.",
+      "description": "Yokaid pomáha nájsť profesionálov v okolí podľa recenzií. Skúsenosti ostatných uľahčujú výber remeselníka či poskytovateľa služieb. Projekt som vytvoril samostatne od návrhu vzhľadu po funkčnú aplikáciu.",
       "url": "https://yokaid.wondercules.com",
       "galleryLabel": "Ukážky projektu Yokaid",
       "images": [
@@ -249,16 +247,15 @@
       ],
       "featuresTitle": "Čo to dokáže",
       "features": [
-        "Zobrazenie profesionálov na mape.",
-        "Vyhľadávanie profesionálov podľa mena.",
-        "Prezeranie profilov s hodnoteniami a recenziami.",
-        "Pridávanie vlastných recenzií a zdieľanie skúseností."
+        "Objavovanie profesionálov v okolí na mape a vyhľadávanie podľa mena.",
+        "Profily s hodnoteniami a recenziami od ostatných používateľov.",
+        "Pridávanie vlastných recenzií a zdieľanie skúseností s profesionálmi."
       ]
     },
     {
       "title": "Aikido Levice",
       "type": "Web stránka",
-      "description": "Webová stránka Aikido Levice predstavuje klub a približuje filozofiu bojového umenia aikido. Web som vytvoril samostatne – od návrhu vzhľadu až po fungujúcu webovú stránku.",
+      "description": "Web klubu Aikido Levice predstavuje tréningy a bojové umenie aikido. Novým záujemcom aj členom prináša rozvrh a aktuálne dianie v klube. Web som vytvoril samostatne od návrhu vzhľadu po realizáciu.",
       "url": "https://aikidolevice.sk",
       "galleryLabel": "Ukážky projektu Aikido Dojo Levice",
       "images": [
@@ -295,10 +292,53 @@
       ],
       "featuresTitle": "Čo to dokáže",
       "features": [
-        "Rozvrh tréningov pre deti aj dospelých.",
-        "Predstavenie trénerov a informácie o aikide.",
-        "Klubové novinky a fotogaléria z tréningov.",
-        "Kontaktný formulár na oslovenie klubu."
+        "Rozvrh tréningov pre deti aj dospelých a predstavenie trénerov.",
+        "Informácie o aikide, klubové novinky a fotogaléria z tréningov.",
+        "Kontaktný formulár na otázky a záujem o tréning."
+      ]
+    },
+    {
+      "title": "Wake Up Neo",
+      "type": "Rozšírenie pre Firefox",
+      "description": "Wake Up Neo vytvorí pauzu pred návštevou rušivého webu. Dáva priestor premyslieť si zámer návštevy namiesto automatického otvárania stránky. Funguje bez účtu, nastavenia sú lokálne a odpovede sa neukladajú.",
+      "url": "https://addons.mozilla.org/en-US/firefox/addon/wake-up-neo/",
+      "galleryLabel": "Ukážky projektu Wake Up Neo",
+      "images": [
+        {
+          "src": "/assets/projects/wake-up-neo/1.webp",
+          "placeholderSrc": "/assets/projects/wake-up-neo/1-placeholder.webp",
+          "alt": "Wake Up Neo: otázka na zámer návštevy Facebooku a zadanie PIN-u na premiešanej klávesnici"
+        },
+        {
+          "src": "/assets/projects/wake-up-neo/2.webp",
+          "placeholderSrc": "/assets/projects/wake-up-neo/2-placeholder.webp",
+          "alt": "Wake Up Neo: výber jazyka, zapnutie povinnej odpovede a nastavenie vlastnej otázky pred návštevou webu"
+        },
+        {
+          "src": "/assets/projects/wake-up-neo/3.webp",
+          "placeholderSrc": "/assets/projects/wake-up-neo/3-placeholder.webp",
+          "alt": "Wake Up Neo: správa sledovaných domén s Facebookom, vlastným názvom a možnosťou pridať alebo odstrániť doménu"
+        },
+        {
+          "src": "/assets/projects/wake-up-neo/4.webp",
+          "placeholderSrc": "/assets/projects/wake-up-neo/4-placeholder.webp",
+          "alt": "Wake Up Neo: výber overenia cez autentifikačnú aplikáciu a nastavenie TOTP pomocou QR kódu alebo textového kľúča"
+        }
+      ],
+      "technologies": [
+        {
+          "label": "WebExtensions API",
+          "icon": "api"
+        },
+        {
+          "label": "TOTP"
+        }
+      ],
+      "featuresTitle": "Čo to dokáže",
+      "features": [
+        "Výber rušivých webov vrátane subdomén a vlastných zobrazovaných názvov.",
+        "Vlastná otázka pred návštevou webu s voliteľnou odpoveďou aspoň piatimi slovami.",
+        "Potvrdenie PIN-om na premiešanej klávesnici alebo TOTP kódom; rozhranie v SK aj EN."
       ]
     }
   ]

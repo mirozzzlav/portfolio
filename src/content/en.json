@@ -96,7 +96,7 @@
     {
       "title": "Priatelu",
       "type": "Web application",
-      "description": "Priatelu helps people meet others nearby and find companions for conversations, trips, and shared interests. I built the application independently – from visual design to a working frontend and backend.",
+      "description": "Priatelu connects people nearby through shared interests. It helps them find companions for conversations, trips, and activities. I built the app independently, from visual design to frontend and backend.",
       "url": "https://priatelu.sk",
       "images": [
         {
@@ -144,17 +144,16 @@
       ],
       "featuresTitle": "What it can do",
       "features": [
-        "Create a profile with photos and interests.",
+        "Create and edit a profile with photos, a bio, and interests.",
         "Discover people by city, distance, age, and gender.",
-        "Connect users when they like each other.",
-        "Chat with connected users."
+        "Connect after a mutual like and start chatting."
       ],
       "galleryLabel": "Priatelu project previews"
     },
     {
       "title": "Digital archive",
       "type": "Web application",
-      "description": "Digital archive keeps documents organized. I focused mainly on the React frontend and API integration. The [demo](https://archive.wondercules.com) uses simulated data and accepts any login credentials.",
+      "description": "Digital archive keeps documents organized. I focused mainly on the React frontend and API integration. The [demo](https://archive.wondercules.com) uses sample data and accepts any login credentials.",
       "url": "https://archive.wondercules.com",
       "images": [
         {
@@ -190,16 +189,15 @@
       ],
       "featuresTitle": "What it can do",
       "features": [
-        "Add and organize documents.",
-        "Filter by category, author, or approver.",
-        "Manage approval levels and track status.",
-        "Manage categories."
+        "Add and organize documents into categories you can manage.",
+        "Filter documents by category, author, or approver.",
+        "Approve documents across multiple levels and track their status."
       ]
     },
     {
       "title": "Yokaid",
       "type": "Web application",
-      "description": "Yokaid helps people find tradespeople and professionals nearby using ratings and experiences shared by others. I built the project independently – from the visual design to a working application.",
+      "description": "Yokaid helps people find local professionals through reviews. Shared experiences make it easier to choose a tradesperson or service provider. I built the project independently, from visual design to a working app.",
       "url": "https://yokaid.wondercules.com",
       "images": [
         {
@@ -247,16 +245,15 @@
       ],
       "featuresTitle": "What it can do",
       "features": [
-        "Discover professionals on a map.",
-        "Search for professionals by name.",
-        "View profiles with ratings and reviews.",
-        "Add reviews and share personal experiences."
+        "Discover local professionals on a map and search by name.",
+        "View profiles with ratings and reviews from other users.",
+        "Add your own reviews and share experiences with professionals."
       ]
     },
     {
       "title": "Aikido Levice",
       "type": "Website",
-      "description": "The Aikido Levice website introduces the club and the philosophy of the martial art. I built the website independently – from the visual design to a working website.",
+      "description": "The Aikido Levice website introduces the club and the martial art. It keeps newcomers and members informed about training schedules and club news. I built the website independently, from visual design to implementation.",
       "url": "https://aikidolevice.sk",
       "galleryLabel": "Aikido Dojo Levice project previews",
       "images": [
@@ -293,10 +290,53 @@
       ],
       "featuresTitle": "What it can do",
       "features": [
-        "Training schedules for children and adults.",
-        "Instructor profiles and information about Aikido.",
-        "Club news and training photo galleries.",
-        "A contact form to reach the club."
+        "Training schedules for children and adults, plus instructor profiles.",
+        "Information about Aikido, club news, and training photo galleries.",
+        "A contact form for questions and training enquiries."
+      ]
+    },
+    {
+      "title": "Wake Up Neo",
+      "type": "Firefox extension",
+      "description": "Wake Up Neo adds a pause before distracting websites. It gives you time to consider your intention instead of opening a page out of habit. No account is needed; settings stay on your device and answers are not stored.",
+      "url": "https://addons.mozilla.org/en-US/firefox/addon/wake-up-neo/",
+      "galleryLabel": "Wake Up Neo project previews",
+      "images": [
+        {
+          "src": "/assets/projects/wake-up-neo/1.webp",
+          "placeholderSrc": "/assets/projects/wake-up-neo/1-placeholder.webp",
+          "alt": "Wake Up Neo: a question about the intention to visit Facebook and PIN entry on a shuffled keypad"
+        },
+        {
+          "src": "/assets/projects/wake-up-neo/2.webp",
+          "placeholderSrc": "/assets/projects/wake-up-neo/2-placeholder.webp",
+          "alt": "Wake Up Neo: language selection, answer requirement, and a custom question before visiting a website"
+        },
+        {
+          "src": "/assets/projects/wake-up-neo/3.webp",
+          "placeholderSrc": "/assets/projects/wake-up-neo/3-placeholder.webp",
+          "alt": "Wake Up Neo: managing monitored domains with Facebook, a custom display name, and controls to add or remove a domain"
+        },
+        {
+          "src": "/assets/projects/wake-up-neo/4.webp",
+          "placeholderSrc": "/assets/projects/wake-up-neo/4-placeholder.webp",
+          "alt": "Wake Up Neo: selecting authenticator app verification and setting up TOTP with a QR code or text key"
+        }
+      ],
+      "technologies": [
+        {
+          "label": "WebExtensions API",
+          "icon": "api"
+        },
+        {
+          "label": "TOTP"
+        }
+      ],
+      "featuresTitle": "What it can do",
+      "features": [
+        "Choose distracting websites, including subdomains and custom display names.",
+        "Set a custom question before visits and optionally require an answer of at least five words.",
+        "Confirm with a PIN on a shuffled keypad or a TOTP code; available in Slovak and English."
       ]
     }
   ]
