@@ -103,7 +103,7 @@ export const globalStyles = {
     "--project-actions-min-width": "24rem",
     "--game-width": "470px",
     "--main-inline-pad": "var(--space-5)",
-    "--header-height": "76px",
+    "--header-height": "calc(var(--control-height-md) + 2 * var(--space-2))",
     "--section-inline-gap": "var(--space-5)",
     "--space-2xs": "0.125rem",
     "--space-0": "0.25rem",
@@ -232,7 +232,6 @@ export const globalStyles = {
 
   [`@media ${mediaQueries.mobile}`]: {
     ":root": {
-      "--header-height": "72px",
       "--section-inline-gap": "var(--space-4)"
     }
   }
