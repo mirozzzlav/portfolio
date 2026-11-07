@@ -36,7 +36,22 @@ Iba premenné s prefixom `VITE_` sa vkladajú do verejného frontendu.
 
 ## Spustenie a aktualizácia
 
-Z koreňa checkoutu s požadovaným publikovaným commitom:
+Hlavný checkout na VPS je `~/portfolio` (`/home/miro/portfolio` pre používateľa
+`miro`). Compose používa `~/portfolio/compose.yaml` a koreňový `~/portfolio/.env`.
+Projekt má názov `portfolio`; ostatné repozitáre na VPS majú vlastné priečinky.
+
+Po odoslaní commitov do `origin/main` spusti priamo na VPS:
+
+```bash
+cd ~/portfolio
+bash deploy/deploy-vps.sh
+```
+
+Skript stiahne zmeny cez fast-forward a zostaví a aktualizuje Compose projekt
+`portfolio`. Lokálne necommitnuté zmeny v sledovaných súboroch nasadenie zastavia.
+Iný checkout možno zvoliť cez `APP_DIR`, remote cez `REMOTE` a vetvu cez `BRANCH`.
+
+Manuálne z koreňa checkoutu s požadovaným publikovaným commitom:
 
 ```bash
 docker compose up -d --build --remove-orphans
