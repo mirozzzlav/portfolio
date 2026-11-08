@@ -75,3 +75,18 @@ export function getContactErrorState(data) {
     }
   };
 }
+
+export async function sendContactPayload(apiUrl, payload) {
+  const response = await fetch(apiUrl, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  });
+  let data = null;
+  try {
+    data = await response.json();
+  } catch {
+    // Preserve HTTP errors even when a proxy returns a non-JSON response.
+  }
+  return { ok: response.ok && data?.ok === true, data };
+}

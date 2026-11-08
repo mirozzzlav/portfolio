@@ -1,3 +1,4 @@
+import { contactApiUrl } from "src/contactConfig.js";
 import { Button } from "src/components/Button.jsx";
 import { Field } from "src/components/Field.jsx";
 import { FormStatus } from "src/components/FormStatus.jsx";
@@ -56,7 +57,7 @@ export function ContactPage() {
   return (
     <form
       className={className(styles.form)}
-      action="/api/contact"
+      action={contactApiUrl}
       method="post"
       noValidate
       onSubmit={handleSubmit}

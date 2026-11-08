@@ -1,17 +1,11 @@
 import { useRef, useState } from "react";
+import { contactApiUrl } from "src/contactConfig.js";
 import {
   getContactPayload,
   validateContactPayload,
-  getContactErrorState
+  getContactErrorState,
+  sendContactPayload
 } from "src/utils/contactForm.js";
-
-async function readJsonResponse(response) {
-  try {
-    return await response.json();
-  } catch {
-    return null;
-  }
-}
 
 export function useContactForm({ turnstileEnabled = false } = {}) {
   const [fieldErrors, setFieldErrors] = useState({});
@@ -51,6 +45,7 @@ export function useContactForm({ turnstileEnabled = false } = {}) {
         messageKey: "validationError",
         type: "error"
       });
+      turnstileRef.current?.reset();
       setIsSubmitting(false);
       return;
     }
@@ -76,16 +71,9 @@ export function useContactForm({ turnstileEnabled = false } = {}) {
     }
 
     try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(payload)
-      });
-      const data = await readJsonResponse(response);
+      const { ok, data } = await sendContactPayload(contactApiUrl, payload);
 
-      if (!response.ok) {
+      if (!ok) {
         const errorState = getContactErrorState(data);
         setFieldErrors(errorState.fieldErrors);
         setSubmitState(errorState.submitState);

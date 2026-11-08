@@ -4,6 +4,7 @@ import {
   getContactErrorState,
   getContactPayload,
   normalizeFieldErrors,
+  sendContactPayload,
   validateContactPayload
 } from "../src/utils/contactForm.js";
 
@@ -116,4 +117,48 @@ test("empty or non-JSON API errors select the network message", () => {
       submitState: { messageKey: "networkError", type: "error" }
     });
   }
+});
+
+test("contact JSON goes to the exact shared API base URL with all five fields", async (t) => {
+  const payload = { ...validPayload, turnstileToken: "single-use-token" };
+  const apiUrl = "https://contact-api.wondercules.com";
+  t.mock.method(globalThis, "fetch", async (url, options) => {
+    assert.equal(url, apiUrl);
+    assert.equal(options.method, "POST");
+    assert.deepEqual(options.headers, { "Content-Type": "application/json" });
+    assert.deepEqual(JSON.parse(options.body), payload);
+    return Response.json({ ok: true });
+  });
+  assert.deepEqual(await sendContactPayload(apiUrl, payload), {
+    ok: true,
+    data: { ok: true }
+  });
+});
+
+test("only a successful HTTP response with ok:true confirms sending", async (t) => {
+  for (const response of [
+    Response.json({ ok: false }),
+    Response.json({}),
+    new Response("not JSON"),
+    Response.json({ ok: true }, { status: 503 }),
+    Response.json({ code: "turnstile_failed" }, { status: 400 })
+  ]) {
+    t.mock.method(globalThis, "fetch", async () => response);
+    const result = await sendContactPayload(
+      "https://contact-api.wondercules.com",
+      validPayload
+    );
+    assert.equal(result.ok, false);
+    t.mock.restoreAll();
+  }
+});
+
+test("network failures propagate to the form error handler", async (t) => {
+  t.mock.method(globalThis, "fetch", async () => {
+    throw new TypeError("Network unavailable");
+  });
+  await assert.rejects(
+    sendContactPayload("https://contact-api.wondercules.com", validPayload),
+    /Network unavailable/
+  );
 });

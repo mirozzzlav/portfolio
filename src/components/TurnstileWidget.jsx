@@ -71,6 +71,7 @@ export const TurnstileWidget = forwardRef(function TurnstileWidget({ siteKey }, 
           );
           pendingVerificationRef.current = null;
         },
+        action: "contact",
         appearance: "interaction-only",
         callback: (token) => {
           pendingVerificationRef.current?.resolve(token);
