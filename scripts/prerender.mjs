@@ -1,4 +1,4 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { cache, flush } from "@emotion/css";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -131,3 +131,6 @@ for (const redirect of redirects) {
 
 await writeFile(path.join(distDir, "sitemap.xml"), renderSitemap());
 await writeFile(path.join(distDir, "robots.txt"), renderRobots());
+
+// The server bundle is only used during prerendering, never at runtime.
+await rm(path.join(distDir, "server"), { recursive: true, force: true });

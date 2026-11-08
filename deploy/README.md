@@ -1,83 +1,68 @@
-# Nasadenie cez Docker Compose
+# Statické nasadenie na mirofurinda.com
 
-Jeden kontajner `web` spúšťa FastAPI cez Uvicorn. Obsluhuje kontaktné API,
-statické súbory a prerenderované React stránky. Node.js sa používa iba pri builde.
-API cesty majú prednosť pred frontendovým fallbackom; neznáme `/api/*` a chýbajúce
-statické súbory vracajú `404`. Healthcheck používa `/health`.
+Caddy na VPS `wondercules.com` obsluhuje `/var/www/html/mirofurinda.com`.
+`www.mirofurinda.com` presmerúva na hlavnú doménu. Projekt nemá vlastné API,
+Docker ani produkčný Node.js proces. Existujúcu konfiguráciu Caddy, spoločného
+API a ostatných webov pri nasadení nemeň.
 
-## Nastavenie
+## Príprava
 
-Ak koreňový `.env` ešte neexistuje, vytvor ho podľa `.env.example`:
+Koreňový `.env` obsahuje iba hodnoty z `.env.example`: `SITE_URL`,
+`VITE_CONTACT_API_URL=https://contact-api.wondercules.com` a existujúci verejný
+`VITE_TURNSTILE_SITE_KEY`. Žiadne SMTP údaje, Turnstile secret ani adresy
+príjemcu a odosielateľa sem nepatria. Zmena env vyžaduje nový build.
 
-```bash
-cp .env.example .env
-```
-
-Existujúci `.env` zachovaj a doplň iba chýbajúce nastavenia. Pri prechode zo
-staršieho nastavenia presuň hodnoty z `api/.env` do koreňového `.env`.
-Skutočné env súbory nepatria do Gitu a sú vylúčené z Docker build kontextu.
-
-Doménu nastav raz cez `DOMAIN_NAME`; verejná URL a kontaktné adresy sa z nej
-odvodia. `SITE_URL` sa používa pri generovaní SEO odkazov a sitemap súboru.
-`HTTP_PORT` určuje port dostupný iba na loopback rozhraní hostiteľa. Na aktuálnom
-VPS používaj `HTTP_PORT=8081`, pretože `8080` už používa iná aplikácia.
-
-Pre produkčný formulár nastav:
-
-- `CONTACT_ALLOWED_ORIGINS=${SITE_URL}`.
-- `CONTACT_TO_EMAIL` a `CONTACT_FROM_EMAIL` podľa overenej odosielateľskej domény.
-- SMTP prístupové údaje; pre Resend použi `smtp.resend.com`, port `465`, používateľa
-  `resend` a Resend API kľúč ako `SMTP_PASSWORD`.
-- Verejný `VITE_TURNSTILE_SITE_KEY` a súkromný `TURNSTILE_SECRET_KEY`, ak chceš
-  Turnstile ochranu. Bez nej nechaj oba prázdne.
-
-Kým nie je SMTP pripravené, zachovaj `MAIL_DRY_RUN=true`. Potom ho nastav na `false`.
-Iba premenné s prefixom `VITE_` sa vkladajú do verejného frontendu.
-
-## Spustenie a aktualizácia
-
-Hlavný checkout na VPS je `~/portfolio` (`/home/miro/portfolio` pre používateľa
-`miro`). Compose používa `~/portfolio/compose.yaml` a koreňový `~/portfolio/.env`.
-Projekt má názov `portfolio`; ostatné repozitáre na VPS majú vlastné priečinky.
-
-Po odoslaní commitov do `origin/main` spusti priamo na VPS:
+Pred nasadením over dostupnosť webu a CORS:
 
 ```bash
-cd ~/portfolio
-bash deploy/deploy-vps.sh
+curl -I https://mirofurinda.com
+curl -i -X OPTIONS https://contact-api.wondercules.com \
+  -H 'Origin: https://mirofurinda.com' \
+  -H 'Access-Control-Request-Method: POST' \
+  -H 'Access-Control-Request-Headers: content-type'
 ```
 
-Skript stiahne zmeny cez fast-forward a zostaví a aktualizuje Compose projekt
-`portfolio`. Lokálne necommitnuté zmeny v sledovaných súboroch nasadenie zastavia.
-Iný checkout možno zvoliť cez `APP_DIR`, remote cez `REMOTE` a vetvu cez `BRANCH`.
+Preflight má vrátiť 200 a `Access-Control-Allow-Origin: https://mirofurinda.com`.
+Spoločný kontajner `contact-api` spravuje formuláre samostatne. Frontend posiela
+JSON priamo na jeho základnú URL, bez ďalšej cesty. Turnstile používa akciu
+`contact`; úspech vyžaduje HTTP úspech aj JSON `{"ok":true}`.
 
-Manuálne z koreňa checkoutu s požadovaným publikovaným commitom:
+## Build, záloha a kopírovanie
 
 ```bash
-docker compose up -d --build --remove-orphans
-docker compose ps
-docker compose logs --tail=100 web
+npm ci
+npm run check
+npm test
+npm run build
 ```
 
-Pri prechode z dvoch kontajnerov `--remove-orphans` odstráni starú Compose službu
-`api`; frontend aj API potom bežia v `web`. Ostatných Compose projektov sa netýka.
-Zmeny `SITE_URL` alebo verejného Turnstile kľúča vyžadujú nový build. Zmeny API
-nastavení aplikuje opätovné `up`; samotný `restart` env hodnoty neobnoví.
+Prenášaj iba obsah `dist/`. Priečinok obsahuje hotové statické stránky vrátane
+jazykových ciest, assets, sitemap a robots; serverový bundle sa po prerenderi
+odstráni. `.env`, zdroje a zálohy nepatria do verejného adresára.
 
-Pre aktuálny VPS over:
+Príklad s oprávnením sudo na VPS (vyžaduje rsync na oboch stranách):
 
 ```bash
-curl -I http://127.0.0.1:8081/en/projects
-curl -i http://127.0.0.1:8081/health
-curl -i http://127.0.0.1:8081/api/contact
+release_id=$(date -u +%Y%m%dT%H%M%SZ)
+ssh wondercules.com "mkdir -p /home/miro/portfolio-static-$release_id /home/miro/backups"
+rsync -a dist/ "wondercules.com:/home/miro/portfolio-static-$release_id/"
+ssh -t wondercules.com "sudo cp -a /var/www/html/mirofurinda.com /home/miro/backups/portfolio-$release_id && sudo rsync -a --chmod=D755,F644 /home/miro/portfolio-static-$release_id/ /var/www/html/mirofurinda.com/"
 ```
 
-Frontend aj health endpoint vracajú `200`. GET na `/api/contact` má vrátiť `405`,
-pretože kontaktný endpoint prijíma POST; tento test neodosiela e-mail.
-Pri lokálnom nastavení s predvoleným portom použi namiesto `8081` port `8080`.
+Najprv vytvor úplnú zálohu; ak zlyhá, nenasadzuj. Cieľový adresár zachovaj.
+Kopírovanie bez `--delete` ponechá staré hashované assets pre otvorené karty.
+Po overení odstráň iba dočasný staging, zálohu ponechaj mimo webrootu.
+Nie je potrebný reload Caddy ani reštart spoločného API.
 
-Zastavenie:
+## Overenie a návrat
 
-```bash
-docker compose down
-```
+Over HTTP 200 pre `/`, `/contact`, `/en/contact`, `/projects`,
+`/en/projects`, `/sitemap.xml` a `/robots.txt`. Stiahni JavaScript odkazovaný
+verejnou stránkou a over, že obsahuje základnú URL spoločného API a verejný
+Turnstile kľúč. Form action na kontaktných stránkach musí ukazovať na rovnakú URL.
+Opakuj CORS preflight. Samotný build a preflight nepotvrdzujú doručenie e-mailu;
+to vyžaduje skutočné overenie Turnstile v prehliadači a odoslanie formulára.
+
+Pri návrate obnov obsah zálohy do rovnakého statického adresára, napríklad
+`sudo rsync -a --delete /home/miro/backups/portfolio-<release_id>/ /var/www/html/mirofurinda.com/`.
+Zálohu pred obnovou skontroluj. Ostatných webov ani spoločného API sa obnova netýka.

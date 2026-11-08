@@ -43,13 +43,15 @@ relatívne importy, pretože Node.js aliasy z Vite nevyhodnocuje.
 ## Spustenie lokálne
 
 ```bash
+cp .env.example .env
+npm ci
 npm run dev
 ```
 
 Vite vypíše lokálnu adresu, štandardne:
 
 ```text
-http://localhost:5173
+http://localhost:8080
 ```
 
 ## Kontrola kódu
@@ -70,31 +72,25 @@ Lokálny vývoj aj produkčný build používajú koreňový `.env` podľa `.env
 Samostatný produkčný env súbor nie je potrebný. Premenné s prefixom `VITE_`
 sú verejné a vložia sa do frontendu pri zostavení.
 
-Doménu nastav raz cez `DOMAIN_NAME=mirofurinda.com`. `SITE_URL`, kontaktné
-e-mailové adresy a povolené origins sa v `.env` odvodia pomocou `${DOMAIN_NAME}`
-a `${SITE_URL}`. Vzor povoľuje aj lokálny web; v produkcii môže byť
-`CONTACT_ALLOWED_ORIGINS=${SITE_URL}`.
+Portfolio je samostatný statický frontend. `npm run build` vytvorí HTML,
+JavaScript, CSS a médiá v `dist/`; SSR bundle slúži iba na prerenderovanie
+pri builde a následne sa odstráni. Produkcia nepotrebuje Node.js ani Python.
 
-## Docker Compose
+- `SITE_URL=https://mirofurinda.com` určuje kanonické SEO URL a sitemap.
+- `VITE_CONTACT_API_URL=https://contact-api.wondercules.com` je úplná cieľová
+  URL formulára, bez pridávania `/api/contact` alebo `/contact`.
+- `VITE_TURNSTILE_SITE_KEY` je existujúci verejný kľúč z `.env.example`.
 
-Frontend aj API sa zostavia a spustia cez Docker Compose:
+Formulár posiela JSON priamo do spoločného API: `name`, `email`, `message`,
+`company` (honeypot) a pri zapnutom Turnstile `turnstileToken`. Token sa resetuje
+po každom pokuse vrátane chybových stavov. Po úspechu sa vyprázdni formulár.
+SMTP, Turnstile secret, príjemca a odosielateľ patria výhradne do spoločného API;
+nevkladaj ich do frontendových env súborov. Lokálny origin musí byť povolený
+v spoločnom API; frontend nemá vlastný proxy ani API. Produkčný CORS musí povoliť
+`https://mirofurinda.com`, metódu POST a hlavičku Content-Type.
 
-```bash
-cp .env.example .env
-docker compose up -d --build
-```
-
-Ak už `.env` existuje, ponechaj ho a doplň potrebné hodnoty podľa `.env.example`.
-Pri prechode zo staršieho nastavenia presuň hodnoty z `api/.env` do koreňového
-`.env`; `api/.env` sa už nepoužíva. Web bude dostupný na `http://localhost:8080`. Lokálny príklad
-má odosielanie e-mailov vypnuté cez `MAIL_DRY_RUN=true`.
-
-Jeden kontajner s FastAPI obsluhuje zostavené React stránky aj `/api/*`.
-Node.js sa používa iba pri builde; Caddy nie je potrebný.
-Docker publikuje HTTP iba na `127.0.0.1:${HTTP_PORT}` (predvolene `8080`).
-
-Postup nasadenia a nastavenie produkčného formulára je v
-[deploy/README.md](deploy/README.md).
+Zmena build premenných vyžaduje nový build aj nasadenie. Postup nasadenia
+statických súborov cez Caddy je v [deploy/README.md](deploy/README.md).
 
 ## Lokálny projektový kontext
 
