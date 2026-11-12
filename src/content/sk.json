@@ -257,34 +257,34 @@
     {
       "title": "Aikido Levice",
       "type": "Web stránka",
-      "description": "Responzívny web klubu Aikido Dojo Levice spája predstavenie aikida s praktickými informáciami pre záujemcov aj členov. V samostatných sekciách ponúka novinky, galériu fotografií a videí, profily trénerov a rozvrh tréningov. Web som vytvoril samostatne od vizuálneho návrhu po realizáciu v Reacte.",
+      "description": "Minimalistický responzívny web Aikido Dojo Levice so svetlým rozložením, výraznými nadpismi a červenými akcentmi inšpirovanými Japonskom. Predstavuje klub a princípy aikida, prináša novinky, galériu fotografií a videí aj informácie o tréneroch a tréningoch. Web som vytvoril samostatne od vizuálneho návrhu po realizáciu v Reacte.",
       "url": "https://aikidolevice.sk",
       "galleryLabel": "Ukážky projektu Aikido Dojo Levice",
       "images": [
         {
           "src": "/assets/projects/aikidolevice/1.webp",
           "placeholderSrc": "/assets/projects/aikidolevice/1-placeholder.webp",
-          "alt": "Úvodná stránka Aikido Dojo Levice s predstavením aikida a portrétom Moriheia Ueshibu"
+          "alt": "Úvod Aikido Dojo Levice s kaligrafickým nadpisom, predstavením aikida a portrétom Moriheia Ueshibu"
         },
         {
           "src": "/assets/projects/aikidolevice/2.webp",
           "placeholderSrc": "/assets/projects/aikidolevice/2-placeholder.webp",
-          "alt": "Klubové novinky s podporou zbierky na tatami a náborom nových členov"
+          "alt": "Dvojstĺpcový prehľad noviniek so zbierkou na tatami a náborom na rok 2026"
         },
         {
           "src": "/assets/projects/aikidolevice/3.webp",
           "placeholderSrc": "/assets/projects/aikidolevice/3-placeholder.webp",
-          "alt": "Galéria fotografií a videí z tréningov Aikido Dojo Levice"
+          "alt": "Mriežka fotografií z dojo a videí z tréningov s tlačidlami prehrávania"
         },
         {
           "src": "/assets/projects/aikidolevice/4.webp",
           "placeholderSrc": "/assets/projects/aikidolevice/4-placeholder.webp",
-          "alt": "Profily trénerov, adresa dojo a rozvrh tréningov pre deti a dospelých"
+          "alt": "Profily Róberta Pataya a Filipa Kaszanyoczkého s adresou dojo a časmi tréningov v spodnom paneli"
         },
         {
           "src": "/assets/projects/aikidolevice/5.webp",
           "placeholderSrc": "/assets/projects/aikidolevice/5-placeholder.webp",
-          "alt": "Kontaktná stránka Aikido Dojo Levice s formulárom a telefónnym kontaktom na trénera"
+          "alt": "Kontaktná stránka s e-mailovým poľom, správou a telefónnym odkazom na hlavného trénera"
         }
       ],
       "technologies": [
@@ -299,9 +299,9 @@
       ],
       "featuresTitle": "Čo to dokáže",
       "features": [
-        "Rozvrh tréningov pre deti aj dospelých, adresa dojo a profily trénerov s odkazom na rozhovor.",
-        "Klubové novinky a galéria fotografií a videí s prehliadaním na celej obrazovke.",
-        "Kontaktný formulár na otázky a záujem o tréning."
+        "Predstavenie klubu a aikida, profily trénerov a rozvrh tréningov pre deti aj dospelých.",
+        "Novinky v prehľadných stĺpcoch a galéria fotografií a videí s prehliadaním na celej obrazovke.",
+        "Kontaktný formulár a priamy telefónny odkaz na hlavného trénera."
       ]
     },
     {

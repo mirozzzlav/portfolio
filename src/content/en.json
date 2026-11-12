@@ -255,34 +255,34 @@
     {
       "title": "Aikido Levice",
       "type": "Website",
-      "description": "A responsive website for Aikido Dojo Levice, combining an introduction to Aikido with practical information for newcomers and members. Dedicated sections cover club news, a photo and video gallery, instructor profiles, and training schedules. I built the website independently, from visual design to implementation in React.",
+      "description": "A minimalist, responsive website for Aikido Dojo Levice with a light layout, bold headings, and red accents inspired by Japan. It introduces the club and the principles of Aikido, with news, a photo and video gallery, instructor profiles, and training information. I built the website independently, from visual design to implementation in React.",
       "url": "https://aikidolevice.sk",
       "galleryLabel": "Aikido Dojo Levice project previews",
       "images": [
         {
           "src": "/assets/projects/aikidolevice/1.webp",
           "placeholderSrc": "/assets/projects/aikidolevice/1-placeholder.webp",
-          "alt": "Aikido Dojo Levice homepage introducing Aikido alongside a portrait of Morihei Ueshiba"
+          "alt": "Aikido Dojo Levice homepage with a calligraphic heading, an introduction to Aikido, and a portrait of Morihei Ueshiba"
         },
         {
           "src": "/assets/projects/aikidolevice/2.webp",
           "placeholderSrc": "/assets/projects/aikidolevice/2-placeholder.webp",
-          "alt": "Club news featuring a tatami fundraiser and recruitment of new members"
+          "alt": "Two-column news layout featuring a tatami fundraiser and recruitment for 2026"
         },
         {
           "src": "/assets/projects/aikidolevice/3.webp",
           "placeholderSrc": "/assets/projects/aikidolevice/3-placeholder.webp",
-          "alt": "Photo and video gallery from Aikido Dojo Levice training sessions"
+          "alt": "Grid of dojo photos and training videos with play buttons"
         },
         {
           "src": "/assets/projects/aikidolevice/4.webp",
           "placeholderSrc": "/assets/projects/aikidolevice/4-placeholder.webp",
-          "alt": "Instructor profiles, dojo address, and training schedules for children and adults"
+          "alt": "Profiles of Róbert Patay and Filip Kaszanyoczki with the dojo address and training times in a bottom panel"
         },
         {
           "src": "/assets/projects/aikidolevice/5.webp",
           "placeholderSrc": "/assets/projects/aikidolevice/5-placeholder.webp",
-          "alt": "Aikido Dojo Levice contact page with a message form and the instructor’s phone contact"
+          "alt": "Contact page with an email field, a message field, and a phone link to the head instructor"
         }
       ],
       "technologies": [
@@ -297,9 +297,9 @@
       ],
       "featuresTitle": "What it can do",
       "features": [
-        "Training schedules for children and adults, the dojo address, and instructor profiles linking to an interview.",
-        "Club news and a photo and video gallery with fullscreen viewing.",
-        "A contact form for questions and training enquiries."
+        "An introduction to the club and Aikido, instructor profiles, and training schedules for children and adults.",
+        "News in clear columns and a photo and video gallery with fullscreen viewing.",
+        "A contact form and a direct phone link to the head instructor."
       ]
     },
     {
