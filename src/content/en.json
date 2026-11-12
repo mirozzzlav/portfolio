@@ -255,29 +255,34 @@
     {
       "title": "Aikido Levice",
       "type": "Website",
-      "description": "The Aikido Levice website introduces the club and the martial art. It keeps newcomers and members informed about training schedules and club news. I built the website independently, from visual design to implementation.",
+      "description": "A responsive website for Aikido Dojo Levice, combining an introduction to Aikido with practical information for newcomers and members. Dedicated sections cover club news, a photo and video gallery, instructor profiles, and training schedules. I built the website independently, from visual design to implementation in React.",
       "url": "https://aikidolevice.sk",
       "galleryLabel": "Aikido Dojo Levice project previews",
       "images": [
         {
           "src": "/assets/projects/aikidolevice/1.webp",
           "placeholderSrc": "/assets/projects/aikidolevice/1-placeholder.webp",
-          "alt": "Introduction to Aikido and club news"
+          "alt": "Aikido Dojo Levice homepage introducing Aikido alongside a portrait of Morihei Ueshiba"
         },
         {
           "src": "/assets/projects/aikidolevice/2.webp",
           "placeholderSrc": "/assets/projects/aikidolevice/2-placeholder.webp",
-          "alt": "Aikido Dojo Levice club news and gallery"
+          "alt": "Club news featuring a tatami fundraiser and recruitment of new members"
         },
         {
           "src": "/assets/projects/aikidolevice/3.webp",
           "placeholderSrc": "/assets/projects/aikidolevice/3-placeholder.webp",
-          "alt": "Aikido Dojo Levice photo gallery and training schedule"
+          "alt": "Photo and video gallery from Aikido Dojo Levice training sessions"
         },
         {
           "src": "/assets/projects/aikidolevice/4.webp",
           "placeholderSrc": "/assets/projects/aikidolevice/4-placeholder.webp",
-          "alt": "Aikido Dojo Levice training schedule and instructors"
+          "alt": "Instructor profiles, dojo address, and training schedules for children and adults"
+        },
+        {
+          "src": "/assets/projects/aikidolevice/5.webp",
+          "placeholderSrc": "/assets/projects/aikidolevice/5-placeholder.webp",
+          "alt": "Aikido Dojo Levice contact page with a message form and the instructor’s phone contact"
         }
       ],
       "technologies": [
@@ -286,14 +291,14 @@
           "icon": "react"
         },
         {
-          "label": "Single page",
+          "label": "React Router",
           "icon": "page"
         }
       ],
       "featuresTitle": "What it can do",
       "features": [
-        "Training schedules for children and adults, plus instructor profiles.",
-        "Information about Aikido, club news, and training photo galleries.",
+        "Training schedules for children and adults, the dojo address, and instructor profiles linking to an interview.",
+        "Club news and a photo and video gallery with fullscreen viewing.",
         "A contact form for questions and training enquiries."
       ]
     },

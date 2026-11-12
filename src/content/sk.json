@@ -257,29 +257,34 @@
     {
       "title": "Aikido Levice",
       "type": "Web stránka",
-      "description": "Web klubu Aikido Levice predstavuje tréningy a bojové umenie aikido. Novým záujemcom aj členom prináša rozvrh a aktuálne dianie v klube. Web som vytvoril samostatne od návrhu vzhľadu po realizáciu.",
+      "description": "Responzívny web klubu Aikido Dojo Levice spája predstavenie aikida s praktickými informáciami pre záujemcov aj členov. V samostatných sekciách ponúka novinky, galériu fotografií a videí, profily trénerov a rozvrh tréningov. Web som vytvoril samostatne od vizuálneho návrhu po realizáciu v Reacte.",
       "url": "https://aikidolevice.sk",
       "galleryLabel": "Ukážky projektu Aikido Dojo Levice",
       "images": [
         {
           "src": "/assets/projects/aikidolevice/1.webp",
           "placeholderSrc": "/assets/projects/aikidolevice/1-placeholder.webp",
-          "alt": "Predstavenie bojového umenia aikido a klubové novinky"
+          "alt": "Úvodná stránka Aikido Dojo Levice s predstavením aikida a portrétom Moriheia Ueshibu"
         },
         {
           "src": "/assets/projects/aikidolevice/2.webp",
           "placeholderSrc": "/assets/projects/aikidolevice/2-placeholder.webp",
-          "alt": "Klubové novinky a galéria Aikido Dojo Levice"
+          "alt": "Klubové novinky s podporou zbierky na tatami a náborom nových členov"
         },
         {
           "src": "/assets/projects/aikidolevice/3.webp",
           "placeholderSrc": "/assets/projects/aikidolevice/3-placeholder.webp",
-          "alt": "Fotogaléria a rozvrh tréningov Aikido Dojo Levice"
+          "alt": "Galéria fotografií a videí z tréningov Aikido Dojo Levice"
         },
         {
           "src": "/assets/projects/aikidolevice/4.webp",
           "placeholderSrc": "/assets/projects/aikidolevice/4-placeholder.webp",
-          "alt": "Rozvrh tréningov a tréneri Aikido Dojo Levice"
+          "alt": "Profily trénerov, adresa dojo a rozvrh tréningov pre deti a dospelých"
+        },
+        {
+          "src": "/assets/projects/aikidolevice/5.webp",
+          "placeholderSrc": "/assets/projects/aikidolevice/5-placeholder.webp",
+          "alt": "Kontaktná stránka Aikido Dojo Levice s formulárom a telefónnym kontaktom na trénera"
         }
       ],
       "technologies": [
@@ -288,14 +293,14 @@
           "icon": "react"
         },
         {
-          "label": "Single page",
+          "label": "React Router",
           "icon": "page"
         }
       ],
       "featuresTitle": "Čo to dokáže",
       "features": [
-        "Rozvrh tréningov pre deti aj dospelých a predstavenie trénerov.",
-        "Informácie o aikide, klubové novinky a fotogaléria z tréningov.",
+        "Rozvrh tréningov pre deti aj dospelých, adresa dojo a profily trénerov s odkazom na rozhovor.",
+        "Klubové novinky a galéria fotografií a videí s prehliadaním na celej obrazovke.",
         "Kontaktný formulár na otázky a záujem o tréning."
       ]
     },
