@@ -38,8 +38,6 @@ export const globalStyles = {
     // Opacity, surfaces and shadows
     "--opacity-disabled": 0.36,
     "--opacity-disabled-button": 0.58,
-    "--surface-preview-title":
-      "color-mix(in srgb, var(--surface-solid) 78%, var(--color-transparent))",
     "--surface-project":
       "color-mix(in srgb, var(--palette-surface-muted), var(--color-transparent) var(--opacity-medium))",
     "--surface-status-success":
@@ -50,8 +48,6 @@ export const globalStyles = {
       "0 calc(-1 * var(--space-1)) var(--space-4) color-mix(in srgb, var(--palette-ink) var(--opacity-subtle), var(--color-transparent))",
     "--shadow-preview":
       "0 20px 60px color-mix(in srgb, var(--palette-ink) var(--opacity-muted), var(--color-transparent))",
-    "--shadow-preview-title":
-      "0 -10px 30px color-mix(in srgb, var(--palette-ink) 10%, var(--color-transparent))",
     "--opacity-subtle": "8%",
     "--opacity-muted": "18%",
     "--opacity-medium": "34%",
@@ -93,7 +89,6 @@ export const globalStyles = {
     "--font-weight-extrabold": 800,
     "--line-height-none": 0,
     "--line-height-solid": 1,
-    "--line-height-compact": 1.1,
     "--line-height-heading": 1.2,
     "--line-height-body": 1.72,
 
@@ -137,7 +132,6 @@ export const globalStyles = {
 
     // Component dimensions
     "--project-header-min-height": "1.2rem",
-    "--preview-title-min-height-mobile": "3.5rem",
     "--header-control-width": "70px",
     "--header-menu-width": "190px",
     "--not-found-logo-width": "clamp(88px, 22vw, 148px)",
@@ -152,7 +146,6 @@ export const globalStyles = {
     "--layer-content": 10,
     "--layer-navigation": 20,
     "--layer-modal": 50,
-    "--layer-modal-control": 60,
     "--transition-duration-fast": "160ms"
   },
   "*": {

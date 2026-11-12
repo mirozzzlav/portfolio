@@ -45,6 +45,8 @@
     "previousProject": "Previous",
     "nextProject": "Next",
     "closePreview": "Close preview",
+    "close": "Close",
+    "screenshotPreview": "Portfolio · Screenshot",
     "previousImage": "Previous image",
     "nextImage": "Next image",
     "imageDescriptionNotFound": "Image description not found",

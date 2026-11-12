@@ -54,8 +54,6 @@ export function useImageGestures({ src, onSwipe }) {
           offsetY: 0
         };
 
-  const isZoomed = imageState.zoom > minZoom;
-
   useEffect(() => {
     gestureStart.current = null;
     pinchStart.current = null;
@@ -132,7 +130,6 @@ export function useImageGestures({ src, onSwipe }) {
     }
 
     return {
-      stageRect,
       stageWidth: stageRect.width,
       stageHeight: stageRect.height,
       ...getContainedImageSize(stageRect, renderedImage)
@@ -145,7 +142,6 @@ export function useImageGestures({ src, onSwipe }) {
       y: touch.clientY,
       offsetX: liveTransform.current.offsetX,
       offsetY: liveTransform.current.offsetY,
-      zoom: liveTransform.current.zoom,
       isZoomed: liveTransform.current.zoom > minZoom,
       stageWidth: metrics.stageWidth,
       stageHeight: metrics.stageHeight,
@@ -164,30 +160,6 @@ export function useImageGestures({ src, onSwipe }) {
       stageHeight: metrics.stageHeight,
       containedWidth: metrics.containedWidth,
       containedHeight: metrics.containedHeight
-    };
-  }
-
-  function getRenderedImageRect() {
-    const metrics = getStageImageMetrics();
-
-    if (!metrics) {
-      return null;
-    }
-
-    const { zoom, offsetX, offsetY } = liveTransform.current;
-
-    const width = metrics.containedWidth * zoom;
-    const height = metrics.containedHeight * zoom;
-
-    const centerX = metrics.stageRect.left + metrics.stageWidth / 2 + offsetX;
-
-    const centerY = metrics.stageRect.top + metrics.stageHeight / 2 + offsetY;
-
-    return {
-      bottom: centerY + height / 2,
-      left: centerX - width / 2,
-      right: centerX + width / 2,
-      top: centerY - height / 2
     };
   }
 
@@ -339,9 +311,7 @@ export function useImageGestures({ src, onSwipe }) {
   return {
     stageRef,
     transformRef,
-    isZoomed,
     transform: getTransformStyle(imageState),
-    getRenderedImageRect,
     touchHandlers: {
       onTouchStart: handleTouchStart,
       onTouchMove: handleTouchMove,

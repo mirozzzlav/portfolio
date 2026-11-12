@@ -1,48 +1,47 @@
-import { mediaQueries } from "src/styles/mediaQueries.js";
 import { mergeClassNames } from "src/styles/classNames.js";
 import { Button } from "src/components/Button.jsx";
+import { mediaQueries } from "src/styles/mediaQueries.js";
 
 const styles = {
   close: {
-    position: "fixed",
-    top: "var(--space-4)",
-    right: "var(--space-4)",
-    zIndex: "var(--layer-modal-control)",
-    display: "inline-flex",
-    alignItems: "center",
-    justifyContent: "center",
-    width: "var(--icon-button-size-xl)",
-    height: "var(--icon-button-size-xl)",
-    borderRadius: "var(--radius-pill)",
-    background: "var(--surface-solid)",
+    flexShrink: 0,
+    padding: "0 var(--space-2)",
     color: "var(--palette-accent-fine)",
-    boxShadow: "var(--shadow-menu)",
-    fontSize: "var(--font-size-lg)",
     fontWeight: "var(--font-weight-regular)",
-    lineHeight: "var(--line-height-solid)",
 
     svg: {
       display: "block",
       width: "var(--icon-size-lg)",
       height: "var(--icon-size-lg)"
-    },
+    }
+  },
+
+  fullLabel: {
+    [`@media ${mediaQueries.mobile}`]: {
+      display: "none"
+    }
+  },
+
+  shortLabel: {
+    display: "none",
 
     [`@media ${mediaQueries.mobile}`]: {
-      top: "var(--space-3)",
-      right: "var(--space-3)",
-      width: "var(--control-height-lg)",
-      height: "var(--control-height-lg)"
+      display: "inline"
     }
   }
 };
 
-export function CloseButton({ className, label = "Close", ...props }) {
+export function CloseButton({
+  className,
+  label = "Close",
+  shortLabel = label,
+  ...props
+}) {
   return (
     <Button
       className={mergeClassNames(styles.close, className)}
       aria-label={label}
       {...props}
-      iconOnly
     >
       <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
         <path
@@ -54,6 +53,8 @@ export function CloseButton({ className, label = "Close", ...props }) {
           strokeWidth="2"
         />
       </svg>
+      <span className={mergeClassNames(styles.fullLabel)}>{label}</span>
+      <span className={mergeClassNames(styles.shortLabel)}>{shortLabel}</span>
     </Button>
   );
 }

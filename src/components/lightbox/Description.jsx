@@ -1,39 +1,34 @@
-import { mediaQueries } from "src/styles/mediaQueries.js";
 import { mergeClassNames } from "src/styles/classNames.js";
+import { mediaQueries } from "src/styles/mediaQueries.js";
 
 const styles = {
   title: {
-    position: "absolute",
-    right: 0,
-    bottom: 0,
-    left: 0,
-    zIndex: 2,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     gap: "var(--space-1)",
-    minHeight: "var(--space-7)",
-    padding: "var(--space-2) var(--space-6)",
-    background: "var(--surface-preview-title)",
-    backdropFilter: "blur(var(--blur-md))",
-    boxShadow: "var(--shadow-preview-title)",
+    padding: "var(--space-1) 0",
     marginBottom: 0,
     color: "var(--color-text)",
-    fontSize: "var(--font-size-base)",
-    fontWeight: "var(--font-weight-semibold)",
+    fontSize: "var(--font-size-sm)",
+    fontWeight: "var(--font-weight-medium)",
+    lineHeight: "var(--line-height-heading)",
 
     [`@media ${mediaQueries.mobile}`]: {
-      minHeight: "var(--preview-title-min-height-mobile)",
-      padding: "var(--space-2) var(--space-5)",
-      lineHeight: "var(--line-height-compact)"
+      padding: 0,
+      fontSize: "var(--font-size-xs)",
+
+      svg: {
+        display: "none"
+      }
     }
   },
 
   titleIcon: {
     display: "block",
     flex: "none",
-    width: "var(--space-5)",
-    height: "var(--space-5)",
+    width: "var(--icon-size-lg)",
+    height: "var(--icon-size-lg)",
     color: "var(--palette-accent-fine)"
   }
 };

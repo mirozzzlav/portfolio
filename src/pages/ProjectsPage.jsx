@@ -4,7 +4,6 @@ import { ProjectTitleNavigation } from "src/components/ProjectTitleNavigation.js
 import { useProjectNavigation } from "src/hooks/useProjectNavigation.js";
 import { className } from "src/styles/classNames.js";
 import { useI18n } from "src/useI18n.js";
-import { Description } from "src/components/lightbox/Description.jsx";
 
 const Lightbox = lazy(() =>
   import("src/components/lightbox/Lightbox.jsx").then((module) => ({
@@ -50,7 +49,7 @@ export function ProjectsPage() {
   const activeProject = projects[activeProjectIndex];
 
   function openPreview(images, imageIndex) {
-    setPreview({ images, imageIndex });
+    setPreview({ images, imageIndex, title: activeProject.title });
   }
 
   return (
@@ -84,12 +83,11 @@ export function ProjectsPage() {
       {preview ? (
         <Suspense fallback={null}>
           <Lightbox
+            title={preview.title}
             images={preview.images}
             initialImageIndex={preview.imageIndex}
             isOpen
             onClose={() => setPreview(null)}
-            missingDescription={content.ui.imageDescriptionNotFound}
-            description={(text, props) => <Description {...props}>{text}</Description>}
           />
         </Suspense>
       ) : null}
