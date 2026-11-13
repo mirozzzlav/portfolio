@@ -299,8 +299,8 @@
       ],
       "featuresTitle": "Čo to dokáže",
       "features": [
-        "Predstavenie klubu a aikida, profily trénerov a rozvrh tréningov pre deti aj dospelých.",
-        "Novinky v prehľadných stĺpcoch a galéria fotografií a videí s prehliadaním na celej obrazovke.",
+        "Klub a aikido, profily trénerov a rozvrh tréningov pre deti aj dospelých.",
+        "Novinky v prehľadných stĺpcoch a galéria fotografií a videí na celej obrazovke.",
         "Kontaktný formulár a priamy telefónny odkaz na hlavného trénera."
       ]
     },
@@ -343,9 +343,9 @@
       ],
       "featuresTitle": "Čo to dokáže",
       "features": [
-        "Výber rušivých webov vrátane subdomén a vlastných zobrazovaných názvov.",
-        "Vlastná otázka pred návštevou webu s voliteľnou odpoveďou aspoň piatimi slovami.",
-        "Potvrdenie PIN-om na premiešanej klávesnici alebo TOTP kódom; rozhranie v SK aj EN."
+        "Výber rušivých webov vrátane subdomén a vlastných názvov.",
+        "Otázka pred návštevou webu s voliteľnou odpoveďou aspoň piatimi slovami.",
+        "Potvrdenie PIN-om na premiešanej klávesnici alebo TOTP kódom; rozhranie v SK/EN."
       ]
     }
   ]

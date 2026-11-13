@@ -297,8 +297,8 @@
       ],
       "featuresTitle": "What it can do",
       "features": [
-        "An introduction to the club and Aikido, instructor profiles, and training schedules for children and adults.",
-        "News in clear columns and a photo and video gallery with fullscreen viewing.",
+        "Introduction to the club and Aikido, instructor profiles, and training schedules for children and adults.",
+        "News in columns and a photo and video gallery with fullscreen viewing.",
         "A contact form and a direct phone link to the head instructor."
       ]
     },
@@ -341,9 +341,9 @@
       ],
       "featuresTitle": "What it can do",
       "features": [
-        "Choose distracting websites, including subdomains and custom display names.",
-        "Set a custom question before visits and optionally require an answer of at least five words.",
-        "Confirm with a PIN on a shuffled keypad or a TOTP code; available in Slovak and English."
+        "Choose distracting websites, including subdomains and custom names.",
+        "Set a question before visits and optionally require an answer of at least five words.",
+        "Confirm with a PIN on a shuffled keypad or TOTP; available in Slovak and English."
       ]
     }
   ]
