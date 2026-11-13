@@ -132,7 +132,10 @@ export function useImageGestures({ src, onSwipe }) {
     return {
       stageWidth: stageRect.width,
       stageHeight: stageRect.height,
-      ...getContainedImageSize(stageRect, renderedImage)
+      ...getContainedImageSize(
+        { width: renderedImage.clientWidth, height: renderedImage.clientHeight },
+        renderedImage
+      )
     };
   }
 

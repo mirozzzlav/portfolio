@@ -40,6 +40,35 @@ a v `jsconfig.json` pre podporu v IDE. Súbory načítavané priamo cez Node.js
 (konfigurácia, testy, prerender a zdieľané moduly pre obsah, routy a SEO) používajú
 relatívne importy, pretože Node.js aliasy z Vite nevyhodnocuje.
 
+## Lightbox
+
+`Lightbox` má vlastné tlačidlá a predvolené štýly. Nepotrebuje prekladový provider
+ani globálne CSS premenné aplikácie. Voliteľný `translate` dostáva anglický text;
+bez neho sa text zobrazí nezmenený. `ImageWrapper` dostáva iba `<img>` cez `children`
+a určuje vzhľad rámčeka jedného obrázka.
+
+```jsx
+<Lightbox
+  images={[{ src: "/photo.webp", alt: "Popis fotografie" }]}
+  isOpen={isOpen}
+  onClose={() => setIsOpen(false)}
+  theme={{
+    "--lightbox-text-color": "#111",
+    "--lightbox-spacing": "12px"
+  }}
+/>
+```
+
+`theme` prepíše iba zadané CSS premenné na koreňovom elemente lightboxu vrátane
+obsahu renderovaného cez portal. Všetky predvolené hodnoty sú v
+[`src/components/lightbox/theme.js`](src/components/lightbox/theme.js).
+Téma obsahuje aj radius a prechod tlačidiel, disabled opacity, rozmery focus
+outline a blur pozadia. Premenné `--blur-loaded-image-blur` a
+`--blur-loaded-image-transition` nastavené cez `theme` upravujú rozmazanie náhľadu
+a prechod obrázka.
+Projektový `ProjectPreviewFrame` má vlastné štýly nezávislé od témy lightboxu.
+Technickými závislosťami zostávajú React, Emotion a pomocné moduly v repozitári.
+
 ## Spustenie lokálne
 
 ```bash

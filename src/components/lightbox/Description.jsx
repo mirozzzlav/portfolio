@@ -6,30 +6,35 @@ const styles = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    gap: "var(--space-1)",
-    padding: "var(--space-1) 0",
+    gap: "calc(var(--lightbox-spacing) * 2 / 3)",
+    width: "fit-content",
+    maxWidth: "100%",
+    marginInline: "auto",
+    padding: "calc(var(--lightbox-spacing) * 2 / 3) var(--lightbox-spacing)",
     marginBottom: 0,
-    color: "var(--color-text)",
-    fontSize: "var(--font-size-sm)",
-    fontWeight: "var(--font-weight-medium)",
-    lineHeight: "var(--line-height-tight)",
-
-    [`@media ${mediaQueries.mobile}`]: {
-      padding: 0,
-      fontSize: "var(--font-size-xs)",
-
-      svg: {
-        display: "none"
-      }
-    }
+    border: "var(--lightbox-border-width) solid var(--lightbox-border-color)",
+    borderRadius: "var(--lightbox-radius)",
+    background: "var(--lightbox-caption-background)",
+    color: "var(--lightbox-text-color)",
+    fontSize: "var(--lightbox-font-size)",
+    fontWeight: 400,
+    fontStyle: "normal",
+    lineHeight: 1.5,
+    textAlign: "center",
+    overflowWrap: "anywhere"
   },
 
   titleIcon: {
     display: "block",
     flex: "none",
-    width: "var(--icon-size-lg)",
-    height: "var(--icon-size-lg)",
-    color: "var(--palette-accent-fine)"
+    width: "calc(var(--lightbox-icon-size) * 1.5)",
+    height: "calc(var(--lightbox-icon-size) * 1.5)",
+    color: "var(--lightbox-text-color)",
+
+    [`@media ${mediaQueries.mobile}`]: {
+      width: "calc(var(--lightbox-icon-size) * 1.25)",
+      height: "calc(var(--lightbox-icon-size) * 1.25)"
+    }
   }
 };
 

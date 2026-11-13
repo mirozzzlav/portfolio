@@ -1,5 +1,6 @@
 import { Suspense, lazy, useState } from "react";
 import { ProjectActions, ProjectCard } from "src/components/ProjectCard.jsx";
+import { ProjectPreviewFrame } from "src/components/ProjectPreviewFrame.jsx";
 import { ProjectTitleNavigation } from "src/components/ProjectTitleNavigation.jsx";
 import { useProjectNavigation } from "src/hooks/useProjectNavigation.js";
 import { className } from "src/styles/classNames.js";
@@ -45,6 +46,13 @@ export function ProjectsPage() {
     disabled: Boolean(preview)
   });
   const activeProject = projects[activeProjectIndex];
+  const lightboxLabels = {
+    Close: content.ui.close,
+    "Image preview": content.ui.screenshotPreview,
+    "Previous image": content.ui.previousImage,
+    "Next image": content.ui.nextImage,
+    "Image description not found": content.ui.imageDescriptionNotFound
+  };
 
   function openPreview(images, imageIndex) {
     setPreview({ images, imageIndex, title: activeProject.title });
@@ -81,6 +89,13 @@ export function ProjectsPage() {
       {preview ? (
         <Suspense fallback={null}>
           <Lightbox
+            ImageWrapper={ProjectPreviewFrame}
+            translate={(text) => lightboxLabels[text] ?? text}
+            theme={{
+              "--lightbox-spacing": "var(--space-2)",
+              "--lightbox-font-size": "var(--font-size-sm)",
+              "--lightbox-button-size": "var(--control-height-md)"
+            }}
             title={preview.title}
             images={preview.images}
             initialImageIndex={preview.imageIndex}

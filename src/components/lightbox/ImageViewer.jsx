@@ -1,6 +1,6 @@
 import { mergeClassNames } from "src/styles/classNames.js";
 import { useImageGestures } from "src/components/lightbox/useImageGestures.js";
-import { PreviewSurface } from "src/components/lightbox/PreviewSurface.jsx";
+import { BlurLoadedImage } from "src/components/BlurLoadedImage.jsx";
 
 const styles = {
   stage: {
@@ -18,10 +18,10 @@ const styles = {
     WebkitUserSelect: "none"
   },
 
-  previewSurface: {
+  image: {
     height: "100%",
     border: 0,
-    backgroundColor: "var(--color-transparent)",
+    backgroundColor: "transparent",
 
     img: {
       pointerEvents: "none",
@@ -32,6 +32,8 @@ const styles = {
 
   transformLayer: {
     display: "grid",
+    gridTemplateColumns: "minmax(0, 1fr)",
+    gridTemplateRows: "minmax(0, 1fr)",
     width: "100%",
     height: "100%",
     minWidth: 0,
@@ -43,7 +45,7 @@ const styles = {
   }
 };
 
-export function ImageViewer({ image, imageDescription, onSwipe }) {
+export function ImageViewer({ image, imageDescription, onSwipe, ImageWrapper }) {
   const { stageRef, transformRef, transform, touchHandlers } = useImageGestures({
     src: image.src,
     onSwipe
@@ -56,12 +58,12 @@ export function ImageViewer({ image, imageDescription, onSwipe }) {
         className={mergeClassNames(styles.transformLayer)}
         style={{ transform }}
       >
-        <PreviewSurface
-          aspectRatio="auto"
-          className={mergeClassNames(styles.previewSurface)}
-          image={image}
-          role="img"
-          aria-label={imageDescription}
+        <BlurLoadedImage
+          className={mergeClassNames(styles.image)}
+          src={image.src}
+          placeholderSrc={image.placeholderSrc}
+          alt={imageDescription}
+          ImageWrapper={ImageWrapper}
         />
       </div>
     </div>

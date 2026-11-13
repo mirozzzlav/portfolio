@@ -7,8 +7,8 @@ const styles = {
     right: 0,
     bottom: 0,
     left: 0,
-    background: "var(--surface-overlay-strong)",
-    backdropFilter: "blur(var(--blur-md))"
+    background: "var(--lightbox-overlay)",
+    backdropFilter: "blur(var(--lightbox-backdrop-blur))"
   }
 };
 
