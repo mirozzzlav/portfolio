@@ -42,12 +42,20 @@ relatívne importy, pretože Node.js aliasy z Vite nevyhodnocuje.
 
 ## Lightbox
 
-`Lightbox` má vlastné tlačidlá a predvolené štýly. Nepotrebuje prekladový provider
-ani globálne CSS premenné aplikácie. Voliteľný `translate` dostáva anglický text;
-bez neho sa text zobrazí nezmenený. `ImageWrapper` dostáva iba `<img>` cez `children`
+`Lightbox` sa načítava z npm balíka [`react-yoybox`](https://www.npmjs.com/package/react-yoybox)
+a má vlastné tlačidlá a predvolené štýly. Nepotrebuje prekladový provider
+ani globálne CSS premenné aplikácie. Voliteľný `t` dostáva kľúče
+`yoybox.close`, `yoybox.screenshotPreview`, `yoybox.previousImage`, `yoybox.nextImage` a
+`yoybox.imageDescriptionNotFound`; bez neho používa anglické texty. V aplikácii sa
+odovzdáva ako `t={t}`, kde `t` poskytuje `useI18n()`. Funkcia `t` prijíma
+cestu ku kľúču, napríklad `t("yoybox.close")`, a pri chýbajúcom texte použije anglický
+preklad alebo samotný kľúč. `content` zostáva dostupné pre štruktúrované dáta.
+`ImageWrapper` dostáva iba `<img>` cez `children`
 a určuje vzhľad rámčeka jedného obrázka.
 
 ```jsx
+import { Lightbox } from "react-yoybox";
+
 <Lightbox
   images={[{ src: "/photo.webp", alt: "Popis fotografie" }]}
   isOpen={isOpen}
@@ -56,18 +64,18 @@ a určuje vzhľad rámčeka jedného obrázka.
     "--lightbox-text-color": "#111",
     "--lightbox-spacing": "12px"
   }}
-/>
+/>;
 ```
 
 `theme` prepíše iba zadané CSS premenné na koreňovom elemente lightboxu vrátane
-obsahu renderovaného cez portal. Všetky predvolené hodnoty sú v
-[`src/components/lightbox/theme.js`](src/components/lightbox/theme.js).
+obsahu renderovaného cez portal. Predvolené hodnoty poskytuje export
+`defaultLightboxTheme` z balíka `react-yoybox`.
 Téma obsahuje aj radius a prechod tlačidiel, disabled opacity, rozmery focus
 outline a blur pozadia. Premenné `--blur-loaded-image-blur` a
 `--blur-loaded-image-transition` nastavené cez `theme` upravujú rozmazanie náhľadu
 a prechod obrázka.
 Projektový `ProjectPreviewFrame` má vlastné štýly nezávislé od témy lightboxu.
-Technickými závislosťami zostávajú React, Emotion a pomocné moduly v repozitári.
+Implementáciu lightboxu a jej pomocné moduly spravuje balík `react-yoybox`.
 
 ## Spustenie lokálne
 

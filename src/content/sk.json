@@ -45,13 +45,15 @@
     "previousProject": "Predošlý",
     "nextProject": "Ďalší",
     "closePreview": "Zatvoriť náhľad",
+    "continue": "Pokračovať",
+    "redirectTitle": "Presmerovanie"
+  },
+  "yoybox": {
     "close": "Zatvoriť",
     "screenshotPreview": "Portfólio · Screenshot",
     "previousImage": "Predchádzajúci obrázok",
     "nextImage": "Ďalší obrázok",
-    "imageDescriptionNotFound": "Popis obrázku sa nenašiel",
-    "continue": "Pokračovať",
-    "redirectTitle": "Presmerovanie"
+    "imageDescriptionNotFound": "Popis obrázku sa nenašiel"
   },
   "snakeGame": {
     "label": "Snake game",

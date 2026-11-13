@@ -45,13 +45,15 @@
     "previousProject": "Previous",
     "nextProject": "Next",
     "closePreview": "Close preview",
+    "continue": "Continue",
+    "redirectTitle": "Redirect"
+  },
+  "yoybox": {
     "close": "Close",
     "screenshotPreview": "Portfolio · Screenshot",
     "previousImage": "Previous image",
     "nextImage": "Next image",
-    "imageDescriptionNotFound": "Image description not found",
-    "continue": "Continue",
-    "redirectTitle": "Redirect"
+    "imageDescriptionNotFound": "Image description not found"
   },
   "snakeGame": {
     "label": "Snake game",

@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { useLocation } from "react-router-dom";
 import {
   getContent,
+  getTranslation,
   getLanguageFromPathname,
   getLanguageLinks
 } from "src/content/index.js";
@@ -17,6 +18,7 @@ export function I18nProvider({ children }) {
 
     return {
       content,
+      t: (key) => getTranslation(language, key),
       language,
       routes: getPageRouteDefinitions(language),
       redirects: getRedirectRoutes(language),

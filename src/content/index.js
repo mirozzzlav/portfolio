@@ -29,6 +29,18 @@ export function getContent(language = defaultLanguage) {
   return languageContent[language] || languageContent[defaultLanguage];
 }
 
+export function getTranslation(language, key) {
+  function readText(content) {
+    const value = key.split(".").reduce((current, segment) => {
+      return current && Object.hasOwn(current, segment) ? current[segment] : undefined;
+    }, content);
+
+    return typeof value === "string" ? value : undefined;
+  }
+
+  return readText(getContent(language)) ?? readText(en) ?? key;
+}
+
 export function getLanguageFromPathname(pathname) {
   const firstSegment = normalizePathname(pathname).split("/").filter(Boolean)[0];
 

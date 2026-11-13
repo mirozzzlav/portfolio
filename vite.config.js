@@ -21,6 +21,10 @@ export default defineConfig({
             return undefined;
           }
 
+          if (id.includes("/react-yoybox/")) {
+            return undefined;
+          }
+
           if (id.includes("/react-router") || id.includes("/@remix-run/router")) {
             return "vendor-router";
           }

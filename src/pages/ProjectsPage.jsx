@@ -7,7 +7,7 @@ import { className } from "src/styles/classNames.js";
 import { useI18n } from "src/useI18n.js";
 
 const Lightbox = lazy(() =>
-  import("src/components/lightbox/Lightbox.jsx").then((module) => ({
+  import("react-yoybox").then((module) => ({
     default: module.Lightbox
   }))
 );
@@ -38,7 +38,7 @@ const styles = {
 };
 
 export function ProjectsPage() {
-  const { content } = useI18n();
+  const { content, t } = useI18n();
   const [preview, setPreview] = useState(null);
   const projects = content.projects;
   const { activeProjectIndex, navigateProject, touchHandlers } = useProjectNavigation({
@@ -46,13 +46,6 @@ export function ProjectsPage() {
     disabled: Boolean(preview)
   });
   const activeProject = projects[activeProjectIndex];
-  const lightboxLabels = {
-    Close: content.ui.close,
-    "Image preview": content.ui.screenshotPreview,
-    "Previous image": content.ui.previousImage,
-    "Next image": content.ui.nextImage,
-    "Image description not found": content.ui.imageDescriptionNotFound
-  };
 
   function openPreview(images, imageIndex) {
     setPreview({ images, imageIndex, title: activeProject.title });
@@ -90,7 +83,7 @@ export function ProjectsPage() {
         <Suspense fallback={null}>
           <Lightbox
             ImageWrapper={ProjectPreviewFrame}
-            translate={(text) => lightboxLabels[text] ?? text}
+            t={t}
             theme={{
               "--lightbox-spacing": "var(--space-2)",
               "--lightbox-font-size": "var(--font-size-sm)",
