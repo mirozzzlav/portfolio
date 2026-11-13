@@ -18,9 +18,7 @@ const styles = {
     minHeight: 0,
     // Clip the sliding cards without creating a scroll container for the sticky title.
     overflow: "clip",
-    touchAction: "pan-y",
-    top: "calc(var(--space-0) * -1)",
-    paddingBottom: "var(--space-0)"
+    touchAction: "pan-y"
   },
 
   track: {

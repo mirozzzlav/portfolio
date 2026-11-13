@@ -7,20 +7,36 @@ import { TurnstileWidget } from "src/components/TurnstileWidget.jsx";
 import { useContactForm } from "src/hooks/useContactForm.js";
 import { className } from "src/styles/classNames.js";
 import { useI18n } from "src/useI18n.js";
+import { mediaQueries } from "src/styles/mediaQueries.js";
 
 const styles = {
   form: {
     display: "grid",
     gap: "var(--space-3)",
+    gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+    alignItems: "start",
     width: "100%",
-    padding: 0
+    padding: 0,
+
+    "> *": {
+      gridColumn: "1 / -1",
+      minWidth: 0
+    },
+
+    "> label:has(input)": {
+      gridColumn: "auto"
+    },
+
+    [`@media ${mediaQueries.narrow}`]: {
+      gridTemplateColumns: "minmax(0, 1fr)"
+    }
   },
 
   intro: {
     marginBottom: "var(--space-1)",
     color: "var(--color-text)",
     fontSize: "var(--font-size-md)",
-    lineHeight: "var(--line-height-body)",
+    lineHeight: "var(--line-height-base)",
     textWrap: "pretty"
   },
 
@@ -31,12 +47,6 @@ const styles = {
     height: 0,
     borderBlock: "5px solid var(--color-transparent)",
     borderLeft: "8px solid currentColor"
-  },
-
-  actions: {
-    display: "grid",
-    justifyItems: "start",
-    gap: "var(--space-2)"
   }
 };
 
@@ -55,44 +65,43 @@ export function ContactPage() {
   } = useContactForm({ turnstileEnabled: Boolean(turnstileSiteKey) });
 
   return (
-    <form
-      className={className(styles.form)}
-      action={contactApiUrl}
-      method="post"
-      noValidate
-      onSubmit={handleSubmit}
-    >
-      <p className={className(styles.intro)}>{contact.intro}</p>
-      <Field
-        error={fieldErrors.name ? contact.fieldErrors.name : undefined}
-        id="contact-name"
-        label={contact.fields.name}
-        type="text"
-        name="name"
-        autoComplete="name"
-        onChange={() => clearFieldError("name")}
-      />
-      <Field
-        error={fieldErrors.email ? contact.fieldErrors.email : undefined}
-        id="contact-email"
-        label={contact.fields.email}
-        type="email"
-        name="email"
-        autoComplete="email"
-        onChange={() => clearFieldError("email")}
-      />
-      <Field
-        as="textarea"
-        error={fieldErrors.message ? contact.fieldErrors.message : undefined}
-        id="contact-message"
-        label={contact.fields.message}
-        name="message"
-        rows="5"
-        onChange={() => clearFieldError("message")}
-      />
-      <HoneypotField />
-      <TurnstileWidget ref={turnstileRef} siteKey={turnstileSiteKey} />
-      <div className={className(styles.actions)}>
+    <>
+      <form
+        className={className(styles.form)}
+        action={contactApiUrl}
+        method="post"
+        noValidate
+        onSubmit={handleSubmit}
+      >
+        <p className={className(styles.intro)}>{contact.intro}</p>
+        <Field
+          error={fieldErrors.name ? contact.fieldErrors.name : undefined}
+          id="contact-name"
+          label={contact.fields.name}
+          type="text"
+          name="name"
+          autoComplete="name"
+          onChange={() => clearFieldError("name")}
+        />
+        <Field
+          error={fieldErrors.email ? contact.fieldErrors.email : undefined}
+          id="contact-email"
+          label={contact.fields.email}
+          type="email"
+          name="email"
+          autoComplete="email"
+          onChange={() => clearFieldError("email")}
+        />
+        <Field
+          as="textarea"
+          error={fieldErrors.message ? contact.fieldErrors.message : undefined}
+          id="contact-message"
+          label={contact.fields.message}
+          name="message"
+          rows="5"
+          onChange={() => clearFieldError("message")}
+        />
+        <HoneypotField />
         <FormStatus type={submitState.type}>
           {submitState.messageKey ? contact[submitState.messageKey] : ""}
         </FormStatus>
@@ -100,7 +109,8 @@ export function ContactPage() {
           {isSubmitting ? contact.submitting : contact.submit}
           <span className={className(styles.buttonArrow)} aria-hidden="true" />
         </Button>
-      </div>
-    </form>
+      </form>
+      <TurnstileWidget ref={turnstileRef} siteKey={turnstileSiteKey} />
+    </>
   );
 }

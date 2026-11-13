@@ -57,6 +57,7 @@ const styles = {
     padding: 0,
     background: "var(--color-transparent)",
     fontFamily: "inherit",
+    lineHeight: "var(--line-height-solid)",
     textAlign: "left",
     whiteSpace: "nowrap",
 

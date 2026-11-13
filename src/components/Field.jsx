@@ -3,7 +3,7 @@ import { className } from "src/styles/classNames.js";
 const styles = {
   label: {
     display: "grid",
-    rowGap: "var(--space-1)",
+    rowGap: "var(--space-0)",
     color: "var(--color-text)",
     fontSize: "var(--font-size-sm)",
     fontWeight: "var(--font-weight-semibold)"
@@ -42,11 +42,10 @@ const styles = {
   },
 
   error: {
-    marginTop: "calc(-1 * var(--space-0))",
     color: "var(--color-error)",
     fontSize: "var(--font-size-xs)",
     fontWeight: "var(--font-weight-regular)",
-    lineHeight: "var(--line-height-body)"
+    lineHeight: "var(--line-height-tight)"
   }
 };
 

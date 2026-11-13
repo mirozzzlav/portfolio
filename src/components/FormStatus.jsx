@@ -7,13 +7,13 @@ const styles = {
     gap: "var(--space-1)",
     width: "100%",
     maxWidth: "100%",
-    margin: "0 0 var(--space-3) 0",
+    margin: 0,
     padding: "var(--space-1) var(--space-2)",
     border: "var(--border-width-thin) solid currentColor",
     borderRadius: "var(--radius-xl)",
     fontSize: "var(--font-size-sm)",
     fontWeight: "var(--font-weight-medium)",
-    lineHeight: "var(--line-height-body)",
+    lineHeight: "var(--line-height-base)",
     textWrap: "pretty"
   },
 

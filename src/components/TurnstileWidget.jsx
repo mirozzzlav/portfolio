@@ -2,7 +2,8 @@ import { forwardRef, useEffect, useImperativeHandle, useRef } from "react";
 import { className } from "src/styles/classNames.js";
 
 const turnstileScriptId = "cloudflare-turnstile-script";
-const styles = { turnstile: { minHeight: 0 } };
+// Keep the container available to Turnstile without adding an empty grid row.
+const styles = { turnstile: { display: "contents" } };
 
 function resetTurnstile(widgetId) {
   if (typeof window !== "undefined" && window.turnstile && widgetId !== null) {

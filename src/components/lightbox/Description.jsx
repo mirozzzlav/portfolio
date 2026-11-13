@@ -12,7 +12,7 @@ const styles = {
     color: "var(--color-text)",
     fontSize: "var(--font-size-sm)",
     fontWeight: "var(--font-weight-medium)",
-    lineHeight: "var(--line-height-heading)",
+    lineHeight: "var(--line-height-tight)",
 
     [`@media ${mediaQueries.mobile}`]: {
       padding: 0,

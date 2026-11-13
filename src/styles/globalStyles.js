@@ -73,9 +73,9 @@ export const globalStyles = {
     "--font-size-lg": "1.25rem",
     "--font-size-page-title": "2.7rem",
     "--font-size-project-title": "1.9rem",
-    "--font-size-not-found-code": "clamp(4rem, 16vw, 8rem)",
-    "--font-size-not-found-title": "clamp(1.6rem, 5vw, 3rem)",
-    "--font-size-footer-year": "0.78em",
+    "--font-size-not-found-code": "8rem",
+    "--font-size-not-found-title": "3rem",
+    "--font-size-footer-year": "var(--font-size-2xs)",
     "--letter-spacing-digital": "0.04em",
     "--font-size-2xs": "0.78rem",
     "--font-size-xs": "0.84rem",
@@ -89,8 +89,8 @@ export const globalStyles = {
     "--font-weight-extrabold": 800,
     "--line-height-none": 0,
     "--line-height-solid": 1,
-    "--line-height-heading": 1.2,
-    "--line-height-body": 1.72,
+    "--line-height-tight": 1.2,
+    "--line-height-base": 1.72,
 
     // Spacing and layout
     "--content-width": "75ch",
@@ -160,13 +160,17 @@ export const globalStyles = {
     minHeight: "100%"
   },
 
+  html: {
+    fontSize: "17px",
+    lineHeight: "var(--line-height-base)"
+  },
+
   body: {
     minHeight: "100%",
     margin: 0,
     color: "var(--color-text)",
     fontFamily: "var(--font-family-ui)",
     fontWeight: "var(--font-weight-regular)",
-    lineHeight: "var(--line-height-body)",
     overflowX: "hidden",
     overflowY: "auto",
     textRendering: "optimizeLegibility"
@@ -202,7 +206,7 @@ export const globalStyles = {
     marginBottom: "var(--space-2)",
     fontSize: "var(--font-size-md)",
     fontWeight: "var(--font-weight-bold)",
-    lineHeight: "var(--line-height-heading)"
+    lineHeight: "var(--line-height-tight)"
   },
 
   ":where(a, button, input, textarea, select, [tabindex]):focus-visible": {
@@ -224,6 +228,8 @@ export const globalStyles = {
 
   [`@media ${mediaQueries.mobile}`]: {
     ":root": {
+      "--font-size-not-found-code": "4rem",
+      "--font-size-not-found-title": "1.6rem",
       "--section-inline-gap": "var(--space-4)"
     }
   }

@@ -48,7 +48,7 @@ const styles = {
     fontWeight: "var(--font-weight-extrabold)",
     letterSpacing: "var(--letter-spacing-project-title)",
     textTransform: "uppercase",
-    lineHeight: "var(--line-height-heading)",
+    lineHeight: "var(--line-height-tight)",
     textAlign: "left",
     overflowWrap: "anywhere"
   },
@@ -77,8 +77,7 @@ const styles = {
   },
 
   navigationButton: {
-    justifyContent: "center",
-    lineHeight: "var(--line-height-solid)"
+    justifyContent: "center"
   }
 };
 
@@ -151,7 +150,6 @@ export function ProjectTitleNavigation({
           aria-label={content.ui.projectNavigation}
         >
           <IconLink
-            size="sm"
             underline={false}
             animation="slide"
             arrow="left"
@@ -166,7 +164,6 @@ export function ProjectTitleNavigation({
           </IconLink>
           <Separator />
           <IconLink
-            size="sm"
             underline={false}
             animation="slide"
             arrow="right"

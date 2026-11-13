@@ -10,6 +10,7 @@ const styles = {
   card: {
     flex: "0 0 calc(100% - var(--space-0))",
     display: "grid",
+    gap: "var(--space-3)",
     alignContent: "start",
     width: "calc(100% - var(--space-0))",
     minHeight: 0,
@@ -28,18 +29,12 @@ const styles = {
 
     [`@media ${mediaQueries.mobile}`]: {
       minHeight: "auto"
-    }
-  },
-
-  descriptionViewport: {
-    display: "grid",
-    gap: "var(--space-3)",
-    paddingTop: "var(--space-1)",
+    },
 
     "> section": {
       position: "relative",
       isolation: "isolate",
-      padding: "var(--space-3) 0",
+      paddingTop: "var(--space-3)",
 
       "&::before": {
         "--project-corner-direction": "to right",
@@ -59,10 +54,6 @@ const styles = {
       }
     },
 
-    "> section:first-child": {
-      paddingTop: 0
-    },
-
     "> section:first-child::before": {
       display: "none"
     }
@@ -72,7 +63,7 @@ const styles = {
     marginBottom: 0,
     color: "var(--color-text)",
     fontSize: "var(--font-size-md)",
-    lineHeight: "var(--line-height-body)",
+    lineHeight: "var(--line-height-base)",
     textWrap: "pretty"
   },
 
@@ -92,7 +83,7 @@ const styles = {
     display: "flex",
     alignItems: "center",
     gap: "var(--space-2)",
-    margin: "0 0 var(--space-2)",
+    margin: "0 0 var(--space-0)",
     fontSize: "var(--font-size-md)",
     fontWeight: "var(--font-weight-semibold)",
     lineHeight: "inherit"
@@ -100,7 +91,7 @@ const styles = {
 
   featuresList: {
     display: "grid",
-    gap: "var(--space-1)",
+    gap: "var(--space-2xs)",
     margin: 0,
     padding: 0,
     listStyle: "none",
@@ -184,43 +175,39 @@ export function ProjectCard({ isActive, project }) {
 
   return (
     <article className={className(styles.card)} aria-hidden={!isActive}>
-      <div>
-        <div className={className(styles.descriptionViewport)}>
-          <section className={className(styles.description)}>
-            <h3 className={className(styles.blockHeading)}>
-              <SelectionIndicator isActive />
-              {content.ui.projectDescription}
-            </h3>
-            <p className={className(styles.description)}>
-              <InlineLinks text={description} tabIndex={isActive ? 0 : -1} />
-            </p>
-          </section>
-          {features?.length > 0 ? (
-            <section className={className(styles.description)}>
-              <h3 className={className(styles.blockHeading)}>
-                <SelectionIndicator isActive />
-                {featuresTitle}
-              </h3>
-              <ul className={className(styles.featuresList)} role="list">
-                {features.map((feature) => (
-                  <li key={feature}>
-                    <InlineLinks text={feature} tabIndex={isActive ? 0 : -1} />
-                  </li>
-                ))}
-              </ul>
-            </section>
-          ) : null}
-          {technologies?.length > 0 ? (
-            <section className={className(styles.description)}>
-              <h3 className={className(styles.blockHeading)}>
-                <SelectionIndicator isActive />
-                {content.ui.technologies}
-              </h3>
-              <TagList items={technologies} ariaLabel={content.ui.technologies} />
-            </section>
-          ) : null}
-        </div>
-      </div>
+      <section className={className(styles.description)}>
+        <h3 className={className(styles.blockHeading)}>
+          <SelectionIndicator isActive />
+          {content.ui.projectDescription}
+        </h3>
+        <p className={className(styles.description)}>
+          <InlineLinks text={description} tabIndex={isActive ? 0 : -1} />
+        </p>
+      </section>
+      {features?.length > 0 ? (
+        <section className={className(styles.description)}>
+          <h3 className={className(styles.blockHeading)}>
+            <SelectionIndicator isActive />
+            {featuresTitle}
+          </h3>
+          <ul className={className(styles.featuresList)} role="list">
+            {features.map((feature) => (
+              <li key={feature}>
+                <InlineLinks text={feature} tabIndex={isActive ? 0 : -1} />
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
+      {technologies?.length > 0 ? (
+        <section className={className(styles.description)}>
+          <h3 className={className(styles.blockHeading)}>
+            <SelectionIndicator isActive />
+            {content.ui.technologies}
+          </h3>
+          <TagList items={technologies} ariaLabel={content.ui.technologies} />
+        </section>
+      ) : null}
     </article>
   );
 }

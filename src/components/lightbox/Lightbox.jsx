@@ -83,7 +83,7 @@ const styles = {
   label: {
     display: "block",
     fontSize: "var(--font-size-xs)",
-    lineHeight: "var(--line-height-heading)"
+    lineHeight: "var(--line-height-tight)"
   },
 
   title: {
@@ -93,7 +93,7 @@ const styles = {
     textOverflow: "ellipsis",
     whiteSpace: "nowrap",
     fontSize: "var(--font-size-md)",
-    lineHeight: "var(--line-height-heading)"
+    lineHeight: "var(--line-height-tight)"
   },
 
   content: {

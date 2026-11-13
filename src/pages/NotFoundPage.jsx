@@ -33,7 +33,7 @@ const styles = {
     color: "var(--palette-ink)",
     fontSize: "var(--font-size-not-found-title)",
     fontWeight: "var(--font-weight-bold)",
-    lineHeight: "var(--line-height-heading)",
+    lineHeight: "var(--line-height-tight)",
     letterSpacing: 0
   },
   action: {

@@ -14,7 +14,7 @@ const styles = {
       marginBottom: 0,
       color: "var(--color-text)",
       fontSize: "var(--font-size-md)",
-      lineHeight: "var(--line-height-body)",
+      lineHeight: "var(--line-height-base)",
       textWrap: "pretty"
     }
   },
