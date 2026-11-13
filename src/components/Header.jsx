@@ -124,6 +124,15 @@ export function Header() {
   const alternateLanguage = languageLinks.find((item) => item.code !== language);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef(null);
+  const navRef = useRef(null);
+  const focusMenuOnOpenRef = useRef(false);
+
+  useEffect(() => {
+    if (isMenuOpen && focusMenuOnOpenRef.current) {
+      navRef.current?.querySelector("a[href]")?.focus();
+      focusMenuOnOpenRef.current = false;
+    }
+  }, [isMenuOpen]);
 
   useEffect(() => {
     function handleDocumentClick(event) {
@@ -132,18 +141,10 @@ export function Header() {
       }
     }
 
-    function handleDocumentKeyDown(event) {
-      if (event.key === "Escape") {
-        setIsMenuOpen(false);
-      }
-    }
-
     document.addEventListener("click", handleDocumentClick);
-    document.addEventListener("keydown", handleDocumentKeyDown);
 
     return () => {
       document.removeEventListener("click", handleDocumentClick);
-      document.removeEventListener("keydown", handleDocumentKeyDown);
     };
   }, []);
 
@@ -174,7 +175,36 @@ export function Header() {
             </Button>
           ) : null}
 
-          <div className={className(styles.menu)} ref={menuRef}>
+          <div
+            className={className(styles.menu)}
+            ref={menuRef}
+            onBlur={(event) => {
+              if (!event.currentTarget.contains(event.relatedTarget)) {
+                setIsMenuOpen(false);
+              }
+            }}
+            onKeyDown={(event) => {
+              if (
+                isMenuOpen &&
+                event.key === "Tab" &&
+                event.shiftKey &&
+                event.target === navRef.current?.querySelector("a[href]")
+              ) {
+                event.preventDefault();
+                setIsMenuOpen(false);
+                const previousControl =
+                  menuRef.current.previousElementSibling ||
+                  menuRef.current.closest("header").querySelector("a[href]");
+                previousControl?.focus();
+              }
+
+              if (event.key === "Escape" && isMenuOpen) {
+                event.preventDefault();
+                setIsMenuOpen(false);
+                menuRef.current?.querySelector("button")?.focus();
+              }
+            }}
+          >
             <Button
               className={className(styles.menuToggle)}
               compact
@@ -182,7 +212,10 @@ export function Header() {
               aria-controls="site-menu"
               aria-expanded={isMenuOpen}
               aria-label={isMenuOpen ? content.ui.closeMenu : content.ui.openMenu}
-              onClick={() => setIsMenuOpen((currentValue) => !currentValue)}
+              onClick={(event) => {
+                focusMenuOnOpenRef.current = !isMenuOpen && event.detail === 0;
+                setIsMenuOpen((currentValue) => !currentValue);
+              }}
             >
               <span>{content.ui.menu}</span>
               <svg
@@ -201,6 +234,7 @@ export function Header() {
             </Button>
 
             <nav
+              ref={navRef}
               id="site-menu"
               className={className([styles.nav, isMenuOpen && styles.navOpen])}
               data-open={isMenuOpen ? "true" : "false"}
